@@ -1,0 +1,6 @@
+_build
+_built
+_deployed
+node_modules/*.js
+babel.config.js
+gulpfile.js

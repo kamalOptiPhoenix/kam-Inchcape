@@ -1,0 +1,14 @@
+{
+    "projectName": "Experiment Name",
+    "variations": [
+        "variation 1"
+    ],
+    "goalsToCreate": [
+        "Goal Name"
+    ],
+    "goalsToAdd": [
+        347058,
+        453434
+    ],
+    "primaryGoal": 347063
+}

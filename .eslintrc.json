@@ -1,0 +1,108 @@
+{
+    "env": {
+        "browser": true,
+        "node": true,
+        "es6": true
+    },
+    "extends": [
+        "airbnb-base"
+    ],
+    "globals": {
+        "Atomics": "readonly",
+        "SharedArrayBuffer": "readonly",
+        "Kameleoon": "readonly",
+        "dataLayer": "readonly",
+        "tc_vars": "readonly",
+        "KameleoonProducts":"readonly"
+    },
+    "parserOptions": {
+        "ecmaVersion": 2020,
+        "sourceType": "module"
+    },
+    "rules": {
+        "linebreak-style": [2, "unix"],
+        "import/prefer-default-export": 0,
+        "padded-blocks": 0,
+        "no-trailing-spaces": 2,
+        "comma-dangle": [2, {
+            "arrays": "always-multiline",
+            "objects": "always-multiline",
+            "imports": "ignore",
+            "exports": "ignore",
+            "functions": "ignore"
+        }],
+        "max-len": [
+            2,
+            100,
+            {
+                "ignoreUrls": true,
+                "ignoreStrings": true,
+                "ignoreRegExpLiterals": true,
+                "ignorePattern": "import|export"
+            }
+        ],
+        "no-underscore-dangle": 0,
+        "consistent-return": 0,
+        "no-continue": 0,
+        "no-plusplus": 0,
+        "no-param-reassign": 0,
+        "no-new": 0,
+        "no-restricted-globals": 0,
+        "no-restricted-syntax": 0,
+        "no-console": 1,
+        "no-var": 1,
+        "prefer-const": [
+            2,
+            {
+                "destructuring": "all"
+            }
+        ],
+        "no-unused-expressions": [
+            2,
+            {
+                "allowShortCircuit": true,
+                "allowTaggedTemplates": true,
+                "allowTernary": true
+            }
+        ],
+        "quotes": [
+            2,
+            "single",
+            {
+                "avoidEscape": true,
+                "allowTemplateLiterals": true
+            }
+        ],
+        "no-array-constructor": 2,
+        "array-callback-return":2,
+        "eqeqeq": 2,
+        "no-mixed-operators": 2,
+        "function-paren-newline": 0,
+        "indent": [
+            2,
+            4,
+            {
+                "SwitchCase": 1
+            }
+        ],
+        "space-before-blocks": 2,
+        "keyword-spacing": 2,
+        "space-infix-ops": 2,
+        "newline-per-chained-call": 2,
+        "no-whitespace-before-property": 2,
+        "semi": 2,
+        "no-unused-vars": 1,
+        "id-length": [
+            1,
+            {
+                "exceptions": [
+                    "i",
+                    "j",
+                    "a",
+                    "b"
+                ]
+            }
+        ],
+        "max-classes-per-file": 1
+    }
+}

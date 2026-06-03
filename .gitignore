@@ -1,0 +1,31 @@
+# Build system
+node_modules
+_built
+dist
+*.dev.js
+
+# Editors & IDEs
+.vscode
+/.project
+*.code-workspace
+.idea/*
+.idea/vcs.xml
+
+# General
+.DS_Store
+.AppleDouble
+.LSOverride
+package-lock.json
+.package-lock.json
+
+# Build system
+.credentials
+_built
+paths.json
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk

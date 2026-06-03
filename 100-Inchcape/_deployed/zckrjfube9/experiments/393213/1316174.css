@@ -1,0 +1,209 @@
+#search-bar-content > div {
+  padding: 90px 0 40px;
+}
+
+.Jk4lsr17aQ {
+  display: none !important;
+}
+
+.subt138_custom-grid {
+  width: 1318px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.subt138_grid {
+  width: 1318px;
+}
+
+/* TOP SECTION */
+
+.subt138_top {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 989px 320px;
+  grid-template-columns: 989px 320px;
+  -ms-grid-rows: 260px 260px;
+  grid-template-rows: 260px 260px;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.subt138_outback {
+  -ms-grid-column: 1;
+  grid-column: 1;
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 2;
+  grid-row: 1/span 2;
+  width: 989px;
+  height: 528px;
+}
+
+.subt138_uncharted {
+  -ms-grid-column: 2;
+  grid-column: 2;
+  -ms-grid-row: 1;
+  grid-row: 1;
+  width: 320px;
+  height: 260px;
+}
+
+.subt138_wilderness {
+  -ms-grid-column: 2;
+  grid-column: 2;
+  -ms-grid-row: 2;
+  grid-row: 2;
+  width: 320px;
+  height: 260px;
+}
+
+/* BOTTOM SECTION */
+
+.subt138_bottom {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 654px 654px;
+  grid-template-columns: 654px 654px;
+  gap: 8px;
+}
+
+.subt138_forester,
+.subt138_trailseeker {
+  width: 654px;
+  height: 280px;
+}
+
+/* IMAGES */
+
+.subt138_grid a {
+  display: block;
+  overflow: hidden;
+}
+
+.subt138_grid img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+
+.subt138-mobile-carousel {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .subt138_custom-grid {
+    display: none !important;
+  }
+
+  .E9xWrfaaHW {
+    display: none !important;
+  }
+
+  .subt138-mobile-carousel {
+    overflow-x: auto;
+    -ms-scroll-snap-type: x mandatory;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .subt138-mobile-track {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    overflow-x: auto;
+    gap: 0;
+    -ms-scroll-snap-type: x mandatory;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .subt138-mobile-track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .subt138-mobile-track a {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 100%;
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+  }
+
+  .subt138-mobile-track > a {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 100%;
+    flex: 0 0 100%;
+    width: 100%;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+
+  .subt138-mobile-track img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .subt138-mobile-carousel {
+    display: block;
+    padding: 0 20px;
+  }
+
+  .subt138-mobile-track {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    overflow-x: auto;
+    gap: 12px;
+    -ms-scroll-snap-type: x mandatory;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .subt138-mobile-track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .subt138-mobile-track > a {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 100%;
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .subt138-mobile-track img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .subt138-mobile-dots {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 30px;
+  }
+
+  .subt138-mobile-dots button {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 0;
+    padding: 0;
+    background: #d0d0d0;
+  }
+
+  .subt138-mobile-dots button.is-active {
+    background: #1637a0;
+  }
+}

@@ -1,0 +1,15 @@
+{
+    "projectName": "SUBT138",
+    "variations": [
+        "Variation 1"
+    ],
+    "goalsToCreate": [
+        "subt138-Tile 1",
+        "subt138-Tile 2",
+        "subt138-Tile 3",
+        "subt138-Tile 4",
+        "subt138-Tile 5"
+    ],
+    "goalsToAdd": [],
+    "primaryGoal": "subt138-Tile 1"
+}

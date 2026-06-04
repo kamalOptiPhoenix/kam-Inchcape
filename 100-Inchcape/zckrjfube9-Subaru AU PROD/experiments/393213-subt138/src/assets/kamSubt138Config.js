@@ -2,14 +2,14 @@ const kamSubt138Config = {
     selectors: {
         searchBarContent: '#search-bar-content',
         mobileTrack: '.subt138-mobile-track',
-        mobileDots: '.subt138-mobile-dots button',
+        mobileDots: '.subt138-mobile-carousel .subt138-mobile-dots button',
         desktopGrid: '.subt138_custom-grid',
         mobileCarousel: '.subt138-mobile-carousel',
     },
 
     html: {
         gridMarkup: `
-            <section class="subt138_custom-grid">
+              <section class="subt138_custom-grid">
                 <div class="subt138_grid">
 
                     <div class="subt138_top">
@@ -39,37 +39,29 @@ const kamSubt138Config = {
                         </a>
 
                     </div>
-                    
-                     <div class="subt138-mobile-dots">
-        <button class="is-active"></button>
-        <button></button>
-        <button></button>
-        <button></button>
-        <button></button>
-    </div>
 
                 </div>
             </section>
              <div class="subt138-mobile-carousel">
         <div class="subt138-mobile-track">
         
-        <a href="https://www.subaru.com.au/outback/2026">
+        <a class="subt138_outback_mobile" href="https://www.subaru.com.au/outback/2026">
                 <img src="https://cdn.optimizely.com/img/15841360337/8bf9f99102f44f29a1ea1275b6095fb1.jpg" alt="Outback">
             </a>
             
-             <a href="https://www.subaru.com.au/uncharted/2026">
+             <a class="subt138_uncharted_mobile" href="https://www.subaru.com.au/uncharted/2026">
                 <img src="https://cdn.optimizely.com/img/15841360337/61f4a8ff928447d284e33903f53533ed.jpg" alt="Uncharted">
             </a>
             
-             <a href="https://www.subaru.com.au/wilderness/2026">
+             <a class="subt138_wilderness_mobile" href="https://www.subaru.com.au/wilderness/2026">
                 <img src="https://cdn.optimizely.com/img/15841360337/333625f2944f48fdaf83ae3487ad03d7.jpg" alt="Wilderness">
             </a>
 
-            <a href="https://www.subaru.com.au/special-offers/my26-forester-awd-hybrid-driveaway-offer">
+            <a class="subt138_forester_mobile" href="https://www.subaru.com.au/special-offers/my26-forester-awd-hybrid-driveaway-offer">
                 <img src="https://cdn.optimizely.com/img/15841360337/4abf4348be91416d9ea6ca0bc420b706.jpg" alt="Forester">
             </a>
 
-            <a href="https://www.subaru.com.au/trailseeker/2026">
+            <a class="subt138_trailseeker_mobile" href="https://www.subaru.com.au/trailseeker/2026">
                 <img src="https://cdn.optimizely.com/img/15841360337/9ff815457f4f4e5da0a15cb356d5f62f.jpg" alt="Trailseeker">
             </a>
 

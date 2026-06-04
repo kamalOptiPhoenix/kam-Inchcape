@@ -79,6 +79,10 @@
     display: none;
 }
 
+.subt138-mobile-dots {
+    display: none;
+}
+
 @media (max-width: 768px) {
 	.subt138_custom-grid {
 		display: none !important;
@@ -89,47 +93,9 @@
 	}
 
 	.subt138-mobile-carousel {
-		overflow-x: auto;
-		scroll-snap-type: x mandatory;
-		-webkit-overflow-scrolling: touch;
-	}
-
-	
-	.subt138-mobile-track {
-    display: flex;
-    overflow-x: auto;
-    gap: 0;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-}
-
-.subt138-mobile-track::-webkit-scrollbar {
-    display: none;
-}
-
-	.subt138-mobile-track a {
-		flex: 0 0 100%;
-		scroll-snap-align: start;
-	}
-	
-	.subt138-mobile-track > a {
-    flex: 0 0 100%;
-    width: 100%;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
-}
-
-	.subt138-mobile-track img {
-    display: block;
-    width: 100%;
-    height: auto;
-}
-	
-	 .subt138-mobile-carousel {
         display: block;
         padding: 0 20px;
+        overflow: hidden;
     }
 
     .subt138-mobile-track {
@@ -137,6 +103,7 @@
         overflow-x: auto;
         gap: 12px;
         scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
     }
@@ -147,7 +114,9 @@
 
     .subt138-mobile-track > a {
         flex: 0 0 100%;
+        width: 100%;
         scroll-snap-align: start;
+        scroll-snap-stop: always;
         border-radius: 8px;
         overflow: hidden;
     }
@@ -158,23 +127,24 @@
         height: auto;
     }
 
-    .subt138-mobile-dots {
+    .subt138-mobile-carousel .subt138-mobile-dots {
         display: flex;
         justify-content: center;
         gap: 12px;
         margin-top: 30px;
     }
 
-    .subt138-mobile-dots button {
+    .subt138-mobile-carousel .subt138-mobile-dots button {
         width: 14px;
         height: 14px;
         border-radius: 50%;
         border: 0;
         padding: 0;
+        cursor: pointer;
         background: #d0d0d0;
     }
 
-    .subt138-mobile-dots button.is-active {
+    .subt138-mobile-carousel .subt138-mobile-dots button.is-active {
         background: #1637a0;
     }
 }

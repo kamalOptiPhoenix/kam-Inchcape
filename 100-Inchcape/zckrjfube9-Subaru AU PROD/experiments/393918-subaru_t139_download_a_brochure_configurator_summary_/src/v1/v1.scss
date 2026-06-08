@@ -1,0 +1,435 @@
+.kamSubt139_brochureWrap {
+	width: 100%;
+	margin-top: 20px;
+	text-align: center;
+}
+
+.kamSubt139_brochureDivider {
+	border: 0;
+	border-top: 1px solid #d9d9d9;
+	margin: 0 0 24px;
+}
+
+.spc ._chr ._chr_level .kamSubt139_brochureBtn {
+	display: -webkit-inline-box;
+	display: -ms-inline-flexbox;
+	display: inline-flex;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	gap: 10px;
+	width: 100%;
+	max-width: 100%;
+	padding: 14px 24px;
+	border: 1px solid #003da5;
+	border-radius: 9px;
+	background: #fff;
+	color: #003da5;
+	font-family: Avenir-Roman, Helvetica, sans-serif;
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 1.2;
+	cursor: pointer;
+	-webkit-transition:
+		background 0.2s ease,
+		color 0.2s ease,
+		border-color 0.2s ease;
+	transition:
+		background 0.2s ease,
+		color 0.2s ease,
+		border-color 0.2s ease;
+	margin-top: 20px;
+}
+
+.kamSubt139_brochureIcon {
+	-ms-flex-negative: 0;
+	flex-shrink: 0;
+}
+
+.spc ._chr ._chr_level .kamSubt139_brochureBtn:hover {
+	background: #003da5;
+	color: #fff;
+}
+
+.spc ._chr ._chr_level .kamSubt139_brochureSubtext {
+	margin: 10px 0 0;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 1.4;
+	color: #666;
+	text-align: center;
+	font-family: Avenir-Roman, Helvetica, sans-serif;
+}
+
+.kamSubt139_modalOverlay {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	background: rgba(0, 0, 0, 0.7);
+	height: 100%;
+	left: 0;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 999;
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+	-webkit-transition: opacity 0.3s ease, visibility 0.3s ease;
+	transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.kamSubt139_modalOverlayOpen {
+	opacity: 1;
+	visibility: visible;
+	pointer-events: auto;
+}
+
+.kamSubt139_modal {
+	background: #fff;
+	-webkit-box-shadow: 0px 4px 22px 0px rgba(0, 0, 0, 0.3490196078);
+	box-shadow: 0px 4px 22px 0px rgba(0, 0, 0, 0.3490196078);
+	font-family: AvenirLT-Medium, Arial, Helvetica, sans-serif;
+	left: 50%;
+	max-height: 94%;
+	max-width: 1440px;
+	overflow-y: auto;
+	position: fixed;
+	text-align: center;
+	top: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	width: 790px;
+	padding: 0;
+	border-radius: 6px;
+}
+
+.kamSubt139_close {
+	position: absolute;
+	top: 19px;
+	right: 17.69px;
+	border: none;
+	padding: 0;
+	cursor: pointer;
+	background: transparent;
+}
+
+.kamSubt139_modalTop {
+	padding: 44px 79.5px 34px 79.5px;
+}
+
+.kamSubt139_modal h2 {
+	font-family: Avenir;
+	font-weight: 400;
+	font-style: Roman;
+	font-size: 46px;
+	leading-trim: NONE;
+	line-height: 100%;
+	letter-spacing: 0px;
+	text-align: center;
+	color: #000000;
+	margin: 0 0 13px;
+	padding: 0;
+}
+
+.kamSubt139_introText {
+	font-family: Avenir;
+	font-weight: 400;
+	font-style: Roman;
+	font-size: 18px;
+	leading-trim: NONE;
+	line-height: 100%;
+	letter-spacing: 0px;
+	text-align: center;
+	color: #000000;
+	margin: 0 0 1px;
+}
+
+.kamSubt139_carImage {
+	display: block;
+	width: 100%;
+	max-width: 298px;
+	margin: 0 auto;
+}
+
+.kamSubt139_downloadLink {
+	font-family: Avenir;
+	font-weight: 800;
+	font-style: Heavy;
+	font-size: 16px;
+	leading-trim: NONE;
+	line-height: 100%;
+	letter-spacing: 0px;
+	text-align: center;
+	color: #1637a0;
+	text-decoration: none;
+	margin: 0;
+}
+
+.kamSubt139_formSection {
+	padding: 42px 64px 54px 64px;
+	background: #f0f0f0;
+}
+
+.kamSubt139_divider {
+	border: 0;
+	border-top: 1px dashed #8b8b8b;
+	margin: 0;
+}
+
+.kamSubt139_formHeading {
+	font-family: Avenir;
+	font-weight: 400;
+	font-style: Roman;
+	font-size: 18px;
+	leading-trim: NONE;
+	line-height: 100%;
+	letter-spacing: 0px;
+	text-align: center;
+	vertical-align: bottom;
+	color: #262626;
+	margin: 0 0 18px;
+}
+
+.kamSubt139_fieldWrap {
+	max-width: 340px;
+	margin: auto;
+	margin-bottom: 55px;
+}
+
+.kamSubt139_emailInput {
+	display: block;
+	border: none;
+	border-bottom: 1px solid #888888;
+	width: 100%;
+	padding: 8px 0px;
+	background: transparent;
+	text-align: left;
+	outline: none;
+	font-family: Avenir;
+	font-weight: 400;
+	font-style: Roman;
+	font-size: 14px;
+	leading-trim: NONE;
+	line-height: 21px;
+	letter-spacing: 0px;
+	color: #262626;
+}
+
+.kamSubt139_emailInput::-webkit-input-placeholder {
+	color: #707070;
+}
+
+.kamSubt139_emailInput::-moz-placeholder {
+	color: #707070;
+}
+
+.kamSubt139_emailInput:-ms-input-placeholder {
+	color: #707070;
+}
+
+.kamSubt139_emailInput::-ms-input-placeholder {
+	color: #707070;
+}
+
+.kamSubt139_emailInput::placeholder {
+	color: #707070;
+}
+
+.kamSubt139_emailError,
+.kamSubt139_privacyError {
+	min-height: 32px;
+	background: transparent;
+	color: #8a1f11;
+	/* display: none; */
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 1.42857;
+	margin-top: 4px;
+	padding-left: 0;
+	text-align: center;
+}
+
+.kamSubt139_privacyError {
+	min-height: 32px;
+	margin: auto;
+}
+
+.kamSubt139_checkboxWrap {
+	max-width: 360px;
+	margin: 0 auto;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: start;
+	-ms-flex-align: start;
+	align-items: flex-start;
+	gap: 10px;
+	text-align: left;
+	cursor: pointer;
+	margin-top: auto;
+}
+
+.kamSubt139_checkboxWrap input[type='checkbox'] {
+	margin-top: 4px;
+	-ms-flex-negative: 0;
+	flex-shrink: 0;
+	width: 16px;
+	height: 16px;
+}
+
+.kamSubt139_checkboxText {
+	font-family: Avenir;
+	font-weight: 350;
+	font-style: Book;
+	font-size: 14px;
+	leading-trim: NONE;
+	line-height: 100%;
+	letter-spacing: 0px;
+	color: #262626;
+}
+
+.kamSubt139_checkboxText strong {
+	font-weight: 800;
+}
+
+.kamSubt139_sendBtn {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	width: 251px;
+	height: 48px;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	margin: 0 auto;
+	padding: 0;
+	font-family: Avenir;
+	font-weight: 500;
+	font-size: 15px;
+	leading-trim: NONE;
+	line-height: 100%;
+	letter-spacing: 0px;
+	text-align: center;
+	border: none;
+	border-radius: 25px;
+	background: #d8d8d8;
+	color: #888;
+	-webkit-transition:
+		background 0.2s ease,
+		color 0.2s ease;
+	transition:
+		background 0.2s ease,
+		color 0.2s ease;
+}
+
+.kamSubt139_sendBtn:not(:disabled) {
+	background: #1637a0;
+	color: #fff;
+	cursor: pointer;
+}
+
+.kamSubt139_sendBtn:not(:disabled):hover {
+	background: #000;
+}
+
+.kamSubt139_successSection {
+	display: none;
+	padding: 42px 64px 54px 64px;
+	background: #f0f0f0;
+}
+
+.kamSubt139_modalSuccess .kamSubt139_formSection {
+	display: none;
+}
+
+.kamSubt139_modalSuccess .kamSubt139_successSection {
+	display: block;
+}
+
+.kamSubt139_successMessage {
+	font-size: 26px;
+	font-weight: 400;
+	letter-spacing: 0;
+	line-height: 100%;
+	padding-bottom: 113px;
+	padding-top: 113px;
+}
+@media (max-width: 800px) {
+	.kamSubt139_modal {
+		width: 700px;
+	}
+}
+
+@media (max-width: 767px) {
+	.kamSubt139_modal {
+		top: unset;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		transform: translateY(100%);
+		padding: 0;
+		max-height: calc(100vh - 63px);
+		height: 836px;
+		display: flex;
+		flex-direction: column;
+		-webkit-transition: -webkit-transform 0.35s cubic-bezier(0.32, 0.72, 0, 1);
+		transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1);
+	}
+
+	.kamSubt139_modalOverlayOpen .kamSubt139_modal {
+		-webkit-transform: translateY(0);
+		-ms-transform: translateY(0);
+		transform: translateY(0);
+	}
+
+	.kamSubt139_modalTop {
+		padding: 51px 11px 25px 11px;
+		flex-shrink: 0;
+	}
+
+	.kamSubt139_modal h2 {
+		font-size: 28px;
+		padding: 8px 0;
+		margin: 0 0 8px;
+	}
+
+	.kamSubt139_close {
+		top: 20px;
+		right: 10px;
+		width: 19px;
+		height: 17px;
+	}
+
+	.kamSubt139_divider {
+		flex-shrink: 0;
+	}
+
+	.kamSubt139_formSection {
+		flex: 1;
+		padding: 30px 28px;
+		background: #f0f0f0;
+	}
+
+	.kamSubt139_introText {
+		padding: 0 18px;
+	}
+
+	.kamSubt139_carImage {
+		width: 100%;
+		max-width: 375px;
+	}
+
+	.kamSubt139_successSection {
+		flex: 1;
+		padding: 30px 28px;
+		background: #f0f0f0;
+	}
+}

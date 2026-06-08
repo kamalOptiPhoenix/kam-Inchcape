@@ -2,14 +2,21 @@ import kamSubt139Config from './kamSubt139Config.js';
 
 function kamSubt139ProcessGoal(goalName) {
     const goalId = kamSubt139Config.goalIds[goalName];
-
-    if (
+    const canFireGoal = Boolean(
         goalId
         && typeof Kameleoon !== 'undefined'
         && Kameleoon.API
         && Kameleoon.API.Goals
         && Kameleoon.API.Goals.processConversion
-    ) {
+    );
+
+    console.log('[SUBT139] Goal trigger:', {
+        goalName,
+        goalId,
+        fired: canFireGoal,
+    });
+
+    if (canFireGoal) {
         Kameleoon.API.Goals.processConversion(goalId);
     }
 }

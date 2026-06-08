@@ -5,17 +5,18 @@ import kamSubt139Config from '../assets/kamSubt139Config.js';
 import kamSubt139InsertMarkup from '../assets/kamSubt139InsertMarkup.js';
 import kamSubt139InitEvents from '../assets/kamSubt139InitEvents.js';
 
-let kamSubt139Initialized = false;
-
 function kamSubt139Init() {
-    if (!kamSubt139Initialized) {
+    if (!window.__kamSubt139CoreInitialized) {
         document.body.classList.add('kamSubt139_body');
-        console.log('%c SUBARU T139 DOWNLOAD A BROCHURE CONFIGURATOR SUMMARY', 'background-color: red; color: white;');
         kamSubt139InitEvents();
-        kamSubt139Initialized = true;
+        window.__kamSubt139CoreInitialized = true;
     }
 
     kamSubt139InsertMarkup();
 }
 
-KamMutation(kamSubt139Config.selectors.customiseSummary, kamSubt139Init);
+if (!window.__kamSubt139Bootstrapped) {
+    window.__kamSubt139Bootstrapped = true;
+
+    KamMutation(kamSubt139Config.selectors.customiseSummary, kamSubt139Init);
+}

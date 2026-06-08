@@ -18,8 +18,6 @@ import {
     kamSubt139UpdateSendButtonState,
 } from './kamSubt139ValidateForm.js';
 
-let kamSubt139EventsBound = false;
-
 function kamSubt139PrefillEmail() {
     const existingEmail = sessionStorage.getItem(
         kamSubt139Config.sessionStorageKeys.emailCollected
@@ -129,11 +127,11 @@ function kamSubt139HandleDocumentChange(event) {
 }
 
 export default function kamSubt139InitEvents() {
-    if (kamSubt139EventsBound) {
+    if (window.__kamSubt139EventsBound) {
         return;
     }
 
-    kamSubt139EventsBound = true;
+    window.__kamSubt139EventsBound = true;
     document.addEventListener('click', kamSubt139HandleDocumentClick);
     document.addEventListener('focusout', kamSubt139HandleDocumentFocusOut);
     document.addEventListener('input', kamSubt139HandleDocumentInput);

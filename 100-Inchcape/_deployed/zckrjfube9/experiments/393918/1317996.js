@@ -186,25 +186,33 @@
     const brochureWrap = document.querySelector(kamSubt139Config.selectors.brochureWrap);
     return Boolean(brochureWrap && lastWrapper && lastWrapper.nextElementSibling === brochureWrap);
   }
-  function kamSubt139RemoveOrphanBrochureWrap() {
+  function kamSubt139RemoveOrphanBrochureWraps() {
     const lastWrapper = kamSubt139GetLastSummaryWrapper();
-    const brochureWrap = document.querySelector(kamSubt139Config.selectors.brochureWrap);
-    if (brochureWrap && (!lastWrapper || lastWrapper.nextElementSibling !== brochureWrap)) {
-      brochureWrap.remove();
-    }
+    const brochureWraps = document.querySelectorAll(kamSubt139Config.selectors.brochureWrap);
+    brochureWraps.forEach(brochureWrap => {
+      if (!lastWrapper || lastWrapper.nextElementSibling !== brochureWrap) {
+        brochureWrap.remove();
+      }
+    });
   }
   function kamSubt139PlaceBrochureButton() {
     const lastWrapper = kamSubt139GetLastSummaryWrapper();
     if (!lastWrapper) {
       return;
     }
-    kamSubt139RemoveOrphanBrochureWrap();
+    kamSubt139RemoveOrphanBrochureWraps();
     if (kamSubt139IsBrochureWrapCorrectlyPlaced(lastWrapper)) {
       return;
     }
     lastWrapper.insertAdjacentHTML('afterend', kamSubt139Config.html.brochureBtn);
   }
   function kamSubt139EnsureModal() {
+    const modalOverlays = document.querySelectorAll(kamSubt139Config.selectors.modalOverlay);
+    modalOverlays.forEach((modalOverlay, index) => {
+      if (index > 0) {
+        modalOverlay.remove();
+      }
+    });
     if (!document.querySelector(kamSubt139Config.selectors.modalOverlay)) {
       document.body.insertAdjacentHTML('beforeend', kamSubt139Config.html.modal);
     }
@@ -355,7 +363,13 @@
   }
   function kamSubt139ProcessGoal(goalName) {
     const goalId = kamSubt139Config.goalIds[goalName];
-    if (goalId && typeof Kameleoon !== 'undefined' && Kameleoon.API && Kameleoon.API.Goals && Kameleoon.API.Goals.processConversion) {
+    const canFireGoal = Boolean(goalId && typeof Kameleoon !== 'undefined' && Kameleoon.API && Kameleoon.API.Goals && Kameleoon.API.Goals.processConversion);
+    console.log('[SUBT139] Goal trigger:', {
+      goalName,
+      goalId,
+      fired: canFireGoal
+    });
+    if (canFireGoal) {
       Kameleoon.API.Goals.processConversion(goalId);
     }
   }
@@ -536,7 +550,6 @@
       }
     });
   }
-  let kamSubt139EventsBound = false;
   function kamSubt139PrefillEmail() {
     const existingEmail = sessionStorage.getItem(kamSubt139Config.sessionStorageKeys.emailCollected) || '';
     const emailInput = document.querySelector(kamSubt139Config.selectors.emailInput);
@@ -620,10 +633,10 @@
     }
   }
   function kamSubt139InitEvents() {
-    if (kamSubt139EventsBound) {
+    if (window.__kamSubt139EventsBound) {
       return;
     }
-    kamSubt139EventsBound = true;
+    window.__kamSubt139EventsBound = true;
     document.addEventListener('click', kamSubt139HandleDocumentClick);
     document.addEventListener('focusout', kamSubt139HandleDocumentFocusOut);
     document.addEventListener('input', kamSubt139HandleDocumentInput);
@@ -632,15 +645,16 @@
 
   /* eslint-disable import/extensions */
 
-  let kamSubt139Initialized = false;
   function kamSubt139Init() {
-    if (!kamSubt139Initialized) {
+    if (!window.__kamSubt139CoreInitialized) {
       document.body.classList.add('kamSubt139_body');
-      console.log('%c SUBARU T139 DOWNLOAD A BROCHURE CONFIGURATOR SUMMARY', 'background-color: red; color: white;');
       kamSubt139InitEvents();
-      kamSubt139Initialized = true;
+      window.__kamSubt139CoreInitialized = true;
     }
     kamSubt139InsertMarkup();
   }
-  KamMutation(kamSubt139Config.selectors.customiseSummary, kamSubt139Init);
+  if (!window.__kamSubt139Bootstrapped) {
+    window.__kamSubt139Bootstrapped = true;
+    KamMutation(kamSubt139Config.selectors.customiseSummary, kamSubt139Init);
+  }
 })();

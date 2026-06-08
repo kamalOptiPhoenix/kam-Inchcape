@@ -14,13 +14,15 @@ function kamSubt139IsBrochureWrapCorrectlyPlaced(lastWrapper) {
     return Boolean(brochureWrap && lastWrapper && lastWrapper.nextElementSibling === brochureWrap);
 }
 
-function kamSubt139RemoveOrphanBrochureWrap() {
+function kamSubt139RemoveOrphanBrochureWraps() {
     const lastWrapper = kamSubt139GetLastSummaryWrapper();
-    const brochureWrap = document.querySelector(kamSubt139Config.selectors.brochureWrap);
+    const brochureWraps = document.querySelectorAll(kamSubt139Config.selectors.brochureWrap);
 
-    if (brochureWrap && (!lastWrapper || lastWrapper.nextElementSibling !== brochureWrap)) {
-        brochureWrap.remove();
-    }
+    brochureWraps.forEach((brochureWrap) => {
+        if (!lastWrapper || lastWrapper.nextElementSibling !== brochureWrap) {
+            brochureWrap.remove();
+        }
+    });
 }
 
 function kamSubt139PlaceBrochureButton() {
@@ -30,7 +32,7 @@ function kamSubt139PlaceBrochureButton() {
         return;
     }
 
-    kamSubt139RemoveOrphanBrochureWrap();
+    kamSubt139RemoveOrphanBrochureWraps();
 
     if (kamSubt139IsBrochureWrapCorrectlyPlaced(lastWrapper)) {
         return;
@@ -40,6 +42,14 @@ function kamSubt139PlaceBrochureButton() {
 }
 
 function kamSubt139EnsureModal() {
+    const modalOverlays = document.querySelectorAll(kamSubt139Config.selectors.modalOverlay);
+
+    modalOverlays.forEach((modalOverlay, index) => {
+        if (index > 0) {
+            modalOverlay.remove();
+        }
+    });
+
     if (!document.querySelector(kamSubt139Config.selectors.modalOverlay)) {
         document.body.insertAdjacentHTML('beforeend', kamSubt139Config.html.modal);
     }

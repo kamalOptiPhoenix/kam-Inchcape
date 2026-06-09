@@ -18,7 +18,7 @@ export default function kamSubt139SubmitBrochureForm(sendBtn, emailInput) {
     const { translations } = kamSubt139Config;
     const formError = document.querySelector(kamSubt139Config.selectors.formError);
     const email = emailInput?.value.trim();
-    const modelName = kamSubt139GetModelName();
+    const configuratorModelName = kamSubt139GetModelName();
 
     sendBtn.dataset.kamSubt139Submitting = 'true';
     sendBtn.disabled = true;
@@ -28,8 +28,8 @@ export default function kamSubt139SubmitBrochureForm(sendBtn, emailInput) {
         formError.textContent = '';
     }
 
-    return kamSubt139GetBrochureTokens(modelName)
-        .then(({ token, ufprt }) => {
+    return kamSubt139GetBrochureTokens(configuratorModelName)
+        .then(({ token, ufprt, modelName, brochureUrl }) => {
             if (!token || !ufprt) {
                 kamSubt139ResetSubmitButton(sendBtn, translations);
 
@@ -59,6 +59,7 @@ export default function kamSubt139SubmitBrochureForm(sendBtn, emailInput) {
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
                     'X-Requested-With': 'XMLHttpRequest',
+                    Referer: brochureUrl,
                 },
                 body: payload.toString(),
             });
@@ -69,20 +70,20 @@ export default function kamSubt139SubmitBrochureForm(sendBtn, emailInput) {
             }
 
             return response.text().then(() => {
-                if (response.ok) {
-                    return kamSubt139FireEmailBrochureSubmittedEvent(email).then(() => {
-                        kamSubt139ShowFormSuccess();
-                        kamSubt139TriggerEmailConversionGoal();
-                    });
+                if (!response.ok) {
+                    kamSubt139ResetSubmitButton(sendBtn, translations);
+
+                    if (formError) {
+                        formError.textContent = `${translations.requestFailed} (${response.status})`;
+                    }
+
+                    return undefined;
                 }
 
-                kamSubt139ResetSubmitButton(sendBtn, translations);
-
-                if (formError) {
-                    formError.textContent = `${translations.requestFailed} (${response.status})`;
-                }
-
-                return undefined;
+                return kamSubt139FireEmailBrochureSubmittedEvent(email).then(() => {
+                    kamSubt139ShowFormSuccess();
+                    kamSubt139TriggerEmailConversionGoal();
+                });
             });
         })
         .catch(() => {

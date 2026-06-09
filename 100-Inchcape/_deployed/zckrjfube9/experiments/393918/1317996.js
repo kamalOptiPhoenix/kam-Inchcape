@@ -246,8 +246,37 @@
     kamSubt139StartSpaObserver();
     kamSubt139ReattachIfNeeded();
   }
+  function kamSubt139NormalizeModelText(text) {
+    return text.replace(/[\u2010\u2011\u2012\u2013\u2014\u2212]/g, '-').replace(/\s+/g, ' ').trim();
+  }
+  function kamSubt139GetBrochureSubmitModelName(modelName) {
+    const normalized = kamSubt139NormalizeModelText(modelName).toLowerCase();
+    if (normalized.includes('wilderness') && normalized.includes('outback')) {
+      return 'All-new Outback Wilderness';
+    }
+    if (normalized.startsWith('all-new') && normalized.includes('outback')) {
+      return 'All-new Outback';
+    }
+    if (normalized.startsWith('all-new')) {
+      return kamSubt139NormalizeModelText(modelName);
+    }
+    return kamSubt139NormalizeModelText(modelName).split(/\s+/)[0];
+  }
+  function kamSubt139GetBrochurePageModelParam(modelName) {
+    const normalized = kamSubt139NormalizeModelText(modelName).toLowerCase();
+    if (normalized.includes('wilderness') && normalized.includes('outback')) {
+      return 'wilderness2026';
+    }
+    if (normalized.startsWith('all-new') && normalized.includes('outback')) {
+      return 'outback2026';
+    }
+    return kamSubt139GetBrochureSubmitModelName(modelName);
+  }
   function kamSubt139GetModelName() {
-    const variantName = document.querySelector(kamSubt139Config.selectors.variantName)?.textContent?.trim() || '';
+    const variantName = kamSubt139NormalizeModelText(document.querySelector(kamSubt139Config.selectors.variantName)?.textContent || '');
+    if (variantName.toLowerCase().startsWith('all-new')) {
+      return kamSubt139GetBrochureSubmitModelName(variantName);
+    }
     return variantName.split(/\s+/)[0];
   }
   function kamSubt139GetVehicleSelected() {
@@ -344,21 +373,42 @@
     }
     return '';
   }
+  function kamSubt139ResolveBrochureModelName(doc, modelName) {
+    const submitModelName = kamSubt139GetBrochureSubmitModelName(modelName);
+    const normalizedTarget = kamSubt139NormalizeModelText(submitModelName).toLowerCase();
+    const carItems = doc.querySelectorAll('.carSelect__item[data-modelName]');
+    let resolvedModelName = submitModelName;
+    carItems.forEach(item => {
+      const pageModelName = item.getAttribute('data-modelName') || '';
+      const normalizedPage = kamSubt139NormalizeModelText(pageModelName).toLowerCase();
+      if (normalizedPage === normalizedTarget) {
+        resolvedModelName = pageModelName;
+      }
+    });
+    return resolvedModelName;
+  }
   function kamSubt139GetBrochureTokens(modelName) {
-    const brochureUrl = `${kamSubt139Config.urls.brochurePage}${encodeURIComponent(modelName)}`;
+    const brochurePageModel = kamSubt139GetBrochurePageModelParam(modelName);
+    const brochureUrl = `${kamSubt139Config.urls.brochurePage}${encodeURIComponent(brochurePageModel)}`;
     return fetch(brochureUrl, {
       credentials: 'include'
     }).then(res => res.text()).then(html => {
       const doc = new DOMParser().parseFromString(html, 'text/html');
-      const token = doc.querySelector('input[name="__RequestVerificationToken"]')?.value || '';
-      const ufprt = doc.querySelector('input[name="ufprt"]')?.value || '';
+      const brochureForm = doc.querySelector('#brochureForm');
+      const token = brochureForm?.querySelector('input[name="__RequestVerificationToken"]')?.value || '';
+      const ufprt = brochureForm?.querySelector('input[name="ufprt"]')?.value || '';
+      const resolvedModelName = kamSubt139ResolveBrochureModelName(doc, modelName);
       return {
         token,
-        ufprt
+        ufprt,
+        modelName: resolvedModelName,
+        brochureUrl
       };
     }).catch(() => ({
       token: '',
-      ufprt: ''
+      ufprt: '',
+      modelName: kamSubt139NormalizeModelText(modelName),
+      brochureUrl
     }));
   }
   function kamSubt139ProcessGoal(goalName) {
@@ -487,16 +537,18 @@
     } = kamSubt139Config;
     const formError = document.querySelector(kamSubt139Config.selectors.formError);
     const email = emailInput?.value.trim();
-    const modelName = kamSubt139GetModelName();
+    const configuratorModelName = kamSubt139GetModelName();
     sendBtn.dataset.kamSubt139Submitting = 'true';
     sendBtn.disabled = true;
     sendBtn.textContent = translations.submitting;
     if (formError) {
       formError.textContent = '';
     }
-    return kamSubt139GetBrochureTokens(modelName).then(({
+    return kamSubt139GetBrochureTokens(configuratorModelName).then(({
       token,
-      ufprt
+      ufprt,
+      modelName,
+      brochureUrl
     }) => {
       if (!token || !ufprt) {
         kamSubt139ResetSubmitButton(sendBtn, translations);
@@ -522,7 +574,8 @@
         credentials: 'include',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-          'X-Requested-With': 'XMLHttpRequest'
+          'X-Requested-With': 'XMLHttpRequest',
+          Referer: brochureUrl
         },
         body: payload.toString()
       });
@@ -531,17 +584,17 @@
         return;
       }
       return response.text().then(() => {
-        if (response.ok) {
-          return kamSubt139FireEmailBrochureSubmittedEvent(email).then(() => {
-            kamSubt139ShowFormSuccess();
-            kamSubt139TriggerEmailConversionGoal();
-          });
+        if (!response.ok) {
+          kamSubt139ResetSubmitButton(sendBtn, translations);
+          if (formError) {
+            formError.textContent = `${translations.requestFailed} (${response.status})`;
+          }
+          return undefined;
         }
-        kamSubt139ResetSubmitButton(sendBtn, translations);
-        if (formError) {
-          formError.textContent = `${translations.requestFailed} (${response.status})`;
-        }
-        return undefined;
+        return kamSubt139FireEmailBrochureSubmittedEvent(email).then(() => {
+          kamSubt139ShowFormSuccess();
+          kamSubt139TriggerEmailConversionGoal();
+        });
       });
     }).catch(() => {
       kamSubt139ResetSubmitButton(sendBtn, translations);

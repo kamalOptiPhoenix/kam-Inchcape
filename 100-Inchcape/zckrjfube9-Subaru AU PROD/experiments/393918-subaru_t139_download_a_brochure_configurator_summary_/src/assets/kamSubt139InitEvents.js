@@ -4,6 +4,7 @@ import {
     kamSubt139FireBrochureDownloadSubmittedEvent,
 } from './kamSubt139DigitalData.js';
 import kamSubt139GetBrochurePdfUrl from './kamSubt139GetBrochurePdfUrl.js';
+import kamSubt139GetModelImageUrl from './kamSubt139GetModelImageUrl.js';
 import kamSubt139SubmitBrochureForm from './kamSubt139SubmitBrochureForm.js';
 import {
     kamSubt139TriggerBrochureCtaClickGoal,
@@ -38,6 +39,15 @@ function kamSubt139UpdateDownloadLink() {
     }
 }
 
+function kamSubt139UpdateCarImage() {
+    const carImage = document.querySelector(kamSubt139Config.selectors.carImage);
+    const modelImageUrl = kamSubt139GetModelImageUrl();
+
+    if (carImage && modelImageUrl) {
+        carImage.src = modelImageUrl;
+    }
+}
+
 function kamSubt139OpenModal() {
     const modal = document.querySelector(kamSubt139Config.selectors.modalOverlay);
 
@@ -48,6 +58,7 @@ function kamSubt139OpenModal() {
     kamSubt139ResetModalForm();
     kamSubt139PrefillEmail();
     kamSubt139UpdateDownloadLink();
+    kamSubt139UpdateCarImage();
     kamSubt139UpdateSendButtonState();
     modal.classList.add('kamSubt139_modalOverlayOpen');
 }

@@ -1,7 +1,7 @@
 import kamSubt139Config from './kamSubt139Config.js';
 import kamSubt139ResolveModelKey from './kamSubt139ResolveModelKey.js';
 
-export default function kamSubt139GetBrochurePdfUrl() {
+export default function kamSubt139GetModelImageUrl() {
     const variantName = document.querySelector(kamSubt139Config.selectors.variantName)
         ?.textContent || '';
     const modelKey = kamSubt139ResolveModelKey(variantName);
@@ -10,5 +10,5 @@ export default function kamSubt139GetBrochurePdfUrl() {
         return '';
     }
 
-    return kamSubt139Config.brochurePdfUrls[modelKey] || '';
+    return kamSubt139Config.modelImageUrls[modelKey] || '';
 }

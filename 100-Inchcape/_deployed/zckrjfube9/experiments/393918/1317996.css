@@ -1,6 +1,5 @@
-.kamSubt139_brochureWrap {
+.spc ._chr ._chr_level .kamSubt139_brochureWrap {
   width: 100%;
-  margin-top: 20px;
   text-align: center;
 }
 
@@ -254,7 +253,7 @@
 }
 
 .kamSubt139_checkboxWrap {
-  max-width: 360px;
+  max-width: 545px;
   margin: 0 auto;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -353,6 +352,12 @@
   padding-top: 113px;
 }
 
+@media (max-width: 1279.95px) {
+  .spc ._chr ._chr_level .kamSubt139_brochureWrap {
+    margin-bottom: 48px;
+  }
+}
+
 @media (max-width: 800px) {
   .kamSubt139_modal {
     width: 700px;
@@ -360,6 +365,10 @@
 }
 
 @media (max-width: 767px) {
+  .spc ._chr ._chr_level .kamSubt139_brochureWrap {
+    margin-bottom: 0px;
+  }
+
   .kamSubt139_modal {
     top: unset;
     bottom: 0;

@@ -35,6 +35,7 @@
       modal: '.kamSubt139_modal',
       closeBtn: '.kamSubt139_close',
       downloadLink: '.kamSubt139_downloadLink',
+      carImage: '.kamSubt139_carImage',
       emailInput: '.kamSubt139_emailInput',
       privacyCheckbox: '.kamSubt139_privacy',
       sendBtn: '.kamSubt139_sendBtn',
@@ -95,7 +96,7 @@
                         </p>
                         <img
                             class="kamSubt139_carImage"
-                            src="https://dxp-pim-proxy-prod.inchcapedigital.com/inchcosy/v2/subaruauasset/AUBTAEKH8SE/?ex=1X&in=40&view=front"
+                            src=""
                             alt="Vehicle"
                         >
                         <a
@@ -158,8 +159,21 @@
       solterra: 'https://docs.subaru.com.au/Subaru-Solterra-brochure.pdf',
       brz: 'https://cdn.oem-production.subaru.com.au/documents/Subaru-BRZ-brochure.pdf'
     },
+    modelImageUrls: {
+      forester: 'https://cdn.oem-production.subaru.com.au/media/l1yjwapv/my26-forester-awd-front-daybreakpearl.png',
+      crosstrek: 'https://cdn.oem-production.subaru.com.au/media/vvnhsw4u/my26-crosstrek-awd-20l-front-crystal-white-pearl.png',
+      outback: 'https://cdn.oem-production.subaru.com.au/media/0sxoz24j/my25-outback-awd-onyx-front-magnetitegreymetallic.png',
+      wilderness: 'https://cdn.oem-production.subaru.com.au/media/3mjhfhap/my26-outback-awd-wilderness-front-crystal-black-silica.png',
+      trailseeker: 'https://cdn.oem-production.subaru.com.au/media/i04l4tts/my26-trailseeker-awd-front-crystal-white-pearl-showroom-v2.png',
+      impreza: 'https://cdn.oem-production.subaru.com.au/media/sqkf1yws/my26-impreza-20l-front-crystalwhitepearl.png',
+      wrx: 'https://cdn.oem-production.subaru.com.au/media/bbejjzwj/my26-wrx-awd-mt-front-crystalblacksilica-showroom.png',
+      uncharted: 'https://cdn.oem-production.subaru.com.au/media/ltnpnzts/my26-uncharted-awd-front-platinum-white-pearl.png',
+      solterra: 'https://cdn.oem-production.subaru.com.au/media/nrfisvi2/my26-solterra-awd-front-cosmic-white-pearl-showroom-v2.png',
+      brz: 'https://cdn.oem-production.subaru.com.au/media/pbrfdcni/my26-brz-coupe-mt-front-crystalwhitepearl.png'
+    },
     sessionStorageKeys: {
-      emailCollected: 'T37EmailCollected'
+      emailCollected: 'T37EmailCollected',
+      firstNameCollected: 'T38FNameCollected'
     },
     translations: {
       invalidEmail: 'Please enter a valid email address.',
@@ -336,42 +350,55 @@
       });
     });
   }
-  function kamSubt139GetBrochurePdfUrl() {
-    const variantName = document.querySelector(kamSubt139Config.selectors.variantName)?.textContent?.trim().toLowerCase() || '';
-    const {
-      brochurePdfUrls
-    } = kamSubt139Config;
-    if (variantName.includes('wilderness') || variantName.includes('all-new')) {
-      return brochurePdfUrls.wilderness;
+  function kamSubt139ResolveModelKey(variantName) {
+    const normalized = (variantName || '').trim().toLowerCase();
+    if (normalized.includes('wilderness') || normalized.includes('all-new')) {
+      return 'wilderness';
     }
-    if (variantName.includes('forester')) {
-      return brochurePdfUrls.forester;
+    if (normalized.includes('forester')) {
+      return 'forester';
     }
-    if (variantName.includes('crosstrek')) {
-      return brochurePdfUrls.crosstrek;
+    if (normalized.includes('crosstrek')) {
+      return 'crosstrek';
     }
-    if (variantName.includes('outback')) {
-      return brochurePdfUrls.outback;
+    if (normalized.includes('outback')) {
+      return 'outback';
     }
-    if (variantName.includes('trailseeker')) {
-      return brochurePdfUrls.trailseeker;
+    if (normalized.includes('trailseeker')) {
+      return 'trailseeker';
     }
-    if (variantName.includes('impreza')) {
-      return brochurePdfUrls.impreza;
+    if (normalized.includes('impreza')) {
+      return 'impreza';
     }
-    if (variantName.includes('wrx')) {
-      return brochurePdfUrls.wrx;
+    if (normalized.includes('wrx')) {
+      return 'wrx';
     }
-    if (variantName.includes('uncharted')) {
-      return brochurePdfUrls.uncharted;
+    if (normalized.includes('uncharted')) {
+      return 'uncharted';
     }
-    if (variantName.includes('solterra')) {
-      return brochurePdfUrls.solterra;
+    if (normalized.includes('solterra')) {
+      return 'solterra';
     }
-    if (variantName.includes('brz')) {
-      return brochurePdfUrls.brz;
+    if (normalized.includes('brz')) {
+      return 'brz';
     }
     return '';
+  }
+  function kamSubt139GetBrochurePdfUrl() {
+    const variantName = document.querySelector(kamSubt139Config.selectors.variantName)?.textContent || '';
+    const modelKey = kamSubt139ResolveModelKey(variantName);
+    if (!modelKey) {
+      return '';
+    }
+    return kamSubt139Config.brochurePdfUrls[modelKey] || '';
+  }
+  function kamSubt139GetModelImageUrl() {
+    const variantName = document.querySelector(kamSubt139Config.selectors.variantName)?.textContent || '';
+    const modelKey = kamSubt139ResolveModelKey(variantName);
+    if (!modelKey) {
+      return '';
+    }
+    return kamSubt139Config.modelImageUrls[modelKey] || '';
   }
   function kamSubt139ResolveBrochureModelName(doc, modelName) {
     const submitModelName = kamSubt139GetBrochureSubmitModelName(modelName);
@@ -537,6 +564,7 @@
     } = kamSubt139Config;
     const formError = document.querySelector(kamSubt139Config.selectors.formError);
     const email = emailInput?.value.trim();
+    const firstName = sessionStorage.getItem(kamSubt139Config.sessionStorageKeys.firstNameCollected)?.trim() || 'noname';
     const configuratorModelName = kamSubt139GetModelName();
     sendBtn.dataset.kamSubt139Submitting = 'true';
     sendBtn.disabled = true;
@@ -561,7 +589,7 @@
       payload.append('ModelName', modelName);
       payload.append('ModelImageUrl', modelName);
       payload.append('Email', email);
-      payload.append('FirstName', 'noname');
+      payload.append('FirstName', firstName);
       payload.append('LastName', 'noname');
       payload.append('Phone', '');
       payload.append('Postcode', '');
@@ -617,6 +645,13 @@
       downloadLink.href = brochurePdfUrl;
     }
   }
+  function kamSubt139UpdateCarImage() {
+    const carImage = document.querySelector(kamSubt139Config.selectors.carImage);
+    const modelImageUrl = kamSubt139GetModelImageUrl();
+    if (carImage && modelImageUrl) {
+      carImage.src = modelImageUrl;
+    }
+  }
   function kamSubt139OpenModal() {
     const modal = document.querySelector(kamSubt139Config.selectors.modalOverlay);
     if (!modal) {
@@ -625,6 +660,7 @@
     kamSubt139ResetModalForm();
     kamSubt139PrefillEmail();
     kamSubt139UpdateDownloadLink();
+    kamSubt139UpdateCarImage();
     kamSubt139UpdateSendButtonState();
     modal.classList.add('kamSubt139_modalOverlayOpen');
   }

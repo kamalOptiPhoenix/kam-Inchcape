@@ -10,6 +10,7 @@ const kamSubt139Config = {
         modal: '.kamSubt139_modal',
         closeBtn: '.kamSubt139_close',
         downloadLink: '.kamSubt139_downloadLink',
+        carImage: '.kamSubt139_carImage',
         emailInput: '.kamSubt139_emailInput',
         privacyCheckbox: '.kamSubt139_privacy',
         sendBtn: '.kamSubt139_sendBtn',
@@ -72,7 +73,7 @@ const kamSubt139Config = {
                         </p>
                         <img
                             class="kamSubt139_carImage"
-                            src="https://dxp-pim-proxy-prod.inchcapedigital.com/inchcosy/v2/subaruauasset/AUBTAEKH8SE/?ex=1X&in=40&view=front"
+                            src=""
                             alt="Vehicle"
                         >
                         <a
@@ -138,8 +139,22 @@ const kamSubt139Config = {
         brz: 'https://cdn.oem-production.subaru.com.au/documents/Subaru-BRZ-brochure.pdf',
     },
 
+    modelImageUrls: {
+        forester: 'https://cdn.oem-production.subaru.com.au/media/l1yjwapv/my26-forester-awd-front-daybreakpearl.png',
+        crosstrek: 'https://cdn.oem-production.subaru.com.au/media/vvnhsw4u/my26-crosstrek-awd-20l-front-crystal-white-pearl.png',
+        outback: 'https://cdn.oem-production.subaru.com.au/media/0sxoz24j/my25-outback-awd-onyx-front-magnetitegreymetallic.png',
+        wilderness: 'https://cdn.oem-production.subaru.com.au/media/3mjhfhap/my26-outback-awd-wilderness-front-crystal-black-silica.png',
+        trailseeker: 'https://cdn.oem-production.subaru.com.au/media/i04l4tts/my26-trailseeker-awd-front-crystal-white-pearl-showroom-v2.png',
+        impreza: 'https://cdn.oem-production.subaru.com.au/media/sqkf1yws/my26-impreza-20l-front-crystalwhitepearl.png',
+        wrx: 'https://cdn.oem-production.subaru.com.au/media/bbejjzwj/my26-wrx-awd-mt-front-crystalblacksilica-showroom.png',
+        uncharted: 'https://cdn.oem-production.subaru.com.au/media/ltnpnzts/my26-uncharted-awd-front-platinum-white-pearl.png',
+        solterra: 'https://cdn.oem-production.subaru.com.au/media/nrfisvi2/my26-solterra-awd-front-cosmic-white-pearl-showroom-v2.png',
+        brz: 'https://cdn.oem-production.subaru.com.au/media/pbrfdcni/my26-brz-coupe-mt-front-crystalwhitepearl.png',
+    },
+
     sessionStorageKeys: {
         emailCollected: 'T37EmailCollected',
+        firstNameCollected: 'T38FNameCollected',
     },
 
     translations: {

@@ -18,6 +18,9 @@ export default function kamSubt139SubmitBrochureForm(sendBtn, emailInput) {
     const { translations } = kamSubt139Config;
     const formError = document.querySelector(kamSubt139Config.selectors.formError);
     const email = emailInput?.value.trim();
+    const firstName = sessionStorage.getItem(
+        kamSubt139Config.sessionStorageKeys.firstNameCollected
+    )?.trim() || 'noname';
     const configuratorModelName = kamSubt139GetModelName();
 
     sendBtn.dataset.kamSubt139Submitting = 'true';
@@ -44,7 +47,7 @@ export default function kamSubt139SubmitBrochureForm(sendBtn, emailInput) {
             payload.append('ModelName', modelName);
             payload.append('ModelImageUrl', modelName);
             payload.append('Email', email);
-            payload.append('FirstName', 'noname');
+            payload.append('FirstName', firstName);
             payload.append('LastName', 'noname');
             payload.append('Phone', '');
             payload.append('Postcode', '');

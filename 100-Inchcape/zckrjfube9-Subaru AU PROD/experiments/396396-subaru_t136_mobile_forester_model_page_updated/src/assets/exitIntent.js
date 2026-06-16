@@ -1,0 +1,398 @@
+/* eslint-disable no-restricted-globals */
+/* eslint-disable no-unused-vars */
+const exitIntent = {
+    shown: false,
+    modalId: 'subt136-exit-intent-modal',
+    overlayId: 'subt136-exit-intent-overlay',
+    brochureUrl: 'https://docs.subaru.com.au/Subaru-Forester-brochure.pdf',
+    privacyUrl: 'https://www.subaru.com.au/privacy-policy',
+
+    HTML: `
+    <div id="subt136-exit-intent-overlay" class="subt136-exit-overlay">
+        <div id="subt136-exit-intent-modal" class="subt136-exit-modal">
+            <button class="subt136-exit-close" aria-label="Close modal">&times;</button>
+            
+            <div class="subt136-exit-content" id="subt136-exit-initial-content">
+                <div class="subt136-exit-top-section">
+                    <h2 class="subt136-exit-headline">Before you go...</h2>
+                    <h2 class="subt136-exit-subheadline">Get the Forester brochure</h2>
+                    
+                    <p class="subt136-exit-description">Compare features, specs and pricing at your own pace.</p>
+                    
+                    <div class="subt136-exit-car-image">
+                        <img src="https://cdn.oem-production.subaru.com.au/media/uhniabbl/my26-forester-awd-touring-front-daybreakpearl.png" alt="Subaru Forester" />
+                    </div>
+                    
+                    <a href="https://docs.subaru.com.au/Subaru-Forester-brochure.pdf" 
+                       class="subt136-exit-download-link" 
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        <span>Download</span>
+                    </a>
+                </div>
+                
+                <div class="subt136-exit-divider"></div>
+                
+                <div class="subt136-exit-bottom-section">
+                    <div class="subt136-exit-form-wrapper">
+                        <p class="subt136-exit-form-intro">Why not send a copy of the brochure straight to your inbox for later?</p>
+                        
+                        <form class="subt136-exit-form" id="subt136-exit-form">
+                            <div class="subt136-exit-form-group">
+                                <input 
+                                    type="email" 
+                                    id="subt136-exit-email" 
+                                    name="email" 
+                                    placeholder="Email" 
+                                    required 
+                                    class="subt136-exit-input"
+                                />
+                                <span class="subt136-exit-error" id="subt136-email-error">Please enter a valid email address</span>
+                            </div>
+                            
+                            <p class="subt136-exit-tagline">Access anytime, even after you leave.</p>
+                            
+                            <div class="subt136-exit-checkbox-group">
+                                <input 
+                                    type="checkbox" 
+                                    id="subt136-exit-privacy" 
+                                    name="privacy" 
+                                    required 
+                                    class="subt136-exit-checkbox"
+                                />
+                                <label for="subt136-exit-privacy" class="subt136-exit-checkbox-label">
+                                    Please confirm you have read and agreed to our 
+                                    <a href="https://www.subaru.com.au/privacy-policy" target="_blank" rel="noopener noreferrer" class="subt136-exit-privacy-link">Privacy Collection Statement</a> 
+                                    by checking this box.
+                                </label>
+                            </div>
+                            
+                            <button type="submit" class="subt136-exit-submit" disabled>Email my brochure</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subt136-exit-content subt136-exit-success-content" id="subt136-exit-success-content" style="display: none;">
+                <div class="subt136-exit-top-section">
+                      <h2 class="subt136-exit-headline">Thanks <br class="subt136-mobile-break">for downloading!</h2>
+                    <p class="subt136-exit-description">Compare features, specs and pricing at your own pace.</p>
+                    
+                    <div class="subt136-exit-car-image">
+                        <img src="https://cdn.oem-production.subaru.com.au/media/uhniabbl/my26-forester-awd-touring-front-daybreakpearl.png" alt="Subaru Forester" />
+                    </div>
+                    
+                    <a href="https://docs.subaru.com.au/Subaru-Forester-brochure.pdf" 
+                       class="subt136-exit-download-link" 
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        <span>Download</span>
+                    </a>
+                </div>
+                
+                <div class="subt136-exit-divider"></div>
+                
+                <div class="subt136-exit-bottom-section">
+                    <p class="subt136-exit-success-message">Your brochure has been sent to your email.<br/>Please check your inbox!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    `,
+
+    injectHTML() {
+        if (document.getElementById(this.overlayId)) return;
+        document.body.insertAdjacentHTML('beforeend', this.HTML);
+    },
+
+    validateEmail(email) {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+    },
+
+    async hashEmail(email) {
+        const msgBuffer = new TextEncoder().encode(email.toLowerCase().trim());
+        const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    },
+
+    triggerAnalyticsEvent(hashedEmail) {
+        if (window.digitalData && window.digitalData.events
+            && window.digitalData.events.pushAndUpdate) {
+            window.digitalData.events.pushAndUpdate({
+                event: '_formNavigate',
+                form: {
+                    name: 'email brochure',
+                    stage: 'submitted',
+                    details: {
+                        dealerContact: false,
+                        vehicleSelected: [{ make: 'subaru', model: 'forester' }]
+                    }
+                },
+                user: { emailHashed: hashedEmail }
+            });
+            console.log('Analytics event triggered with hashed email:', hashedEmail);
+        } else {
+            console.warn('digitalData.events.pushAndUpdate not available');
+        }
+    },
+
+    updateSubmitButton() {
+        const emailInput = document.getElementById('subt136-exit-email');
+        const privacyCheckbox = document.getElementById('subt136-exit-privacy');
+        const submitButton = document.querySelector('.subt136-exit-submit');
+
+        if (!emailInput || !privacyCheckbox || !submitButton) return;
+
+        submitButton.disabled = !(this.validateEmail(emailInput.value) && privacyCheckbox.checked);
+    },
+
+    showSuccessState() {
+        const initialContent = document.getElementById('subt136-exit-initial-content');
+        const successContent = document.getElementById('subt136-exit-success-content');
+
+        if (initialContent && successContent) {
+            initialContent.style.display = 'none';
+            successContent.style.display = 'block';
+        }
+    },
+
+    // ── NEW: fetch fresh CSRF tokens from the brochure page ──────────────────
+    fetchCSRFTokens() {
+        return fetch('https://www.subaru.com.au/brochure-download?model=forester', {
+            method: 'GET',
+            credentials: 'include'
+        })
+            .then(pageResponse => pageResponse.text())
+            .then((pageHtml) => {
+                const doc = new DOMParser().parseFromString(pageHtml, 'text/html');
+
+                const tokenEl = doc.querySelector('input[name="__RequestVerificationToken"]');
+                const ufprtEl = doc.querySelector('input[name="ufprt"]');
+
+                const token = tokenEl ? tokenEl.value : null;
+                const ufprt = ufprtEl ? ufprtEl.value : null;
+
+                if (!token || !ufprt) {
+                    return Promise.reject(new Error('CSRF tokens not found on brochure page'));
+                }
+
+                return { token, ufprt };
+            });
+    },
+
+    bindFormEvents() {
+        const form = document.getElementById('subt136-exit-form');
+        const emailInput = document.getElementById('subt136-exit-email');
+        const privacyCheckbox = document.getElementById('subt136-exit-privacy');
+        const emailError = document.getElementById('subt136-email-error');
+
+        if (!form || !emailInput || !privacyCheckbox) return;
+
+        Kameleoon.API.Utils.addEventListener(emailInput, 'blur', () => {
+            if (emailInput.value && !this.validateEmail(emailInput.value)) {
+                emailInput.classList.add('error');
+                emailError.classList.add('visible');
+            } else {
+                emailInput.classList.remove('error');
+                emailError.classList.remove('visible');
+            }
+        });
+
+        Kameleoon.API.Utils.addEventListener(emailInput, 'input', () => {
+            if (emailInput.classList.contains('error')) {
+                emailInput.classList.remove('error');
+                emailError.classList.remove('visible');
+            }
+            this.updateSubmitButton();
+        });
+
+        Kameleoon.API.Utils.addEventListener(privacyCheckbox, 'change', () => {
+            this.updateSubmitButton();
+        });
+
+        Kameleoon.API.Utils.addEventListener(form, 'submit', async (e) => {
+            e.preventDefault();
+
+            if (!this.validateEmail(emailInput.value) || !privacyCheckbox.checked) return;
+
+            const submitButton = document.querySelector('.subt136-exit-submit');
+            if (submitButton) {
+                submitButton.disabled = true;
+                submitButton.textContent = 'Sending...';
+            }
+
+            try {
+                // ── Fetch fresh CSRF tokens from brochure page ───────────────
+                const { token, ufprt } = await this.fetchCSRFTokens();
+
+                const formData = new URLSearchParams({
+                    ModelName: 'Forester',
+                    ModelImageUrl: 'Forester',
+                    Email: emailInput.value,
+                    FirstName: 'noname',
+                    LastName: 'noname',
+                    Phone: '',
+                    Postcode: '',
+                    TocAgreement: 'true',
+                    __RequestVerificationToken: token,
+                    ufprt,
+                    ContactMe: 'false'
+                });
+
+                const response = await fetch('https://www.subaru.com.au/umbraco/surface/brochuredownloadform/SubmitBrochureDownloadForm', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                        'x-requested-with': 'XMLHttpRequest'
+                    },
+                    body: formData.toString(),
+                    credentials: 'include'
+                });
+
+                if (response.ok) {
+                    const hashedEmail = await this.hashEmail(emailInput.value);
+                    this.triggerAnalyticsEvent(hashedEmail);
+                    this.showSuccessState();
+                } else {
+                    throw new Error(`API error: ${response.status} ${response.statusText}`);
+                }
+            } catch (error) {
+                console.error('Submission error:', error);
+                alert('There was an error processing your request. Please try again.');
+
+                if (submitButton) {
+                    submitButton.disabled = false;
+                    submitButton.textContent = 'Email my brochure';
+                }
+            }
+        });
+    },
+
+    bindCloseEvents() {
+        const overlay = document.getElementById(this.overlayId);
+        const closeBtn = document.querySelector('.subt136-exit-close');
+
+        if (!overlay || !closeBtn) return;
+
+        Kameleoon.API.Utils.addEventListener(closeBtn, 'click', () => this.close());
+
+        Kameleoon.API.Utils.addEventListener(overlay, 'click', (e) => {
+            if (e.target === overlay) this.close();
+        });
+
+        Kameleoon.API.Utils.addEventListener(document, 'keydown', (e) => {
+            if (e.key === 'Escape' && overlay.classList.contains('active')) this.close();
+        });
+    },
+
+    show() {
+        if (this.shown) return;
+        this.shown = true;
+
+        const overlay = document.getElementById(this.overlayId);
+        if (!overlay) return;
+
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    },
+
+    close() {
+        const overlay = document.getElementById(this.overlayId);
+        if (!overlay) return;
+
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+    },
+
+    detectExitIntent() {
+        let pageReadyTime = null;
+        let maxScrollDepth = 0;
+        let lastScrollY = 0;
+        let scrollDirection = 0;
+
+        const trigger = (source) => {
+            console.log('[ExitIntent] triggered by:', source);
+            this.show();
+        };
+
+        history.pushState(null, '', location.href);
+
+        Kameleoon.API.Utils.addEventListener(window, 'popstate', () => {
+            console.log('*** Show custom popup ***');
+            this.show();
+            history.pushState(null, '', location.href);
+        });
+
+        // Safari fallback
+        window.addEventListener('beforeunload', (e) => {
+            e.preventDefault();
+            e.returnValue = '';
+        });
+
+        // Edge-swipe — iOS Safari supplement
+        let touchStartX = 0;
+        let touchStartY = 0;
+        let swipeTriggered = false;
+
+        window.addEventListener('touchstart', (e) => {
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+            swipeTriggered = false;
+        }, { passive: true });
+
+        window.addEventListener('touchmove', (e) => {
+            if (swipeTriggered) return;
+            const dx = e.touches[0].clientX - touchStartX;
+            const dy = Math.abs(e.touches[0].clientY - touchStartY);
+            if (touchStartX < 30 && dx > 40 && dy < 60) {
+                swipeTriggered = true;
+                trigger('edge-swipe');
+            }
+        }, { passive: true });
+
+        // ─── 2. Scroll Behaviour ─────────────────────────────────────────────────
+        const handleScroll = () => {
+            const currentScrollY = window.scrollY || window.pageYOffset;
+            const pageHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPct = pageHeight > 0 ? (currentScrollY / pageHeight) * 100 : 0;
+
+            if (scrollPct > maxScrollDepth) maxScrollDepth = scrollPct;
+
+            const prevScrollDirection = scrollDirection;
+            scrollDirection = currentScrollY < lastScrollY ? -1 : 1;
+            lastScrollY = currentScrollY;
+
+            if (scrollDirection === -1 && prevScrollDirection !== -1 && maxScrollDepth > 50) {
+                trigger('scroll-up-after-depth');
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
+
+        // ─── 3. Tab Switch / App Backgrounding ───────────────────────────────────
+        const onVisible = () => {
+            if (!pageReadyTime) pageReadyTime = Date.now();
+        };
+
+        Kameleoon.API.Utils.addEventListener(document, 'visibilitychange', () => {
+            if (document.hidden) {
+                trigger('tab-switch');
+            } else {
+                onVisible();
+            }
+        });
+
+        if (!document.hidden) onVisible();
+    },
+
+    init() {
+        this.injectHTML();
+        this.bindFormEvents();
+        this.bindCloseEvents();
+        this.detectExitIntent();
+    }
+};
+
+export default exitIntent;

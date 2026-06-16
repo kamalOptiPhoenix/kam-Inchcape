@@ -1,79 +1,74 @@
-#search-bar-content > div{
-	padding: 90px 0 40px;
+#search-bar-content > div {
+    padding: 90px 0 40px;
 }
 
 .Jk4lsr17aQ {
-	display: none !important;
+    display: none !important;
 }
 
+
 .subt138_custom-grid {
-	width: 1318px;
-	margin: 0 auto;
-	padding: 0;
+    max-width: 1318px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
 }
 
 .subt138_grid {
-	width: 1318px;
+    width: 100%;
 }
 
 /* TOP SECTION */
 
 .subt138_top {
-	display: grid;
-	grid-template-columns: 989px 320px;
-	grid-template-rows: 260px 260px;
-	gap: 8px;
-	margin-bottom: 8px;
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(240px, 1fr);
+    gap: 8px;
+    margin-bottom: 8px;
 }
 
 .subt138_outback {
-	grid-column: 1;
-	grid-row: 1 / span 2;
-	width: 989px;
-	height: 528px;
+    grid-column: 1;
+    grid-row: 1 / span 2;
 }
 
 .subt138_uncharted {
-	grid-column: 2;
-	grid-row: 1;
-	width: 320px;
-	height: 260px;
+    grid-column: 2;
+    grid-row: 1;
 }
 
 .subt138_wilderness {
-	grid-column: 2;
-	grid-row: 2;
-	width: 320px;
-	height: 260px;
+    grid-column: 2;
+    grid-row: 2;
 }
 
-/* BOTTOM SECTION */
 
 .subt138_bottom {
-	display: grid;
-	grid-template-columns: 654px 654px;
-	gap: 8px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
 }
 
-.subt138_forester,
-.subt138_trailseeker {
-	width: 654px;
-	height: 280px;
-}
-
-/* IMAGES */
 
 .subt138_grid a {
-	display: block;
-	overflow: hidden;
+    display: block;
+    overflow: hidden;
+    transition: opacity 0.3s ease;
 }
 
-.subt138_grid img {
-	display: block;
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
+
+.subt138_grid a:hover {
+    opacity: 0.7;
 }
+
+
+.subt138_grid img {
+    display: block;
+    width: 100%;
+    height: 100%;
+   }
+
 
 .subt138-mobile-carousel {
     display: none;
@@ -83,29 +78,69 @@
     display: none;
 }
 
+
+@media (min-width: 769px) and (max-width: 1440px) {
+
+    .subt138_custom-grid {
+        width: calc(100% - 40px);
+        max-width: 1318px;
+    }
+
+    .subt138_grid {
+        width: 100%;
+    }
+
+    .subt138_top {
+        grid-template-columns: 75% calc(25% - 8px);
+    }
+
+    .subt138_bottom {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .subt138_outback,
+    .subt138_uncharted,
+    .subt138_wilderness,
+    .subt138_forester,
+    .subt138_trailseeker {
+        width: 100%;
+    }
+
+    .subt138_grid img {
+        width: 100%;
+        height: auto;
+    }
+}
+
 @media (max-width: 768px) {
-	.subt138_custom-grid {
-		display: none !important;
-	}
 
-	.E9xWrfaaHW {
-		display: none !important;
-	}
+    #search-bar-content > div {
+        padding: 120px 0 40px;
+    }
 
-	.subt138-mobile-carousel {
+    .subt138_custom-grid {
+        display: none !important;
+    }
+
+    .E9xWrfaaHW {
+        display: none !important;
+    }
+
+    .subt138-mobile-carousel {
         display: block;
-        padding: 0 20px;
-        overflow: hidden;
+        padding: 0 19px;
     }
 
     .subt138-mobile-track {
         display: flex;
         overflow-x: auto;
-        gap: 12px;
+        gap: 0;
         scroll-snap-type: x mandatory;
         scroll-behavior: smooth;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
+        min-width: 340px;
+        height: 447px;
     }
 
     .subt138-mobile-track::-webkit-scrollbar {
@@ -123,8 +158,9 @@
 
     .subt138-mobile-track img {
         display: block;
-        width: 100%;
+        width: auto;
         height: auto;
+        margin: 0 auto;
     }
 
     .subt138-mobile-carousel .subt138-mobile-dots {
@@ -146,5 +182,11 @@
 
     .subt138-mobile-carousel .subt138-mobile-dots button.is-active {
         background: #1637a0;
+    }
+}
+
+@media screen and (max-width: 374px) {
+    .subt138-mobile-track {
+        min-width: auto;
     }
 }

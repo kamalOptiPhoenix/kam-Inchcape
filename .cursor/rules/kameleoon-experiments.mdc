@@ -1,0 +1,41 @@
+---
+description: Kameleoon API patterns and experiment coding standards for this repo
+globs: 100-Inchcape/**/*.js
+alwaysApply: false
+---
+
+# Kameleoon Experiment Standards
+
+Reference: https://docs.kameleoon.com/developer-docs/apis/activation-api-js/api-reference/api-reference
+
+## Prefer Kameleoon APIs over custom JS
+
+| Need | Use | Avoid |
+|------|-----|-------|
+| Wait for selector | `Kameleoon.API.Core.runWhenElementPresent()` | `KamMutation`, custom polling |
+| Wait for condition | `Kameleoon.API.Core.runWhenConditionTrue()` | `waitUntil`, `setInterval` |
+| Event listeners | `Kameleoon.API.Utils.addEventListener()` | Raw `addEventListener` when Kameleoon API exists |
+| Goal tracking | `Kameleoon.API.Goals.processConversion(goalId)` | Custom tracking |
+
+Check the official API docs before writing custom DOM observation or polling.
+
+## Structure & naming
+
+- Config object: selectors, HTML, goal IDs/names, translations
+- Prefix: `kam{ExperimentId}{ClientName}` (camelCase) on functions, variables, classes
+- Body class: `kam{Id}{Client}_body`; component classes: `kam{Id}{Client}_wrapper`, etc.
+- Multiple selectors: group in config, wait via `Promise.all` + `runWhenElementPresent`
+- One-time init guards: `window.__kam{Id}Initialized` to prevent duplicate bindings
+- Goal names in config must match the brief exactly
+
+## Goal tracking pattern
+
+```javascript
+if (goalId && Kameleoon?.API?.Goals?.processConversion) {
+    Kameleoon.API.Goals.processConversion(goalId);
+}
+```
+
+## Existing repo utilities
+
+`100-Inchcape/utils/kamMutation.js` and `waitUntil.js` exist but are legacy. Use Kameleoon-native APIs for new code unless no equivalent exists.

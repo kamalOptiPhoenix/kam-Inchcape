@@ -1,0 +1,13 @@
+{
+    "projectName": "Subaru T117 - Hide Variant Step within Configurator",
+    "variations": [
+        "Variation 1"
+    ],
+    "goalsToCreate": [
+        "Configurator Completions"
+    ],
+    "goalsToAdd": [
+       
+    ],
+    "primaryGoal": "Configurator Completions"
+}

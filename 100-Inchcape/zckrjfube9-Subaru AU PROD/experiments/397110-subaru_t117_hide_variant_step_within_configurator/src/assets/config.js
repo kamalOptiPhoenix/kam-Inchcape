@@ -20,6 +20,7 @@ export const hrefMap = {
 };
 
 export const getTooltipHTML = greeting => `
+<div class="variant-tooltip">
     <div class="tooltip-inner">
         <button class="tooltip-close" aria-label="Close tooltip">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
@@ -29,6 +30,7 @@ export const getTooltipHTML = greeting => `
         </button>
         <div class="tooltip-heading">Hi ${greeting}</div>
         <div>Don't forget you can choose another model variant here.</div>
-        <div class="tooltip-arrow" id="tooltip-arrow"></div>
+            <div class="tooltip-arrow" id="tooltip-arrow"></div>
+        </div>
     </div>
 `;

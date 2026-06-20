@@ -1,10 +1,12 @@
 /* eslint-disable import/extensions */
 /* eslint-disable no-console */
-import handleDetailPage from '../assets/handleDetailPage.js';
+// import handleDetailPage from '../assets/handleDetailPage.js';
 import handleListPage from '../assets/handleListPage.js';
 import watchElement from '../assets/watchElement.js';
+import newDetailPageHandler from '../assets/newDetailPageHandler.js';
 
-const INIT_SELECTOR = 'div[data-test="container:models"] div[data-test="container:cars"] > div.SPC_WIDGET-MuiGrid-root, [data-test^="container:variants_section:"].SPC_WIDGET-MuiAccordion-root, .SPC_WIDGET-MuiGrid-grid-md-8';
+
+const INIT_SELECTOR = 'div[data-test="container:models"] div[data-test="container:cars"] > div.SPC_WIDGET-MuiGrid-root, div[data-test="specPack:list"]';
 
 (function v1() {
     function init() {
@@ -15,7 +17,8 @@ const INIT_SELECTOR = 'div[data-test="container:models"] div[data-test="containe
         }
 
         if (window.location.pathname.startsWith('/configure/configure')) {
-            handleDetailPage();
+            // handleDetailPage();
+            newDetailPageHandler();
         }
     }
 

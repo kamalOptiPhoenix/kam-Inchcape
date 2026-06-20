@@ -13,6 +13,7 @@
     '/configure/trim-levels/AUTS2026': 'https://www.subaru.com.au/configure/configure/AUTS2026?carCode=AUHD2ANBV&selectedFeatures=AU_EC_1X&selectedFeatures=AU_IO_213&specificationPack=AUHD2ANBV'
   };
   const getTooltipHTML = greeting => `
+<div class="variant-tooltip">
     <div class="tooltip-inner">
         <button class="tooltip-close" aria-label="Close tooltip">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
@@ -22,252 +23,10 @@
         </button>
         <div class="tooltip-heading">Hi ${greeting}</div>
         <div>Don't forget you can choose another model variant here.</div>
-        <div class="tooltip-arrow" id="tooltip-arrow"></div>
+            <div class="tooltip-arrow" id="tooltip-arrow"></div>
+        </div>
     </div>
 `;
-
-  /* eslint-disable import/extensions */
-
-  function handleDetailPage() {
-    const showTooltip = accordion => {
-      // Only show if not already shown or closed this session
-      if (sessionStorage.getItem('T117TooltipShowed')) {
-        return;
-      }
-      // Remove existing tooltips
-      document.querySelectorAll('.variant-tooltip').forEach(t => t.remove());
-
-      // Get first name
-      let firstName = '';
-      try {
-        // Try sessionStorage first
-        firstName = sessionStorage.getItem('T38FNameCollected') || '';
-        if (firstName && firstName.trim().length > 0) {
-          // Save to localStorage for cross-tab use
-          localStorage.setItem('T117NameCollected', firstName);
-        } else {
-          // If not in session, try localStorage
-          firstName = localStorage.getItem('T117NameCollected') || '';
-        }
-        // Clean up: if still empty or whitespace, fallback
-        if (!firstName || firstName.trim().length === 0) {
-          firstName = '';
-        }
-        // Truncate if too long
-        if (firstName.length > 12) firstName = firstName.substring(0, 12);
-      } catch (e) {
-        firstName = '';
-      }
-      const greeting = firstName ? `${firstName}!` : 'there!';
-      const tooltip = document.createElement('div');
-      tooltip.classList.add('variant-tooltip');
-      tooltip.innerHTML = getTooltipHTML(greeting);
-
-      // For both mobile and desktop, append tooltip afterbegin to [data-test="specPack:list"]
-      const specList = document.querySelector('[data-test="specPack:list"]');
-      if (specList) {
-        specList.insertAdjacentElement('afterbegin', tooltip);
-        sessionStorage.setItem('T117TooltipShowed', 'shown');
-      }
-
-      // Close tooltip functionality
-      const closeTooltip = () => {
-        tooltip.classList.add('tooltip-hidden');
-        sessionStorage.setItem('T117TooltipShowed', 'closed');
-        // Remove blue class from the currently blue accordion
-        const blueAccordion = document.querySelector('.SPC_WIDGET-MuiAccordion-root.accordion-closed-blue');
-        if (blueAccordion) {
-          blueAccordion.classList.remove('accordion-closed-blue');
-        }
-      };
-
-      // Close on X click
-      const closeBtn = tooltip.querySelector('button');
-      if (closeBtn) {
-        closeBtn.addEventListener('click', closeTooltip);
-      }
-
-      // Close on outside click
-      const handleOutsideClick = e => {
-        if (!tooltip.contains(e.target)) {
-          closeTooltip();
-        }
-      };
-      setTimeout(() => {
-        document.addEventListener('click', handleOutsideClick);
-      }, 100);
-    };
-    Kameleoon.API.Core.runWhenElementPresent('.SPC_WIDGET-MuiGrid-grid-md-8 img', () => {
-      if (window.innerWidth < 960) {
-        const mobileAccordions = [...document.querySelectorAll('[data-test^="container:variants_section:"].SPC_WIDGET-MuiAccordion-root')];
-        if (mobileAccordions.length > 0) {
-          showTooltip();
-        } else {
-          console.warn('⚠️ No accordions found to attach tooltip.');
-        }
-      } else {
-        console.log('🖥️ Not a mobile viewport — skipping tooltip.');
-      }
-    });
-    const accordions = [...document.querySelectorAll('[data-test^="container:variants_section:"].SPC_WIDGET-MuiAccordion-root')];
-    if (accordions.length === 0) {
-      return;
-    }
-    let lastClosedAccordion = null;
-    let isProcessing = false;
-    const applyClosedStyles = accordion => {
-      if (isProcessing) return;
-      accordion.classList.add('accordion-closed');
-      accordion.classList.remove('accordion-open');
-
-      // Reset all SVG icon states
-      document.querySelectorAll('.SPC_WIDGET-MuiSvgIcon-root[data-test$=":expand_button"]').forEach(svg => {
-        svg.classList.remove('svg-closed');
-      });
-
-      // Apply to current accordion
-      const svg = accordion.querySelector('.SPC_WIDGET-MuiSvgIcon-root[data-test$=":expand_button"]');
-      if (svg) {
-        svg.classList.add('svg-closed');
-      }
-    };
-    const updateAccordionState = () => {
-      const allAccordions = document.querySelectorAll('.SPC_WIDGET-MuiAccordion-root');
-      let newLastClosed = null;
-      allAccordions.forEach(accordion => {
-        accordion.classList.remove('accordion-opened', 'accordion-closed', 'accordion-closed-blue');
-        if (accordion.classList.contains('Mui-expanded')) {
-          accordion.classList.add('accordion-opened');
-        } else {
-          accordion.classList.add('accordion-closed');
-          newLastClosed = accordion; // The last one in the DOM order that is closed
-        }
-      });
-
-      // Remove blue from all, then add to only the last closed (after user interaction)
-      allAccordions.forEach(acc => acc.classList.remove('accordion-closed-blue'));
-      if (newLastClosed) {
-        newLastClosed.classList.add('accordion-closed-blue');
-        lastClosedAccordion = newLastClosed;
-      }
-    };
-
-    // Attach click listener to update styles correctly
-    const bindAccordionClickHandlers = () => {
-      const allAccordions = document.querySelectorAll('.SPC_WIDGET-MuiAccordion-root');
-      allAccordions.forEach(accordion => {
-        accordion.addEventListener('click', () => {
-          // Slight delay to allow MUI to update its classes
-          setTimeout(updateAccordionState, 20);
-        });
-      });
-    };
-
-    // Initialize on load
-    bindAccordionClickHandlers();
-    const resetToDefaultStyles = accordion => {
-      if (isProcessing) return;
-      accordion.classList.remove('accordion-open', 'accordion-closed');
-
-      // Reset current SVG icon color
-      const svg = accordion.querySelector('.SPC_WIDGET-MuiSvgIcon-root[data-test$=":expand_button"]');
-      if (svg) svg.classList.remove('svg-closed');
-    };
-
-    // Initial Setup
-    let firstClosedSet = false;
-    accordions.forEach((accordion, index) => {
-      const collapse = accordion.querySelector('.SPC_WIDGET-MuiCollapse-root');
-      if (!collapse) {
-        return;
-      }
-      collapse.style.display = 'none';
-      accordion.classList.remove('accordion-closed-blue');
-
-      // Only the first closed accordion gets blue background on load
-      if (!firstClosedSet) {
-        isProcessing = true;
-        applyClosedStyles(accordion);
-
-        // Remove Mui-expanded from the expand icon button inside this accordion
-        const expandIconBtn = accordion.querySelector('.SPC_WIDGET-MuiAccordionSummary-expandIcon');
-        if (expandIconBtn && expandIconBtn.classList.contains('Mui-expanded')) {
-          expandIconBtn.classList.remove('Mui-expanded');
-        }
-
-        // Always rotate the SVG
-        const svg = accordion.querySelector('svg');
-        if (svg) {
-          svg.classList.add('svg-rotated');
-        }
-        // Only add blue if tooltip is not closed for this session
-        if (sessionStorage.getItem('T117TooltipShowed') !== 'closed') {
-          accordion.classList.add('accordion-closed-blue');
-        }
-        isProcessing = false;
-        lastClosedAccordion = accordion;
-        showTooltip();
-        firstClosedSet = true;
-      } else {
-        isProcessing = true;
-        resetToDefaultStyles(accordion);
-        isProcessing = false;
-      }
-    });
-    // After initial setup, if tooltip is not present, remove blue class from any accordion
-    if (!document.querySelector('.variant-tooltip')) {
-      const blueAccordion = document.querySelector('.SPC_WIDGET-MuiAccordion-root.accordion-closed-blue');
-      if (blueAccordion) {
-        blueAccordion.classList.remove('accordion-closed-blue');
-      }
-    }
-
-    // Mutation Observers
-    accordions.forEach((accordion, i) => {
-      const observer = new MutationObserver(mutations => {
-        if (isProcessing) return;
-        const expandedMutation = mutations.find(mutation => mutation.type === 'attributes' && mutation.attributeName === 'class' && mutation.target.classList.contains('Mui-expanded') !== mutation.oldValue.includes('Mui-expanded'));
-        if (!expandedMutation) return;
-        const isExpanded = accordion.classList.contains('Mui-expanded');
-        const collapse = accordion.querySelector('.SPC_WIDGET-MuiCollapse-root');
-        if (!collapse) {
-          return;
-        }
-        isProcessing = true;
-        if (isExpanded) {
-          collapse.style.display = '';
-          // applyOpenStyles(accordion); // Always add .accordion-open when expanded
-          // highlightAccordion(null); // Remove highlight while expanded
-          if (lastClosedAccordion && lastClosedAccordion !== accordion) {
-            resetToDefaultStyles(lastClosedAccordion);
-          }
-          lastClosedAccordion = null;
-        } else {
-          collapse.style.display = 'none';
-          if (lastClosedAccordion && lastClosedAccordion !== accordion) {
-            resetToDefaultStyles(lastClosedAccordion);
-          }
-          applyClosedStyles(accordion); // Always add .accordion-closed when collapsed
-          // highlightAccordion(accordion);
-          lastClosedAccordion = accordion;
-        }
-        isProcessing = false;
-      });
-      observer.observe(accordion, {
-        attributes: true,
-        attributeFilter: ['class'],
-        attributeOldValue: true
-      });
-    });
-
-    // Highlight selected spec
-    const selectedSpec = document.querySelector('[data-test^="specPack:selector:"][data-selected="true"]');
-    if (selectedSpec) {
-      selectedSpec.classList.add('highlight-selected-spec');
-    } else {
-      console.log('ℹ️ No spec selected on page');
-    }
-  }
 
   /* eslint-disable import/extensions */
 
@@ -317,10 +76,141 @@
     });
     return observer;
   }
+  function defineOptiReady() {
+    const listeners = [];
+    const doc = window.document;
+    const MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
+    let observer;
+    function check() {
+      // Check the DOM for elements matching a stored selector
+      for (let i = 0, len = listeners.length, listener, elements; i < len; i++) {
+        listener = listeners[i];
+        // Query for elements matching the specified selector
+        elements = doc.querySelectorAll(listener.selector);
+        for (let j = 0, jLen = elements.length, element; j < jLen; j++) {
+          element = elements[j];
+          if (!element.ready) {
+            element.ready = [];
+          }
+          // Make sure the callback isn't invoked with the
+          // same listener more than once
+          // due to other mutations
+          if (!element.ready[i]) {
+            element.ready[i] = true;
+            // Invoke the callback with the element
+            listener.fn.call(element, element);
+          }
+        }
+      }
+    }
+    function ready(selector, fn) {
+      // Store the selector and callback to be monitored
+      listeners.push({
+        selector,
+        fn
+      });
+      if (!observer) {
+        // Watch for changes in the document
+        observer = new MutationObserver(check);
+        observer.observe(doc.documentElement, {
+          childList: true,
+          subtree: true
+        });
+      }
+      // Check if the element is currently in the DOM
+      check();
+    }
+
+    // Expose 'ready'
+    window.optiReady = ready;
+  }
+  defineOptiReady();
+
+  // showtooltip function
+  function showTooltip() {
+    if (sessionStorage.getItem('T117TooltipShowed')) {
+      return;
+    }
+    document.querySelectorAll('.variant-tooltip').forEach(tooltip => tooltip.remove());
+    let firstName = '';
+    try {
+      firstName = sessionStorage.getItem('T38FNameCollected') || '';
+      if (firstName && firstName.trim().length > 0) {
+        localStorage.setItem('T117NameCollected', firstName);
+      } else {
+        firstName = localStorage.getItem('T117NameCollected') || '';
+      }
+      if (!firstName || firstName.trim().length === 0) {
+        firstName = '';
+      }
+      if (firstName.length > 12) firstName = firstName.substring(0, 12);
+    } catch (e) {
+      firstName = '';
+    }
+    const greeting = firstName ? `${firstName}!` : 'there!';
+    const specList = document.querySelector('[data-test="specPack:list"]');
+    if (!specList) {
+      return;
+    }
+    const template = document.createElement('div');
+    template.innerHTML = getTooltipHTML(greeting).trim();
+    const tooltip = template.firstElementChild;
+    if (!tooltip) {
+      return;
+    }
+    specList.insertAdjacentElement('afterbegin', tooltip);
+    sessionStorage.setItem('T117TooltipShowed', 'shown');
+    const closeTooltip = () => {
+      tooltip.classList.add('tooltip-hidden');
+      sessionStorage.setItem('T117TooltipShowed', 'closed');
+      const blueAccordion = document.querySelector('.SPC_WIDGET-MuiAccordion-root.accordion-closed-blue');
+      if (blueAccordion) {
+        blueAccordion.classList.remove('accordion-closed-blue');
+      }
+    };
+    const closeBtn = tooltip.querySelector('button');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', closeTooltip);
+    }
+    setTimeout(() => {
+      document.addEventListener('click', e => {
+        if (!tooltip.contains(e.target)) {
+          closeTooltip();
+        }
+      });
+    }, 100);
+  }
+  function handleAccordions() {
+    // close accordian if it is open
+    const accordions = document.querySelectorAll('[data-test^="specPack:selector:"].SPC_WIDGET-MuiBox-root');
+    accordions.forEach(accordion => {
+      if (accordion.getAttribute('data-selected') === 'true') {
+        const button = accordion.querySelector('div.Mui-expanded[role="button"][data-test*="container:variants_section:"]');
+        if (button) {
+          button.click();
+        }
+      }
+    });
+
+    // make 1st accordion blue background
+    // make it blue background
+    accordions[0].querySelector('div[data-test^="container:variants_section:"]').classList.add('accordion-closed-blue');
+    showTooltip();
+  }
+  function newDetailPageHandler() {
+    window.optiReady('[data-test^="container:variants_section:"].SPC_WIDGET-MuiAccordion-root', () => {
+      if (!window.isRun) {
+        window.isRun = true;
+        if (!sessionStorage.getItem('T117TooltipShowed')) {
+          handleAccordions();
+        }
+      }
+    });
+  }
 
   /* eslint-disable import/extensions */
 
-  const INIT_SELECTOR = 'div[data-test="container:models"] div[data-test="container:cars"] > div.SPC_WIDGET-MuiGrid-root, [data-test^="container:variants_section:"].SPC_WIDGET-MuiAccordion-root, .SPC_WIDGET-MuiGrid-grid-md-8';
+  const INIT_SELECTOR = 'div[data-test="container:models"] div[data-test="container:cars"] > div.SPC_WIDGET-MuiGrid-root, div[data-test="specPack:list"]';
   (function v1() {
     function init() {
       document.body.classList.add('subt117');
@@ -328,7 +218,8 @@
         handleListPage();
       }
       if (window.location.pathname.startsWith('/configure/configure')) {
-        handleDetailPage();
+        // handleDetailPage();
+        newDetailPageHandler();
       }
     }
     watchElement(INIT_SELECTOR, init);

@@ -1,1 +1,1 @@
-import './src/v1/v1.js';
+import './src/v1/v1';

@@ -216,3 +216,7 @@
     border-color: transparent transparent transparent #1a3eb1 !important;
   }
 }
+
+.subt117 div[data-test="specPack:list"] div[data-test^="container:variants_section:"] {
+  border-color: #1637A0 !important;
+}

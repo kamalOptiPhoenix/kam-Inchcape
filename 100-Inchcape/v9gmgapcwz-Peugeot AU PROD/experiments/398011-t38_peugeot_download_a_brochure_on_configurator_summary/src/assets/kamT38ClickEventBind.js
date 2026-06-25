@@ -14,8 +14,13 @@ export default function kamT38ClickEventBind(
     pdfDownload,
     addDataWithCookie,
     checkCookieDuration,
-    FormRequest
+    FormRequest,
+    onModalClose
 ) {
+    if (window.__kamT38ClickEventBound) {
+        return;
+    }
+    window.__kamT38ClickEventBound = true;
     const modelFormMapping = {
         'partner van': 'Partner Van',
         '308 wagon': '308 Wagon',
@@ -90,6 +95,12 @@ export default function kamT38ClickEventBind(
 
             jQuery('body').removeClass('t38ModalShow');
 
+            if (onModalClose) {
+                requestAnimationFrame(() => {
+                    onModalClose();
+                });
+            }
+
             if (email) {
                 addDataWithCookie('t38EmailCollected', email);
                 FormRequest(email);
@@ -101,7 +112,10 @@ export default function kamT38ClickEventBind(
 
     Kameleoon.API.Utils.addEventListener(window, 'message', kamT38HandleIframeMessage);
 
-    jQuery(document).on('click', '.build-buy-summary .trimDetailsPromotionRow .trimDetailsButtonWrapper.t38ButtonWrapper a', () => {
+    jQuery(document).on('click', '.build-buy-summary .trimDetailsPromotionRow .trimDetailsButtonWrapper.t38ButtonWrapper a', (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+
         const [, modelName] = jQuery('.trimDetailsTitleWrapper h2').text().toLowerCase().split('your ');
         kamT38CurrentModelName = modelName;
 

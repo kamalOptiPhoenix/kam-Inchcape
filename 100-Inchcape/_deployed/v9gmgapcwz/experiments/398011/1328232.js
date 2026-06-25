@@ -168,7 +168,11 @@
   let kamT38CurrentModelName = '';
 
   // eslint-disable-next-line max-len
-  function kamT38ClickEventBind(pdfDownload, addDataWithCookie, checkCookieDuration, FormRequest) {
+  function kamT38ClickEventBind(pdfDownload, addDataWithCookie, checkCookieDuration, FormRequest, onModalClose) {
+    if (window.__kamT38ClickEventBound) {
+      return;
+    }
+    window.__kamT38ClickEventBound = true;
     const modelFormMapping = {
       'partner van': 'Partner Van',
       '308 wagon': '308 Wagon',
@@ -283,6 +287,11 @@
           }
         }
         jQuery('body').removeClass('t38ModalShow');
+        if (onModalClose) {
+          requestAnimationFrame(() => {
+            onModalClose();
+          });
+        }
         if (email) {
           addDataWithCookie('t38EmailCollected', email);
           FormRequest(email);
@@ -291,7 +300,9 @@
       }
     }
     Kameleoon.API.Utils.addEventListener(window, 'message', kamT38HandleIframeMessage);
-    jQuery(document).on('click', '.build-buy-summary .trimDetailsPromotionRow .trimDetailsButtonWrapper.t38ButtonWrapper a', () => {
+    jQuery(document).on('click', '.build-buy-summary .trimDetailsPromotionRow .trimDetailsButtonWrapper.t38ButtonWrapper a', event => {
+      event.preventDefault();
+      event.stopPropagation();
       const [, modelName] = jQuery('.trimDetailsTitleWrapper h2').text().toLowerCase().split('your ');
       kamT38CurrentModelName = modelName;
       const modelData = modelMapping[modelName] || {
@@ -333,14 +344,34 @@
       jQuery('body').addClass('t38ModalShow');
     });
   }
-  function kamT38CloseModalClickEvent() {
+  function kamT38CloseModal(onClose) {
+    jQuery('body').removeClass('t38ModalShow');
+    if (onClose) {
+      requestAnimationFrame(() => {
+        onClose();
+      });
+    }
+  }
+  function kamT38CloseModalClickEvent(onClose) {
+    if (window.__kamT38CloseModalBound) {
+      return;
+    }
+    window.__kamT38CloseModalBound = true;
     jQuery('.t38ModalOverlay').click(event => {
       const outsideModalClick = jQuery(event.target).closest('.t38ModalContainer').length === 0;
-      if (outsideModalClick) jQuery('body').removeClass('t38ModalShow');
+      if (outsideModalClick) kamT38CloseModal(onClose);
     });
     jQuery('.t38CloseButton').click(() => {
-      jQuery('body').removeClass('t38ModalShow');
+      kamT38CloseModal(onClose);
     });
+  }
+  function kamT38EmailValidation() {
+    const mail = jQuery('.t38EmailInput').val();
+    jQuery('.t38EmailInputWrapper').removeClass('t38errorShow');
+    const regexEmail = /\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/;
+    if (regexEmail.test(mail)) return true;
+    jQuery('.t38EmailInputWrapper').addClass('t38errorShow');
+    return false;
   }
   function kamT38HtmlAddV1() {
     jQuery('body').prepend(`
@@ -468,7 +499,7 @@
       console.log('**** PCAT38 V1 Started ****');
       jQuery('body').addClass('pcat38');
       kamT38HtmlAddV1();
-      kamT38ClickEventBind(kamT38PdfDownload, kamT38AddDataWithCookie, kamT38CheckCookieDuration, kamT38FormRequest);
+      kamT38ClickEventBind(kamT38PdfDownload, kamT38AddDataWithCookie, kamT38CheckCookieDuration, kamT38FormRequest, kamT38EmailValidation);
       kamT38CloseModalClickEvent();
     }
     if (window.__kamT38V1Initialized) {

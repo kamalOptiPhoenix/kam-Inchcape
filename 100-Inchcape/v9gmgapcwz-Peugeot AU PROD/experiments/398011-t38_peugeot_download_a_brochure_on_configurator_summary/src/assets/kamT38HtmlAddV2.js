@@ -1,4 +1,15 @@
-export default function kamT38HtmlAddV2() {
+const kamT38PromotionWrapSelector = '.build-buy-summary .trimDetailsPromotionRow .promotionWrap';
+
+const kamT38ButtonHtmlV2 = `
+    <div class="t38ButtonWrapper trimDetailsButtonWrapper">
+        <a href="javascript:void(0)" role="button" class="trimButtonPrimary">Download Specifications</a>
+    </div>`;
+
+export function kamT38InjectModalV2() {
+    if (document.querySelector('.t38ModalOverlay')) {
+        return;
+    }
+
     jQuery('body').prepend(`
         <div class="t38ModalOverlay">
             <div class="t38ModalContainer">
@@ -13,8 +24,27 @@ export default function kamT38HtmlAddV2() {
             </div>
         </div>
     `);
-    jQuery('.promotionBox .promotionWrap').append(`
-    <div class="t38ButtonWrapper trimDetailsButtonWrapper">
-        <a href="javascript:void(0)" role="button" class="trimButtonPrimary">Download Specifications</a>
-    </div>`);
+}
+
+export function kamT38InjectButtonV2(promotionWrap) {
+    if (!promotionWrap || promotionWrap.querySelector('.t38ButtonWrapper')) {
+        return;
+    }
+
+    promotionWrap.insertAdjacentHTML('beforeend', kamT38ButtonHtmlV2);
+}
+
+export function kamT38ReinjectButtonV2() {
+    document.querySelectorAll(kamT38PromotionWrapSelector).forEach(kamT38InjectButtonV2);
+}
+
+export default function kamT38PersistButtonV2() {
+    Kameleoon.API.Core.runWhenElementPresent(
+        kamT38PromotionWrapSelector,
+        (elements) => {
+            elements.forEach(kamT38InjectButtonV2);
+        },
+        null,
+        true
+    );
 }

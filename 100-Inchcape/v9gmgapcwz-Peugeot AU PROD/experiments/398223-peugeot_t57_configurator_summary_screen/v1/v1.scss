@@ -1,0 +1,70 @@
+.build-buy-summary
+  .trimDetailsPromotionRow
+  .trimDetailsButtonWrapper[data-target="#buildForm1"],
+.build-buy-summary
+  .trimDetailsPromotionRow
+  .trimDetailsButtonWrapper[data-target="#buildForm2"] {
+  display: none !important;
+}
+.build-buy-summary .trimDetailsPromotionRow .promotionWrap {
+  margin-right: 10px;
+  width: 257px;
+}
+.build-buy-summary
+  .trimDetailsPromotionRow
+  .trimDetailsButtonWrapper[data-target="#buildForm7"] {
+  margin-top: 30px;
+}
+.build-buy-summary .trimDetailsPromotionRow .trimDetailsButtonWrapper {
+  width: 100%;
+}
+.build-buy-summary .trimDetailsPromotionRow .trimDetailsButtonWrapper > a {
+  width: 100%;
+  text-align: center;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 28px;
+  letter-spacing: 0%;
+  text-align: center;
+  text-transform: uppercase;
+  background: #368bd0;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.build-buy-summary
+  .trimDetailsPromotionRow
+  .trimDetailsButtonWrapper
+  > a:hover {
+  background-color: #fff;
+  outline: 0;
+}
+.build-buy-summary
+  .trimDetailsPromotionRow
+  .trimDetailsButtonWrapper
+  .trimButtonPrimary.btn-summary-submit {
+  width: 100%;
+  padding: 0px;
+}
+.trimDetailsButtonWrapper .trimButtonPrimary {
+  padding: 0px;
+}
+
+/* Responsive styles */
+@media (max-width: 1024px) {
+  .build-buy-summary .trimDetailsPromotionRow .promotionWrap {
+    width: 100%;
+  }
+  .build-buy-summary .trimDetailsPromotionRow .trimDetailsButtonWrapper {
+    width: 258px;
+  }
+  .build-buy-summary
+    .trimDetailsPromotionRow
+    .trimDetailsButtonWrapper[data-target="#buildForm7"] {
+    margin-top: 10px;
+  }
+  .trimDetailsPromotionRow {
+    margin-bottom: 38px;
+  }
+}

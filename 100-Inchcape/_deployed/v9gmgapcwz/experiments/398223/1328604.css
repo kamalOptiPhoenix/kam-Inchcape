@@ -65,10 +65,6 @@
 /* Responsive styles */
 
 @media (max-width: 1024px) {
-  .build-buy-summary .trimDetailsPromotionRow .promotionWrap {
-    width: 100%;
-  }
-
   .build-buy-summary .trimDetailsPromotionRow .trimDetailsButtonWrapper {
     width: 258px;
   }
@@ -84,5 +80,11 @@
   .build-buy-summary .trimDetailsPromotionRow .trimDetailsButtonWrapper > a {
     border: 1px solid #000000;
     color: #000000;
+  }
+}
+
+@media (max-width: 768px) {
+  .build-buy-summary .trimDetailsPromotionRow .promotionWrap {
+    width: 100%;
   }
 }

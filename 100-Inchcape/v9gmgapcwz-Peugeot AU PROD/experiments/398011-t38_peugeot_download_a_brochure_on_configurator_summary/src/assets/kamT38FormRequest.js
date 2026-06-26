@@ -2,7 +2,7 @@
 /* eslint-disable max-len */
 export default function kamT38FormRequest(email) {
     console.log('*** PCAT38: FormRequest called ***', { email });
-    const [, modelName] = jQuery('.trimDetailsTitleWrapper h2').text().toLowerCase().split('your ');
+    const [, modelName] = document.querySelector('.trimDetailsTitleWrapper h2').textContent.toLowerCase().split('your ');
     console.log('*** PCAT38: Model name extracted in FormRequest ***', modelName);
     const model = {
         'partner van': {

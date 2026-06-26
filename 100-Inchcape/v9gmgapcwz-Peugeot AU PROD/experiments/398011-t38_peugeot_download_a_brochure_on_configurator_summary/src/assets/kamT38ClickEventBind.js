@@ -1,10 +1,9 @@
-import { goals } from '../../goals.js';
-
-function kamT38TriggerCtaClickGoal() {
-    const goalId = goals['Download a Brochure CTA click - 38'];
-    if (goalId && Kameleoon?.API?.Goals?.processConversion) {
-        Kameleoon.API.Goals.processConversion(goalId);
-    }
+function kamT38PushApiOnly(nameOfEvent) {
+    window.optimizely = window.optimizely || [];
+    window.optimizely.push({
+        type: 'event',
+        eventName: nameOfEvent,
+    });
 }
 
 let kamT38CurrentModelName = '';
@@ -14,13 +13,8 @@ export default function kamT38ClickEventBind(
     pdfDownload,
     addDataWithCookie,
     checkCookieDuration,
-    FormRequest,
-    onModalClose
+    FormRequest
 ) {
-    if (window.__kamT38ClickEventBound) {
-        return;
-    }
-    window.__kamT38ClickEventBound = true;
     const modelFormMapping = {
         'partner van': 'Partner Van',
         '308 wagon': '308 Wagon',
@@ -61,7 +55,7 @@ export default function kamT38ClickEventBind(
         'expert van my25': { bodystyle: 'expert-van-my25', label: 'Expert Van MY25' },
     };
 
-    function kamT38HandleIframeMessage(event) {
+    Kameleoon.API.Utils.addEventListener(window, 'message', (event) => {
         const allowedOrigins = [
             'https://peugeotforms.inchcape.com.au',
             'https://configurator.peugeot.com.au',
@@ -93,36 +87,28 @@ export default function kamT38ClickEventBind(
                 }
             }
 
-            jQuery('body').removeClass('t38ModalShow');
-
-            if (onModalClose) {
-                requestAnimationFrame(() => {
-                    onModalClose();
-                });
-            }
+            document.body.classList.remove('t38ModalShow');
 
             if (email) {
                 addDataWithCookie('t38EmailCollected', email);
                 FormRequest(email);
             }
 
-            pdfDownload(kamT38CurrentModelName);
+            pdfDownload(kamT38CurrentModelName, kamT38PushApiOnly);
         }
-    }
+    });
 
-    Kameleoon.API.Utils.addEventListener(window, 'message', kamT38HandleIframeMessage);
+    document.addEventListener('click', (event) => {
+        const button = event.target.closest('.build-buy-summary .trimDetailsPromotionRow .trimDetailsButtonWrapper.t38ButtonWrapper a');
+        if (!button) {
+            return;
+        }
 
-    jQuery(document).on('click', '.build-buy-summary .trimDetailsPromotionRow .trimDetailsButtonWrapper.t38ButtonWrapper a', (event) => {
-        event.preventDefault();
-        event.stopPropagation();
-
-        const [, modelName] = jQuery('.trimDetailsTitleWrapper h2').text().toLowerCase().split('your ');
+        const [, modelName] = document.querySelector('.trimDetailsTitleWrapper h2').textContent.toLowerCase().split('your ');
         kamT38CurrentModelName = modelName;
 
         const modelData = modelMapping[modelName] || { bodystyle: modelName.replace(/\s+/g, '-'), label: modelName };
         const formModelValue = modelFormMapping[modelName] || modelData.label;
-
-        kamT38TriggerCtaClickGoal();
 
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
@@ -139,7 +125,7 @@ export default function kamT38ClickEventBind(
         const emailCollected = checkCookieDuration('t38EmailCollected');
 
         if (emailCollected) {
-            pdfDownload(modelName);
+            pdfDownload(modelName, kamT38PushApiOnly);
             return;
         }
 
@@ -162,6 +148,6 @@ export default function kamT38ClickEventBind(
             };
         }
 
-        jQuery('body').addClass('t38ModalShow');
+        document.body.classList.add('t38ModalShow');
     });
 }

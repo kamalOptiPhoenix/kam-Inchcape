@@ -10,7 +10,7 @@ function kamT38DataLayerEvent(modelName) {
     });
 }
 
-export default function kamT38PdfDownload(modelName) {
+export default function kamT38PdfDownload(modelName, pushApiOnly) {
     console.log('*** PCAT38: pdfDownload called ***', { modelName });
     const model = {
         'partner van': {
@@ -95,7 +95,10 @@ export default function kamT38PdfDownload(modelName) {
 
     window.open(model[modelName].href, '_blank');
     console.log('*** PCAT38: PDF window opened ***');
-    console.log('*** PCAT38: DataLayer event pushed ***');
+
+    pushApiOnly('Downloads_T38');
+    console.log('*** PCAT38: Optimizely event pushed ***');
 
     kamT38DataLayerEvent(modelName);
+    console.log('*** PCAT38: DataLayer event pushed ***');
 }

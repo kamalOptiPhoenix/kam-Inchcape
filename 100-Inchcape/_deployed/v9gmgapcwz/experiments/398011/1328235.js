@@ -7,7 +7,7 @@
     console.log('*** PCAT38: FormRequest called ***', {
       email
     });
-    const [, modelName] = jQuery('.trimDetailsTitleWrapper h2').text().toLowerCase().split('your ');
+    const [, modelName] = document.querySelector('.trimDetailsTitleWrapper h2').textContent.toLowerCase().split('your ');
     console.log('*** PCAT38: Model name extracted in FormRequest ***', modelName);
     const model = {
       'partner van': {
@@ -156,23 +156,17 @@
     }
     return false;
   }
-  const goals = {
-    'Download a Brochure CTA click - 38': 420459
-  };
-  function kamT38TriggerCtaClickGoal() {
-    const goalId = goals['Download a Brochure CTA click - 38'];
-    if (Kameleoon?.API?.Goals?.processConversion) {
-      Kameleoon.API.Goals.processConversion(goalId);
-    }
+  function kamT38PushApiOnly(nameOfEvent) {
+    window.optimizely = window.optimizely || [];
+    window.optimizely.push({
+      type: 'event',
+      eventName: nameOfEvent
+    });
   }
   let kamT38CurrentModelName = '';
 
   // eslint-disable-next-line max-len
-  function kamT38ClickEventBind(pdfDownload, addDataWithCookie, checkCookieDuration, FormRequest, onModalClose) {
-    if (window.__kamT38ClickEventBound) {
-      return;
-    }
-    window.__kamT38ClickEventBound = true;
+  function kamT38ClickEventBind(pdfDownload, addDataWithCookie, checkCookieDuration, FormRequest) {
     const modelFormMapping = {
       'partner van': 'Partner Van',
       '308 wagon': '308 Wagon',
@@ -262,7 +256,7 @@
         label: 'Expert Van MY25'
       }
     };
-    function kamT38HandleIframeMessage(event) {
+    Kameleoon.API.Utils.addEventListener(window, 'message', event => {
       const allowedOrigins = ['https://peugeotforms.inchcape.com.au', 'https://configurator.peugeot.com.au'];
       if (!allowedOrigins.includes(event.origin)) {
         return;
@@ -286,31 +280,26 @@
             }
           }
         }
-        jQuery('body').removeClass('t38ModalShow');
-        if (onModalClose) {
-          requestAnimationFrame(() => {
-            onModalClose();
-          });
-        }
+        document.body.classList.remove('t38ModalShow');
         if (email) {
           addDataWithCookie('t38EmailCollected', email);
           FormRequest(email);
         }
-        pdfDownload(kamT38CurrentModelName);
+        pdfDownload(kamT38CurrentModelName, kamT38PushApiOnly);
       }
-    }
-    Kameleoon.API.Utils.addEventListener(window, 'message', kamT38HandleIframeMessage);
-    jQuery(document).on('click', '.build-buy-summary .trimDetailsPromotionRow .trimDetailsButtonWrapper.t38ButtonWrapper a', event => {
-      event.preventDefault();
-      event.stopPropagation();
-      const [, modelName] = jQuery('.trimDetailsTitleWrapper h2').text().toLowerCase().split('your ');
+    });
+    document.addEventListener('click', event => {
+      const button = event.target.closest('.build-buy-summary .trimDetailsPromotionRow .trimDetailsButtonWrapper.t38ButtonWrapper a');
+      if (!button) {
+        return;
+      }
+      const [, modelName] = document.querySelector('.trimDetailsTitleWrapper h2').textContent.toLowerCase().split('your ');
       kamT38CurrentModelName = modelName;
       const modelData = modelMapping[modelName] || {
         bodystyle: modelName.replace(/\s+/g, '-'),
         label: modelName
       };
       const formModelValue = modelFormMapping[modelName] || modelData.label;
-      kamT38TriggerCtaClickGoal();
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({
         event: 'updatevirtualpath',
@@ -324,7 +313,7 @@
       });
       const emailCollected = checkCookieDuration('t38EmailCollected');
       if (emailCollected) {
-        pdfDownload(modelName);
+        pdfDownload(modelName, kamT38PushApiOnly);
         return;
       }
       const iframe = document.getElementById('t38FormIframe');
@@ -341,40 +330,20 @@
           }, 500);
         };
       }
-      jQuery('body').addClass('t38ModalShow');
+      document.body.classList.add('t38ModalShow');
     });
   }
-  function kamT38CloseModal(onClose) {
-    jQuery('body').removeClass('t38ModalShow');
-    if (onClose) {
-      requestAnimationFrame(() => {
-        onClose();
-      });
-    }
-  }
-  function kamT38CloseModalClickEvent(onClose) {
-    if (window.__kamT38CloseModalBound) {
-      return;
-    }
-    window.__kamT38CloseModalBound = true;
-    jQuery('.t38ModalOverlay').click(event => {
-      const outsideModalClick = jQuery(event.target).closest('.t38ModalContainer').length === 0;
-      if (outsideModalClick) kamT38CloseModal(onClose);
+  function kamT38CloseModalClickEvent() {
+    document.querySelector('.t38ModalOverlay').addEventListener('click', event => {
+      const outsideModalClick = !event.target.closest('.t38ModalContainer');
+      if (outsideModalClick) document.body.classList.remove('t38ModalShow');
     });
-    jQuery('.t38CloseButton').click(() => {
-      kamT38CloseModal(onClose);
+    document.querySelector('.t38CloseButton').addEventListener('click', () => {
+      document.body.classList.remove('t38ModalShow');
     });
   }
-  const kamT38PromotionWrapSelector = '.build-buy-summary .trimDetailsPromotionRow .promotionWrap';
-  const kamT38ButtonHtmlV2 = `
-    <div class="t38ButtonWrapper trimDetailsButtonWrapper">
-        <a href="javascript:void(0)" role="button" class="trimButtonPrimary">Download Specifications</a>
-    </div>`;
-  function kamT38InjectModalV2() {
-    if (document.querySelector('.t38ModalOverlay')) {
-      return;
-    }
-    jQuery('body').prepend(`
+  function kamT38HtmlAddV2() {
+    document.body.insertAdjacentHTML('afterbegin', `
         <div class="t38ModalOverlay">
             <div class="t38ModalContainer">
             <span class="t38CloseButton">×</span>
@@ -388,20 +357,10 @@
             </div>
         </div>
     `);
-  }
-  function kamT38InjectButtonV2(promotionWrap) {
-    if (!promotionWrap || promotionWrap.querySelector('.t38ButtonWrapper')) {
-      return;
-    }
-    promotionWrap.insertAdjacentHTML('beforeend', kamT38ButtonHtmlV2);
-  }
-  function kamT38ReinjectButtonV2() {
-    document.querySelectorAll(kamT38PromotionWrapSelector).forEach(kamT38InjectButtonV2);
-  }
-  function kamT38PersistButtonV2() {
-    Kameleoon.API.Core.runWhenElementPresent(kamT38PromotionWrapSelector, elements => {
-      elements.forEach(kamT38InjectButtonV2);
-    }, null, true);
+    document.querySelector('.promotionBox .promotionWrap').insertAdjacentHTML('beforeend', `
+    <div class="t38ButtonWrapper trimDetailsButtonWrapper">
+        <a href="javascript:void(0)" role="button" class="trimButtonPrimary">Download Specifications</a>
+    </div>`);
   }
 
   /* eslint-disable no-console */
@@ -414,7 +373,7 @@
       eventLabel: 'email provided'
     });
   }
-  function kamT38PdfDownload(modelName) {
+  function kamT38PdfDownload(modelName, pushApiOnly) {
     console.log('*** PCAT38: pdfDownload called ***', {
       modelName
     });
@@ -498,30 +457,22 @@
     });
     window.open(model[modelName].href, '_blank');
     console.log('*** PCAT38: PDF window opened ***');
-    console.log('*** PCAT38: DataLayer event pushed ***');
+    pushApiOnly('Downloads_T38');
+    console.log('*** PCAT38: Optimizely event pushed ***');
     kamT38DataLayerEvent(modelName);
+    console.log('*** PCAT38: DataLayer event pushed ***');
   }
 
-  /* global jQuery */
+  /* eslint-disable no-console */
 
   (function kamT38V2() {
     function kamT38V2Init() {
-      console.log('**** PCAT38 V2 Started ****');
-      jQuery('body').addClass('pcat38');
-      kamT38InjectModalV2();
-      kamT38PersistButtonV2();
-      kamT38ClickEventBind(kamT38PdfDownload, kamT38AddDataWithCookie, kamT38CheckCookieDuration, kamT38FormRequest, kamT38ReinjectButtonV2);
-      kamT38CloseModalClickEvent(kamT38ReinjectButtonV2);
+      console.log('**** PCAT38 V2 Started 11:17 ****');
+      document.body.classList.add('pcat38');
+      kamT38HtmlAddV2();
+      kamT38ClickEventBind(kamT38PdfDownload, kamT38AddDataWithCookie, kamT38CheckCookieDuration, kamT38FormRequest);
+      kamT38CloseModalClickEvent();
     }
-    if (window.__kamT38V2Initialized) {
-      return;
-    }
-    Kameleoon.API.Core.runWhenConditionTrue(() => document.querySelector('body.build-buy-summary') !== null && document.querySelector('.trimDetailsPromotionRow .promotionWrap') !== null, () => {
-      if (window.__kamT38V2Initialized) {
-        return;
-      }
-      window.__kamT38V2Initialized = true;
-      kamT38V2Init();
-    });
+    Kameleoon.API.Core.runWhenElementPresent('.promotionBox', kamT38V2Init);
   })();
 })();

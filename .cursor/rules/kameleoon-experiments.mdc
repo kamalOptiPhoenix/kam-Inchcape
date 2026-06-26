@@ -19,6 +19,10 @@ Reference: https://docs.kameleoon.com/developer-docs/apis/activation-api-js/api-
 
 Check the official API docs before writing custom DOM observation or polling.
 
+## Migration
+
+During migration, do not change class names, functionality, or logic. Preserve existing behavior and only update implementation details (e.g. replace legacy utilities with Kameleoon APIs) where required.
+
 ## Structure & naming
 
 - Config object: selectors, HTML, goal IDs/names, translations

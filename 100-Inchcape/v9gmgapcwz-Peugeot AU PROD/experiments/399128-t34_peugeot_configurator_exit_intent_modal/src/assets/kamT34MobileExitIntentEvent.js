@@ -18,7 +18,7 @@ export default function kamT34MobileExitIntentEvent() {
             && sessionStorage.getItem('t34ModalShowed') === null
             && window.innerWidth < 768) {
             kamT34ProcessGoal('T34 Exit Intent Modal Pageviews');
-            jQuery('body').addClass('t34ModalShow');
+            window.jQuery('body').addClass('t34ModalShow');
             sessionStorage.setItem('t34ModalShowed', 'true');
         }
 

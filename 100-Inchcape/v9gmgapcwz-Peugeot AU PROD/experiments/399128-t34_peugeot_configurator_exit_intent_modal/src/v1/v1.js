@@ -15,7 +15,7 @@ import kamT34ModalBuild from '../assets/kamT34ModalBuild.js';
         window.__kamT34BuildInitialized = true;
 
         console.log('*** PCAT34 ***');
-        jQuery('body').addClass('pcat34');
+        window.jQuery('body').addClass('pcat34');
         const currentModel = document.getElementById('js-trim-img').alt;
         sessionStorage.setItem('t34CurrentModal', currentModel);
         kamT34ModalBuild(modelData[currentModel]);
@@ -29,7 +29,7 @@ import kamT34ModalBuild from '../assets/kamT34ModalBuild.js';
         window.__kamT34SummaryInitialized = true;
 
         console.log('*** PCAT34 Summary Init ***');
-        jQuery('body').addClass('pcat34');
+        window.jQuery('body').addClass('pcat34');
         const currentModel = sessionStorage.getItem('t34CurrentModal') || document.getElementById('js-trim-img').alt;
         kamT34ModalBuildSummary(modelData[currentModel]);
     }

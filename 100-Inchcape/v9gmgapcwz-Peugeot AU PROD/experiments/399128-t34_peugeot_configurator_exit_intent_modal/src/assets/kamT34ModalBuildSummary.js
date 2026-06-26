@@ -27,6 +27,6 @@ export default function kamT34ModalBuildSummary({ ModalImgDesktop, ModalImgMobil
     if (document.querySelector('.t34CongurationSaveModal') === null && sessionStorage.getItem('t34RefExitIntent') !== null) {
         document.querySelector('body').insertAdjacentHTML('afterbegin', Html);
         kamT34ModalSummaryEvents(comingSoonModel);
-        setTimeout(() => { jQuery('body').addClass('t34ModalShow'); }, 300);
+        setTimeout(() => { window.jQuery('body').addClass('t34ModalShow'); }, 300);
     }
 }

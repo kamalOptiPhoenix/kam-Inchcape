@@ -1,4 +1,10 @@
-export default function kamT34ModalBuild({ ModalImgDesktop, ModalImgMobile }) {
+export default function kamT34ModalBuild(modelImages = {}) {
+    const { ModalImgDesktop, ModalImgMobile } = modelImages;
+
+    if (!ModalImgDesktop || !ModalImgMobile) {
+        return;
+    }
+
     const Html = `
     <section class="t34ModalWrapper t34ExitIntentModal">
         <img class="t34ModalImg t34DesktopImg" src="${ModalImgDesktop}"/>

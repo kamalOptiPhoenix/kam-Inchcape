@@ -1,0 +1,223 @@
+.pcat34.t34ModalShow {
+  position: relative;
+  overflow: hidden;
+  height: 100vh;
+}
+
+.pcat34.t34ModalShow:before {
+  content: "";
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: block;
+  position: fixed;
+  z-index: 999;
+}
+
+.pcat34:not(.t34ModalShow) .t34ModalWrapper {
+  opacity: 0;
+  visibility: hidden;
+  z-index: -1;
+}
+
+.pcat34 .t34ModalWrapper {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 600px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  max-height: 90vh;
+  overflow: scroll;
+  background-color: #fff;
+  z-index: 9999;
+  border-radius: 4px;
+  -webkit-box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.15);
+  -webkit-transition: opacity 0.3s;
+  transition: opacity 0.3s;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.pcat34 .t34ModalWrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.pcat34 .t34ModalWrapper img.t34DesktopImg {
+  width: 100%;
+  max-height: 268px;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+
+.pcat34 .t34ModalWrapper img.t34MobileImg {
+  display: none;
+}
+
+.pcat34 .t34ModalWrapper .t34ModalHeading {
+  margin: 38px auto 19px;
+  color: #000;
+  text-align: center;
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  text-transform: uppercase;
+  font-family: "New Peugeot Bold";
+}
+
+.pcat34 .t34ModalWrapper p {
+  color: #6D7075;
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 25px;
+  margin: 0 47px;
+}
+
+.pcat34 .t34ModalWrapper .t34ButtonWrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: calc(100% - 42px);
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  margin: 39px auto 42px;
+}
+
+.pcat34 .t34ModalWrapper.t34CongurationSaveModal button {
+  width: 260px;
+  padding: 13.5px 0;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  text-transform: uppercase;
+  cursor: pointer;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  border: 2px solid #0069E5;
+  margin: 0;
+}
+
+.pcat34 .t34ModalWrapper.t34CongurationSaveModal button.t34TestDriveCta {
+  color: #FFF;
+  background-color: #0069E5;
+}
+
+.pcat34 .t34ModalWrapper.t34CongurationSaveModal button.t34ReturnConfiguratorCta {
+  background-color: #fff;
+  color: #0069E5;
+}
+
+.pcat34 .t34ModalWrapper.t34ExitIntentModal button {
+  margin: 32px auto 49px;
+  color: #FFF;
+  background-color: #0069E5;
+  width: 300px;
+  padding: 14.5px 0;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  text-transform: uppercase;
+  border: 2px solid #0069E5;
+  font-family: "New Peugeot Bold";
+  cursor: pointer;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.pcat34 .t34ModalWrapper.t34CongurationSaveModal button.t34ReturnConfiguratorCta:hover {
+  color: #FFF;
+  background-color: #0069E5;
+}
+
+.pcat34 .t34ModalWrapper.t34ExitIntentModal button:hover,
+.pcat34 .t34ModalWrapper.t34CongurationSaveModal button.t34TestDriveCta:hover {
+  background-color: #fff;
+  color: #0069E5;
+}
+
+@media screen and (max-width: 767px) {
+  .pcat34 .t34ModalWrapper img.t34MobileImg {
+    display: block;
+    max-height: 400px;
+    width: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+    -o-object-position: bottom;
+    object-position: bottom;
+  }
+
+  .pcat34 .t34ModalWrapper img.t34DesktopImg {
+    display: none;
+    width: 100%;
+  }
+
+  .pcat34 .t34ModalWrapper {
+    top: auto;
+    bottom: 0;
+    left: 0;
+    -webkit-transform: translate(0);
+    -ms-transform: translate(0);
+    transform: translate(0);
+    max-width: 100%;
+    -webkit-transition: 0.7s;
+    transition: 0.7s;
+  }
+
+  .pcat34:not(.t34ModalShow) .t34ModalWrapper {
+    opacity: 1;
+    visibility: visible;
+    z-index: 999;
+    bottom: -100%;
+  }
+
+  .pcat34 .t34ModalWrapper .t34ModalHeading {
+    font-size: 20px;
+    margin: 53px auto 26px;
+  }
+
+  .pcat34 .t34ModalWrapper p {
+    width: calc(100% - 77px);
+    font-size: 12px;
+    margin: 0 auto;
+  }
+
+  .pcat34 .t34ModalWrapper p span {
+    display: none;
+  }
+
+  .pcat34 .t34ModalWrapper .t34ButtonWrapper {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    width: auto;
+    margin: 18px auto 30px;
+  }
+
+  .pcat34 .t34ModalWrapper.t34CongurationSaveModal button {
+    width: 300px;
+    margin-bottom: 18px;
+  }
+}

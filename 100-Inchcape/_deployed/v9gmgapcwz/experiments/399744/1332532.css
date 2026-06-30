@@ -1,0 +1,263 @@
+.pcat68-callback-card {
+  border: 1px solid #000000;
+  background: #d6e5fd;
+  border-radius: 10px;
+  padding: 32px 16px 23px 26px;
+  min-height: 429px;
+}
+
+.pcat68-callback-card h2 {
+  font-family: "New Peugeot Bold";
+  font-weight: 700;
+  font-style: Bold;
+  font-size: 16px;
+  leading-trim: NONE;
+  line-height: 150%;
+  letter-spacing: 0%;
+  color: #3f3953;
+  margin: 0 0 10px 0;
+}
+
+.pcat68-desc {
+  font-family: "New Peugeot";
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 14px;
+  leading-trim: NONE;
+  line-height: 150%;
+  letter-spacing: 0%;
+  color: #3f3953;
+  margin-bottom: 17px;
+}
+
+.pcat68-form-group label {
+  font-family: "New Peugeot";
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 12px;
+  leading-trim: NONE;
+  line-height: 21px;
+  letter-spacing: 0px;
+  text-transform: uppercase;
+  color: #000000;
+  margin: 0;
+}
+
+.pcat68-form-group input {
+  border: none;
+  border-bottom: 1px solid #000000;
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  max-width: 375px;
+  display: block;
+  font-family: "New Peugeot";
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 11px;
+  leading-trim: NONE;
+  line-height: 21px;
+  letter-spacing: 0px;
+  color: #000000;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.pcat68-form-group input:focus {
+  border: none;
+  border-bottom: 1px solid #000000;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.pcat68-field-error.pcat68-error-hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.pcat68-field-error {
+  font-family: "New Peugeot";
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 10px;
+  leading-trim: NONE;
+  line-height: 21px;
+  letter-spacing: 0px;
+  color: #ff0000;
+  opacity: 1;
+  visibility: visible;
+  margin-bottom: 6px;
+}
+
+.pcat68-note {
+  font-family: "New Peugeot";
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 12px;
+  leading-trim: NONE;
+  line-height: 150%;
+  letter-spacing: 0%;
+  color: #3f3953;
+  margin-bottom: 25px;
+}
+
+.pcat68-btn {
+  border: none;
+  background: #0069e5;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  color: #ffffff;
+  font-family: "New Peugeot";
+  font-weight: 700;
+  font-style: Bold;
+  font-size: 10px;
+  leading-trim: NONE;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: center;
+  text-transform: uppercase;
+  height: 45px;
+  width: 198.25px;
+  cursor: pointer;
+}
+
+.pcat68-callback-card.pcat68-thankyou-card {
+  padding: 111px 0px;
+}
+
+.pcat68-thankyou-wrap {
+  text-align: center;
+}
+
+.pcat68-thankyou-desc {
+  font-family: "New Peugeot";
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 14px;
+  leading-trim: NONE;
+  line-height: 150%;
+  letter-spacing: 0%;
+  color: #3f3953;
+}
+
+.pcat68-thankyou-icon {
+  margin-bottom: 24px;
+}
+
+.pcat68-thankyou-title {
+  margin-bottom: 22px;
+}
+
+@media (min-width: 768px) {
+  .pcat68-callback-card.pcat68-callback-card-v2 {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    width: 100%;
+    -webkit-column-gap: 26px;
+    -moz-column-gap: 26px;
+    column-gap: 26px;
+    padding: 24px 28px;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    min-height: unset;
+    margin-bottom: 20px;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+
+  .pcat68-callback-card.pcat68-callback-card-v2.pcat68-thankyou-card {
+    padding: 50px auto;
+  }
+
+  .pcat68-callback-card-v2 h2 {
+    margin: 0 0 20px 0;
+  }
+
+  .pcat68-callback-card-v2 .pcat68-callback-icon {
+    width: 72px;
+    height: 72px;
+    margin: 0;
+  }
+
+  .pcat68-callback-card-v2 .pcat68-col-first {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 377px;
+    flex: 0 0 377px;
+  }
+
+  .pcat68-callback-card-v2 .pcat68-col-second {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 300px;
+    flex: 0 0 300px;
+    margin-top: 7px;
+  }
+
+  .pcat68-callback-card-v2 .pcat68-note {
+    margin-bottom: 0;
+  }
+
+  .pcat68-callback-card-v2 .pcat68-btn {
+    margin-top: 8px;
+    width: 241px;
+  }
+}
+
+@media (max-width: 767px) {
+  .pcat68-callback-card {
+    padding: 15px 8px 21px 26px;
+    min-height: 474px;
+  }
+
+  .pcat68-callback-card.pcat68-callback-card-v2 {
+    margin-bottom: 20px;
+  }
+
+  .pcat68-desc {
+    margin-bottom: 22px;
+  }
+
+  .pcat68-form-group input {
+    max-width: calc(100% - 16px);
+  }
+
+  .pcat68-form-group {
+    position: relative;
+    margin-bottom: 27px;
+  }
+
+  .pcat68-field-error {
+    position: absolute;
+    top: 22px;
+    left: 0;
+  }
+
+  .pcat68-btn {
+    width: calc(100% - 16px);
+  }
+
+  .pcat68-callback-card.pcat68-thankyou-card {
+    padding: 150px 35px;
+  }
+
+  .pcat68-callback-icon {
+    display: none;
+  }
+
+  .pcat68-callback-card h2 {
+    margin: 0 0 20px 0;
+  }
+}

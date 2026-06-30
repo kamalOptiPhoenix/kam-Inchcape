@@ -1,0 +1,12 @@
+{
+    "projectName": "Peugeot T68 - Mobile Number within Configurator",
+    "variations": [
+        "variation 1", 
+        "variation 2"
+    ],
+    "goalsToCreate": [
+        "Phone numbers captured"
+    ],
+    "goalsToAdd": [],
+    "primaryGoal": "Phone numbers captured"
+}

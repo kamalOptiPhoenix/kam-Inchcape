@@ -26,8 +26,6 @@ During migration, do not change class names, functionality, or logic. Preserve e
 ## Structure & naming
 
 - Config object: selectors, HTML, goal IDs/names, translations
-- Prefix: `kam{ExperimentId}{ClientName}` (camelCase) on functions, variables, classes
-- Body class: `kam{Id}{Client}_body`; component classes: `kam{Id}{Client}_wrapper`, etc.
 - Multiple selectors: group in config, wait via `Promise.all` + `runWhenElementPresent`
 - One-time init guards: `window.__kam{Id}Initialized` to prevent duplicate bindings
 - Goal names in config must match the brief exactly

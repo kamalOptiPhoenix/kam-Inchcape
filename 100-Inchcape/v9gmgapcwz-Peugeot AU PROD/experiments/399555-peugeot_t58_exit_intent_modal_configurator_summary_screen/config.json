@@ -1,0 +1,13 @@
+{
+    "projectName": "Peugeot T58 - Exit Intent Modal Configurator Summary Screen",
+    "variations": [
+        "variation 1"
+    ],
+    "goalsToCreate": [
+        "Primary CTA click T58",
+        "Check Stock Availability CTA clicks T58",
+        "Modal Appearances T58"
+    ],
+    "goalsToAdd": [],
+    "primaryGoal": "Modal Appearances T58"
+}

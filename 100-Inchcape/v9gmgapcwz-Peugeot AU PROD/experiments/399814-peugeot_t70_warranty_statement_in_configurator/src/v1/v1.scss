@@ -1,0 +1,128 @@
+.pcat70 {
+
+    .pcat70-info-icon {
+        margin-left: 4px;
+        background-color: #47A0DB;
+        font-weight: 700;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .pcat70-warranty-text {
+        font-family: "New Peugeot Bold", Arial, sans-serif;
+        font-size: 12px;
+        font-weight: 700;
+        margin: 0 24px;
+        text-align: center;
+        color: #47A0DB;
+        margin-bottom: 24px;
+        line-height: 1.8;
+    }
+
+    .pcat70-info-icon {
+        padding: 1px 8px !important;
+        margin-left: 4px;
+        background-color: #47a0db;
+        font-weight: 700;
+        text-decoration: none;
+        color: #ffffff;
+        cursor: pointer;
+        font-size: 12px;
+        border-radius: 100% !important;
+    }
+
+    .pcat70-modal-heading {
+        font-family: "New Peugeot Bold", Arial, sans-serif;
+        font-weight: 700;
+        font-size: 22px;
+        color: #000000;
+
+    }
+
+    /* Overlay */
+    .pcat70-modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+    }
+
+    /* Modal */
+    .pcat70-modal {
+        background: #fff;
+        width: 90%;
+        position: relative;
+        max-width: 875px;
+        height: 442px;
+    }
+
+    /* Close button */
+    .pcat70-modal-close {
+        position: absolute;
+        right: 0px;
+        background: #47A0DB;
+        color: #fff;
+        border: none;
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+        font-size: 18px;
+    }
+
+    .pcat70-heading-container {
+        padding: 106px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .pcat70-subheading-heading-main {
+        font-weight: 700;
+        font-size: 14px;
+    }
+
+    .pcat70-subheading-heading-para {
+        font-weight: 400;
+        font-size: 14px;
+
+        a {
+            font-weight: 700;
+            color: #47A0DB;
+        }
+    }
+
+    // Modal open state
+    .pcat70-modal-overlay.pcat70-modal-open {
+        display: flex;
+    }
+
+    // Centered warranty text (for tdOfferBoxImgArea context)
+    .pcat70-warranty-text--centered {
+        margin: 24px auto;
+    }
+
+
+    @media (max-width: 768px) {
+        .pcat70-subheading-heading-para a {
+            word-break: break-all;
+            font-weight: 700;
+        }
+
+        .pcat70-heading-container {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 75px;
+        }
+
+        .pcat70-subheading-heading-para {
+            font-weight: 400;
+            font-size: 12px;
+        }
+    }
+
+}

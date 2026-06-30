@@ -643,6 +643,26 @@ const deployExperiment = (experimentUrl, requestData) => {
 };
 
 async function deploy(done) {
+    if (args.path) {
+        const paths = args.path.split('/');
+        const [clientFolder, siteCodeFolder, typeFolder, projectFolder] = paths;
+        const siteCodeFromPath = siteCodeFolder?.split('-')?.[0];
+        const clientIdFromPath = clientFolder?.split('-')?.[0];
+        const projectID = projectFolder?.split('-')?.[0];
+
+        if (clientIdFromPath) {
+            args['customer-id'] = +clientIdFromPath;
+        }
+        if (siteCodeFromPath) {
+            args.sitecode = siteCodeFromPath;
+        }
+        if (/experiments/i.test(typeFolder) && projectID) {
+            args['experiment-id'] = +projectID;
+        } else if (/personalizations/i.test(typeFolder) && projectID) {
+            args['personalization-id'] = +projectID;
+        }
+    }
+
     await build();
     // args
     const clientId = args['customer-id'];

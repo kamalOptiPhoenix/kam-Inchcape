@@ -1,0 +1,426 @@
+body {
+  font-family: "Gotham Book";
+}
+
+.deet10 {
+  /* Updated CSS for full height mobile video */
+}
+
+.deet10 .deepal-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: black;
+  z-index: 9999;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  overflow: hidden;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+.deet10 .desktop-video {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.deet10 .mobile-video {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.deet10 .deepal-modal-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  border: none;
+}
+
+.deet10 .deepal-modal-close {
+  cursor: pointer;
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 40px;
+  color: white;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 3;
+}
+
+.deet10 .deepal-modal-logo {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  height: 40px;
+  z-index: 3;
+}
+
+.deet10 .deepal-modal-content {
+  font-family: "Gotham Book";
+  position: absolute;
+  top: 10%;
+  z-index: 2;
+  text-align: center;
+  width: 100%;
+  padding: 2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.deet10 .deepal-headline {
+  font-size: 62px;
+  font-weight: 325;
+  margin: 0;
+}
+
+.deet10 .deepal-subheadline {
+  font-size: 1.2rem;
+  margin: 0;
+  font-size: 32px;
+}
+
+.deet10 .deepal-multitruck {
+  display: inline-block;
+  height: 110px;
+  width: 326px;
+  vertical-align: middle;
+  -webkit-transition: opacity 0.5s ease;
+  transition: opacity 0.5s ease;
+}
+
+.deet10 .deepal-multitruck.show {
+  opacity: 1;
+}
+
+.deet10 .deepal-cta-container {
+  font-weight: 350;
+  margin: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  gap: 17px;
+}
+
+.deet10 .deepal-cta {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  font-size: 20px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.deet10 .deepal-cta.primary {
+  font-weight: 350;
+  width: 320px;
+  height: 50px;
+  background: #7292d8;
+  color: white;
+}
+
+.deet10 .deepal-cta.secondary {
+  border: none;
+  width: 320px;
+  height: 50px;
+  background: #2e3945;
+  color: white;
+}
+
+.deet10 .deepal-metrics {
+  font-family: "Gotham Book";
+  position: absolute;
+  padding: 0 120px;
+  bottom: 40px;
+  left: 0;
+  width: 100%;
+  z-index: 2;
+}
+
+.deet10 .deepal-divider {
+  background-color: #ffffff;
+  height: 1px;
+  width: 100%;
+  margin: 12px 0 20px 0;
+  opacity: 0.5;
+}
+
+.deet10 .deepal-metrics-title {
+  font-size: 16px;
+  font-weight: 325;
+  color: white;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.deet10 .deepal-metrics-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 2rem;
+  padding: 0 2rem;
+}
+
+.deet10 .deepal-metric {
+  gap: 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+.deet10 .deepal-metric img {
+  display: block;
+  height: 45px;
+  width: auto;
+}
+
+.deet10 .deepal-footnote {
+  font-family: "Gotham Book";
+  position: absolute;
+  font-size: 12px;
+  font-weight: 325;
+  right: 20px;
+  opacity: 0.7;
+  z-index: 9;
+}
+
+.deet10 .metric-divider {
+  display: inline-block;
+  width: 1px;
+  height: 21px;
+  /* adjust for your design */
+  background-color: #7292d8;
+  /* or rgba(255,255,255,0.6) */
+}
+
+.deet10 .deepal-text {
+  font-size: 18px;
+}
+
+@media (max-width: 768px) {
+  .deet10 .desktop-video {
+    display: none;
+  }
+
+  .deet10 .mobile-video {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 1;
+    padding: 0;
+  }
+
+  .deet10 .mobile-video .deepal-modal-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+  }
+
+  .deet10 #vimeo-player-mobile {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100vw;
+    height: 56.25vw;
+    min-width: 200.78vh;
+    min-height: 100vh;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    border: 0;
+    pointer-events: none;
+  }
+
+  .deet10 .deepal-modal-content {
+    top: 8%;
+    padding: 1rem;
+    gap: 15px;
+  }
+
+  .deet10 .deepal-modal-content .deepal-headline {
+    font-size: 44px;
+    line-height: 1.1;
+  }
+
+  .deet10 .deepal-modal-content .deepal-subheadline {
+    font-size: 24px;
+  }
+
+  .deet10 .deepal-headline .deepal-multitruck {
+    height: 85px;
+    width: 244px;
+  }
+
+  .deet10 .deepal-cta-container {
+    font-weight: 350;
+    gap: 17px;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+
+  .deet10 .deepal-cta {
+    width: 280px;
+    height: 45px;
+    font-size: 16px;
+  }
+
+  .deet10 .deepal-metrics {
+    bottom: 50px;
+    padding: 0px 37px;
+  }
+
+  .deet10 .deepal-metrics-title {
+    display: none;
+    font-size: 16px;
+    text-align: left;
+    margin-bottom: 8px;
+  }
+
+  .deet10 .deepal-divider {
+    display: none;
+    margin: 8px 0 15px 0;
+  }
+
+  .deet10 .deepal-metrics-container {
+    display: none;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    gap: 15px;
+    padding: 0;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+  }
+
+  .deet10 .deepal-metric {
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    gap: 24px;
+    width: 100%;
+  }
+
+  .deet10 .deepal-metric img {
+    height: 32px;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+  }
+
+  .deet10 .deepal-text {
+    font-size: 15px;
+    text-align: left;
+  }
+
+  .deet10 .deepal-footnote {
+    right: 20px;
+    font-size: 12px;
+  }
+
+  .deet10 .deepal-modal-logo {
+    height: 40px;
+    width: 130px;
+    top: 15px;
+    left: 15px;
+  }
+
+  .deet10 .deepal-modal-close {
+    width: 30px;
+    height: 50px;
+    top: 6px;
+    right: 24px;
+    font-size: 30px;
+  }
+
+  .deet10 .deepal-modal-close svg {
+    width: 24px;
+    height: 21px;
+  }
+
+  .deet10 .deepal-cta.primary,
+  .deet10 .deepal-cta.secondary {
+    border: none;
+    font-weight: 350;
+    font-size: 16px;
+    width: 274px;
+    height: 40px;
+  }
+
+  .deet10 .video-gradient-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40%;
+    background: -webkit-gradient(linear, left bottom, left top, from(rgba(0, 0, 0, 0.8)), to(transparent));
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    pointer-events: none;
+    /* allow clicks to pass through */
+    z-index: 2;
+  }
+}

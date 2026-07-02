@@ -1,0 +1,304 @@
+.deet6 {
+  .menu-side {
+    display: none !important;
+  }
+
+  // Utility classes to replace inline styles
+  .deet6-hide-target {
+    display: none !important;
+  }
+
+  .deet6-boxhome-padding {
+    padding-top: 3rem !important;
+  }
+
+  // .T4_sticky-banner {
+  //     display: none !important;
+  // }
+
+  .deet6-butter-bar {
+    font-family: Gotham;
+    position: fixed;
+    top: var(--butter-bar-top, 0);
+    left: 0;
+    width: 100%;
+    z-index: calc(var(--header-layers) - 2);
+    display: flex;
+    background-color: #7292d8;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    height: 44px;
+  }
+
+  .deet6-butter-bar-visible {
+    display: flex !important;
+  }
+
+  .deet6-butter-bar-hidden {
+    display: none !important;
+  }
+
+  // Desktop row structure - override for desktop layout
+  .deet6-top-row,
+  .deet6-bottom-row {
+    display: flex;
+    width: 100%;
+  }
+
+  // Desktop specific styles to maintain original single-row layout
+  @media (min-width: 769px) {
+    .deet6-butter-bar {
+      flex-direction: row;
+      height: 44px;
+    }
+
+    .deet6-top-row,
+    .deet6-bottom-row {
+      display: flex;
+      width: auto;
+      flex: 1;
+    }
+
+    .deet6-top-row {
+      flex: 4;
+      /* Takes up space for 4 buttons */
+    }
+
+    .deet6-bottom-row {
+      flex: 1;
+      /* Takes up space for 1 button */
+    }
+
+    .deet6-top-row .deet6-cta-btn,
+    .deet6-bottom-row .deet6-cta-btn {
+      flex: 1;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #29323c;
+      font-family: Gotham;
+      font-weight: 350;
+      font-style: Medium;
+      font-size: 12px;
+      leading-trim: NONE;
+      line-height: 28px;
+      letter-spacing: 0%;
+      text-align: center;
+      text-transform: uppercase;
+      border-right: 1px solid #29323c;
+      text-decoration: none;
+      gap: 9px;
+      height: 44px;
+    }
+
+    .deet6-butterbar-icon {
+      width: auto;
+      height: auto;
+      margin-bottom: 0;
+    }
+
+    // Responsive text for desktop
+    .mobile-text {
+      display: none;
+    }
+
+    .desktop-text {
+      display: inline;
+    }
+  }
+
+  // Mobile styles to match the image design
+  @media (max-width: 768px) {
+    #homepage {
+      margin-top: 75px;
+    }
+
+    .deet6-butter-bar {
+      background-color: #7292d8;
+      height: 60px;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-around;
+      padding: 8px 0;
+    }
+
+    .deet6-cta-btn {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #29323c;
+      font-family: Gotham;
+      font-weight: 350;
+      font-size: 10px;
+      line-height: 12px;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: none;
+      gap: 4px;
+      padding: 4px 2px;
+    }
+
+    .deet6-butterbar-icon {
+      width: 20px;
+      height: 20px;
+      margin-bottom: 2px;
+    }
+
+    .deet6-cta-btn:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      text-decoration: none;
+      color: #29323c;
+    }
+
+    // Desktop styles (existing)
+    .deet6-cta-btn {
+      flex: 1;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #29323c;
+      font-family: Gotham;
+      font-weight: 350;
+      font-style: Medium;
+      font-size: 12px;
+      leading-trim: NONE;
+      line-height: 28px;
+      letter-spacing: 0%;
+      text-align: center;
+      text-transform: uppercase;
+      border-right: 1px solid #29323c;
+      text-decoration: none;
+      gap: 9px;
+    }
+
+    .deet6-cta-btn:hover {
+      background-color: #7292d8;
+      text-decoration: none;
+      color: #29323c;
+    }
+
+    // Mobile styles to match the image design
+    .deet6-butter-bar {
+      height: auto;
+      flex-direction: column;
+      align-items: stretch;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      background-color: #7292d8;
+    }
+
+    .deet6-top-row {
+      display: flex;
+      width: 100%;
+      height: 60px;
+    }
+
+    .deet6-bottom-row {
+      display: flex;
+      width: 100%;
+    }
+
+    // Top row with 4 main options
+    .deet6-top-row .deet6-cta-btn {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #29323c;
+      font-family: Gotham;
+      font-weight: 350;
+      font-size: 10px;
+      line-height: 12px;
+      text-transform: capitalize;
+      text-decoration: none;
+      border: none;
+      gap: 4px;
+      padding: 8px 4px;
+      border-right: 1px solid rgba(41, 50, 60, 0.2);
+      min-height: 60px;
+    }
+
+    // Remove right border from last item in top row
+    .deet6-top-row .deet6-cta-btn:last-child {
+      border-right: none;
+    }
+
+    .deet6-cta-btn.deet6-special-offers img {
+      display: none !important;
+    }
+
+    // Special Offers - full width bottom row
+    .deet6-bottom-row .deet6-cta-btn {
+      flex: none;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #29323c;
+      font-family: Gotham;
+      font-weight: 350;
+      font-size: 12px;
+      line-height: 16px;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: none;
+      border-top: 1px solid rgba(41, 50, 60, 0.2);
+      gap: 8px;
+    }
+
+    a.deet6-cta-btn.deet6-special-offers[href*="#join-deepal-community"] {
+      background-color: #d9d9d9;
+      max-height: 26px;
+    }
+
+    .deet6-butterbar-icon {
+      width: 20px;
+      height: 20px;
+      margin-bottom: 2px;
+    }
+
+    // Icon for Special Offers (bottom row)
+    .deet6-bottom-row .deet6-cta-btn .deet6-butterbar-icon {
+      margin-bottom: 0;
+      margin-right: 4px;
+    }
+
+    .deet6-cta-btn:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      text-decoration: none;
+      color: #29323c;
+    }
+
+    // Responsive text for mobile/desktop
+    .mobile-text {
+      display: inline;
+    }
+
+    .desktop-text {
+      display: none;
+    }
+
+    @media (min-width: 769px) and (max-width: 1366px) {
+      .boxHome {
+        padding-top: 3rem !important;
+        /* override padding */
+      }
+
+      .boxHome .py-md-4.mb-md-4.py-2.mb-3 {
+        display: none !important;
+        /* hide this block */
+      }
+    }
+  }
+}

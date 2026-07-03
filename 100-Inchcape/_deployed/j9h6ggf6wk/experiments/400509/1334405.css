@@ -1,0 +1,377 @@
+.deet6 .menu-side {
+  display: none !important;
+}
+
+.deet6 .deet6-hide-target {
+  display: none !important;
+}
+
+.deet6 .deet6-boxhome-padding {
+  padding-top: 3rem !important;
+}
+
+.deet6 .deet6-butter-bar {
+  font-family: Gotham;
+  position: fixed;
+  top: var(--butter-bar-top, 0);
+  left: 0;
+  width: 100%;
+  z-index: calc(var(--header-layers) - 2);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background-color: #7292d8;
+  -webkit-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  height: 44px;
+}
+
+.deet6 .deet6-butter-bar-visible {
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+}
+
+.deet6 .deet6-butter-bar-hidden {
+  display: none !important;
+}
+
+.deet6 .deet6-top-row,
+.deet6 .deet6-bottom-row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+}
+
+@media (min-width: 769px) {
+  .deet6 .deet6-butter-bar {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    height: 44px;
+  }
+
+  .deet6 .deet6-top-row,
+  .deet6 .deet6-bottom-row {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: auto;
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+  }
+
+  .deet6 .deet6-top-row {
+    -webkit-box-flex: 4;
+    -ms-flex: 4;
+    flex: 4;
+    /* Takes up space for 4 buttons */
+  }
+
+  .deet6 .deet6-bottom-row {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    /* Takes up space for 1 button */
+  }
+
+  .deet6 .deet6-top-row .deet6-cta-btn,
+  .deet6 .deet6-bottom-row .deet6-cta-btn {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    text-align: center;
+    color: #29323c;
+    font-family: Gotham;
+    font-weight: 350;
+    font-style: Medium;
+    font-size: 12px;
+    leading-trim: NONE;
+    line-height: 28px;
+    letter-spacing: 0%;
+    text-align: center;
+    text-transform: uppercase;
+    border-right: 1px solid #29323c;
+    text-decoration: none;
+    gap: 9px;
+    height: 44px;
+  }
+
+  .deet6 .deet6-butterbar-icon {
+    width: auto;
+    height: auto;
+    margin-bottom: 0;
+  }
+
+  .deet6 .mobile-text {
+    display: none;
+  }
+
+  .deet6 .desktop-text {
+    display: inline;
+  }
+}
+
+@media (max-width: 768px) {
+  .deet6 #homepage {
+    margin-top: 75px;
+  }
+
+  .deet6 .deet6-butter-bar {
+    background-color: #7292d8;
+    height: 60px;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
+    padding: 8px 0;
+  }
+
+  .deet6 .deet6-cta-btn {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    text-align: center;
+    color: #29323c;
+    font-family: Gotham;
+    font-weight: 350;
+    font-size: 10px;
+    line-height: 12px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    gap: 4px;
+    padding: 4px 2px;
+  }
+
+  .deet6 .deet6-butterbar-icon {
+    width: 20px;
+    height: 20px;
+    margin-bottom: 2px;
+  }
+
+  .deet6 .deet6-cta-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    text-decoration: none;
+    color: #29323c;
+  }
+
+  .deet6 .deet6-cta-btn {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    text-align: center;
+    color: #29323c;
+    font-family: Gotham;
+    font-weight: 350;
+    font-style: Medium;
+    font-size: 12px;
+    leading-trim: NONE;
+    line-height: 28px;
+    letter-spacing: 0%;
+    text-align: center;
+    text-transform: uppercase;
+    border-right: 1px solid #29323c;
+    text-decoration: none;
+    gap: 9px;
+  }
+
+  .deet6 .deet6-cta-btn:hover {
+    background-color: #7292d8;
+    text-decoration: none;
+    color: #29323c;
+  }
+
+  .deet6 .deet6-butter-bar {
+    height: auto;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+    padding: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    background-color: #7292d8;
+  }
+
+  .deet6 .deet6-top-row {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    height: 60px;
+  }
+
+  .deet6 .deet6-bottom-row {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+  }
+
+  .deet6 .deet6-top-row .deet6-cta-btn {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    text-align: center;
+    color: #29323c;
+    font-family: Gotham;
+    font-weight: 350;
+    font-size: 10px;
+    line-height: 12px;
+    text-transform: capitalize;
+    text-decoration: none;
+    border: none;
+    gap: 4px;
+    padding: 8px 4px;
+    border-right: 1px solid rgba(41, 50, 60, 0.2);
+    min-height: 60px;
+  }
+
+  .deet6 .deet6-top-row .deet6-cta-btn:last-child {
+    border-right: none;
+  }
+
+  .deet6 .deet6-cta-btn.deet6-special-offers img {
+    display: none !important;
+  }
+
+  .deet6 .deet6-bottom-row .deet6-cta-btn {
+    -webkit-box-flex: 0;
+    -ms-flex: none;
+    flex: none;
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    text-align: center;
+    color: #29323c;
+    font-family: Gotham;
+    font-weight: 350;
+    font-size: 12px;
+    line-height: 16px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    border-top: 1px solid rgba(41, 50, 60, 0.2);
+    gap: 8px;
+  }
+
+  .deet6 a.deet6-cta-btn.deet6-special-offers[href*="#join-deepal-community"] {
+    background-color: #d9d9d9;
+    max-height: 26px;
+  }
+
+  .deet6 .deet6-butterbar-icon {
+    width: 20px;
+    height: 20px;
+    margin-bottom: 2px;
+  }
+
+  .deet6 .deet6-bottom-row .deet6-cta-btn .deet6-butterbar-icon {
+    margin-bottom: 0;
+    margin-right: 4px;
+  }
+
+  .deet6 .deet6-cta-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    text-decoration: none;
+    color: #29323c;
+  }
+
+  .deet6 .mobile-text {
+    display: inline;
+  }
+
+  .deet6 .desktop-text {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) and (min-width: 769px) and (max-width: 1366px) {
+  .deet6 .boxHome {
+    padding-top: 3rem !important;
+    /* override padding */
+  }
+
+  .deet6 .boxHome .py-md-4.mb-md-4.py-2.mb-3 {
+    display: none !important;
+    /* hide this block */
+  }
+}

@@ -1,19 +1,9 @@
 /* eslint-disable import/extensions */
 import butterBarHtmlV2 from '../assets/butterBarHtmlV2.js';
 import scrollHandler from '../assets/scrollHandelr.js';
-import kamT6DeepalProcessGoal from '../assets/kamT6DeepalProcessGoal.js';
 import kamT6DeepalConfig from '../assets/config.js';
 
 (function kamT6DeepalV2() {
-    function attachContactUsGoal(butterBar) {
-        const contactUsBtn = butterBar.querySelector('a[href*="contact-us"]');
-        if (contactUsBtn) {
-            Kameleoon.API.Utils.addEventListener(contactUsBtn, 'click', () => {
-                kamT6DeepalProcessGoal('Contact Us click T6');
-            });
-        }
-    }
-
     function insertButterBar() {
         if (!document.getElementById('deet6-butter-bar')) {
             const html = butterBarHtmlV2();
@@ -53,8 +43,6 @@ import kamT6DeepalConfig from '../assets/config.js';
 
                     Kameleoon.API.Utils.addEventListener(window, 'scroll', updateButterBarPosition, { passive: true });
                     Kameleoon.API.Utils.addEventListener(window, 'resize', updateButterBarPosition, { passive: true });
-
-                    attachContactUsGoal(butterBar);
                 }
 
                 const scrollHandlerInstance = scrollHandler();

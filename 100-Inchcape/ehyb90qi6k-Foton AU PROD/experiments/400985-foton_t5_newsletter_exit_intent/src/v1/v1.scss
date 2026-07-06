@@ -1,0 +1,84 @@
+#deepal-exit-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+    z-index: 999999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+#deepal-exit-modal {
+    width: 90%;
+    max-width: 720px;
+    background: #fff;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.4);
+    font-family: Arial, Tahoma, sans-serif;
+}
+
+#deepal-exit-modal-header {
+    background: url("https://www.fotonaustralia.com.au/media/3tzogbmg/privacy-banner.jpg?width=1920&height=416&v=1db837f10bd7aa0") center/cover no-repeat;
+    height: 160px;
+}
+
+#deepal-exit-modal-content {
+    padding: 32px 40px;
+    text-align: center;
+}
+
+#deepal-exit-modal-content h2 {
+    font-size: 26px;
+    letter-spacing: 1px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: #000;
+}
+
+#deepal-exit-modal-content p {
+    font-size: 16px;
+    color: #333;
+    line-height: 1.45;
+    margin-bottom: 28px;
+}
+
+#deepal-exit-modal-close {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    font-size: 28px;
+    cursor: pointer;
+    color: #fff;
+    z-index: 10;
+}
+
+#deepal-exit-modal-btn {
+    background: #052e6a;
+    border: none;
+    padding: 14px 32px;
+    font-weight: 700;
+    color: #fff;
+    font-size: 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: opacity .2s ease;
+}
+
+#deepal-exit-modal-btn:hover {
+    opacity: .8;
+}
+
+@media (max-width: 520px) {
+    #deepal-exit-modal-content {
+        padding: 24px;
+    }
+    #deepal-exit-modal-content h2 {
+        font-size: 22px;
+    }
+    #deepal-exit-modal-header {
+        height: 120px;
+    }
+}

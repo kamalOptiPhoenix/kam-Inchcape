@@ -94,7 +94,7 @@ const kamT10DeepalConfig = {
                         <img src="//cdn.optimizely.com/img/15841360337/d6d82cebc6c3447db217e89d320a8bb9.svg" alt="Range">
                         <span class="metric-divider"></span>
                         <div class="deepal-text">
-                            <strong>WLTP Driving Range*</strong><br>510kms
+                            <strong>WLTP Driving Range*:</strong><br>510kms
                         </div>
                     </div>
 
@@ -102,7 +102,7 @@ const kamT10DeepalConfig = {
                         <img src="//cdn.optimizely.com/img/15841360337/1919c75865a44d328baeac0f2aa190ca.svg" alt="Charge">
                         <span class="metric-divider"></span>
                         <div class="deepal-text">
-                            <strong>DC Charge 30%-80%**</strong><br>15 minutes
+                            <strong>DC Charge time 30%-80%**:</strong><br>15 minutes
                         </div>
                     </div>
 
@@ -110,7 +110,7 @@ const kamT10DeepalConfig = {
                         <img src="//cdn.optimizely.com/img/15841360337/1dec3dfd5e8b4974a113967210bd70e3.svg" alt="Speed">
                         <span class="metric-divider"></span>
                         <div class="deepal-text">
-                            <strong>Acceleration 0–100 km/h***</strong><br>3.96 seconds
+                            <strong>Acceleration (0–100 km/h)***:</strong><br>3.96 seconds
                         </div>
                     </div>
                 </div>

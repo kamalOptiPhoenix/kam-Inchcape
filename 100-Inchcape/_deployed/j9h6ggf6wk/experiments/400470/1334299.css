@@ -90,7 +90,6 @@ body {
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
-  gap: 20px;
 }
 
 .deet10 .deepal-headline {
@@ -102,6 +101,7 @@ body {
 .deet10 .deepal-subheadline {
   font-size: 1.2rem;
   margin: 0;
+  margin-bottom: 28px;
   font-size: 32px;
 }
 
@@ -146,7 +146,7 @@ body {
 }
 
 .deet10 .deepal-cta.primary {
-  font-weight: 350;
+  font-weight: 325;
   width: 320px;
   height: 50px;
   background: #7292d8;
@@ -293,7 +293,6 @@ body {
   .deet10 .deepal-modal-content {
     top: 8%;
     padding: 1rem;
-    gap: 15px;
   }
 
   .deet10 .deepal-modal-content .deepal-headline {
@@ -405,7 +404,7 @@ body {
   .deet10 .deepal-cta.primary,
   .deet10 .deepal-cta.secondary {
     border: none;
-    font-weight: 350;
+    font-weight: 325;
     font-size: 16px;
     width: 274px;
     height: 40px;

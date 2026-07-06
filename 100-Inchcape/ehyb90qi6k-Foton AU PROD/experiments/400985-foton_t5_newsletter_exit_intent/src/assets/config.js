@@ -2,7 +2,7 @@ const kamT5FotonConfig = {
     sessionKey: 'deepal_exit_modal_shown',
     formUrl: 'https://www.fotonaustralia.com.au/#form',
     goalIds: {
-        'Foton Exit Intent CTA click T5': 0,
+        'Foton Exit Intent CTA click T5': 421910,
     },
     modalHTML: `
         <div id="deepal-exit-modal-overlay" role="dialog" aria-modal="true">

@@ -17,8 +17,9 @@
 
   // Base butter bar styles
   .fott2-butter-bar {
+    --butter-bar-top: 54px;
     position: fixed;
-    top: var(--butter-bar-top, 0);
+    top: var(--butter-bar-top);
     left: 0;
     width: 100%;
     z-index: calc(var(--header-layers) - 2);

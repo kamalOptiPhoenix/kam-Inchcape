@@ -15,13 +15,26 @@ import kamT2FotonConfig from '../assets/config.js';
                 const butterBar = document.getElementById('fott2-butter-bar');
                 if (butterBar) {
                     const updateButterBarPosition = () => {
-                        const headerRect = header.getBoundingClientRect();
-                        const headerHeight = headerRect.height > 0 ? headerRect.height : header.offsetHeight;
+                        const currentHeader = document.querySelector('header.header-wrapper');
+                        if (!currentHeader) return;
 
-                        if (headerHeight > 0) {
-                            butterBar.style.setProperty('--butter-bar-top', `${headerHeight}px`);
-                        }
+                        const isMobile = window.innerWidth <= 1155;
+                        const defaultHeaderHeight = isMobile ? 54 : 86;
+
+                        const headerRect = currentHeader.getBoundingClientRect();
+                        const measuredHeight = Math.max(
+                            headerRect.height,
+                            currentHeader.offsetHeight,
+                        );
+
+                        const headerHeight = measuredHeight > 0
+                            ? measuredHeight
+                            : defaultHeaderHeight;
+
+                        butterBar.style.setProperty('--butter-bar-top', `${headerHeight}px`);
                     };
+
+                    updateButterBarPosition();
 
                     requestAnimationFrame(() => {
                         updateButterBarPosition();

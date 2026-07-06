@@ -1,0 +1,225 @@
+.fott2 nav.menu-side {
+  display: none !important;
+}
+
+.fott2 .fott2-hide-target {
+  display: none !important;
+}
+
+.fott2 .fott2-butter-bar-visible {
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+}
+
+.fott2 .fott2-butter-bar-hidden {
+  display: none !important;
+}
+
+.fott2 .fott2-butter-bar {
+  position: fixed;
+  top: var(--butter-bar-top, 0);
+  left: 0;
+  width: 100%;
+  z-index: calc(var(--header-layers) - 2);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background-color: #efefef;
+  height: 44px;
+  -ms-flex-preferred-size: 100%;
+  flex-basis: 100%;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.fott2 .fott2-top-row,
+.fott2 .fott2-bottom-row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: auto;
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+.fott2 .fott2-top-row {
+  -webkit-box-flex: 4;
+  -ms-flex: 4;
+  flex: 4;
+}
+
+.fott2 .fott2-bottom-row {
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+.fott2 .fott2-top-row .fott2-cta-btn,
+.fott2 .fott2-bottom-row .fott2-cta-btn {
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  border-right: 1px solid #29323c;
+  text-decoration: none;
+  gap: 9px;
+  font-family: Arial;
+  font-weight: 700;
+  font-style: Bold;
+  font-size: 12px;
+  leading-trim: NONE;
+  line-height: 28px;
+  letter-spacing: 0%;
+  text-align: center;
+  text-transform: uppercase;
+  color: #09295f;
+}
+
+.fott2 .fott2-butterbar-icon {
+  width: auto;
+  height: auto;
+  margin-bottom: 0;
+}
+
+.fott2 .mobile-text {
+  display: none;
+}
+
+.fott2 .desktop-text {
+  display: inline;
+}
+
+.fott2 .fott2-aumark-s .fott2-top-row .fott2-newsletter-top-row {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .fott2 .fott2-butter-bar {
+    height: auto;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+    padding: 0;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.2509803922);
+    box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.2509803922);
+    padding-top: 6px;
+  }
+
+  .fott2 .fott2-top-row {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    height: 60px;
+  }
+
+  .fott2 .fott2-bottom-row {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+  }
+
+  .fott2 .fott2-cta-btn {
+    font-size: 10px;
+    gap: 4px;
+    padding: 4px 2px;
+  }
+
+  .fott2 .fott2-top-row .fott2-cta-btn {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    border-right: none;
+    font-size: 10px;
+    gap: 4px;
+  }
+
+  .fott2 .fott2-butterbar-icon {
+    width: 24px;
+    height: 24px;
+    margin-bottom: 2px;
+  }
+
+  .fott2 .fott2-bottom-row .fott2-cta-btn {
+    width: 100%;
+    color: #2e3945;
+    text-transform: uppercase;
+  }
+
+  .fott2 .fott2-bottom-row .fott2-cta-btn .fott2-butterbar-icon {
+    margin-bottom: 0;
+    margin-right: 4px;
+  }
+
+  .fott2 .fott2-bottom-row .fott2-cta-btn.fott2-newsletter {
+    background-color: #ffffff;
+    max-height: 26px;
+    color: #2e3945;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 11px;
+    leading-trim: NONE;
+    line-height: 28px;
+    letter-spacing: 0%;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .fott2 .fott2-bottom-row .fott2-cta-btn.fott2-newsletter img {
+    display: none;
+  }
+
+  .fott2 .mobile-text {
+    display: inline;
+  }
+
+  .fott2 .desktop-text {
+    display: none;
+  }
+
+  .fott2 .fott2-top-row .fott2-cta-btn,
+  .fott2 .fott2-bottom-row .fott2-cta-btn {
+    color: black;
+  }
+
+  .fott2 .fott2-aumark-s .fott2-top-row .fott2-newsletter-top-row {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    background-color: transparent;
+    max-height: none;
+    gap: 4px;
+  }
+
+  .fott2 .fott2-aumark-s .fott2-top-row .fott2-newsletter-top-row img {
+    display: block;
+  }
+
+  .fott2 .fott2-aumark-s .fott2-bottom-row-hidden-mobile {
+    display: none;
+  }
+}

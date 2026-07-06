@@ -23,13 +23,6 @@ Check the official API docs before writing custom DOM observation or polling.
 
 During migration, do not change class names, functionality, or logic. Preserve existing behavior and only update implementation details (e.g. replace legacy utilities with Kameleoon APIs) where required.
 
-## Structure & naming
-
-- Config object: selectors, HTML, goal IDs/names, translations
-- Multiple selectors: group in config, wait via `Promise.all` + `runWhenElementPresent`
-- One-time init guards: `window.__kam{Id}Initialized` to prevent duplicate bindings
-- Goal names in config must match the brief exactly
-
 ## Goal tracking pattern
 
 ```javascript

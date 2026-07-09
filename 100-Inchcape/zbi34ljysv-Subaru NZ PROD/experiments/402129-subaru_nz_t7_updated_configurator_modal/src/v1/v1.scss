@@ -1,0 +1,269 @@
+/* Overlay background */
+.lead-capture-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	justify-content: center;
+	align-items: end;
+	z-index: 10000;
+	background: #000000b2;
+	display: none;
+}
+body.leadCapture-Show .lead-capture-overlay {
+	display: flex;
+}
+
+/* Main modal container */
+.lead-capture-modal {
+	display: flex;
+	width: 100%;
+	background: white;
+	max-height: 88.889vh;
+	box-shadow: 0px 0px 16px 0px #00000026;
+}
+
+/* Image section */
+.lead-capture-modal-img {
+	width: 50%;
+}
+.lead-capture-modal-img img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+/* Form section */
+.lead-capture-modal-form {
+	width: 50%;
+	padding: 54px 84px 52px 84px;
+	box-sizing: border-box;
+	overflow-y: auto;
+}
+.lead-capture-modal-form-content {
+	max-width: 544px;
+	margin: auto;
+}
+.lead-capture-modal-form h2 {
+	font-weight: 700;
+	font-size: 30px;
+	line-height: 100%;
+	letter-spacing: 0px;
+	text-align: center;
+	text-transform: uppercase;
+	color: #1637a0;
+}
+.lead-capture-modal-form p {
+	color: #434c5c;
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 150%;
+	letter-spacing: 0px;
+	text-align: center;
+	margin-top: 21px;
+	margin-bottom: 24px;
+}
+
+.lead-capture-modal-form .custom-select {
+	background: #fff
+		url(//cdn.optimizely.com/img/15841360337/0dd15a370ca9459b8866727b622f6eb7.svgz)
+		right 0.75rem center / 12px 12px no-repeat;
+}
+
+/* Form fields */
+#leadCaptureForm input,
+#leadCaptureForm select {
+	width: 100%;
+	margin-bottom: 24px;
+	border-radius: 0px;
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 150%;
+	letter-spacing: 0px;
+	color: #434c5c;
+	border: none;
+	border-bottom: 1px solid #434c5c;
+}
+
+/* Checkbox text */
+#leadCaptureForm label {
+	color: #434c5c;
+	display: block;
+	margin-bottom: 3px;
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 150%;
+	letter-spacing: 0px;
+}
+#leadCaptureForm label::after {
+	content: '*';
+}
+
+#leadCaptureForm .webform-button--submit,
+#leadCaptureForm
+	.form-item-comments-let-us-know-if-theres-a-model-youre-interested-in,
+#leadCaptureForm .form-check-label {
+	display: none;
+}
+
+#leadCaptureForm div.form-item-accept-toc.form-check {
+	display: flex;
+	align-items: flex-start;
+	margin-bottom: 50px;
+	margin-top: 15px;
+}
+#leadCaptureForm div.form-item-accept-toc.form-check input[type='checkbox'] {
+	width: auto;
+	margin-right: 10px;
+	margin-top: 5px;
+}
+#leadCaptureForm div.form-item-accept-toc.form-check small.description,
+#leadCaptureForm div.form-item-accept-toc.form-check small.description a {
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 130%;
+	letter-spacing: 0px;
+	color: #323334 !important;
+}
+#leadCaptureForm div.form-item-accept-toc.form-check small.description a {
+	text-decoration: underline;
+}
+/* Form buttons */
+.form-actions {
+	display: flex;
+	justify-content: center;
+	gap: 24px;
+}
+.form-actions button {
+	border: 1px solid black;
+	background: white;
+	display: flex;
+	width: 259.87px;
+	justify-content: center;
+	align-items: center;
+	height: 48px;
+	font-weight: 600;
+	font-size: 15px;
+	line-height: 100%;
+	letter-spacing: 0px;
+	text-align: center;
+	text-transform: uppercase;
+}
+.form-actions button#lead-capture-SubmitButton {
+	background: #1e396c;
+	color: white;
+	border: none;
+}
+
+/* Skip confirmation */
+.skip-confirm {
+	margin-top: 40px;
+	background: white;
+	border: 1px solid red;
+	padding: 30px 24px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	box-sizing: border-box;
+}
+.skip-message {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	
+}
+.skip-confirm p {
+	max-width: 235px;
+	font-weight: 500;
+	font-size: 13px;
+	line-height: 22px;
+	letter-spacing: 0px;
+	margin: 0px;
+}
+.skip-confirm button {
+	margin-left: 24px;
+	border: 1px solid black;
+	background: white;
+	display: flex;
+	width: 228px;
+	justify-content: center;
+	align-items: center;
+	height: 48px;
+	font-weight: 600;
+	font-size: 15px;
+	line-height: 100%;
+	letter-spacing: 0px;
+	text-align: center;
+	text-transform: uppercase;
+}
+.hidden {
+	display: none;
+}
+.mob-only {
+	display: none;
+}
+body.subtnz01 #leadCaptureModal .js-webform-states-hidden{
+	display: none;
+
+}
+@media only screen and (max-width: 1240px) {
+	.skip-confirm button {
+    margin-left: 15px;}
+}
+@media only screen and (max-width: 1200px) {
+	  .skip-message{
+    	flex-direction: column;
+    flex: 1;
+    }
+    .skip-confirm button{
+    	    margin-left: 0px;
+    width: 258px;
+    margin-top: 22px;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+	.desktop-only {
+		display: none;
+	}
+	.mob-only {
+		display: block;
+	}
+	.lead-capture-modal-img {
+		display: none;
+	}
+	.lead-capture-modal-form {
+		width: 100%;
+		padding: 50px 20px 22px 20px;
+	}
+	.lead-capture-modal-form h2 {
+		line-height: 110.00000000000001%;
+	}
+	.lead-capture-modal-form p {
+		line-height: 130%;
+		margin-top: 19px;
+		margin-bottom: 30px;
+		text-align: justify;
+	}
+	#leadCaptureForm div.form-item-accept-toc.form-check {
+		margin-top: 5px;
+		margin-bottom: 32px;
+	}
+	.form-actions{
+		gap: 15px;
+	}
+	.form-actions button {
+		width: 160px;
+    }
+    
+   	.skip-confirm p{
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 22px;
+    letter-spacing: 0px;
+    text-align: center;
+    margin: 0px;
+    }
+  
+}

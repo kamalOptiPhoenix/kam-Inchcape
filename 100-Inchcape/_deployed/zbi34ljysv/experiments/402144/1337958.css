@@ -1,20 +1,25 @@
-// SUBNZT4 - Brochure Download UI Update
 .subnzt4 .webform-submission-form {
   display: block;
   max-width: 1400px;
   margin: 0 auto;
   padding: 40px 89px 40px 56px;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   width: 100%;
   overflow-x: hidden;
 }
 
 .subnzt4 .brochure-form-layout {
+  display: -ms-grid;
   display: grid;
+  -ms-grid-columns: 1fr 1fr;
   grid-template-columns: 1fr 1fr;
   gap: 60px;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
   align-items: start;
   width: 100%;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
 
@@ -42,31 +47,43 @@
 
 .subnzt4 .step-1-container {
   width: 100%;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
 
 .subnzt4 .step-1-container .brochure-cards-grid {
+  display: -ms-grid;
   display: grid;
+  -ms-grid-columns: (1fr)[2];
   grid-template-columns: repeat(2, 1fr);
   gap: 18px 27px;
   width: 100%;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
 
 .subnzt4 .step-1-container .brochure-card {
   background: #fff;
-  box-shadow: 0px 0px 14px 0px #0000001a;
+  -webkit-box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.1019607843);
+  box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.1019607843);
   border: 1px solid #e6e6e6;
   border-radius: 1px;
   cursor: pointer;
+  -webkit-transition: all 0.2s ease;
   transition: all 0.2s ease;
   position: relative;
   max-width: 320px;
   width: 100%;
   height: 188px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
   padding-bottom: 17px;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
 
@@ -89,6 +106,7 @@
 .subnzt4 .step-1-container .brochure-card__image img {
   height: auto;
   display: block;
+  -o-object-fit: contain;
   object-fit: contain;
   margin: auto;
 }
@@ -108,17 +126,24 @@
 }
 
 .subnzt4 .step-1-container .brochure-card__checkbox {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
   gap: 7px;
 }
 
-.subnzt4 .step-1-container .brochure-card__checkbox input[type="checkbox"] {
+.subnzt4 .step-1-container .brochure-card__checkbox input[type=checkbox] {
   width: 14px;
   height: 14px;
   cursor: pointer;
   accent-color: #0066cc;
+  -ms-flex-negative: 0;
   flex-shrink: 0;
   border: 1px solid #b1b1b1;
   border-radius: 2px;
@@ -127,10 +152,7 @@
   -moz-appearance: checkbox;
 }
 
-.subnzt4
-  .step-1-container
-  .brochure-card__checkbox
-  input[type="checkbox"]:checked {
+.subnzt4 .step-1-container .brochure-card__checkbox input[type=checkbox]:checked {
   background-color: #0066cc;
   border-color: #0066cc;
   appearance: checkbox;
@@ -153,17 +175,24 @@
 
 .subnzt4 .step-1-container .brochure-selection-instruction {
   display: none;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
   gap: 13px;
   margin-top: 24px;
   width: 100%;
   max-width: 100%;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
 
 @media (max-width: 768px) {
   .subnzt4 .step-1-container .brochure-selection-instruction {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
   }
 
@@ -173,9 +202,16 @@
 }
 
 .subnzt4 .step-1-container .brochure-selection-instruction__icon {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
+  -ms-flex-negative: 0;
   flex-shrink: 0;
 }
 
@@ -198,18 +234,28 @@
 
 .subnzt4 .step-1-container .brochure-ready-instruction {
   display: none;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
   flex-direction: row;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
   gap: 13px;
   margin-top: 24px;
   width: 100%;
   max-width: 100%;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
 
 @media (max-width: 768px) {
   .subnzt4 .step-1-container .brochure-ready-instruction {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
   }
 
@@ -219,9 +265,16 @@
 }
 
 .subnzt4 .step-1-container .brochure-ready-instruction__icon {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
+  -ms-flex-negative: 0;
   flex-shrink: 0;
 }
 
@@ -245,13 +298,23 @@
 
 .subnzt4 .step-2-container {
   width: 100%;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
 
 .subnzt4 .step-2-container .step-2-placeholder {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
   justify-content: flex-start;
   min-height: 400px;
   text-align: center;
@@ -273,6 +336,7 @@
   .subnzt4 .step-2-container.subnzt4-mobile-hidden {
     display: none;
   }
+
   .banner--standard-default .banner__title > span {
     font-weight: 700;
     font-style: Bold;
@@ -280,9 +344,11 @@
     leading-trim: NONE;
     line-height: 100%;
   }
+
   .skip-download-link {
     text-align: center;
   }
+
   .banner--standard-default .banner__title {
     margin-bottom: 32px;
   }
@@ -307,6 +373,7 @@
   margin-bottom: 24px;
   width: 100%;
   max-width: 100%;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
 
@@ -328,8 +395,8 @@
   margin-left: 2px;
 }
 
-.subnzt4 .step-2-container .step-2-form .form-item input[type="text"],
-.subnzt4 .step-2-container .step-2-form .form-item input[type="email"],
+.subnzt4 .step-2-container .step-2-form .form-item input[type=text],
+.subnzt4 .step-2-container .step-2-form .form-item input[type=email],
 .subnzt4 .step-2-container .step-2-form .form-item select {
   width: 100%;
   max-width: 100%;
@@ -338,48 +405,64 @@
   border-bottom: 1px solid #e0e0e0;
   font-size: 16px;
   background: rgba(0, 0, 0, 0);
+  -webkit-transition: border-color 0.2s ease;
   transition: border-color 0.2s ease;
   font-family: inherit;
   border-bottom: 1px solid #434c5c;
   color: black;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
 
-.webform-submission-form
-  .form-control:where(
-    [type="text"],
-    [type="email"],
-    textarea,
-    [type="tel"]
-  ):focus,
+.webform-submission-form .form-control:where([type=text],
+[type=email],
+textarea,
+[type=tel]):focus,
 .webform-submission-form .custom-select:focus {
+  -webkit-box-shadow: none;
   box-shadow: none;
 }
-.subnzt4
-  .step-2-container
-  .step-2-form
-  .form-item
-  input[type="text"]::placeholder,
-.subnzt4
-  .step-2-container
-  .step-2-form
-  .form-item
-  input[type="email"]::placeholder {
+
+.subnzt4 .step-2-container .step-2-form .form-item input[type=text]::-webkit-input-placeholder,
+.subnzt4 .step-2-container .step-2-form .form-item input[type=email]::-webkit-input-placeholder {
+  color: #999;
+}
+
+.subnzt4 .step-2-container .step-2-form .form-item input[type=text]::-moz-placeholder,
+.subnzt4 .step-2-container .step-2-form .form-item input[type=email]::-moz-placeholder {
+  color: #999;
+}
+
+.subnzt4 .step-2-container .step-2-form .form-item input[type=text]:-ms-input-placeholder,
+.subnzt4 .step-2-container .step-2-form .form-item input[type=email]:-ms-input-placeholder {
+  color: #999;
+}
+
+.subnzt4 .step-2-container .step-2-form .form-item input[type=text]::-ms-input-placeholder,
+.subnzt4 .step-2-container .step-2-form .form-item input[type=email]::-ms-input-placeholder {
+  color: #999;
+}
+
+.subnzt4 .step-2-container .step-2-form .form-item input[type=text]::placeholder,
+.subnzt4 .step-2-container .step-2-form .form-item input[type=email]::placeholder {
   color: #999;
 }
 
 .subnzt4 .step-2-container .step-2-form .form-item.form-check {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
   align-items: flex-start;
   margin-bottom: 20px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
 }
 
-.subnzt4
-  .step-2-container
-  .step-2-form
-  .form-item.form-check
-  input[type="checkbox"] {
+.subnzt4 .step-2-container .step-2-form .form-item.form-check input[type=checkbox] {
   width: 15px;
   height: 15px;
   margin-top: 4px;
@@ -408,12 +491,7 @@
   color: #323334;
 }
 
-.subnzt4
-  .step-2-container
-  .step-2-form
-  .form-item.form-check
-  .description
-  a:hover {
+.subnzt4 .step-2-container .step-2-form .form-item.form-check .description a:hover {
   text-decoration: none;
 }
 
@@ -426,6 +504,7 @@
   line-height: 16px;
   letter-spacing: 0px;
 }
+
 .webform-submission-form .webform-element-description a {
   color: #323334;
   font-weight: 500;
@@ -435,6 +514,7 @@
   line-height: 16px;
   letter-spacing: 0px;
 }
+
 .webform-submission-form .description a:hover,
 .webform-submission-form .description a:active {
   color: #323334;
@@ -445,9 +525,9 @@
   margin-bottom: 22px;
 }
 
-.subnzt4 .step-2-container .step-2-form .form-buttons button[type="submit"],
+.subnzt4 .step-2-container .step-2-form .form-buttons button[type=submit],
 .subnzt4 .step-2-container .step-2-form .form-buttons .btn--xl,
-.subnzt4 .step-2-container .step-2-form .form-buttons input[type="submit"] {
+.subnzt4 .step-2-container .step-2-form .form-buttons input[type=submit] {
   font-weight: 600;
   font-style: DemiBold;
   font-size: 15px;
@@ -465,31 +545,17 @@
   color: #fff;
 }
 
-.subnzt4
-  .step-2-container
-  .step-2-form
-  .form-buttons
-  button[type="submit"]:hover,
+.subnzt4 .step-2-container .step-2-form .form-buttons button[type=submit]:hover,
 .subnzt4 .step-2-container .step-2-form .form-buttons .btn--xl:hover,
-.subnzt4
-  .step-2-container
-  .step-2-form
-  .form-buttons
-  input[type="submit"]:hover {
+.subnzt4 .step-2-container .step-2-form .form-buttons input[type=submit]:hover {
   background-color: #002d5a;
 }
 
-.subnzt4
-  .step-2-container
-  .step-2-form
-  .form-buttons
-  button[type="submit"]:active,
+.subnzt4 .step-2-container .step-2-form .form-buttons button[type=submit]:active,
 .subnzt4 .step-2-container .step-2-form .form-buttons .btn--xl:active,
-.subnzt4
-  .step-2-container
-  .step-2-form
-  .form-buttons
-  input[type="submit"]:active {
+.subnzt4 .step-2-container .step-2-form .form-buttons input[type=submit]:active {
+  -webkit-transform: translateY(1px);
+  -ms-transform: translateY(1px);
   transform: translateY(1px);
 }
 
@@ -514,8 +580,10 @@
 .subnzt4 .step-2-container .step-2-form .skip-download-link .btn:hover {
   text-decoration: none;
 }
+
 .subnzt4 .step-2-container .step-2-form .skip-download-link button:focus,
 .subnzt4 .step-2-container .step-2-form .skip-download-link .btn:focus {
+  -webkit-box-shadow: none;
   box-shadow: none;
 }
 
@@ -529,17 +597,26 @@
   height: 0;
   overflow: hidden;
 }
+
 .subnzt4 .webform-submission-form .model-links-dialog {
-  box-shadow: 0px 0px 16px 0px #00000040;
+  -webkit-box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.2509803922);
+  box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.2509803922);
   border: none;
   padding: 106px 17px 127px 7px;
 }
+
 .brochure .model-links-dialog .model--teaser {
   gap: 0;
+  -webkit-box-pack: space-evenly;
+  -ms-flex-pack: space-evenly;
   justify-content: space-evenly;
 }
+
 .brochure .model-links-dialog .model--teaser .model-download-link {
+  -webkit-box-flex: unset;
+  -ms-flex: unset;
   flex: unset;
+  -ms-flex-preferred-size: 30%;
   flex-basis: 30%;
 }
 
@@ -549,25 +626,17 @@
   right: 24px;
   background: none;
   border: none;
-
   cursor: pointer;
   z-index: 10;
 }
 
-.subnzt4
-  .webform-submission-form
-  .model-links-dialog
-  .subnzt4-dialog-close
-  img {
+.subnzt4 .webform-submission-form .model-links-dialog .subnzt4-dialog-close img {
   width: 14px;
   height: 12px;
   display: block;
 }
 
-.subnzt4
-  .webform-submission-form
-  .model-links-dialog
-  .js-dialog-close.subnzt4-hidden {
+.subnzt4 .webform-submission-form .model-links-dialog .js-dialog-close.subnzt4-hidden {
   display: none !important;
 }
 
@@ -576,19 +645,32 @@
   color: #224f8c;
   border-radius: 0;
   border: none;
-  box-shadow: 0px 0px 16px 0px #00000040;
+  -webkit-box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.2509803922);
+  box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.2509803922);
   padding: 0px 116px 0px 116px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
   align-items: flex-start;
   height: 465px !important;
   width: 100% !important;
   max-width: 895px !important;
+  -webkit-transform: translate(-50%, -50%) !important;
+  -ms-transform: translate(-50%, -50%) !important;
   transform: translate(-50%, -50%) !important;
   top: 50% !important;
   left: 50% !important;
 }
+
 .ui-dialog .ui-dialog-title {
   font-weight: 700;
   font-style: Bold;
@@ -600,12 +682,12 @@
   position: unset !important;
   width: 100%;
 }
+
 .ui-dialog .ui-dialog-titlebar {
   position: unset !important;
 }
 
-.webform-confirmation-modal.ui-dialog:not(.ui-dialog-off-canvas)
-  .ui-widget-content.ui-dialog-content {
+.webform-confirmation-modal.ui-dialog:not(.ui-dialog-off-canvas) .ui-widget-content.ui-dialog-content {
   font-weight: 500;
   font-style: Medium;
   font-size: 25px;
@@ -616,37 +698,38 @@
   padding: 0;
 }
 
-.webform-confirmation-modal.ui-dialog:not(.ui-dialog-off-canvas)
-  .ui-dialog-titlebar-close {
+.webform-confirmation-modal.ui-dialog:not(.ui-dialog-off-canvas) .ui-dialog-titlebar-close {
   margin: 0;
   top: 28px;
   right: 25px;
+  -webkit-transform: translate(0px, 0px);
+  -ms-transform: translate(0px, 0px);
   transform: translate(0px, 0px);
   block-size: unset;
   inline-size: unset;
   border: none;
 }
 
-.webform-confirmation-modal.ui-dialog:not(.ui-dialog-off-canvas)
-  .ui-dialog-titlebar-close
-  .ui-icon-closethick {
-  background-image: url(//cdn.optimizely.com/img/15841360337/dad328c74954415586f568074c8e7612.svg);
+.webform-confirmation-modal.ui-dialog:not(.ui-dialog-off-canvas) .ui-dialog-titlebar-close .ui-icon-closethick {
+  background-image: url("//cdn.optimizely.com/img/15841360337/dad328c74954415586f568074c8e7612.svg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: auto;
+  -webkit-mask-image: none;
   mask-image: none;
   width: 14px;
   height: 12px;
 }
 
-.webform-confirmation-modal.ui-dialog:not(.ui-dialog-off-canvas)
-  .ui-dialog-titlebar {
+.webform-confirmation-modal.ui-dialog:not(.ui-dialog-off-canvas) .ui-dialog-titlebar {
   padding: 0;
   margin-bottom: 24px;
 }
+
 .subnzt4-dialog {
   background-color: #fff;
   border-radius: 10px;
+  -webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
   padding: 20px;
   width: 100%;
@@ -656,16 +739,29 @@
   position: fixed;
   top: 50%;
   left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   z-index: 1000;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
 }
+
 .subnzt4-dialog-content {
   text-align: center;
 }
+
 .subnzt4-dialog-close {
   background: none;
   border: none;
@@ -678,47 +774,61 @@
   cursor: pointer;
   z-index: 10;
 }
+
 .subnzt4-dialog-close img {
   width: 14px;
   height: 12px;
   display: block;
 }
+
 @media only screen and (max-width: 1200px) {
   .subnzt4 .webform-submission-form {
     padding: 16px;
     width: 100%;
     max-width: 100%;
+    -webkit-box-sizing: border-box;
     box-sizing: border-box;
     overflow-x: hidden;
   }
+
   .subnzt4 .brochure-form-layout {
+    -ms-grid-columns: none;
     grid-template-columns: none;
     gap: 38px;
     width: 100%;
+    -webkit-box-sizing: border-box;
     box-sizing: border-box;
   }
+
   .subnzt4 .step-header .step-number {
     display: block;
   }
+
   .subnzt4 .step-1-container {
     width: 100%;
     max-width: 100%;
+    -webkit-box-sizing: border-box;
     box-sizing: border-box;
     overflow-x: hidden;
   }
+
   .subnzt4 .step-1-container .brochure-cards-grid {
     gap: 14px 12px;
     width: 100%;
+    -webkit-box-sizing: border-box;
     box-sizing: border-box;
   }
+
   .subnzt4 .step-1-container .brochure-card {
     height: auto;
     padding-bottom: 0px;
     display: block;
     width: 100%;
     max-width: 100%;
+    -webkit-box-sizing: border-box;
     box-sizing: border-box;
   }
+
   .subnzt4 .step-1-container .brochure-card__name {
     font-family: Avenir Next;
     font-weight: 500;
@@ -730,49 +840,64 @@
     text-align: center;
     margin-top: 5px;
   }
+
   .subnzt4 .step-1-container .brochure-card__checkbox label {
     font-size: 13px;
   }
+
   .subnzt4 .step-1-container .brochure-card__image {
     margin-bottom: 0px;
   }
+
   .subnzt4 .step-1-container .brochure-card__image img {
+    -o-object-fit: contain;
     object-fit: contain;
   }
+
   .subnzt4 .step-header .step-number {
     font-size: 13px;
   }
+
   .subnzt4 .step-header .step-title {
     font-size: 18px;
   }
+
   .subnzt4 .step-1-container .brochure-card__checkbox {
     margin-bottom: 11px;
   }
+
   .subnzt4 .step-2-container {
     width: 100%;
     max-width: 100%;
+    -webkit-box-sizing: border-box;
     box-sizing: border-box;
     overflow-x: hidden;
   }
-  .subnzt4 .step-2-container .step-2-form .form-buttons button[type="submit"],
+
+  .subnzt4 .step-2-container .step-2-form .form-buttons button[type=submit],
   .subnzt4 .step-2-container .step-2-form .form-buttons .btn--xl,
-  .subnzt4 .step-2-container .step-2-form .form-buttons input[type="submit"] {
+  .subnzt4 .step-2-container .step-2-form .form-buttons input[type=submit] {
     width: 100%;
     max-width: 100%;
+    -webkit-box-sizing: border-box;
     box-sizing: border-box;
   }
+
   .subnzt4 .webform-submission-form .model-links-dialog {
     padding: 52px 32px 9px 34px;
   }
+
   .subnzt4 .webform-submission-form .model-links-dialog .subnzt4-dialog-close {
     top: 24px;
     right: 18px;
   }
+
   .subnzt4 .webform-confirmation-modal.ui-dialog:not(.ui-dialog-off-canvas) {
     padding: 142px 30px 122px 30px !important;
     width: 100% !important;
     max-width: calc(100% - 30px) !important;
   }
+
   .ui-dialog .ui-dialog-title {
     font-weight: 700;
     font-style: Bold;
@@ -782,8 +907,8 @@
     letter-spacing: 1px;
     text-transform: uppercase;
   }
-  .webform-confirmation-modal.ui-dialog:not(.ui-dialog-off-canvas)
-    .ui-widget-content.ui-dialog-content {
+
+  .webform-confirmation-modal.ui-dialog:not(.ui-dialog-off-canvas) .ui-widget-content.ui-dialog-content {
     font-weight: 500;
     font-style: Medium;
     font-size: 18px;

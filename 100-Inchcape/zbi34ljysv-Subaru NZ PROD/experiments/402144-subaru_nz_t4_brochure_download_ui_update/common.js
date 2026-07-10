@@ -9,7 +9,7 @@ import kamSubnzT4ProcessGoal from './src/assets/kamSubnzT4ProcessGoal.js';
     }
 
     Kameleoon.API.Core.runWhenElementPresent(
-        'div.ui-dialog.webform-confirmation-modal',
+        'div.ui-dialog.ui-widget-content',
         initGoal,
     );
 }());

@@ -1,6 +1,18 @@
 /* eslint-disable max-len */
-/* eslint-disable camelcase */
+/* eslint-disable no-console */
+/* eslint-disable no-alert */
 import kamSubnzT7ProcessGoal from './kamSubnzT7ProcessGoal.js';
+
+function unlockAntibotKey(key) {
+    // Mirrors Drupal antibot.js unlockForms key transform.
+    return key
+        .split('')
+        .reverse()
+        .join('')
+        .match(/.{1,2}/g)
+        .map((value) => value.split('').reverse().join(''))
+        .join('');
+}
 
 export default function kamSubnzT7AppendLeadCaptureForm() {
     const redirectToStoredUrl = () => {
@@ -11,7 +23,9 @@ export default function kamSubnzT7AppendLeadCaptureForm() {
         }
     };
 
-    fetch('https://www.subaru.co.nz/about/keep-me-informed')
+    fetch('/about/keep-me-informed', {
+        credentials: 'same-origin',
+    })
         .then((response) => response.text())
         .then((html) => {
             const parser = new DOMParser();
@@ -23,25 +37,28 @@ export default function kamSubnzT7AppendLeadCaptureForm() {
                 'script[type="application/json"][data-drupal-selector="drupal-settings-json"]',
             );
             const settingsData = JSON.parse(scriptTag.textContent);
-            const antibotKey = settingsData.antibot.forms[
-                'webform-submission-keep-me-informed-node-917-add-form'
-            ].key;
+            const antibotKey = unlockAntibotKey(
+                settingsData.antibot.forms[
+                    'webform-submission-keep-me-informed-node-917-add-form'
+                ].key,
+            );
 
             const antibotInput = form.querySelector('input[name="antibot_key"]');
             if (antibotInput) {
                 antibotInput.value = antibotKey;
             }
 
-            form.action = '/about/keep-me-informed';
+            // Antibot locks action to /antibot until unlocked; use data-action.
+            form.action = form.getAttribute('data-action') || '/about/keep-me-informed';
 
             const container = document.getElementById('leadCaptureForm');
 
             if (!container.querySelector('form')) {
                 container.insertAdjacentElement('afterbegin', form);
             }
-            const Email_label = document.querySelector('#leadCaptureForm label[for="edit-email-address"]');
-            if (Email_label) {
-                Email_label.innerHTML = 'Email';
+            const emailLabel = document.querySelector('#leadCaptureForm label[for="edit-email-address"]');
+            if (emailLabel) {
+                emailLabel.innerHTML = 'Email';
             }
 
             const getFormData = (formElement) => {
@@ -63,6 +80,7 @@ export default function kamSubnzT7AppendLeadCaptureForm() {
 
                 fetch(form.action, {
                     method: 'POST',
+                    credentials: 'same-origin',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
                     },
@@ -77,6 +95,12 @@ export default function kamSubnzT7AppendLeadCaptureForm() {
                         const responseText = (responseDoc.body && responseDoc.body.textContent) || '';
                         const textSuccess = /Thanks for your interest in Subaru/i.test(responseText);
 
+                        console.log('[SUBNZT7] form submit response', {
+                            confirmationEl: !!confirmationEl,
+                            textSuccess,
+                            hasSubmissionFailed: /Submission failed/i.test(responseText),
+                        });
+
                         if (confirmationEl || textSuccess) {
                             document.body.classList.remove('leadCapture-Show');
                             localStorage.removeItem('leadCapture_skipped');
@@ -86,9 +110,10 @@ export default function kamSubnzT7AppendLeadCaptureForm() {
                             redirectToStoredUrl();
                         } else {
                             const errorEl = responseDoc.querySelector(
-                                '.messages--error, .messages.messages--error, .webform-error-message, .form-item--error-message',
+                                '.messages--error, .messages.messages--error, .webform-error-message, .form-item--error-message, [role="alert"]',
                             );
                             const errorText = errorEl && errorEl.textContent && errorEl.textContent.trim();
+                            console.log('[SUBNZT7] form submit failed', errorText);
                             alert(errorText ? `Form not submitted: ${errorText}` : 'Form not submitted successfully.');
                         }
                     })

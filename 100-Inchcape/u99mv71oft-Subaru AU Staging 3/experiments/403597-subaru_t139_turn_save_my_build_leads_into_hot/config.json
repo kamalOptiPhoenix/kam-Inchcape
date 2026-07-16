@@ -1,0 +1,13 @@
+{
+    "projectName": "Subaru T139 - Turn Save my Build Leads into HOT",
+    "variations": [
+        "variation 1", 
+        "variation 2"
+    ],
+    "goalsToCreate": [],
+    "goalsToAdd": [
+        "configurator_completions_global"
+    ],
+    "primaryGoal": "configurator_completions_global"
+}
+

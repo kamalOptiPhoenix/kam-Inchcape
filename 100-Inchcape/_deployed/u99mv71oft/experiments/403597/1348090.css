@@ -1,0 +1,21 @@
+div.SPC_WIDGET-MuiDialog-root[data-test="modal:leadCapture"] h6 span[data-translationkey=trans__configurator__dealer_selection_modal__personal_details_description] {
+  font-size: 0;
+  line-height: 1.5;
+}
+
+div.SPC_WIDGET-MuiDialog-root[data-test="modal:leadCapture"] h6 span[data-translationkey=trans__configurator__dealer_selection_modal__personal_details_description]::after {
+  content: "Please enter your first name and email address so we can send you your configuration. One of our dealership sales consultants may also reach out if you have any questions or would like personalised assistance.";
+  display: block;
+  color: #222;
+  font-size: 18px;
+  text-align: center;
+  font-weight: 400;
+}
+
+button[data-test="button:personalDetails:next"] {
+  margin-bottom: 10px;
+}
+
+button[data-test="button:personalDetails:skip"] {
+  display: none !important;
+}

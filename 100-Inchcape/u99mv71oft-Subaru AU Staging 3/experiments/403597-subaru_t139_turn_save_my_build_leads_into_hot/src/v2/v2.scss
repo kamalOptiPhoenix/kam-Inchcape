@@ -16,7 +16,7 @@ span[data-translationkey="trans__configurator__dealer_selection_modal__personal_
     font-weight: 400;
 }
 button[data-test="button:personalDetails:next"] {
-    margin-bottom: 10px ;
+    margin-bottom: 10px !important;
 }
 button[data-test="button:personalDetails:skip"]{
     display: none !important;

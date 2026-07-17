@@ -13,7 +13,7 @@ div.SPC_WIDGET-MuiDialog-root[data-test="modal:leadCapture"] h6 span[data-transl
 }
 
 button[data-test="button:personalDetails:next"] {
-  margin-bottom: 10px;
+  margin-bottom: 10px !important;
 }
 
 button[data-test="button:personalDetails:skip"] {

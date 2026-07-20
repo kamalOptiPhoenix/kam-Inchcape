@@ -1,0 +1,648 @@
+@import url("https://fonts.cdnfonts.com/css/petrov-sans-trial");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+
+// for mobile 
+@media (max-width: 768px) {
+.KGMT5 {
+  .hide-section {
+    display: none;
+  }
+  .kgmt5-title,
+  .title-black {
+    font-family: "Petrov Sans-Trial", sans-serif !important;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 34px !important;
+    leading-trim: NONE;
+    line-height: 120% !important;
+    letter-spacing: 0%;
+    text-align: center;
+    vertical-align: middle;
+    text-transform: uppercase;
+    color: #000000;
+  }
+  #Main\ Body\ Copy p:not(:has(.title-black)) {
+    text-align: left !important;
+  }
+  #Main\ Body\ Copy p .od-description strong {
+    font-weight: 400 !important;
+  }
+
+  .kgmt5-description,
+  .od-description {
+    font-family: Inter;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 16px !important;
+    leading-trim: NONE;
+    line-height: 150% !important;
+    letter-spacing: 0%;
+    color: #000000;
+  }
+
+  .kgmt5-sec2-btn-wrapper {
+    padding: 0px 2.75rem 60px 2.75rem;
+  }
+  .kgmt5-sec2-btn-wrapper a{
+    font-family: "Petrov Sans-Trial", sans-serif !important;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 18px;
+    leading-trim: NONE;
+    line-height: 28px;
+    letter-spacing: 0%;
+    text-align: center;
+    vertical-align: middle;
+  }
+  .kgmt5-sec2-btn-wrapper a.secondary-button{
+    color: #383838;
+  }
+
+  .kgmt5-custom-section-5 {
+    padding-top: 58px;
+  }
+
+  .kgmt5-sec5-btn {
+    margin: 47px 0 27px 0;
+   
+  }
+  .kgmt5-sec5-btn-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 0 2.75rem;
+  }
+
+  .kgmt5-section-6 {
+    background-color: #f6f5f5;
+    padding-top: 65px;
+    padding-bottom: 82px;
+  }
+  .kgmt5-section-6 h3.my-\[5rem\] {
+    margin: 0 !important;
+  }
+
+  .kgmt5-section-6 .filterDiv.relative {
+    margin-top: 26px !important;
+    margin-bottom: 20px !important;
+  }
+  .kgmt5-section-6 > div.flex.flex-col {
+    flex-direction: column-reverse;
+    margin: 0;
+  }
+  .kgmt5-section-6 #myBtnContainer {
+    margin-top: 0;
+  }
+
+  #Variants\ Header {
+    display: none;
+  }
+
+  #Gallery{
+    background-color: #1D1D1D;
+    padding-top: 46px;
+    padding-bottom: 60px;
+  }
+ 
+
+  .kgmt5-gallery-inner {
+    max-width: 100%;
+    padding: 0;
+  }
+
+  .kgmt5-gallery-title {
+    font-weight: 300;
+    font-style: Regular;
+    font-size: 30px;
+    leading-trim: NONE;
+    line-height: 120%;
+    letter-spacing: 0%;
+    text-align: center;
+    vertical-align: middle;
+    text-transform: uppercase;
+    color: #ffffff !important;
+    margin: 0 0 43px !important;
+    padding: 0;
+  }
+
+  .kgmt5-gallery-swiper {
+    position: relative;
+    overflow: hidden;
+    padding: 0;
+
+    .swiper-slide {
+      width: 100%;
+  
+      height: auto;
+      opacity: 0.45;
+      transition: opacity 0.3s ease;
+    }
+
+    .swiper-slide-active {
+      opacity: 1;
+    }
+  }
+
+  .kgmt5-gallery-slide {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    line-height: 0;
+    background-color: #1a1a1a;
+  }
+
+  .kgmt5-gallery-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .kgmt5-gallery-button-prev,
+  .kgmt5-gallery-button-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 48px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+
+    img {
+      display: block;
+      width: 14.88px;
+      height: auto;
+      opacity: 1;
+      transition: opacity 0.2s ease;
+    }
+
+    &.swiper-button-disabled {
+      cursor: default;
+      pointer-events: none;
+
+     
+    }
+  }
+
+  .kgmt5-gallery-button-prev {
+    left: 0;
+  }
+
+  .kgmt5-gallery-button-next {
+    right: 0;
+  }
+
+  .kgmt5-gallery-pagination {
+    position: relative !important;
+    bottom: auto !important;
+    margin-top: 41px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .kgmt5-gallery-pagination .swiper-pagination-bullet {
+    width: 8px;
+    height: 8px;
+    margin: 0 !important;
+    background: #6b6b6b;
+    opacity: 1;
+  }
+
+  .kgmt5-gallery-pagination .swiper-pagination-bullet-active {
+    background: #ffffff;
+  }
+
+  .kgmt5-custom-section-7 {
+    background-color: #ffffff;
+    padding: 58px 21px 48px 21px;
+  }
+
+  .kgmt5-sec7-heading {
+    margin-bottom: 32px;
+  }
+
+  .kgmt5-sec7-carousel-wrap {
+    position: relative;
+  }
+
+  .kgmt5-sec7-scroll {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .kgmt5-sec7-card {
+    flex: 0 0 calc(100% - 8px);
+    min-width: 280px;
+    scroll-snap-align: center;
+    padding: 0 4px;
+  }
+
+  .kgmt5-sec7-card-image {
+    display: block;
+    margin-bottom: 20px;
+    text-align: center;
+
+    img {
+      width: 100%;
+      max-width: 360px;
+      height: auto;
+      object-fit: contain;
+      margin: auto;
+    }
+  }
+
+  .kgmt5-sec7-model {
+    font-family: "Petrov Sans-Trial", sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 120%;
+    letter-spacing: 0;
+    text-align: center;
+    text-transform: uppercase;
+    color: #000;
+    margin: 0 0 9px;
+  }
+
+  .kgmt5-sec7-price {
+    font-family: "Petrov Sans-Trial", sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 120%;
+    letter-spacing: 0;
+    text-align: center;
+    text-transform: uppercase;
+    color: #000;
+    margin: 0 0 39px;
+  }
+
+  .kgmt5-sec7-spec-row {
+    display: flex;
+    gap: 9px;
+    padding: 15px 0;
+    border-bottom: 1px solid #bfbfbf;
+  }
+  // border-bottom for last row
+  .kgmt5-sec7-spec-row:last-child {
+    border-bottom: none;
+  }
+
+  .kgmt5-sec7-spec-label {
+    flex: 0 0 35%;
+    font-family: Inter, sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 120%;
+    color: #000;
+  }
+
+  .kgmt5-sec7-spec-value {
+    flex: 1;
+    font-family: Inter, sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 120%;
+    color: #000000;
+  }
+
+  .kgmt5-sec7-arrow {
+    position: absolute;
+    top: 60px;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 48px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #000000;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    opacity: 0.7;
+
+    &.is-disabled,
+    &:disabled {
+     opacity: 0.3;
+      cursor: default;
+      pointer-events: none;
+    }
+
+    &--prev {
+      left: -15px;
+    }
+
+    &--next {
+      right: -15px;
+    }
+  }
+
+  .kgmt5-sec7-btn-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 25px 2.75rem 0;
+  }
+
+  .kgmt5-sec7-btn {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+  }
+
+  #Specs\ Header {
+    background-color: #f6f5f5;
+    padding-top: 40px;
+  }
+
+  #Spec > .flex.flex-col.padding-T,
+  #Smart > .flex.flex-col.padding-T {
+    padding: 0;
+    display: none;
+  }
+
+  #Spec > .flex.flex-row.padding-T,
+  #Smart > .flex.flex-row.padding-T {
+    padding: 0 !important;
+  }
+
+  .tiImageTitle {
+    font-family: "Petrov Sans-Trial", sans-serif !important;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 20px;
+    leading-trim: NONE;
+    line-height: 120%;
+    letter-spacing: 0%;
+    vertical-align: middle;
+    text-transform: uppercase;
+    color: #000000;
+    text-align: left;
+    align-self: flex-start;
+    padding: 0 12px;
+    padding-top: 32px;
+    padding-bottom: 8px;
+  }
+
+  .tiImageDescs {
+    padding: 0 12px;
+  }
+  .tiImageDescs p {
+    font-family: Inter;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 16px;
+    leading-trim: NONE;
+    line-height: 150%;
+    letter-spacing: 0%;
+    color: #000000;
+  }
+  .tiImageDescs p strong {
+    font-weight: 400 !important;
+  }
+  .kgmt5-sec8-btn-wrapper {
+    margin-top: 24px;
+  }
+  .kgmt5-sec8-btn.primary-button,
+  .kgmt5-sec10-btn.primary-button {
+    width: 286px;
+    align-self: center;
+  }
+  .primary-button {
+    background-color: #373249;
+     font-family: "Petrov Sans-Trial", sans-serif !important;
+    font-weight: 300;
+    font-style: Regular;
+    font-size: 18px;
+    leading-trim: NONE;
+    line-height: 28px;
+    letter-spacing: 0%;
+    text-align: center;
+    vertical-align: middle;
+  }
+  #DIVIDER {
+    background: #ffffff !important;
+  }
+  form section.relative > div.absolute {
+    background: #edecf2 !important;
+  }
+  .formContainer {
+    padding: 50px 21px 53px;
+  }
+  .formContainer p.pb-10 {
+    padding: 0;
+  }
+  .formContainer h1#bookatestdrive {
+    font-family: "Petrov Sans-Trial", sans-serif !important;
+    font-weight: 300;
+    font-style: Regular;
+    font-size: 30px;
+    leading-trim: NONE;
+    line-height: 120%;
+    letter-spacing: 0%;
+    text-align: center;
+    vertical-align: middle;
+    text-transform: uppercase;
+  }
+  .formGrid .noBackground label {
+    display: none;
+  }
+  .formGrid .noBackground input {
+    border: none;
+    background: transparent;
+    border-bottom: 1px solid #000000;
+  }
+  select#title,
+  select#preferredDealer {
+    border: none;
+    border-bottom: 1px solid #000000;
+    background-color: transparent;
+  }
+  select#title {
+    width: 150px;
+  }
+  .formGrid .dropDown_black {
+    background-image: url(//cdn.optimizely.com/img/15841360337/2aa492fe3b404b80897aefc6d265b367.svg);
+  }
+
+  .formGrid .noBackground input,
+  .formGrid select,
+  .inputField_invalid {
+    font-family: Inter;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 15px;
+    leading-trim: NONE;
+    line-height: 100%;
+    letter-spacing: 0%;
+  }
+  //placeholder color
+  .formGrid .noBackground input::placeholder,
+  select:invalid {
+    color: #707070 !important;
+  }
+  label[for="customCheckBox"] {
+    font-family: Inter;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 14px;
+    leading-trim: NONE;
+    line-height: 150%;
+    letter-spacing: 0%;
+    color: #707070;
+  }
+  .KGM-submitButtonsForm {
+    width: 286px;
+    font-family: "Petrov Sans-Trial", sans-serif;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 18px;
+    leading-trim: NONE;
+    line-height: 28px;
+    letter-spacing: 0%;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 0;
+    background-color: #373249;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+  }
+  .KGM-submitButtonsForm::after {
+    content: "Submit";
+    font-size: 18px;
+  }
+
+  #Terms\ and\ Conditions h3 {
+    font-family: Inter !important;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 14px;
+    leading-trim: NONE;
+    line-height: 150%;
+    letter-spacing: 0%;
+    color: #3b3b3b;
+  }
+  #Terms\ and\ Conditions h3 em{
+    font-style: normal;
+  }
+  #Terms\ and\ Conditions h3 a {
+    text-decoration: underline;
+  }
+
+  section.flex.flex-wrap.bg-KGM_Royal_Purple-dark {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    background-color: #3b0764;
+  }
+
+  section.flex.flex-wrap.bg-KGM_Royal_Purple-dark > a {
+    min-height: 180px;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center;
+    align-items: center;
+    padding: 44px 20px 38px 20px;
+    margin: 0 !important;
+    text-align: center;
+    border-right: 1px solid #fff !important;
+    border-bottom: 1px solid #fff !important;
+    height: 187px;
+  }
+  //border-bottom for last 2 items 
+    section.flex.flex-wrap.bg-KGM_Royal_Purple-dark > a:nth-child(n + 3) {
+        border-bottom: 0 !important;
+    }
+  section.flex.flex-wrap.bg-KGM_Royal_Purple-dark > a:nth-child(2n) {
+    border-right: 0 !important;
+  }
+
+  /* ICONS */
+  section.flex.flex-wrap.bg-KGM_Royal_Purple-dark > a img {
+    object-fit: contain;
+    margin-bottom: 16px;
+    padding: 0 !important;
+    height: auto;
+    width: auto;
+   
+  }
+
+  /* TEXT */
+  section.flex.flex-wrap.bg-KGM_Royal_Purple-dark > a div {
+    padding-left: 0 !important;
+    text-transform: uppercase;
+    max-width: 100px;
+    font-family: "Petrov Sans-Trial", sans-serif;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 16px;
+    leading-trim: NONE;
+    line-height: 120%;
+    letter-spacing: 0px;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  /* CHANGE LABELS */
+  section.flex.flex-wrap.bg-KGM_Royal_Purple-dark > a:nth-child(1) div {
+    font-size: 0;
+  }
+
+  section.flex.flex-wrap.bg-KGM_Royal_Purple-dark > a:nth-child(1) div::after {
+    content: "DOWNLOAD\A PRICELIST";
+    white-space: pre;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  section.flex.flex-wrap.bg-KGM_Royal_Purple-dark > a:nth-child(3) div {
+    font-size: 0;
+  }
+
+  section.flex.flex-wrap.bg-KGM_Royal_Purple-dark > a:nth-child(3) div::after {
+    content: "BOOK A\A TEST DRIVE";
+    white-space: pre;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  /* OPTIONAL ICON REPLACEMENT */
+  section.flex.flex-wrap.bg-KGM_Royal_Purple-dark > a:nth-child(1) img {
+    content: url("//cdn.optimizely.com/img/15841360337/972be9d6fa744473afa147f159094654.svg");
+    margin-bottom: 8px;
+  }
+
+  section.flex.flex-wrap.bg-KGM_Royal_Purple-dark > a:nth-child(2) img {
+    content: url("//cdn.optimizely.com/img/15841360337/f40c87c3f32742c8876b2b3ef9901db8.svg");
+  }
+
+  section.flex.flex-wrap.bg-KGM_Royal_Purple-dark > a:nth-child(3) img {
+    content: url("//cdn.optimizely.com/img/15841360337/8425c0d01a314bc4801cd9185c5007d6.svg");
+  }
+
+  section.flex.flex-wrap.bg-KGM_Royal_Purple-dark > a:nth-child(4) img {
+    content: url("//cdn.optimizely.com/img/15841360337/a05fbd6a9a964a9594d9c1e092d37e64.svg");
+  }
+}
+}
+
+

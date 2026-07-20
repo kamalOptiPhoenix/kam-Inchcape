@@ -68,6 +68,7 @@ const config = {
 
                     // Show modal
                     document.body.classList.add('T1_ShowNoScroll', 'T1_Show');
+                    kamLdvt1ProcessGoal('Pop-up appearances T1');
                 });
             }
         });
@@ -145,7 +146,7 @@ const config = {
                     const storedPdfUrl = sessionStorage.getItem('pdfUrl');
                     window.open(storedPdfUrl, '_blank');
                     brochure_T1_form.submit();
-                    kamLdvt1ProcessGoal('contact_details_conversions_t1');
+                    kamLdvt1ProcessGoal('Contact Details conversions T1');
                 }
             }
         );

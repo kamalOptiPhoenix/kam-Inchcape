@@ -1,0 +1,10 @@
+body.KGMT1  #popUpForm{
+	display: none !important;
+}
+body.t1-Modal-Show.KGMT1  #popUpForm.KGMT1-form{
+	display: block !important;
+}
+
+body.t1-Modal-Show.KGMT1  #popUpForm.KGMT1-form input{
+	color: black !important;
+}

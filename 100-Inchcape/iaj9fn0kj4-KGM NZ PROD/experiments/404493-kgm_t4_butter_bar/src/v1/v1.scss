@@ -1,0 +1,170 @@
+@import url('https://fonts.cdnfonts.com/css/petrov-sans-trial');
+
+.KGMT4 {
+    .kgm-butter-bar, .mobile-label  {
+        display: none !important;
+    }
+    .kgm-butter-bar_T4 {
+        position: sticky;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: #3B0764;
+        z-index: 9999;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease-in-out;
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+
+    .kgm-butter-bar_T4.visible {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    .butter-bar-container_T4 {
+        padding: 0 20px;
+    }
+
+    .butter-bar-content_T4 {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        gap: 20px;
+        padding: 6px 0;
+        flex-wrap: wrap;
+    }
+
+    .butter-bar-btn_T4 {
+        display: flex;
+        align-items: center;
+       font-family: 'Petrov Sans-Trial 300', sans-serif;
+        padding: 0px 16px;
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+        font-size: 15px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        transition: all 0.2s ease;
+        backdrop-filter: blur(10px);
+        min-height: 36px;
+        gap: 12px;
+    }
+
+    .butter-bar-btn_T4 .btn-icon {
+        width: 30px;
+        height: 30px;
+        flex-shrink: 0;
+    }
+
+    .butter-bar-btn_T4 span {
+        white-space: nowrap;
+        text-align: center;
+    }
+
+    .dollor-desktop {
+        width: 30px !important;
+        height: 30px !important;
+    }
+
+    @media (max-width: 768px) {
+        .parent-container {
+            position: fixed;
+            width: 100%;
+        }
+
+        .kgm-butter-bar_T4 {
+            position: sticky !important;
+            top: 90px !important;
+            z-index: 9998 !important;
+            display: block !important;
+            opacity: 1 !important;
+            transform: none !important;
+        }
+
+        .banner-img.w-full {
+            margin-top: 40px;
+        }
+
+        #scnd_function {
+            position: unset !important;
+        }
+
+        .butter-bar-content_T4 {
+            gap: 10px;
+            flex-wrap: nowrap !important;
+            flex-direction: row !important;
+            justify-content: space-between !important;
+            padding: 0px;
+        }
+
+        .butter-bar-btn_T4 {
+            padding: 6px 12px;
+            font-size: 11px;
+            min-height: 32px;
+            flex-direction: column;
+            flex: 1 1 0;
+            align-items: center;
+            justify-content: center;
+            max-width: 25%;
+            gap: 10px;
+        }
+
+        .butter-bar-btn_T4 .btn-icon {
+            width: 32px;
+            height: 32px;
+        }
+
+        .dollor-pricelist {
+            width: 45px !important;
+            height: 45px !important;
+        }
+
+        .price-list-container {
+            gap: 0px !important;
+        }
+    }
+
+    @media (max-width: 640px) {
+
+        
+        .butter-bar-btn_T4[href="https://www.kgm.co.nz/brochure-page/"], .mobile-label {
+            display: none !important;
+        }
+
+        .butter-bar-content_T4 {
+            gap: 16px;
+            justify-content: space-between;
+        }
+
+        .butter-bar-btn_T4 {
+            flex: 1;
+            justify-content: center;
+            padding: 6px 8px;
+            font-size: 10px;
+            min-height: 30px;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .butter-bar-btn_T4 .btn-icon {
+            width: 32px;
+            height: 32px;
+        }
+
+        .butter-bar-btn_T4:hover::after {
+            content: attr(data-action);
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            white-space: nowrap;
+        }
+    }
+}

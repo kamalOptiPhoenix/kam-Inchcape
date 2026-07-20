@@ -1,0 +1,122 @@
+.LDVT9 {
+
+    
+    
+    header .sticky-header {
+        z-index: 9999;
+    }
+
+    .desktop-label{
+        font-size: 15px;
+        font-family: "Calibre";
+        font-weight: 500;
+        display: flex;
+        align-items: initial;
+        justify-content: center;
+        margin-top: 8px;
+    }
+
+    .mobile_label_ldvt9 {
+        display: none !important;
+    }
+
+    #butter_bar_ldvt9 {
+        transition: transform 0.3s ease, opacity 0.3s ease;
+        pointer-events: auto;
+        display: flex;
+        position: fixed;
+        top: 106px;
+        background: #FFC00D;
+    }
+
+    .visible_ldvt9 {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+    }
+    
+    .hidden_ldvt9 {
+        transform: translateY(-100%);
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .butter_bar_ldvt9 {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 9;
+        transition: transform 0.3s ease;
+    }
+
+    .butter_bar_container_ldvt9 {
+        display: flex;
+        width: 100%;
+    }
+
+    .butter_bar_content_ldvt9 {
+        display: flex;
+        height: 50px;
+        justify-content: space-evenly;
+        width: 100%;
+        align-items: center;
+    }
+
+    .butter_bar_btn_ldvt9 {
+        display: flex;
+        gap: 13px;
+    }
+
+    @media (max-width: 768px) {
+        .butter_bar_container_ldvt9 {
+            padding: 5px 0;
+        }
+
+        .mobile_label_ldvt9 {
+            display: block !important;
+            font-size: 12px;
+            font-family: 'Calibre';
+            font-weight: 500;
+        }
+
+        .butter_bar_btn_ldvt9[href="https://ldv.co.nz/price-list/"],
+        .desktop-label {
+            display: none !important;
+        }
+
+        .butter_bar_btn_ldvt9 {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .butter_bar_content_ldvt9 {
+            height: 66px;
+        }
+
+        .butter_bar_btn_ldvt9 .btn_icon_ldvt9+span {
+            font-size: 12px;
+        }
+
+        #butter_bar_ldvt9 {
+            top: 79px;
+        }
+
+        .sticky-header {
+            position: fixed;
+            top: 0;
+        }
+
+        .btn_icon_ldvt9 {
+            width: 21px;
+        }
+    }
+
+    @media (max-width: 1024px) {
+        #butter_bar_ldvt9 {
+            top: 79px;
+        }
+    }
+}

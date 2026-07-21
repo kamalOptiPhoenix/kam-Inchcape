@@ -95,12 +95,6 @@ export default function kamSubnzT7AppendLeadCaptureForm() {
                         const responseText = (responseDoc.body && responseDoc.body.textContent) || '';
                         const textSuccess = /Thanks for your interest in Subaru/i.test(responseText);
 
-                        console.log('[SUBNZT7] form submit response', {
-                            confirmationEl: !!confirmationEl,
-                            textSuccess,
-                            hasSubmissionFailed: /Submission failed/i.test(responseText),
-                        });
-
                         if (confirmationEl || textSuccess) {
                             document.body.classList.remove('leadCapture-Show');
                             localStorage.removeItem('leadCapture_skipped');
@@ -113,7 +107,6 @@ export default function kamSubnzT7AppendLeadCaptureForm() {
                                 '.messages--error, .messages.messages--error, .webform-error-message, .form-item--error-message, [role="alert"]',
                             );
                             const errorText = errorEl && errorEl.textContent && errorEl.textContent.trim();
-                            console.log('[SUBNZT7] form submit failed', errorText);
                             alert(errorText ? `Form not submitted: ${errorText}` : 'Form not submitted successfully.');
                         }
                     })

@@ -3,6 +3,19 @@
 /* eslint-disable import/extensions */
 import kamSubnzT7ProcessGoal from './src/assets/kamSubnzT7ProcessGoal.js';
 (function kamSubnzT7Shared() {
+    function fireConfiguratorCompletionsGoal() {
+        if (window.kamSubnzT7ConfiguratorCompletionsFired) {
+            return;
+        }
+        if (!Kameleoon?.API?.Goals?.processConversion) {
+            return;
+        }
+
+        window.kamSubnzT7ConfiguratorCompletionsFired = true;
+        console.log('*** configurator_completions_t1 goal triggerd ***');
+        kamSubnzT7ProcessGoal('Configurator Completions T1');
+    }
+
     function initGoals() {
         let summaryFlag = true;
 
@@ -14,8 +27,7 @@ import kamSubnzT7ProcessGoal from './src/assets/kamSubnzT7ProcessGoal.js';
                     if (headerOnScreen) {
                         if (summaryFlag) {
                             summaryFlag = false;
-                            console.log('*** configurator_completions_t1 goal triggerd ***');
-                            kamSubnzT7ProcessGoal('Configurator Completions T1');
+                            fireConfiguratorCompletionsGoal();
                         }
                     }
                 }, 3000);
@@ -24,8 +36,7 @@ import kamSubnzT7ProcessGoal from './src/assets/kamSubnzT7ProcessGoal.js';
 
         Kameleoon.API.Utils.addEventListener(document, 'click', (event) => {
             if (event.target.closest('button[data-test="customise:summary:enquire"]')) {
-                console.log('*** configurator_completions_t1 goal triggerd ***');
-                kamSubnzT7ProcessGoal('Configurator Completions T1');
+                fireConfiguratorCompletionsGoal();
             }
         });
     }

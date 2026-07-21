@@ -108,11 +108,6 @@
           const confirmationEl = responseDoc.querySelector('.webform-confirmation, .webform-confirmation__message, [data-drupal-messages] .messages--status');
           const responseText = responseDoc.body && responseDoc.body.textContent || '';
           const textSuccess = /Thanks for your interest in Subaru/i.test(responseText);
-          console.log('[SUBNZT7] form submit response', {
-            confirmationEl: !!confirmationEl,
-            textSuccess,
-            hasSubmissionFailed: /Submission failed/i.test(responseText)
-          });
           if (confirmationEl || textSuccess) {
             document.body.classList.remove('leadCapture-Show');
             localStorage.removeItem('leadCapture_skipped');
@@ -123,7 +118,6 @@
           } else {
             const errorEl = responseDoc.querySelector('.messages--error, .messages.messages--error, .webform-error-message, .form-item--error-message, [role="alert"]');
             const errorText = errorEl && errorEl.textContent && errorEl.textContent.trim();
-            console.log('[SUBNZT7] form submit failed', errorText);
             alert(errorText ? `Form not submitted: ${errorText}` : 'Form not submitted successfully.');
           }
         }).catch(error => {
@@ -142,34 +136,17 @@
     const shouldShowModal = () => localStorage.getItem('leadCaptured') === null || localStorage.getItem('leadCapture_skipped') === 'true';
     const redirectToStoredUrl = () => {
       const pendingUrl = sessionStorage.getItem(redirectStorageKey);
-      console.log('[SUBNZT7] redirectToStoredUrl', pendingUrl);
       if (pendingUrl) {
         sessionStorage.removeItem(redirectStorageKey);
         window.location.href = pendingUrl;
       }
     };
-    console.log('[SUBNZT7] clickBind attached', {
-      triggerCount: document.querySelectorAll(triggerSelector).length,
-      leadCaptured: localStorage.getItem('leadCaptured'),
-      leadCaptureSkipped: localStorage.getItem('leadCapture_skipped'),
-      leadCaptureShown: sessionStorage.getItem('leadCaptureShown'),
-      modalPresent: !!document.getElementById('leadCaptureModal')
-    });
     document.addEventListener('click', event => {
       const triggerLink = event.target.closest(triggerSelector);
       if (triggerLink) {
         const showModal = shouldShowModal();
         const leadCaptureShown = sessionStorage.getItem('leadCaptureShown');
-        console.log('[SUBNZT7] trigger link clicked', {
-          href: triggerLink.href,
-          showModal,
-          leadCaptureShown,
-          leadCaptured: localStorage.getItem('leadCaptured'),
-          leadCaptureSkipped: localStorage.getItem('leadCapture_skipped'),
-          target: event.target
-        });
         if (showModal && leadCaptureShown === null) {
-          console.log('[SUBNZT7] showing lead capture modal');
           event.preventDefault();
           event.stopPropagation();
           event.stopImmediatePropagation();
@@ -180,21 +157,16 @@
             skipConfirmation.classList.add('hidden');
           }
           document.body.classList.add('leadCapture-Show');
-          console.log('[SUBNZT7] body class after show', document.body.className);
           return;
         }
-        console.log('[SUBNZT7] modal skipped — allowing navigation');
       }
       if (event.target.closest('#skipButton')) {
-        console.log('[SUBNZT7] skip button clicked');
         document.getElementById('skipConfirmation').classList.remove('hidden');
       }
       if (event.target.closest('#lead-capture-SubmitButton')) {
-        console.log('[SUBNZT7] submit button clicked');
         document.querySelector('#leadCaptureForm .webform-button--submit').click();
       }
       if (event.target.closest('#skipAnyway')) {
-        console.log('[SUBNZT7] skip anyway clicked');
         document.body.classList.remove('leadCapture-Show');
         localStorage.setItem('leadCapture_skipped', 'true');
         redirectToStoredUrl();
@@ -214,10 +186,7 @@
     }
     if (!window.kamSubnzT7Start) {
       window.kamSubnzT7Start = true;
-      console.log('[SUBNZT7] waiting for body + jQuery');
       Kameleoon.API.Core.runWhenConditionTrue(() => document.body != null && typeof jQuery === 'function', init);
-    } else {
-      console.log('[SUBNZT7] init skipped — kamSubnzT7Start already set');
     }
   })();
 })();

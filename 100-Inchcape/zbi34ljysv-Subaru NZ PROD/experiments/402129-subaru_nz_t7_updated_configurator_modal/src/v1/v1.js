@@ -15,12 +15,10 @@ import kamSubnzT7ClickBind from '../assets/kamSubnzT7ClickBind.js';
 
     if (!window.kamSubnzT7Start) {
         window.kamSubnzT7Start = true;
-        console.log('[SUBNZT7] waiting for body + jQuery');
+       
         Kameleoon.API.Core.runWhenConditionTrue(
             () => document.body != null && typeof jQuery === 'function',
             init,
         );
-    } else {
-        console.log('[SUBNZT7] init skipped — kamSubnzT7Start already set');
-    }
+    } 
 }());

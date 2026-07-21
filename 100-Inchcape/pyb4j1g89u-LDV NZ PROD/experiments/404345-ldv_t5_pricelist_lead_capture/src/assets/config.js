@@ -50,9 +50,13 @@ const config = {
 `,
     handleDwnloadBtn: () => {
         const originalBtn = [...document.querySelectorAll('section button.btn-Primary')]
-            .find(btn => btn.textContent.trim() === 'LDV Pricelist');
+            .find((btn) => {
+                const onclick = btn.getAttribute('onclick') || '';
+                const text = btn.textContent.trim().toLowerCase();
+                return onclick.includes('.pdf') && text.includes('pricelist');
+            });
 
-        if (!originalBtn) return;
+        if (!originalBtn || originalBtn.classList.contains('t5CustomBrochureBtn')) return;
 
         // ✅ Extract PDF URL from inline onclick
         const onclickText = originalBtn.getAttribute('onclick') || '';
@@ -69,7 +73,7 @@ const config = {
         <button 
           class="btn btn-Primary w-full my-3 h-12 pt-1.5 md:w-auto md:h-12 md:min-w-[225px] md:min-h-12 px-5 text-center t5CustomBrochureBtn"
           data-pdf="${pdfUrl}">
-          LDV Pricelist
+          DOWNLOAD PRICELIST
         </button>
       `;
 
@@ -86,8 +90,8 @@ const config = {
             } else {
                 // Else show modal
                 document.body.classList.add('T5_Show', 'T5_ShowNoScroll');
-                console.log('*** t5_pop_up_appearances goal triggered ***');
-                kamLdvt5ProcessGoal('t5_pop-up_appearances');
+                console.log('*** Pop-up appearances T5 goal triggered ***');
+                kamLdvt5ProcessGoal('Pop-up appearances T5');
             }
         });
     },
@@ -163,8 +167,8 @@ const config = {
                     );
                     const PdfUrl = document.querySelector('.t5CustomBrochureBtn').getAttribute('data-pdf');
                     window.open(PdfUrl, '_blank');
-                    console.log('*** contact_details_conversions_t5 goal triggered ***');
-                    kamLdvt5ProcessGoal('t5_contact_details_conversions');
+                    console.log('*** Contact Details conversions T5 goal triggered ***');
+                    kamLdvt5ProcessGoal('Contact Details conversions T5');
                     brochure_T5_form.submit();
                 }
             }

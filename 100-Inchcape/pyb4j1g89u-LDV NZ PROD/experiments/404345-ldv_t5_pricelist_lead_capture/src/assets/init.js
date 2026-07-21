@@ -8,7 +8,7 @@ export default function init() {
     bodyEl.classList.add('ldvt5');
 
     // HTML and Event Bind
-    if (!document.querySelector('.brochureModal')) {
+    if (!document.querySelector('.brochure_T5')) {
         bodyEl.insertAdjacentHTML('afterbegin', config.html);
         config.fetchForm().then((form) => {
             const brochure_T5_form_wrapper = document.querySelector(

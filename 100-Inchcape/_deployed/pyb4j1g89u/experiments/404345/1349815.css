@@ -1,0 +1,191 @@
+.brochure_T5.hidden {
+  display: none;
+}
+
+body.T5_Show .brochure_T5 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.brochure_T5_heading {
+  font-weight: 700;
+  font-size: 36px;
+  line-height: normal;
+  letter-spacing: 0%;
+  text-align: center;
+  text-transform: uppercase;
+  color: #000000;
+}
+
+.brochure_T5_line {
+  background-color: #ffc70a;
+  font-size: 5px;
+  color: transparent;
+  width: 300px;
+  height: 6px;
+  -ms-flex-item-align: center;
+  -ms-grid-row-align: center;
+  align-self: center;
+  margin-top: 24px;
+}
+
+.brochure_T5 .form_modal-content {
+  max-width: 679px;
+  max-height: 605px;
+}
+
+.brochure_T5_content {
+  width: 100%;
+  height: 100%;
+}
+
+.brochure_T5_Description {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 28px;
+  letter-spacing: 0%;
+  text-align: center;
+  color: #000000;
+  font-family: Calibre;
+}
+
+.brochure_T5 label[for="firstName "],
+.brochure_T5 label[for=lastName],
+.brochure_T5 label[for=email] {
+  display: none;
+}
+
+.brochure_T5 input[name=firstName],
+.brochure_T5 input[name=lastName],
+.brochure_T5 input[name=email] {
+  height: 43px;
+}
+
+.brochure_T5 .formGrid {
+  padding-left: 20px;
+  padding-right: 20px;
+  -webkit-column-gap: 30px;
+  -moz-column-gap: 30px;
+  column-gap: 30px;
+  row-gap: 0.5rem;
+}
+
+.brochure_T5 span.rte-Main-specification {
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 100%;
+  letter-spacing: 0%;
+}
+
+.brochure_T5 span a {
+  font-family: Calibre;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-decoration: underline;
+  text-decoration-style: solid;
+  text-decoration-offset: 0%;
+  text-decoration-thickness: 0%;
+}
+
+.firstName_wrapper,
+.lastName_wrapper {
+  -ms-grid-column-span: 6;
+  grid-column: span 6/span 6;
+}
+
+.brochure_T5_content > div {
+  border-radius: 6px;
+}
+
+.brochure_T5 button[type=submit] {
+  font-family: inherit;
+  width: 286px;
+}
+
+.brochure_T5_content .chkBox input[type=checkbox] {
+  margin-top: 8px;
+}
+
+@media only screen and (max-width: 768px) {
+  .brochure_T5_heading {
+    font-family: Calibre;
+    font-size: 30px;
+  }
+
+  .brochure_T5_line {
+    width: 194px;
+    margin-top: 18px;
+  }
+
+  .brochure_T5 .formGrid {
+    padding-left: 16px;
+    padding-right: 16px;
+    -webkit-column-gap: unset;
+    -moz-column-gap: unset;
+    column-gap: unset;
+  }
+
+  .brochure_T5 .inputField input[type=text],
+  .inputField input[type=email] {
+    max-width: 327px;
+  }
+
+  .brochure_T5 button[type=submit] {
+    max-width: 300px;
+    font-family: inherit;
+  }
+
+  .brochure_T5_header_wrapper {
+    margin-top: 60px;
+  }
+
+  .brochure_T5 .formContainer {
+    padding: 0px;
+    padding-bottom: 45px;
+  }
+
+  .brochure_T5 .form_modal-content {
+    max-width: 100vw;
+    max-height: 80vh;
+  }
+
+  .firstName_wrapper,
+  .lastName_wrapper {
+    -ms-grid-column-span: 12;
+    grid-column: span 12/span 12;
+  }
+
+  body.T5_Show .brochure_T5 {
+    -webkit-box-align: end;
+    -ms-flex-align: end;
+    align-items: end;
+  }
+
+  .brochure_T5_content {
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+    justify-content: end;
+  }
+
+  .brochure_T5_content > div {
+    height: 100%;
+  }
+
+  .brochure_T5_content .chkBox .invalid-feedback.inputField_invalid.ps-7 {
+    -webkit-padding-start: 0px;
+    padding-inline-start: 0px;
+  }
+
+  .brochure_T5 button[type=submit] {
+    width: 300px;
+  }
+}

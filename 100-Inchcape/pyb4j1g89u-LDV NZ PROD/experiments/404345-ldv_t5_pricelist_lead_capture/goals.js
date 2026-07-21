@@ -1,4 +1,4 @@
 export const goals = {
-    't5_pop-up_appearances': 0,
-    t5_contact_details_conversions: 0,
+    'Pop-up appearances T5': 423374,
+    'Contact Details conversions T5': 423375,
 };

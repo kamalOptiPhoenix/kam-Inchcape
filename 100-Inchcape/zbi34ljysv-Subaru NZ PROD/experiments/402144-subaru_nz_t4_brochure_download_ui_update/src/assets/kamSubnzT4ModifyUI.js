@@ -39,6 +39,8 @@ export default function kamSubnzT4ModifyUI() {
       '//cdn.optimizely.com/img/15841360337/7bf2dab960764995b7ac7b180f01cf6f.png',
         'All-new Forester':
       '//cdn.optimizely.com/img/15841360337/b18cd88f25434c4eb358e83e92d72b86.png',
+        Forester:
+      '//cdn.optimizely.com/img/15841360337/b18cd88f25434c4eb358e83e92d72b86.png',
         Outback:
       '//cdn.optimizely.com/img/15841360337/ab613538f0b443e586cb9f63d2ddd6b4.png',
         Impreza:
@@ -57,6 +59,8 @@ export default function kamSubnzT4ModifyUI() {
         Crosstrek:
       '//cdn.optimizely.com/img/15841360337/4de17cb7a0c246f595787a4683f5f1b3.png',
         'All-new Forester':
+      '//cdn.optimizely.com/img/15841360337/184559ddf743477ca3e919080308439c.png',
+        Forester:
       '//cdn.optimizely.com/img/15841360337/184559ddf743477ca3e919080308439c.png',
         Outback:
       '//cdn.optimizely.com/img/15841360337/73eb38ae7fc548f3a72bdc1ee91731f7.png',
@@ -83,8 +87,9 @@ export default function kamSubnzT4ModifyUI() {
             const modelName = nameEl ? nameEl.textContent.trim() : '';
             const imgAlt = nameEl ? nameEl.textContent.trim() : '';
 
-            const imgSrcDesktop = modelImageMap[modelName] || item.querySelector('img')?.src || '';
-            const imgSrcMobile = modelImageMapMobile[modelName] || imgSrcDesktop;
+            const nativeImgSrc = item.querySelector('img')?.src || '';
+            const imgSrcDesktop = nativeImgSrc || modelImageMap[modelName] || '';
+            const imgSrcMobile = nativeImgSrc || modelImageMapMobile[modelName] || imgSrcDesktop;
 
             const isCountryBrochure = modelName.includes('Subaru country brochure')
                 || modelName.includes('Subaru Country Brochure');

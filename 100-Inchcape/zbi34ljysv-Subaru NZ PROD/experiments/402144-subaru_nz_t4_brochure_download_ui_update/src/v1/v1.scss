@@ -82,15 +82,28 @@
 
 .subnzt4 .step-1-container .brochure-card__image {
   width: 100%;
+  height: 110px;
   margin-bottom: 12px;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.subnzt4 .step-1-container .brochure-card__image picture {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .subnzt4 .step-1-container .brochure-card__image img {
-  height: auto;
+  width: 100%;
+  height: -webkit-fill-available;
   display: block;
   object-fit: contain;
-  margin: auto;
+  margin: 0 auto;
 }
 
 .subnzt4 .step-1-container .brochure-card__name {
@@ -734,9 +747,13 @@
     font-size: 13px;
   }
   .subnzt4 .step-1-container .brochure-card__image {
+    height: 90px;
     margin-bottom: 0px;
   }
+
   .subnzt4 .step-1-container .brochure-card__image img {
+    width: 100%;
+    height: -webkit-fill-available;
     object-fit: contain;
   }
   .subnzt4 .step-header .step-number {

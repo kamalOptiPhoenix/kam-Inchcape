@@ -41,7 +41,7 @@ const config = {
                 if (sessionStorage.getItem('T4NewsletterViewed') === null) {
                     window.jQuery('#popUpForm').css('display', 'block');
                     sessionStorage.setItem('T4NewsletterViewed', 'true');
-                    kamLdvt4ProcessGoal('newsletter_pop-up_appearances');
+                    kamLdvt4ProcessGoal('Pop-up appearances T4');
                 }
             }
 

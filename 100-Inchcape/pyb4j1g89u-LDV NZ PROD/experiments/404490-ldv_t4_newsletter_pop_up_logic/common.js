@@ -20,13 +20,13 @@ import { goals } from './goals.js';
         setTimeout(() => {
             // Control Tracking
             if (sessionStorage.getItem('isShowed') !== null && !document.querySelector('body').classList.contains('ldvt4')) {
-                kamLdvt4ProcessGoal('newsletter_pop-up_appearances');
+                kamLdvt4ProcessGoal('Pop-up appearances T4');
             }
         }, 2000);
     }
 
     if (window.location.pathname.includes('/thank-you') && sessionStorage.getItem('FormSubmitEvent') !== null) {
-        kamLdvt4ProcessGoal('newsletter_conversions');
+        kamLdvt4ProcessGoal('Newsletter conversions T4');
     }
 
     sessionStorage.removeItem('FormSubmitEvent');

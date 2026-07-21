@@ -1,4 +1,4 @@
 export const goals = {
-    'newsletter_pop-up_appearances': 0,
-    newsletter_conversions: 0,
+    'Pop-up appearances T4': 423589,
+    'Newsletter conversions T4': 423587,
 };

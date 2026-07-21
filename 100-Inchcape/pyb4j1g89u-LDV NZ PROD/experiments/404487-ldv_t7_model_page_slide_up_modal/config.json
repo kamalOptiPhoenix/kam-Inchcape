@@ -4,6 +4,8 @@
         "variation 1"
     ],
     "goalsToCreate": [],
-    "goalsToAdd": [],
-    "primaryGoal": ""
+    "goalsToAdd": [
+        "Modal PageViews T7"
+    ],
+    "primaryGoal": "Modal PageViews T7"
 }

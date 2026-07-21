@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import setupModalEvents from './setupModalEvents.js';
 import { T60_MODELS } from './config.js';
+import kamLdvt7ProcessGoal from './kamLdvt7ProcessGoal.js';
 
 function isElementInViewport(el) {
     const rect = el.getBoundingClientRect();
@@ -78,6 +79,8 @@ function showModal(config) {
     const modal = document.getElementById(config.modalId);
     if (modal) {
         modal.classList.add('t60-modal-show');
+        console.log('*** Modal PageViews goal triggered T7 ***');
+        kamLdvt7ProcessGoal('Modal PageViews T7');
     }
 }
 

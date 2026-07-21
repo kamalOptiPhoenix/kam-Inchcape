@@ -1,0 +1,152 @@
+.LDVT9 header .sticky-header {
+  z-index: 9999;
+}
+
+.LDVT9 .desktop-label {
+  font-size: 15px;
+  font-family: "Calibre";
+  font-weight: 500;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: initial;
+  -ms-flex-align: initial;
+  align-items: initial;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+.LDVT9 .mobile_label_ldvt9 {
+  display: none !important;
+}
+
+.LDVT9 #butter_bar_ldvt9 {
+  -webkit-transition: opacity 0.3s ease, -webkit-transform 0.3s ease;
+  transition: opacity 0.3s ease, -webkit-transform 0.3s ease;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  transition: transform 0.3s ease, opacity 0.3s ease, -webkit-transform 0.3s ease;
+  pointer-events: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: fixed;
+  top: 106px;
+  background: #FFC00D;
+}
+
+.LDVT9 .visible_ldvt9 {
+  -webkit-transform: translateY(0);
+  -ms-transform: translateY(0);
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.LDVT9 .hidden_ldvt9 {
+  -webkit-transform: translateY(-100%);
+  -ms-transform: translateY(-100%);
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.LDVT9 .butter_bar_ldvt9 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9;
+  -webkit-transition: -webkit-transform 0.3s ease;
+  transition: -webkit-transform 0.3s ease;
+  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, -webkit-transform 0.3s ease;
+}
+
+.LDVT9 .butter_bar_container_ldvt9 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+}
+
+.LDVT9 .butter_bar_content_ldvt9 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 50px;
+  -webkit-box-pack: space-evenly;
+  -ms-flex-pack: space-evenly;
+  justify-content: space-evenly;
+  width: 100%;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.LDVT9 .butter_bar_btn_ldvt9 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 13px;
+}
+
+@media (max-width: 768px) {
+  .LDVT9 .butter_bar_container_ldvt9 {
+    padding: 5px 0;
+  }
+
+  .LDVT9 .mobile_label_ldvt9 {
+    display: block !important;
+    font-size: 12px;
+    font-family: "Calibre";
+    font-weight: 500;
+  }
+
+  .LDVT9 .butter_bar_btn_ldvt9[href="https://ldv.co.nz/price-list/"],
+  .LDVT9 .desktop-label {
+    display: none !important;
+  }
+
+  .LDVT9 .butter_bar_btn_ldvt9 {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .LDVT9 .butter_bar_content_ldvt9 {
+    height: 66px;
+  }
+
+  .LDVT9 .butter_bar_btn_ldvt9 .btn_icon_ldvt9 + span {
+    font-size: 12px;
+  }
+
+  .LDVT9 #butter_bar_ldvt9 {
+    top: 79px;
+  }
+
+  .LDVT9 .sticky-header {
+    position: fixed;
+    top: 0;
+  }
+
+  .LDVT9 .btn_icon_ldvt9 {
+    width: 21px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .LDVT9 #butter_bar_ldvt9 {
+    top: 79px;
+  }
+}

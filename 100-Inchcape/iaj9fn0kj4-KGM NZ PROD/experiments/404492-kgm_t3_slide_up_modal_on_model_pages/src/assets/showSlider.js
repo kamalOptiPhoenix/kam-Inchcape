@@ -214,7 +214,7 @@ export default function showSlider() {
             }, 500);
 
             console.log('*** Modal_pageviews goal triggered T3 ***');
-            kamKgmt3ProcessGoal('modal_pageviews_t3');
+            kamKgmt3ProcessGoal('Modal PageViews T3');
         }
     }
 }

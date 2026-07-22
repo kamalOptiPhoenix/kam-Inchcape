@@ -1,3 +1,4 @@
 export const goals = {
-    modal_pageviews_t3: 0,
+    	
+'Modal PageViews T3': 423685,
 };

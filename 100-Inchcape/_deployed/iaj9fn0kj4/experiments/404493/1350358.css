@@ -1,0 +1,215 @@
+@import url("https://fonts.cdnfonts.com/css/petrov-sans-trial");
+.KGMT4 .kgm-butter-bar,
+.KGMT4 .mobile-label {
+  display: none !important;
+}
+
+.KGMT4 .kgm-butter-bar_T4 {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #3B0764;
+  z-index: 9999;
+  -webkit-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  -webkit-transform: translateY(-100%);
+  -ms-transform: translateY(-100%);
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+.KGMT4 .kgm-butter-bar_T4.visible {
+  -webkit-transform: translateY(0);
+  -ms-transform: translateY(0);
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.KGMT4 .butter-bar-container_T4 {
+  padding: 0 20px;
+}
+
+.KGMT4 .butter-bar-content_T4 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 20px;
+  padding: 6px 0;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+.KGMT4 .butter-bar-btn_T4 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  font-family: "Petrov Sans-Trial 300", sans-serif;
+  padding: 0px 16px;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  min-height: 36px;
+  gap: 12px;
+}
+
+.KGMT4 .butter-bar-btn_T4 .btn-icon {
+  width: 30px;
+  height: 30px;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}
+
+.KGMT4 .butter-bar-btn_T4 span {
+  white-space: nowrap;
+  text-align: center;
+}
+
+.KGMT4 .dollor-desktop {
+  width: 30px !important;
+  height: 30px !important;
+}
+
+@media (max-width: 768px) {
+  .KGMT4 .parent-container {
+    position: fixed;
+    width: 100%;
+  }
+
+  .KGMT4 .kgm-butter-bar_T4 {
+    position: sticky !important;
+    top: 90px !important;
+    z-index: 9998 !important;
+    display: block !important;
+    opacity: 1 !important;
+    -webkit-transform: none !important;
+    -ms-transform: none !important;
+    transform: none !important;
+  }
+
+  .KGMT4 .banner-img.w-full {
+    margin-top: 40px;
+  }
+
+  .KGMT4 #scnd_function {
+    position: unset !important;
+  }
+
+  .KGMT4 .butter-bar-content_T4 {
+    gap: 10px;
+    -ms-flex-wrap: nowrap !important;
+    flex-wrap: nowrap !important;
+    -webkit-box-orient: horizontal !important;
+    -webkit-box-direction: normal !important;
+    -ms-flex-direction: row !important;
+    flex-direction: row !important;
+    -webkit-box-pack: justify !important;
+    -ms-flex-pack: justify !important;
+    justify-content: space-between !important;
+    padding: 0px;
+  }
+
+  .KGMT4 .butter-bar-btn_T4 {
+    padding: 6px 12px;
+    font-size: 11px;
+    min-height: 32px;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 0px;
+    flex: 1 1 0;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    max-width: 25%;
+    gap: 10px;
+  }
+
+  .KGMT4 .butter-bar-btn_T4 .btn-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .KGMT4 .dollor-pricelist {
+    width: 45px !important;
+    height: 45px !important;
+  }
+
+  .KGMT4 .price-list-container {
+    gap: 0px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .KGMT4 .butter-bar-btn_T4[href="https://www.kgm.co.nz/brochure-page/"],
+  .KGMT4 .mobile-label {
+    display: none !important;
+  }
+
+  .KGMT4 .butter-bar-content_T4 {
+    gap: 16px;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+  }
+
+  .KGMT4 .butter-bar-btn_T4 {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    padding: 6px 8px;
+    font-size: 10px;
+    min-height: 30px;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .KGMT4 .butter-bar-btn_T4 .btn-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .KGMT4 .butter-bar-btn_T4:hover::after {
+    content: attr(data-action);
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 10px;
+    white-space: nowrap;
+  }
+}

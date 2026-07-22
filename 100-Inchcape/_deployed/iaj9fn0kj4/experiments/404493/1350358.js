@@ -1,11 +1,14 @@
-export const CONFIG = {
+"use strict";
+
+(function () {
+  const CONFIG = {
     baseUrl: 'https://www.kgm.co.nz',
     stickySelector: '.sticky.top-0',
     butterBarId: 'kgm-butter-bar_T4'
-};
+  };
 
-// Static Butter Bar HTML
-export const BUTTER_BAR_HTML = `
+  // Static Butter Bar HTML
+  const BUTTER_BAR_HTML = `
 <div id="${CONFIG.butterBarId}" class="kgm-butter-bar_T4">
     <div class="butter-bar-container_T4">
         <div class="butter-bar-content_T4">
@@ -34,10 +37,50 @@ export const BUTTER_BAR_HTML = `
     </div>
 </div>
 `;
-
-export function appendButterBar() {
-    const stickyEl = document.querySelector(CONFIG.stickySelector);
-    if (stickyEl) {
-        stickyEl.insertAdjacentHTML('afterend', BUTTER_BAR_HTML);
+  function isMobile() {
+    return window.innerWidth <= 768;
+  }
+  function showButterBar(butterBar) {
+    if (butterBar) {
+      butterBar.classList.add('visible');
     }
-}
+  }
+  function initButterBar() {
+    if (document.getElementById(CONFIG.butterBarId)) return;
+    if (isMobile()) {
+      const scndFunction = document.getElementById('scnd_function');
+      if (scndFunction) {
+        const parentContainer = scndFunction.parentElement;
+        parentContainer.classList.add('parent-container');
+        scndFunction.insertAdjacentHTML('afterend', BUTTER_BAR_HTML);
+        showButterBar(document.getElementById(CONFIG.butterBarId));
+      }
+    } else {
+      const stickyDivs = document.querySelectorAll('.sticky.top-0');
+      if (stickyDivs.length) {
+        const lastDiv = stickyDivs[stickyDivs.length - 1];
+        lastDiv.insertAdjacentHTML('beforeend', BUTTER_BAR_HTML);
+        showButterBar(document.getElementById(CONFIG.butterBarId));
+      }
+    }
+  }
+
+  /* eslint-disable no-console */
+
+  (function kamKgmt4V1() {
+    function getInsertionTarget() {
+      if (window.innerWidth <= 768) {
+        return document.getElementById('scnd_function');
+      }
+      const stickyDivs = document.querySelectorAll('.sticky.top-0');
+      return stickyDivs.length ? stickyDivs[stickyDivs.length - 1] : null;
+    }
+    function init() {
+      if (document.getElementById('kgm-butter-bar_T4')) return;
+      console.log('**** KGMT4 Started ****');
+      document.body.classList.add('KGMT4');
+      initButterBar();
+    }
+    Kameleoon.API.Core.runWhenConditionTrue(getInsertionTarget, init);
+  })();
+})();

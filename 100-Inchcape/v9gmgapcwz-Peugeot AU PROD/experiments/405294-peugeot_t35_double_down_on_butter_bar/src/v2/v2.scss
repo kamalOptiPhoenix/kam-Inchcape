@@ -1,0 +1,78 @@
+.pcat23 .sticky_bottom_bar {
+    display: none !important;
+}
+
+section.t23-q-sticky-bootom-bar-wrapper:not(.t23Sticky) {
+    transform: translateY(-300px);
+}
+
+.pcat28 section.t23-q-sticky-bootom-bar-wrapper {
+    border-top: 1px solid #fff;
+    margin-top: 60px;
+}
+
+section.t23-q-sticky-bootom-bar-wrapper {
+    position: fixed;
+    width: 100%;
+    z-index: 1001;
+    transition: .6s cubic-bezier(.83, 0, .17, 1);
+}
+
+section.t23-q-sticky-bootom-bar-wrapper .q-sticky-bottom-bar__link {
+    color: #FFF;
+    text-align: center;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 700;
+    text-transform: uppercase;
+    background-color: #0074e8;
+    cursor: pointer;
+}
+
+section.t23-q-sticky-bootom-bar-wrapper .q-sticky-bottom-bar__link:hover {
+    background: #000;
+}
+
+section.t23-q-sticky-bootom-bar-wrapper .q-sticky-bottom-bar__link img {
+    margin-right: 10px;
+}
+
+@media only screen and (max-width: 991px) {
+    section.t23-q-sticky-bootom-bar-wrapper .q-sticky-bottom-bar__container {
+        flex-wrap: wrap;
+    }
+
+    .t23BrochureDownloadCta span,
+    .t23DownloadSpecsCta span {
+        display: none;
+    }
+
+    .t23BrochureDownloadCta:after {
+        content: "Download Brochure";
+    }
+
+    .t23DownloadSpecsCta:after {
+        content: "Download Specs";
+    }
+
+    .t23BuildPrice {
+        border-left: none !important;
+    }
+
+    section.t23-q-sticky-bootom-bar-wrapper .q-sticky-bottom-bar__link {
+        flex-basis: 33%;
+        flex-direction: column;
+    }
+
+    section.t23-q-sticky-bootom-bar-wrapper .q-sticky-bottom-bar__link:nth-last-child(-n+2) {
+        background-color: #000;
+    }
+
+    section.t23-q-sticky-bootom-bar-wrapper .q-sticky-bottom-bar__link:nth-last-child(-n+2):hover {
+        background: #333;
+    }
+
+    section.t23-q-sticky-bootom-bar-wrapper .q-sticky-bottom-bar__link:nth-last-child(-n+2) img {
+        display: none;
+    }
+}

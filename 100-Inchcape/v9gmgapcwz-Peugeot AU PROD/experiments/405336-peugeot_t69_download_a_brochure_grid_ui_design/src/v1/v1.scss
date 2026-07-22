@@ -1,0 +1,148 @@
+.pcat69-car-box {
+    transition: all .25s ease;
+    box-shadow: 0px 0px 14px 0px #0000001A;
+    border: 1px solid #e6e6e6;
+}
+
+
+.pcat69-car-box.pcat69-selected {
+    border: 2px solid #0069E5;
+}
+
+.pcat69-checkbox-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 8px;
+    cursor: pointer;
+}
+
+.pcat69-checkbox[type="checkbox"] {
+    pointer-events: none;
+    background-color: #0069E5;
+}
+
+.button_link.aem-GridColumn.aem-GridColumn--default--12 {
+    height: 10px;
+}
+
+.q-button.button.primary.q-mod.q-mod-button-link.stat-button-link.center.analytics {
+    visibility: hidden;
+    height: 1px;
+    margin: 0;
+    padding: 0;
+}
+
+.pcat69-car-box {
+    // your existing box styles...
+}
+
+.pcat69-checkbox-wrap {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    user-select: none;
+    margin: 8px 0;
+}
+
+// Hide native input but keep it functional for :checked state
+.pcat69-checkbox[type='checkbox'] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+}
+
+// Custom checkbox box — unchecked state
+.pcat69-checkbox-custom {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ccc;
+    border-radius: 3px;
+    background-color: #fff;
+    flex-shrink: 0;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+
+    .pcat69-checkmark {
+        opacity: 0;
+        transition: opacity 0.15s ease;
+    }
+}
+
+.pcat69-checkbox-label {
+    font-size: 14px;
+    color: #333;
+}
+
+// Checked state — CSS only via adjacent sibling selector
+.pcat69-checkbox:checked+.pcat69-checkbox-custom {
+    background-color: #0069e5;
+    border-color: #0069e5;
+
+    .pcat69-checkmark {
+        opacity: 1;
+    }
+}
+
+.grid_builder_v2.grid_builder.aem-GridColumn.aem-GridColumn--default--12>.q-grid-container.grid-bg-transparent.q-margin-large.grid-full-width>.row {
+    display: flex;
+    gap: 20px;
+}
+
+.q-title-container .q-title .q-label>div {
+    text-align: center;
+    font-weight: 400;
+    font-size: 16px;
+    color: #000000;
+}
+
+.q-multimedia-teaser.q-teaser-button .q-teaser-content-container {
+    padding: 0;
+
+}
+
+.q-multimedia-teaser.q-teaser-button.js-multimedia-teaser {
+    gap: 10px;
+}
+
+.ht-headline.flex-item{
+    text-align: center;
+    margin-top: 40px;
+
+}
+
+@media (max-width: 767px) {
+
+    /* make row a flex container */
+    .row {
+        display: grid !important;
+        grid-template-columns: repeat(2, 2fr) !important;
+    }
+
+    .row:before {
+        display:none !important;
+    }
+
+    .grid-bg-transparent{
+        margin: 0 !important;
+    }
+
+    .pcat69-flex-row{
+        display: flex !important;
+        margin-top: 40px;
+    }
+    /* each car = 50% width */
+    .row .small-12.medium-3.columns.pcat69-car-box {
+        width: 172px !important;
+        flex: 0 0 50%;
+        height: 184px;
+        margin: 0 auto;
+    }
+
+}

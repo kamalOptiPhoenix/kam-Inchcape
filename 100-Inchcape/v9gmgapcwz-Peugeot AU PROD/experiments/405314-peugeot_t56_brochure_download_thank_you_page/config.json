@@ -1,0 +1,14 @@
+{
+    "projectName": "Peugeot T56 - Brochure Download Thank You Page",
+    "variations": [
+        "variation 1"
+    ],
+    "goalsToCreate": [
+        "brochure_contact_details_t56",
+        "brochure_download_success_t56",
+        "Email_Addresses_Collected",
+        "Brochure_Downloads"
+    ],
+    "goalsToAdd": [],
+    "primaryGoal": "brochure_download_success_t56"
+}

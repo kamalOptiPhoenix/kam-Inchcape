@@ -1,0 +1,50 @@
+// PCAT56 iframe styles
+// Hide the success message inside the iframe since parent will show its own success overlay
+.pcat56-iframe{
+    margin-top: 0;
+}
+
+.success {
+    display: none !important;
+}
+
+.imf-input-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.imf-label[for="userEmail"] {
+    display: none;
+}
+
+.imf-input-wrapper.imf-checkbox-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.enquiry.general.peugeot-webform {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-primary.btn-brand {
+    color: rgb(255, 255, 255);
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 28px;
+    letter-spacing: 0em;
+    width: 156px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgb(0, 105, 229);
+    text-decoration: none;
+    margin: auto auto 30px;
+    padding: 7px 0px;
+}

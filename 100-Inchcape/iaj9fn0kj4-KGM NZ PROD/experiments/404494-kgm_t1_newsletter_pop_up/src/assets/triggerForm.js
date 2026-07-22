@@ -1,13 +1,29 @@
 /* eslint-disable no-console */
 import kamKgmt1ProcessGoal from './kamKgmt1ProcessGoal.js';
 
-function showModal() {
+function revealModal() {
     sessionStorage.setItem('KGMT1Shown', 'true');
     setTimeout(() => {
+        const popupForm = document.querySelector('#popUpForm.KGMT1-form');
+        if (popupForm) {
+            popupForm.classList.remove('hidden');
+        }
         document.body.classList.add('t1-Modal-Show');
     }, 500);
     console.log('*** t1_pop-up_appearances goal triggered ***');
-    kamKgmt1ProcessGoal('t1_pop-up_appearances');
+    kamKgmt1ProcessGoal('Pop-up appearances T1');
+}
+
+function showModal() {
+    if (document.querySelector('#popUpForm.KGMT1-form')) {
+        revealModal();
+        return;
+    }
+
+    Kameleoon.API.Core.runWhenConditionTrue(
+        () => document.querySelector('#popUpForm.KGMT1-form'),
+        revealModal,
+    );
 }
 
 function mobileScrollEvent() {

@@ -37,7 +37,7 @@ import { goals } from './goals.js';
 
                 if (isValid) {
                     console.log('✅ Valid form submitted');
-                    kamKgmt1ProcessGoal('t1_newsletter_conversions');
+                    kamKgmt1ProcessGoal('Newsletter conversions T1');
                     form.submit(); // Actually submit the form
                 }
             });
@@ -54,7 +54,7 @@ import { goals } from './goals.js';
             const display = popupEl.style.display;
             if (display === 'block') {
                 console.log('*** t1_pop-up_appearances goal triggered ***');
-                kamKgmt1ProcessGoal('t1_pop-up_appearances');
+                kamKgmt1ProcessGoal('Pop-up appearances T1');
                 displayObserver.disconnect();
             }
         });

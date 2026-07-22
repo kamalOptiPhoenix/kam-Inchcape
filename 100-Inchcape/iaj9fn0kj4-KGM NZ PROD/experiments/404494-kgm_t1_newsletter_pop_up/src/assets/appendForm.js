@@ -61,27 +61,22 @@ function validateForm() {
         // Submit if valid
         if (isValid) {
             console.log('*** t1_newsletter_conversions goal triggered ***');
-            kamKgmt1ProcessGoal('t1_newsletter_conversions');
+            kamKgmt1ProcessGoal('Newsletter conversions T1');
             form.submit();
         }
     });
 }
 
+function preparePopupForm(popupForm) {
+    if (popupForm.classList.contains('KGMT1-form')) return;
+
+    popupForm.classList.add('KGMT1-form');
+    validateForm();
+    console.log('*** Pop-up form prepared successfully.');
+}
+
 export default function appendForm() {
-    fetch('https://www.kgm.co.nz/')
-        .then(res => res.text())
-        .then((html) => {
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(html, 'text/html');
-            const popupForm = doc.querySelector('#popUpForm');
-            if (popupForm) {
-                document.body.appendChild(popupForm);
-                popupForm.classList.add('KGMT1-form');
-                validateForm();
-                console.log('*** Pop-up form appended successfully.');
-            } else {
-                console.warn('***Pop-up form not found.');
-            }
-        })
-        .catch(err => console.error('Failed to fetch the page:', err));
+    Kameleoon.API.Core.runWhenElementPresent('#popUpForm', ([popupForm]) => {
+        preparePopupForm(popupForm);
+    });
 }

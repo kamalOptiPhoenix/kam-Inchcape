@@ -3,6 +3,8 @@ body.KGMT1  #popUpForm{
 }
 body.t1-Modal-Show.KGMT1  #popUpForm.KGMT1-form{
 	display: block !important;
+	visibility: visible !important;
+	opacity: 1 !important;
 }
 
 body.t1-Modal-Show.KGMT1  #popUpForm.KGMT1-form input{

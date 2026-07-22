@@ -1,0 +1,693 @@
+.pca-webform.container {
+  max-width: none;
+  background-color: #fff;
+  padding: 86px 75px 136px 75px;
+}
+.pca-webform .form,
+.pca-webform form,
+html {
+  background-color: #fff;
+}
+.success {
+  text-align: center;
+  max-width: 100%;
+  margin: auto;
+}
+// Success message with model image and thank you layout
+.t64-success-wrapper {
+  width: 100%;
+  max-width: 100%;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.t64-success-content {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+}
+.t64-success-image-container {
+  flex: 0 0 auto;
+  width: auto;
+  max-width: 600px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.t64-success-image {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+.t64-success-message {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  max-width: 425px;
+}
+.t64-success-title {
+  font-weight: 700;
+  font-style: Bold;
+  font-size: 30px;
+  leading-trim: NONE;
+  line-height: 115.99999999999999%;
+  letter-spacing: 0%;
+  text-align: center;
+  text-transform: uppercase;
+
+  color: #000000;
+  margin: 0 0 25px 0;
+  padding: 0 10px;
+}
+.t64-success-text {
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 14px;
+  leading-trim: NONE;
+  line-height: 180%;
+  letter-spacing: 0%;
+  text-align: center;
+
+  color: #3f3953;
+
+  padding: 0;
+}
+.t64-success-message a {
+  color: #0069e5;
+  text-decoration: underline;
+  font-size: 14px;
+}
+.t64-success-message a:hover {
+  text-decoration: none;
+}
+@media only screen and (max-width: 768px) {
+  .t64-success-content {
+    flex-direction: column;
+    gap: 30px;
+  }
+  .t64-success-image-container {
+    width: 100%;
+    max-width: 100%;
+  }
+  .t64-success-heading {
+    display: none;
+  }
+  .t64-success-title {
+    text-align: center;
+  }
+  .t64-success-text {
+    font-size: 14px;
+    text-align: center;
+  }
+}
+.t64-form-header {
+  max-width: 100%;
+  width: 100%;
+  margin: auto;
+  margin-bottom: 40px;
+  text-align: center;
+}
+.t64-form-heading,
+.t64-success-heading {
+  font-weight: 700;
+  font-style: Bold;
+  font-size: 36px;
+  leading-trim: NONE;
+  line-height: 115.99999999999999%;
+  letter-spacing: 0%;
+  text-align: center;
+  text-transform: uppercase;
+  color: #000000;
+  margin: 0 0 13px 0;
+  padding: 0;
+}
+
+.t64-form-description,
+.t64-success-description {
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 14px;
+  leading-trim: NONE;
+  line-height: 150%;
+  letter-spacing: 0%;
+  text-align: center;
+  vertical-align: middle;
+  color: #3f3953;
+  margin: 0 0 48px 0;
+  padding: 0;
+}
+.t64-success-heading,
+.t64-success-description {
+  margin: 0 0 25px 0;
+}
+.t64-form-content-wrapper {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 100%;
+}
+.t64-form-image-container {
+  flex: 0 0 auto;
+  width: auto;
+  max-width: 600px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.t64-form-image {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+#general_enquiry_form {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  align-items: flex-start;
+}
+#general_enquiry_form .imf-input-wrapper:has(#enquiryType),
+#general_enquiry_form .imf-input-wrapper:has(#model) {
+  display: none !important;
+}
+// Two-column layout container
+#general_enquiry_form .t64-form-column-1,
+#general_enquiry_form .t64-form-column-2 {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+#general_enquiry_form .t64-form-column-1 {
+  flex: 0 0 calc(50% - 15px);
+  margin-right: 30px;
+}
+#general_enquiry_form .t64-form-column-2 {
+  flex: 0 0 calc(50% - 15px);
+}
+// Form fields inside columns
+#general_enquiry_form .imf-input-wrapper {
+  width: 100%;
+  margin-bottom: 0;
+  grid-template-columns: unset;
+  gap: 0px;
+  position: relative;
+}
+#general_enquiry_form #dealer-wrapper {
+  width: 100%;
+}
+#general_enquiry_form .imf-input-wrapper .imf-label {
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 12px;
+  leading-trim: NONE;
+  line-height: 21px;
+  letter-spacing: 0px;
+  text-transform: uppercase;
+  color: #000000;
+  display: block;
+  text-align: left;
+  margin-bottom: 5px;
+}
+#general_enquiry_form .imf-input-wrapper .imf-label abbr {
+  color: #e9322d;
+  margin-left: 3px;
+}
+#general_enquiry_form .imf-input-wrapper input[type="text"],
+#general_enquiry_form .imf-input-wrapper input[type="email"],
+#general_enquiry_form .imf-input-wrapper input[type="tel"],
+#general_enquiry_form .imf-input-wrapper input[type="number"],
+#general_enquiry_form .imf-input-wrapper select,
+#general_enquiry_form .imf-input-wrapper textarea {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #000;
+  padding: 0;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 11px;
+  leading-trim: NONE;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #000000;
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
+}
+#general_enquiry_form .imf-input-wrapper input[type="text"]::placeholder,
+#general_enquiry_form .imf-input-wrapper input[type="email"]::placeholder,
+#general_enquiry_form .imf-input-wrapper input[type="tel"]::placeholder,
+#general_enquiry_form .imf-input-wrapper input[type="number"]::placeholder,
+#general_enquiry_form .imf-input-wrapper select::placeholder,
+#general_enquiry_form .imf-input-wrapper textarea::placeholder {
+  opacity: 0;
+  color: transparent;
+}
+#general_enquiry_form
+  .imf-input-wrapper
+  input[type="text"]::-webkit-input-placeholder,
+#general_enquiry_form
+  .imf-input-wrapper
+  input[type="email"]::-webkit-input-placeholder,
+#general_enquiry_form
+  .imf-input-wrapper
+  input[type="tel"]::-webkit-input-placeholder,
+#general_enquiry_form
+  .imf-input-wrapper
+  input[type="number"]::-webkit-input-placeholder,
+#general_enquiry_form .imf-input-wrapper select::-webkit-input-placeholder,
+#general_enquiry_form .imf-input-wrapper textarea::-webkit-input-placeholder {
+  opacity: 0;
+  color: transparent;
+}
+#general_enquiry_form .imf-input-wrapper input[type="text"]::-moz-placeholder,
+#general_enquiry_form .imf-input-wrapper input[type="email"]::-moz-placeholder,
+#general_enquiry_form .imf-input-wrapper input[type="tel"]::-moz-placeholder,
+#general_enquiry_form .imf-input-wrapper input[type="number"]::-moz-placeholder,
+#general_enquiry_form .imf-input-wrapper select::-moz-placeholder,
+#general_enquiry_form .imf-input-wrapper textarea::-moz-placeholder {
+  opacity: 0;
+  color: transparent;
+}
+#general_enquiry_form
+  .imf-input-wrapper
+  input[type="text"]:-ms-input-placeholder,
+#general_enquiry_form
+  .imf-input-wrapper
+  input[type="email"]:-ms-input-placeholder,
+#general_enquiry_form
+  .imf-input-wrapper
+  input[type="tel"]:-ms-input-placeholder,
+#general_enquiry_form
+  .imf-input-wrapper
+  input[type="number"]:-ms-input-placeholder,
+#general_enquiry_form .imf-input-wrapper select:-ms-input-placeholder,
+#general_enquiry_form .imf-input-wrapper textarea:-ms-input-placeholder {
+  opacity: 0;
+  color: transparent;
+}
+#general_enquiry_form .imf-input-wrapper input[type="text"]:-moz-placeholder,
+#general_enquiry_form .imf-input-wrapper input[type="email"]:-moz-placeholder,
+#general_enquiry_form .imf-input-wrapper input[type="tel"]:-moz-placeholder,
+#general_enquiry_form .imf-input-wrapper input[type="number"]:-moz-placeholder,
+#general_enquiry_form .imf-input-wrapper select:-moz-placeholder,
+#general_enquiry_form .imf-input-wrapper textarea:-moz-placeholder {
+  opacity: 0;
+  color: transparent;
+}
+#general_enquiry_form .imf-input-wrapper select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg height='15px' width='15px' viewBox='0 0 32 32' fill='%23999999' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M14.77,23.795L5.185,14.21c-0.879-0.879-0.879-2.317,0-3.195l0.8-0.801c0.877-0.878,2.316-0.878,3.194,0 l7.315,7.315l7.316-7.315c0.878-0.878,2.317-0.878,3.194,0l0.8,0.801c0.879,0.878,0.879,2.316,0,3.195l-9.587,9.585 c-0.471,0.472-1.104,0.682-1.723,0.647C15.875,24.477,15.243,24.267,14.77,23.795z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: 15px;
+  padding-right: 25px;
+}
+#general_enquiry_form .imf-input-wrapper textarea {
+  border: 1px solid #000;
+  border-radius: 0;
+  padding: 8px;
+  resize: vertical;
+  min-height: 90px;
+  background: white;
+}
+// Error messages styling
+#general_enquiry_form .t64-field-error {
+  color: #e9322d;
+  font-size: 11px;
+  font-weight: 400;
+  margin-top: 4px;
+  display: block;
+  line-height: 1.4;
+}
+#general_enquiry_form .imf-input-wrapper input.t64-field-invalid,
+#general_enquiry_form .imf-input-wrapper select.t64-field-invalid,
+#general_enquiry_form .imf-input-wrapper textarea.t64-field-invalid {
+  border-bottom-color: #e9322d;
+}
+#general_enquiry_form .imf-checkbox-wrapper .t64-field-error {
+  color: #e9322d;
+  font-size: 11px;
+  font-weight: 400;
+  margin-top: 4px;
+  display: block;
+  line-height: 1.4;
+  width: 100%;
+  order: 10; // Ensure error appears after checkbox and label
+}
+#general_enquiry_form #dealer-wrapper.hidden {
+  display: none !important;
+}
+#general_enquiry_form #dealer-wrapper .imf-input-wrapper {
+  flex: 0 0 100%;
+  width: 100%;
+}
+// Privacy checkbox (above accordion, outside columns)
+#general_enquiry_form .imf-checkbox-wrapper {
+  clear: both;
+  width: 100%;
+  padding: 0;
+  flex: 0 0 100%;
+  margin-top: 33px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+// Checkbox and label stay inline on same line
+#general_enquiry_form .imf-checkbox-wrapper > input[type="checkbox"] {
+  flex-shrink: 0;
+}
+#general_enquiry_form .imf-checkbox-wrapper > .imf-label {
+  flex: 1;
+  min-width: 0;
+}
+// Error message appears below (full width, breaks to new line)
+#general_enquiry_form .imf-checkbox-wrapper .t64-field-error {
+  width: 100%;
+  flex-basis: 100%;
+  margin-top: 4px;
+}
+#general_enquiry_form .imf-btn-wrapper {
+  width: 100%;
+  justify-content: flex-start;
+  text-align: left;
+  margin: 40px 0px;
+  flex: 0 0 100%;
+}
+// Privacy accordion (now outside form, after t64-form-content-wrapper)
+.t64-privacy-accordion {
+  max-width: 1041px;
+  width: auto;
+  margin: auto;
+  text-align: center;
+}
+#general_enquiry_form .t64-privacy-accordion {
+  width: 100%;
+  margin: 0;
+  margin-top: 20px;
+  max-width: 100%;
+  flex: 0 0 100%;
+}
+#general_enquiry_form .imf-checkbox-wrapper input[type="checkbox"] {
+  margin-right: 8px;
+}
+#general_enquiry_form .imf-checkbox-wrapper .imf-label.privacy-label {
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 12px;
+  leading-trim: NONE;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-transform: none;
+  position: relative;
+  color: #000;
+}
+#general_enquiry_form
+  .imf-checkbox-wrapper
+  .imf-label.privacy-label
+  .privacy-link {
+  color: #000000;
+  text-decoration: none;
+}
+#general_enquiry_form
+  .imf-checkbox-wrapper
+  .imf-label.privacy-label
+  .privacy-link:hover {
+  text-decoration: none;
+}
+#general_enquiry_form .imf-checkbox-wrapper .imf-label.privacy-label abbr {
+  color: #e9322d;
+}
+
+#general_enquiry_form .imf-btn-wrapper .btn-primary {
+  background-color: #c0c0c0;
+  font-weight: 700;
+  font-style: Bold;
+  font-size: 10px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: center;
+  text-transform: uppercase;
+  color: #fff;
+  border-radius: 0;
+  width: 300px;
+  height: 45px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  cursor: pointer;
+  transition: background-color 0.3s ease, opacity 0.3s ease;
+  border: none;
+}
+#general_enquiry_form .imf-btn-wrapper .btn-primary:disabled {
+  cursor: not-allowed;
+  background: #c0c0c0;
+  opacity: 0.6;
+}
+#general_enquiry_form .imf-btn-wrapper .btn-primary.t64-submit-enabled {
+  cursor: pointer;
+  background-color: #0069e5;
+}
+#general_enquiry_form .imf-btn-wrapper .btn-primary.t64-submit-enabled:hover {
+  background-color: #0052b3;
+}
+#general_enquiry_form .imf-btn-wrapper .btn-primary.t64-submit-disabled {
+  cursor: not-allowed;
+  background-color: #c0c0c0;
+}
+#general_enquiry_form .htmx-spinner {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+// Privacy accordion styling (now outside form, after wrapper)
+.t64-privacy-accordion {
+  width: 100%;
+  margin: 0;
+  max-width: 100%;
+}
+.t64-privacy-accordion .t64-privacy-accordion-trigger {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  color: #323334;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 13px;
+  line-height: 100%;
+  letter-spacing: 0px;
+  text-align: left;
+  margin: auto;
+  transition: color 0.3s ease;
+  position: relative;
+  padding-bottom: 10px;
+  margin-left: 640px;
+}
+.t64-privacy-accordion .t64-privacy-accordion-trigger::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: #e3e3e3;
+}
+.t64-privacy-accordion
+  .t64-privacy-accordion-trigger
+  .t64-privacy-accordion-text {
+  margin-right: 8px;
+}
+.t64-privacy-accordion
+  .t64-privacy-accordion-trigger
+  .t64-privacy-accordion-icon {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+.t64-privacy-accordion
+  .t64-privacy-accordion-trigger
+  .t64-privacy-accordion-icon
+  img {
+  display: block;
+  width: auto;
+  height: 10px;
+}
+.t64-privacy-accordion.t64-accordion-open .t64-privacy-accordion-icon {
+  transform: rotate(180deg);
+}
+.t64-privacy-accordion .t64-privacy-accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  padding-top: 0;
+  margin-top: 0;
+  transition: max-height 0.3s ease, padding-top 0.3s ease;
+}
+.t64-privacy-accordion .t64-privacy-accordion-content[aria-hidden="false"] {
+  max-height: 2000px;
+  padding-top: 33px;
+}
+.t64-privacy-accordion.t64-accordion-open .t64-privacy-accordion-content {
+  max-height: 2000px;
+  padding-top: 33px;
+  max-width: 72%;
+  margin: auto;
+}
+.t64-privacy-accordion .t64-privacy-policy-text {
+  text-align: left;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 12px;
+  leading-trim: NONE;
+  line-height: 190%;
+  letter-spacing: 0px;
+  color: #323334;
+}
+.t64-privacy-accordion .t64-privacy-policy-text a {
+  color: #0074e8;
+  text-decoration: underline;
+}
+
+@media only screen and (max-width: 768px) {
+  body.pcat64-iframe {
+    margin-top: 0px;
+    background-color: #fff;
+  }
+  .pca-webform.container {
+    padding: 39px 0px;
+  }
+  .t64-form-header {
+    margin-bottom: 33px;
+    margin-top: 0;
+  }
+  .t64-form-content-wrapper {
+    flex-direction: column;
+    gap: 30px;
+  }
+  .t64-form-image-container {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 0;
+  }
+  // When header is moved inside wrapper on mobile, add spacing
+  .t64-form-content-wrapper .t64-form-header.t64-mobile-reordered {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding: 0px 24px;
+  }
+  .t64-form-heading {
+    font-weight: 700;
+    font-style: Bold;
+    font-size: 24px;
+    leading-trim: NONE;
+    line-height: 140%;
+    letter-spacing: 0%;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  .t64-form-description {
+    margin-bottom: 0px;
+
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 14px;
+    leading-trim: NONE;
+    line-height: 150%;
+    letter-spacing: 0%;
+    text-align: center;
+    vertical-align: middle;
+  }
+  #general_enquiry_form .t64-form-column-1,
+  #general_enquiry_form .t64-form-column-2 {
+    flex: 0 0 100% !important;
+    width: 100%;
+    margin-right: 0;
+  }
+  #general_enquiry_form {
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+    padding: 0 24px;
+  }
+  #general_enquiry_form .imf-checkbox-wrapper {
+    margin-top: 0px;
+  }
+  // Ensure asterisk is at the beginning of privacy checkbox label on mobile
+  #general_enquiry_form .imf-checkbox-wrapper .imf-label.privacy-label,
+  #general_enquiry_form .imf-checkbox-wrapper label[for*="privacyPolicy"] {
+    display: flex !important;
+    align-items: flex-start;
+  }
+  #general_enquiry_form .imf-checkbox-wrapper .imf-label.privacy-label abbr,
+  #general_enquiry_form .imf-checkbox-wrapper label[for*="privacyPolicy"] abbr {
+    order: -1 !important;
+    margin-right: 4px;
+    flex-shrink: 0;
+    display: inline-block;
+  }
+  #general_enquiry_form .imf-btn-wrapper {
+    margin: 0;
+    margin-bottom: 34px;
+  }
+  #general_enquiry_form .imf-btn-wrapper .btn-primary {
+    width: 100%;
+  }
+  .t64-privacy-accordion {
+    max-width: 100%;
+  }
+  .t64-privacy-accordion .t64-privacy-accordion-trigger {
+    justify-content: space-between;
+    margin: auto;
+    width: 274px;
+  }
+  .t64-privacy-accordion .t64-privacy-accordion-trigger::after {
+    left: 0;
+    transform: none;
+    width: 100%;
+  }
+  .t64-privacy-accordion .t64-privacy-policy-text p {
+    margin-bottom: 10px;
+  }
+  #general_enquiry_form .t64-privacy-accordion {
+    max-width: 100%;
+  }
+  #general_enquiry_form .t64-privacy-accordion .t64-privacy-accordion-trigger {
+    justify-content: flex-start;
+  }
+  #general_enquiry_form
+    .t64-privacy-accordion
+    .t64-privacy-accordion-trigger::after {
+    left: 0;
+    transform: none;
+    width: 100%;
+  }
+  #general_enquiry_form .t64-privacy-accordion .t64-privacy-policy-text p {
+    margin-bottom: 10px;
+  }
+  .t64-field-error {
+    width: 100%;
+  }
+  .t64-privacy-accordion.t64-accordion-open .t64-privacy-accordion-content {
+    padding: 33px 20px;
+    max-width: 100%;
+  }
+  .t64-success-description {
+    display: none;
+  }
+}

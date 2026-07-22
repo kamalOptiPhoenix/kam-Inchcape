@@ -1,0 +1,22 @@
+iframe.T64Iframe {
+  border: none;
+}
+
+// Hidden utility class
+.t64-hidden {
+  display: none !important;
+}
+
+// Iframe responsive styles
+.t64-iframe-responsive {
+  max-width: 100%;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+// Iframe height set via CSS custom property
+.t64-iframe-height-set {
+  height: var(--t64-iframe-height, 100%);
+}

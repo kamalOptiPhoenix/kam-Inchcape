@@ -3,14 +3,48 @@ import initHomepageButterBar from '../assets/initHomepageButterBar.js';
 import scrollHandler from '../assets/scrollHandler.js';
 
 (function kamLdvt9V1() {
-    function init() {
-        document.body.classList.add('LDVT9');
-        initHomepageButterBar();
+    const scrollHandlerInstance = scrollHandler();
 
+    function initScrollHandler() {
         Kameleoon.API.Core.runWhenElementPresent('#butter_bar_ldvt9', () => {
-            scrollHandler().init();
+            scrollHandlerInstance.init();
         });
     }
 
-    Kameleoon.API.Core.runWhenElementPresent('body', init);
+    function init() {
+        document.body.classList.add('LDVT9');
+
+        if (!initHomepageButterBar()) {
+            return;
+        }
+
+        initScrollHandler();
+    }
+
+    function observeHeader() {
+        const header = document.querySelector('header');
+        if (!header) {
+            return;
+        }
+
+        const observer = new MutationObserver(() => {
+            if (initHomepageButterBar()) {
+                scrollHandlerInstance.showButterBar();
+            }
+        });
+
+        observer.observe(header, { childList: true, subtree: true });
+    }
+
+    if (!window.ldvt9Start) {
+        window.ldvt9Start = true;
+
+        Kameleoon.API.Core.runWhenConditionTrue(
+            () => document.querySelector('header .sticky-header'),
+            () => {
+                init();
+                observeHeader();
+            },
+        );
+    }
 }());

@@ -1,13 +1,14 @@
 /* eslint-disable no-use-before-define */
-export default function scrollHandler() {
-    let lastScrollTop = 0;
-    let isScrollingDown = false;
+let scrollInitialized = false;
+let lastScrollTop = 0;
 
+export default function scrollHandler() {
     function showButterBar() {
         const el = document.getElementById('butter_bar_ldvt9');
         if (el) {
             el.classList.remove('hidden_ldvt9');
             el.classList.add('visible_ldvt9');
+            lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
         }
     }
 
@@ -24,9 +25,7 @@ export default function scrollHandler() {
         const butterBar = document.getElementById('butter_bar_ldvt9');
         if (!butterBar) return;
 
-        isScrollingDown = currentScrollTop > lastScrollTop;
-
-        if (isScrollingDown) {
+        if (currentScrollTop > lastScrollTop) {
             hideButterBar();
         } else {
             showButterBar();
@@ -37,8 +36,12 @@ export default function scrollHandler() {
 
     function init() {
         showButterBar();
-        Kameleoon.API.Utils.addEventListener(window, 'scroll', handleScroll, { passive: true });
+
+        if (!scrollInitialized) {
+            Kameleoon.API.Utils.addEventListener(window, 'scroll', handleScroll, { passive: true });
+            scrollInitialized = true;
+        }
     }
 
-    return { init };
+    return { init, showButterBar };
 }

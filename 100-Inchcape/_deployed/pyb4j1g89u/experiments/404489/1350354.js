@@ -38,26 +38,37 @@
     </div>
 </div>
 `;
+  function isButterBarPlacedCorrectly(butterBar, stickyHeader) {
+    return butterBar.isConnected && butterBar.previousElementSibling === stickyHeader;
+  }
   function initHomepageButterBar() {
-    if (document.getElementById(CONFIG.butterBarId)) {
-      return;
-    }
     const stickyHeader = document.querySelector('header .sticky-header');
     if (!stickyHeader) {
-      return;
+      return false;
+    }
+    const existingBar = document.getElementById(CONFIG.butterBarId);
+    if (existingBar) {
+      if (isButterBarPlacedCorrectly(existingBar, stickyHeader)) {
+        existingBar.classList.remove('hidden_ldvt9');
+        existingBar.classList.add('visible_ldvt9');
+        return true;
+      }
+      existingBar.remove();
     }
     stickyHeader.insertAdjacentHTML('afterend', BUTTER_BAR_HTML);
+    return true;
   }
 
   /* eslint-disable no-use-before-define */
+  let scrollInitialized = false;
+  let lastScrollTop = 0;
   function scrollHandler() {
-    let lastScrollTop = 0;
-    let isScrollingDown = false;
     function showButterBar() {
       const el = document.getElementById('butter_bar_ldvt9');
       if (el) {
         el.classList.remove('hidden_ldvt9');
         el.classList.add('visible_ldvt9');
+        lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
       }
     }
     function hideButterBar() {
@@ -71,8 +82,7 @@
       const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
       const butterBar = document.getElementById('butter_bar_ldvt9');
       if (!butterBar) return;
-      isScrollingDown = currentScrollTop > lastScrollTop;
-      if (isScrollingDown) {
+      if (currentScrollTop > lastScrollTop) {
         hideButterBar();
       } else {
         showButterBar();
@@ -81,25 +91,56 @@
     }
     function init() {
       showButterBar();
-      Kameleoon.API.Utils.addEventListener(window, 'scroll', handleScroll, {
-        passive: true
-      });
+      if (!scrollInitialized) {
+        Kameleoon.API.Utils.addEventListener(window, 'scroll', handleScroll, {
+          passive: true
+        });
+        scrollInitialized = true;
+      }
     }
     return {
-      init
+      init,
+      showButterBar
     };
   }
 
   /* eslint-disable import/extensions */
 
   (function kamLdvt9V1() {
-    function init() {
-      document.body.classList.add('LDVT9');
-      initHomepageButterBar();
+    const scrollHandlerInstance = scrollHandler();
+    function initScrollHandler() {
       Kameleoon.API.Core.runWhenElementPresent('#butter_bar_ldvt9', () => {
-        scrollHandler().init();
+        scrollHandlerInstance.init();
       });
     }
-    Kameleoon.API.Core.runWhenElementPresent('body', init);
+    function init() {
+      document.body.classList.add('LDVT9');
+      if (!initHomepageButterBar()) {
+        return;
+      }
+      initScrollHandler();
+    }
+    function observeHeader() {
+      const header = document.querySelector('header');
+      if (!header) {
+        return;
+      }
+      const observer = new MutationObserver(() => {
+        if (initHomepageButterBar()) {
+          scrollHandlerInstance.showButterBar();
+        }
+      });
+      observer.observe(header, {
+        childList: true,
+        subtree: true
+      });
+    }
+    if (!window.ldvt9Start) {
+      window.ldvt9Start = true;
+      Kameleoon.API.Core.runWhenConditionTrue(() => document.querySelector('header .sticky-header'), () => {
+        init();
+        observeHeader();
+      });
+    }
   })();
 })();

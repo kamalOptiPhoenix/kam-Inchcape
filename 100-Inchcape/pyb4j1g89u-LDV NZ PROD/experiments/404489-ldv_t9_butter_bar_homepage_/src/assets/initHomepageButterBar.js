@@ -37,13 +37,27 @@ const BUTTER_BAR_HTML = `
 </div>
 `;
 
+function isButterBarPlacedCorrectly(butterBar, stickyHeader) {
+    return butterBar.isConnected && butterBar.previousElementSibling === stickyHeader;
+}
+
 export default function initHomepageButterBar() {
-    if (document.getElementById(CONFIG.butterBarId)) {
-        return;
-    }
     const stickyHeader = document.querySelector('header .sticky-header');
     if (!stickyHeader) {
-        return;
+        return false;
     }
+
+    const existingBar = document.getElementById(CONFIG.butterBarId);
+    if (existingBar) {
+        if (isButterBarPlacedCorrectly(existingBar, stickyHeader)) {
+            existingBar.classList.remove('hidden_ldvt9');
+            existingBar.classList.add('visible_ldvt9');
+            return true;
+        }
+
+        existingBar.remove();
+    }
+
     stickyHeader.insertAdjacentHTML('afterend', BUTTER_BAR_HTML);
+    return true;
 }

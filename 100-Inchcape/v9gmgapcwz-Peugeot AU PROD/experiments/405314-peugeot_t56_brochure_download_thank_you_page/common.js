@@ -23,7 +23,7 @@ function kamT56HandleFormMessage(event) {
 
         if (email && kamT56IsValidEmail(email)) {
             console.log('T56: Valid email. Firing event...');
-            kamT56ProcessGoal('brochure_contact_details_t56');
+            kamT56ProcessGoal('Brochure Contact Details T56');
         } else {
             console.log('T56: Invalid email, event not fired. Email value:', email);
         }
@@ -37,7 +37,7 @@ function kamT56HandleFormMessage(event) {
 
         if (email && kamT56IsValidEmail(email)) {
             console.log('T56: Valid email on success. Firing confirmation event...');
-            kamT56ProcessGoal('brochure_download_success_t56');
+            kamT56ProcessGoal('Brochure Download Success T56');
         }
     }
 }

@@ -67,7 +67,7 @@ function updateExistingModal(modelInfo) {
             step1.appendChild(iframe);
         }
 
-        iframe.src = 'https://peugeotforms.inchcape.com.au/webforms/download_brochure/?pcat56=true';
+        iframe.src = 'https://peugeotforms.inchcape.com.au/webforms/download_brochure/?pcat56kam=true';
 
         const email = localStorage.getItem('userEmail')
             || sessionStorage.getItem('t56EmailCollected')
@@ -97,7 +97,7 @@ function preloadIframe() {
     const preloadFrame = document.createElement('iframe');
     preloadFrame.id = 't56PreloadIframe';
     preloadFrame.style.display = 'none';
-    preloadFrame.src = 'https://peugeotforms.inchcape.com.au/webforms/download_brochure/?pcat56=true';
+    preloadFrame.src = 'https://peugeotforms.inchcape.com.au/webforms/download_brochure/?pcat56kam=true';
     document.body.appendChild(preloadFrame);
     console.log('[PCAT56] Iframe preloaded for faster modal opening');
 }
@@ -182,7 +182,7 @@ function kamT56HandleIframeMessage(event) {
 
     if (event.data && event.data.type === 'FORM_SUBMIT_SUCCESS' && event.data.experiment === 'pcat56') {
         try {
-            kamT56ProcessGoal('brochure_contact_details_t56');
+            kamT56ProcessGoal('Brochure Contact Details T56');
         } catch (e) {
             console.error('[PCAT56 parent] Error triggering analytics:', e);
         }

@@ -4,11 +4,8 @@
         "variation 1"
     ],
     "goalsToCreate": [
-        "brochure_contact_details_t56",
-        "brochure_download_success_t56",
-        "Email_Addresses_Collected",
-        "Brochure_Downloads"
+        "Brochure Contact Details T56"
     ],
     "goalsToAdd": [],
-    "primaryGoal": "brochure_download_success_t56"
+    "primaryGoal": "Brochure Contact Details T56"
 }

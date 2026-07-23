@@ -1,0 +1,356 @@
+.pcat71-carousel {
+  background: #f8f6f6;
+  padding: 40px 0 24px;
+}
+
+.pcat71-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding: 44px 40px 0;
+  -ms-scroll-snap-type: x mandatory;
+  scroll-snap-type: x mandatory;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.pcat71-card {
+  width: 299px;
+  background: #fff;
+  overflow: hidden;
+  scroll-snap-align: start;
+  -webkit-box-shadow: 0px 2px 24px 0px rgba(50, 51, 52, 0.1019607843);
+  box-shadow: 0px 2px 24px 0px rgba(50, 51, 52, 0.1019607843);
+}
+
+.pcat71-card-content {
+  padding: 24px 21px;
+}
+
+.pcat71-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ::before/::after do not apply to <img>; wrapper carries the overlay text. */
+
+.pcat71-card-image {
+  position: relative;
+  line-height: 0;
+}
+
+.pcat71-carousel[data-pcat71-model="5008-hybrid-suv"] .pcat71-card-2 .pcat71-card-image::before,
+.pcat71-carousel[data-pcat71-model="308-hybrid"] .pcat71-card-2 .pcat71-card-image::before,
+.pcat71-carousel[data-pcat71-model="408-hybrid"] .pcat71-card-2 .pcat71-card-image::before,
+.pcat71-carousel[data-pcat71-model=partner-van] .pcat71-card-2 .pcat71-card-image::before,
+.pcat71-carousel[data-pcat71-model=new-e-partner-van] .pcat71-card-2 .pcat71-card-image::before,
+.pcat71-carousel[data-pcat71-model=diesel-expert-van] .pcat71-card-2 .pcat71-card-image::before,
+.pcat71-carousel[data-pcat71-model=e-expert] .pcat71-card-2 .pcat71-card-image::before,
+.pcat71-carousel[data-pcat71-model=boxer-van] .pcat71-card-2 .pcat71-card-image::before,
+.pcat71-carousel[data-pcat71-model=new-boxer-van-diesel] .pcat71-card-2 .pcat71-card-image::before {
+  content: "*Overseas model shown";
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  color: #fff;
+  pointer-events: none;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 8px;
+  leading-trim: NONE;
+  line-height: 150%;
+  letter-spacing: 0%;
+}
+
+.pcat71-card h3 {
+  font-weight: 700;
+  font-style: Bold;
+  font-size: 14px;
+  leading-trim: NONE;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #0074e8;
+  margin-bottom: 16px;
+}
+
+.pcat71-card p {
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 13px;
+  leading-trim: NONE;
+  line-height: 150%;
+  letter-spacing: 0%;
+  color: #000000;
+}
+
+.pcat71-infotip-keep {
+  white-space: nowrap;
+}
+
+.pcat71-infotip {
+  position: relative;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  vertical-align: text-bottom;
+  margin-left: 4px;
+  top: 1px;
+  cursor: pointer;
+  outline: none;
+  margin-bottom: 2px;
+  z-index: 1;
+}
+
+.pcat71-infotip:hover,
+.pcat71-infotip:focus,
+.pcat71-infotip:focus-within {
+  z-index: 30;
+}
+
+.pcat71-infotip__icon {
+  display: block;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}
+
+.pcat71-infotip__ring {
+  fill: none;
+  stroke: #0074e8;
+}
+
+.pcat71-infotip__i-part {
+  fill: #0074e8;
+}
+
+.pcat71-infotip__bubble {
+  --pcat71-caret-border: #adaeb2;
+  --pcat71-caret-size: 8px;
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transition: opacity 0.15s ease, visibility 0.15s;
+  transition: opacity 0.15s ease, visibility 0.15s;
+  position: fixed;
+  left: -9999px;
+  top: 0;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  min-width: 200px;
+  max-width: calc(100vw - 32px);
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  padding: 1.125rem 1rem;
+  background: #fff;
+  border: 1px solid var(--pcat71-caret-border);
+  -webkit-box-shadow: 0 4px 12px rgba(50, 51, 52, 0.15);
+  box-shadow: 0 4px 12px rgba(50, 51, 52, 0.15);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0;
+  color: #787b80;
+  text-align: left;
+  z-index: 99999;
+  pointer-events: auto;
+  text-wrap: auto;
+}
+
+.pcat71-infotip__bubble[data-placement=above]::before,
+.pcat71-infotip__bubble[data-placement=above]::after,
+.pcat71-infotip__bubble[data-placement=below]::before,
+.pcat71-infotip__bubble[data-placement=below]::after {
+  content: "";
+  position: absolute;
+  left: var(--pcat71-arrow-left, 50%);
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-style: solid;
+  pointer-events: none;
+}
+
+.pcat71-infotip__bubble[data-placement=above]::after {
+  bottom: calc(-1 * var(--pcat71-caret-size));
+  border-width: var(--pcat71-caret-size) var(--pcat71-caret-size) 0 var(--pcat71-caret-size);
+  border-color: var(--pcat71-caret-border) transparent transparent transparent;
+  z-index: 0;
+}
+
+.pcat71-infotip__bubble[data-placement=above]::before {
+  bottom: calc(-1 * var(--pcat71-caret-size) + 1px);
+  border-width: calc(var(--pcat71-caret-size) - 1px) calc(var(--pcat71-caret-size) - 1px) 0 calc(var(--pcat71-caret-size) - 1px);
+  border-color: #fff transparent transparent transparent;
+  z-index: 1;
+}
+
+.pcat71-infotip__bubble[data-placement=below]::after {
+  top: calc(-1 * var(--pcat71-caret-size));
+  border-width: 0 var(--pcat71-caret-size) var(--pcat71-caret-size) var(--pcat71-caret-size);
+  border-color: transparent transparent var(--pcat71-caret-border) transparent;
+  z-index: 0;
+}
+
+.pcat71-infotip__bubble[data-placement=below]::before {
+  top: calc(-1 * var(--pcat71-caret-size) + 1px);
+  border-width: 0 calc(var(--pcat71-caret-size) - 1px) calc(var(--pcat71-caret-size) - 1px) calc(var(--pcat71-caret-size) - 1px);
+  border-color: transparent transparent #fff transparent;
+  z-index: 1;
+}
+
+.pcat71-infotip__link {
+  color: #0074e8;
+  text-decoration: underline;
+  word-break: break-all;
+}
+
+.pcat71-infotip__bubble.pcat71-infotip__bubble--open {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Hide scrollbar (optional) */
+
+.pcat71-container::-webkit-scrollbar {
+  display: none;
+}
+
+.pcat71-container {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.pcat71-controls {
+  display: none;
+}
+
+@media screen and (min-width: 700px) and (max-width: 991px), screen and (min-width: 992px) {
+  [data-app-wl=WlCanvas]:not(.cq-placeholder + [data-app-wl=WlCanvas]) .wl-canvas-wrapper .wl-canvas.wl-canvas-adjustive-height .wl-canvas__media-wrapper img {
+    height: calc(100vh - 250px);
+    min-height: 555px;
+  }
+
+  [data-app-wl=WlCanvas]:not(.cq-placeholder + [data-app-wl=WlCanvas]) .wl-canvas-wrapper .wl-canvas.wl-canvas-adjustive-height .wl-canvas__media-wrapper .wl-canvas__image-wrapper {
+    height: calc(100vh - 250px);
+    min-height: 555px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .pcat71-carousel {
+    padding: 24px 0 37px;
+  }
+
+  .pcat71-container {
+    gap: 12px;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    padding: 37px 21px 0;
+    scroll-padding-left: 21px;
+    scroll-padding-right: 21px;
+  }
+
+  /* 21px inset each side; remainder shows peek of next card */
+
+  .pcat71-card {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 calc(100vw - 21px - 21px - 40px);
+    flex: 0 0 calc(100vw - 21px - 21px - 40px);
+    max-width: 320px;
+    overflow: visible;
+  }
+
+  .pcat71-card-image {
+    overflow: hidden;
+  }
+
+  .pcat71-controls {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 23px;
+  }
+
+  .pcat71-arrow {
+    border: 0;
+    background: transparent;
+    padding: 0px;
+    line-height: 0;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    margin-bottom: 0;
+  }
+
+  .pcat71-arrow:hover,
+  .pcat71-arrow:focus {
+    background-color: transparent;
+  }
+
+  .pcat71-arrow img {
+    display: block;
+    width: 10px;
+    height: auto;
+  }
+
+  .pcat71-indicator {
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 14px;
+    leading-trim: NONE;
+    line-height: 100%;
+    color: #0074e8;
+  }
+
+  .pcat71-card h3 {
+    font-size: 12px;
+    margin-bottom: 12px;
+  }
+
+  .pcat71-card p {
+    font-size: 11px;
+  }
+
+  .pcat71-carousel[data-pcat71-model="5008-hybrid-suv"] .pcat71-card-2 .pcat71-card-image::before,
+  .pcat71-carousel[data-pcat71-model="308-hybrid"] .pcat71-card-2 .pcat71-card-image::before,
+  .pcat71-carousel[data-pcat71-model="408-hybrid"] .pcat71-card-2 .pcat71-card-image::before,
+  .pcat71-carousel[data-pcat71-model=partner-van] .pcat71-card-2 .pcat71-card-image::before,
+  .pcat71-carousel[data-pcat71-model=new-e-partner-van] .pcat71-card-2 .pcat71-card-image::before,
+  .pcat71-carousel[data-pcat71-model=diesel-expert-van] .pcat71-card-2 .pcat71-card-image::before,
+  .pcat71-carousel[data-pcat71-model=e-expert] .pcat71-card-2 .pcat71-card-image::before,
+  .pcat71-carousel[data-pcat71-model=boxer-van] .pcat71-card-2 .pcat71-card-image::before,
+  .pcat71-carousel[data-pcat71-model=new-boxer-van-diesel] .pcat71-card-2 .pcat71-card-image::before {
+    font-size: 10px;
+    right: 6px;
+    bottom: 6px;
+  }
+
+  .pcat71-infotip__bubble {
+    font-size: 10px;
+    min-width: 180px;
+    max-width: calc(100vw - 32px);
+  }
+
+  .pcat71-infotip__bubble {
+    line-height: 20px;
+    font-size: 12px;
+  }
+}

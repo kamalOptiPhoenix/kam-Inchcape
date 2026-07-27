@@ -1,8 +1,9 @@
-console.log('*** Global Code ***');
+console.log('*** Global Code  2:29 ***');
 
 const globalGoals = {
 	'KAM - Make an Enquiry Conversion': 420578,
 	'KAM - Book a Test Drive Conversion': 420579,
+	'Enquire now conversion global': 424164
 };
 
 (function globalTrackingAndTargeting() {
@@ -91,6 +92,9 @@ const globalGoals = {
 							);
 
 							modules.tracking.push_API_only('enquire_now_conversion_global');
+							Kameleoon.API.Goals.processConversion(
+								globalGoals['Enquire now conversion global']
+							);
 						}
 					);
 				});
@@ -115,6 +119,9 @@ const globalGoals = {
 						);
 
 						modules.tracking.push_API_only('enquire_now_conversion_global');
+						Kameleoon.API.Goals.processConversion(
+							globalGoals['Enquire now conversion global']
+						);
 					}
 				});
 			},

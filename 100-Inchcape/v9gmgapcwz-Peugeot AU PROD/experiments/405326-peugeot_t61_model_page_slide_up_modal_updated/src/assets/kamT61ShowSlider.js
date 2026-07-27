@@ -369,7 +369,7 @@ export default function kamT61ShowSlider() {
         sessionStorage.setItem("t61ModalShown", true);
       }, 500);
       console.log("*** Modal_pageviews goal trigerred T61***");
-      kamT61ProcessGoal('modal_pageviews_t51');
+      kamT61ProcessGoal('modal pageviews T61'); //modal pageviews T61
     }
   }
 }

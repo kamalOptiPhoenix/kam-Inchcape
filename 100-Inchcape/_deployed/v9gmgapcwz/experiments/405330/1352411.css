@@ -1,0 +1,19 @@
+iframe.T64Iframe {
+  border: none;
+}
+
+.t64-hidden {
+  display: none !important;
+}
+
+.t64-iframe-responsive {
+  max-width: 100%;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+.t64-iframe-height-set {
+  height: var(--t64-iframe-height, 100%);
+}

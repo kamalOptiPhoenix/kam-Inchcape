@@ -115,6 +115,14 @@ function getCurrentModel() {
   return "5008 Hybrid"; // Default
 }
 
+function namesAreSame(firstName, lastName) {
+  return (
+    firstName !== "" &&
+    lastName !== "" &&
+    firstName.toLowerCase() === lastName.toLowerCase()
+  );
+}
+
 /**
  * Updates the form header with model-specific content
  */
@@ -757,11 +765,39 @@ function setupFormValidation() {
 
     switch (fieldType) {
       case "firstName":
-      case "lastName":
+      case "lastName": {
+        const {
+          firstNameValue,
+          lastNameValue,
+          firstNameField,
+          lastNameField,
+        } = getAllRequiredFieldValues();
+        const nameMatchError = namesAreSame(firstNameValue, lastNameValue)
+          ? "First name and last name cannot be the same."
+          : null;
+
         if (!value) {
           errorMessage = "Please fill in this field.";
+        } else {
+          errorMessage = nameMatchError;
+        }
+
+        const siblingField =
+          fieldType === "firstName" ? lastNameField : firstNameField;
+        const siblingValue =
+          fieldType === "firstName" ? lastNameValue : firstNameValue;
+
+        if (
+          siblingField &&
+          (forceShow || touchedFields.has(siblingField))
+        ) {
+          const siblingError = !siblingValue
+            ? "Please fill in this field."
+            : nameMatchError;
+          showFieldError(siblingField, siblingError);
         }
         break;
+      }
       case "email":
         errorMessage = getEmailError(value);
         break;
@@ -825,6 +861,7 @@ function setupFormValidation() {
     const isComplete =
       firstNameValue !== "" &&
       lastNameValue !== "" &&
+      !namesAreSame(firstNameValue, lastNameValue) &&
       emailValue !== "" &&
       isValidEmail(emailValue) &&
       phoneValue !== "" &&

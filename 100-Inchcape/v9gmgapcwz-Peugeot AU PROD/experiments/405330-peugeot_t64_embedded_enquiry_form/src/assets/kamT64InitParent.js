@@ -5,7 +5,7 @@ export default function kamT64InitParent() {
     console.log('*** Peugeot T64 - Embedded Enquiry Form ***');
     document.body.classList.add('PCAT64');
     const testDriveUrl = 'https://peugeotforms.inchcape.com.au/webforms/make-an-enquiry/';
-    const testDriveUrlWithTest64 = 'https://peugeotforms.inchcape.com.au/webforms/make-an-enquiry/?Test64=true';
+    const testDriveUrlWithTest64 = 'https://peugeotforms.inchcape.com.au/webforms/make-an-enquiry/?Test64kam=true';
 
     const allIframes = document.querySelectorAll('iframe');
     let existingTestDriveIframe = null;
@@ -14,7 +14,7 @@ export default function kamT64InitParent() {
         const src = iframe.getAttribute('src') || '';
         if (src.includes('peugeotforms.inchcape.com.au/webforms/make-an-enquiry')) {
             existingTestDriveIframe = iframe;
-            if (!src.includes('Test64=true')) {
+            if (!src.includes('Test64kam=true')) {
                 iframe.src = testDriveUrlWithTest64;
             }
             if (!iframe.classList.contains('T64Iframe')) {
@@ -83,7 +83,7 @@ export default function kamT64InitParent() {
 
         if (JSON.stringify(messageData).includes('"mainStepName":"confirmation"')) {
             console.log('*** form submitted PCAT64 goal fired ***');
-            kamT64ProcessGoal('enquire_now_embedded_form_conversions_t64');
+            kamT64ProcessGoal('enquire now embedded form conversions T64');
         }
 
         if (!cachedIframe) {

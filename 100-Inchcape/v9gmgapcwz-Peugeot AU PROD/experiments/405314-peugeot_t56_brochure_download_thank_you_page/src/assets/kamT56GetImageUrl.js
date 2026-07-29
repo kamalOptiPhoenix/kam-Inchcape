@@ -39,7 +39,28 @@ const ModelImages = {
     'MY23 E-Partner Van':
                 'https://cdn.optimizely.com/img/15841360337/ddc0089da1dd47d4a7f8c336bca378bb.png',
     'New Boxer Van':
-                'https://cdn.optimizely.com/img/15841360337/0a249412b72743409705abf48ee191a9.png'
+                'https://cdn.optimizely.com/img/15841360337/0a249412b72743409705abf48ee191a9.png',
+    // Form / page-label aliases (ModelCodes values and download-brochure q-label text)
+    '308 Hybrid':
+				'https://cdn.optimizely.com/img/15841360337/223d738097254803abd10fb1d5777ae5.png',
+    '408 Hybrid':
+				'https://cdn.optimizely.com/img/15841360337/421762776999436191b848fba63086be.png',
+    '2008 Hybrid':
+				'https://cdn.optimizely.com/img/15841360337/b090585d3cb742aebb0278a00566ad03.png',
+    'Partner Van':
+				'https://cdn.optimizely.com/img/15841360337/ad108d9387634bdcbb18dec33ddf5dde.png',
+    'Expert Van':
+				'https://cdn.optimizely.com/img/15841360337/75622d91515545be850f53e8f7101c11.png',
+    'New Expert Van':
+				'https://cdn.optimizely.com/img/15841360337/3e8e2be5c63c4af7899c0d5114d5fd8d.png',
+    '2008 HYBRID SUV':
+				'https://cdn.optimizely.com/img/15841360337/b090585d3cb742aebb0278a00566ad03.png',
+    '3008 HYBRID SUV':
+				'https://cdn.optimizely.com/img/15841360337/d7f0770e93b04cc19a1d589aa2044b05.png',
+    '5008 HYBRID SUV':
+				'https://cdn.optimizely.com/img/15841360337/c6f1d3403313406fb38105e7843bec66.png',
+    'PARTNER VAN':
+				'https://cdn.optimizely.com/img/15841360337/ad108d9387634bdcbb18dec33ddf5dde.png'
 };
 
 const ModelImagesMobile = {
@@ -81,7 +102,27 @@ const ModelImagesMobile = {
     'MY23 E-Partner Van':
     'https://cdn.optimizely.com/img/15841360337/da3e13b4064f4dc789a4a1a5aa53463f.png',
     'New Boxer Van':
-    'https://cdn.optimizely.com/img/15841360337/67e86320054e4f918a3b1a147666a4e1.png'
+    'https://cdn.optimizely.com/img/15841360337/67e86320054e4f918a3b1a147666a4e1.png',
+    '308 Hybrid':
+    'https://cdn.optimizely.com/img/15841360337/223d738097254803abd10fb1d5777ae5.png',
+    '408 Hybrid':
+    'https://cdn.optimizely.com/img/15841360337/421762776999436191b848fba63086be.png',
+    '2008 Hybrid':
+    'https://cdn.optimizely.com/img/15841360337/b090585d3cb742aebb0278a00566ad03.png',
+    'Partner Van':
+    'https://cdn.optimizely.com/img/15841360337/ad108d9387634bdcbb18dec33ddf5dde.png',
+    'Expert Van':
+    'https://cdn.optimizely.com/img/15841360337/75622d91515545be850f53e8f7101c11.png',
+    'New Expert Van':
+    'https://cdn.optimizely.com/img/15841360337/3e8e2be5c63c4af7899c0d5114d5fd8d.png',
+    '2008 HYBRID SUV':
+    'https://cdn.optimizely.com/img/15841360337/b090585d3cb742aebb0278a00566ad03.png',
+    '3008 HYBRID SUV':
+    'https://cdn.optimizely.com/img/15841360337/d7f0770e93b04cc19a1d589aa2044b05.png',
+    '5008 HYBRID SUV':
+    'https://cdn.optimizely.com/img/15841360337/c6f1d3403313406fb38105e7843bec66.png',
+    'PARTNER VAN':
+    'https://cdn.optimizely.com/img/15841360337/ad108d9387634bdcbb18dec33ddf5dde.png'
 };
 
 const fallbackImageUrl = 'https://cdn.optimizely.com/img/15841360337/2e9aba6f1d1e453a83363beac2281d9b.png';

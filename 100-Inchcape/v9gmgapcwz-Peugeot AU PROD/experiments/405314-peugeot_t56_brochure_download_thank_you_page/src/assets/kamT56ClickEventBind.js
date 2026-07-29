@@ -36,7 +36,7 @@ function updateExistingModal(modelInfo) {
         modal.setAttribute('data-current-model', modelInfo.name);
         modal.setAttribute('data-modelName', modelInfo.name);
     }
-    const imgUrl = kamT56GetImageUrl(modelInfo.code || modelInfo.name);
+    const imgUrl = kamT56GetImageUrl(modelInfo.name || modelInfo.code);
     const imgStep1 = document.querySelector('.t56Step1 .t56ModalImage');
     const imgStep2 = document.querySelector('.t56Step2 .t56ModalImage');
     if (imgStep1) imgStep1.setAttribute('src', imgUrl);
@@ -170,7 +170,7 @@ function kamT56HandleIframeMessage(event) {
         }
 
         const modelCode = ModelCodes[modalModelName] || modalModelName;
-        const imageUrl = kamT56GetImageUrl(modelCode);
+        const imageUrl = kamT56GetImageUrl(modalModelName || modelCode);
         const imgStep2 = document.querySelector('.t56Step2 .t56ModalImage');
         if (imgStep2) imgStep2.setAttribute('src', imageUrl);
 
@@ -228,7 +228,7 @@ function kamT56BindBrochureAnchorClicks(anchors) {
 
             currentModelInfo.name = Name || 'Vehicle';
             currentModelInfo.code = ModelCodes[Name] || currentModelInfo.name;
-            currentModelInfo.imageUrl = kamT56GetImageUrl(currentModelInfo.code || currentModelInfo.name);
+            currentModelInfo.imageUrl = kamT56GetImageUrl(currentModelInfo.name || currentModelInfo.code);
             window.targetModalCode = currentModelInfo.code;
             if (!sessionStorage.getItem('T56ModalSubmitted')) {
                 event.preventDefault();

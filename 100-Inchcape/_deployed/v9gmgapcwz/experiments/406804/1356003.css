@@ -1,0 +1,616 @@
+html.pcat72-is-loading body {
+  background: #fff !important;
+}
+
+html.pcat72-is-loading .calculator-inner,
+html.pcat72-is-loading .calculator-form {
+  position: relative;
+}
+
+html.pcat72-is-loading .calculator-inner::after,
+html.pcat72-is-loading .calculator-form::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  z-index: 50;
+  border-radius: inherit;
+}
+
+body.pcat72-iframe {
+  height: auto !important;
+  min-height: 0 !important;
+  overflow: hidden;
+}
+
+body.pcat72-iframe #wrapper,
+body.pcat72-iframe #main {
+  height: auto !important;
+  min-height: 0 !important;
+}
+
+body.pcat72-iframe .calculator-inner .btn.btn-primary.btn-diff-model {
+  display: none !important;
+}
+
+body.pcat72-iframe .calculator-inner,
+body.pcat72-iframe .calculator,
+body.pcat72-iframe .calculator .container {
+  overflow: visible !important;
+}
+
+body.pcat72-iframe .calculator-form {
+  position: relative;
+  overflow: visible;
+  -webkit-box-shadow: 0px 0px 22px 0px rgba(0, 0, 0, 0.1490196078);
+  box-shadow: 0px 0px 22px 0px rgba(0, 0, 0, 0.1490196078);
+  border-radius: 20px;
+  background: #ffffff;
+  padding: 34px 32px 33px 36px;
+}
+
+body.pcat72-iframe .pcat72-native-hidden {
+  display: none !important;
+}
+
+body.pcat72-iframe .pcat72-field-label,
+body.pcat72-iframe .interest-rate > p,
+body.pcat72-iframe .cash-deposit > p {
+  font-family: Peugeot New;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 15px;
+  leading-trim: NONE;
+  line-height: 110%;
+  letter-spacing: 0px;
+  text-align: center;
+  color: #000;
+  margin: 0 0 16px;
+}
+
+body.pcat72-iframe .pcat72-value {
+  color: #0074e8;
+  font-weight: 700;
+}
+
+body.pcat72-iframe .pcat72-frequency {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  background: #f8f6f6;
+  border-radius: 6px;
+  margin-bottom: 37px;
+  height: 60px;
+}
+
+body.pcat72-iframe .pcat72-frequency .time-selection {
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  font-weight: 400;
+  font-style: Bold;
+  font-size: 13px;
+  leading-trim: NONE;
+  line-height: 110%;
+  letter-spacing: 0px;
+  text-align: center;
+  color: #000000;
+  -webkit-transition: color 0.2s ease, background 0.2s ease;
+  transition: color 0.2s ease, background 0.2s ease;
+  padding: 0 !important;
+}
+
+body.pcat72-iframe .pcat72-frequency .time-selection.active-time {
+  color: #0074e8;
+  font-weight: 700 !important;
+  background: transparent;
+  text-decoration: none !important;
+}
+
+body.pcat72-iframe .interest-rate,
+body.pcat72-iframe .cash-deposit,
+body.pcat72-iframe .pcat72-loan-term-section {
+  margin-bottom: 28px;
+}
+
+body.pcat72-iframe .calculator-slider {
+  margin-bottom: 20px;
+  padding: 0 12px 28px;
+}
+
+body.pcat72-iframe .calculator-slider > p span {
+  font-family: Peugeot New;
+  font-weight: 700;
+  font-style: Bold;
+  font-size: 15px;
+  leading-trim: NONE;
+  line-height: 110%;
+  letter-spacing: 0px;
+  text-align: center;
+  color: #0074e8;
+}
+
+body.pcat72-iframe .calculator-slider-contain > span {
+  font-family: Peugeot New;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 13px;
+  leading-trim: NONE;
+  line-height: 110%;
+  letter-spacing: 0px;
+  text-align: center;
+  color: #000;
+}
+
+body.pcat72-iframe .calculator-slider-contain > span:nth-child(2) {
+  left: 60px;
+}
+
+body.pcat72-iframe .calculator-slider-contain > span:nth-child(4) {
+  left: 85%;
+}
+
+body.pcat72-iframe .calculator-slider-inner {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  height: 4px;
+  border-radius: 999px;
+  max-width: 339px;
+  margin: auto;
+  background: -webkit-gradient(linear, left top, right top, from(#0074e8), color-stop(#0074e8), color-stop(#DADADA), to(#DADADA));
+  background: linear-gradient(to right, #0074e8 0%, #0074e8 var(--pcat72-slider-fill, 0%), #DADADA var(--pcat72-slider-fill, 0%), #DADADA 100%);
+}
+
+body.pcat72-iframe .calculator-slider-inner::-webkit-slider-runnable-track {
+  height: 4px;
+  background: transparent;
+  border-radius: 999px;
+}
+
+body.pcat72-iframe .calculator-slider-inner::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  margin-top: -6px;
+  border-radius: 50%;
+  background: #fff;
+  border: none;
+  -webkit-box-shadow: 0 0 0 1px #0074e8, 0px 2px 6px 0px rgba(0, 0, 0, 0.2509803922);
+  box-shadow: 0 0 0 1px #0074e8, 0px 2px 6px 0px rgba(0, 0, 0, 0.2509803922);
+  cursor: pointer;
+}
+
+body.pcat72-iframe .calculator-slider-inner::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fff;
+  border: none;
+  box-shadow: 0 0 0 1px #0074e8, 0px 2px 6px 0px rgba(0, 0, 0, 0.2509803922);
+  cursor: pointer;
+}
+
+body.pcat72-iframe .calculator-slider-inner::-moz-range-track {
+  height: 4px;
+  background: #DADADA;
+  border-radius: 999px;
+}
+
+body.pcat72-iframe .calculator-slider-inner::-moz-range-progress {
+  height: 4px;
+  background: #0074e8;
+  border-radius: 999px;
+}
+
+body.pcat72-iframe .pcat72-loan-term {
+  margin-top: 0;
+}
+
+body.pcat72-iframe .pcat72-loan-term__options {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (minmax(0, 1fr))[4];
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+body.pcat72-iframe .pcat72-loan-term__btn {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  font-family: Peugeot New;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 13px;
+  leading-trim: NONE;
+  line-height: 110%;
+  letter-spacing: 0px;
+  text-align: center;
+  border: 1px solid #b1b1b1;
+  background: #ffffff;
+  padding: 10px 22px;
+  color: #000000;
+  min-height: 34px;
+  cursor: pointer;
+  -webkit-transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+body.pcat72-iframe .pcat72-loan-term__btn.is-active {
+  background: #0074e8;
+  border-color: #0074e8;
+  color: #fff;
+}
+
+body.pcat72-iframe .pcat72-loan-term__btn:hover,
+body.pcat72-iframe .pcat72-loan-term__btn:focus,
+body.pcat72-iframe .pcat72-loan-term__btn:active {
+  background: #0074e8 !important;
+  border-color: #0074e8;
+  color: #fff;
+}
+
+body.pcat72-iframe .pcat72-repayment {
+  background: #f8f6f6;
+  border-radius: 6px;
+  padding: 21px 65px 12px 65px;
+  margin: 15px 0 34px;
+  text-align: center;
+}
+
+body.pcat72-iframe .pcat72-repayment > p {
+  font-family: Peugeot New;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 15px;
+  leading-trim: NONE;
+  line-height: 110%;
+  letter-spacing: 0px;
+  text-align: center;
+  color: #000;
+}
+
+body.pcat72-iframe .pcat72-repayment > span {
+  display: block;
+  color: #0074e8;
+  font-family: Peugeot New;
+  font-weight: 700;
+  font-style: Bold;
+  font-size: 26px;
+  leading-trim: NONE;
+  line-height: 110%;
+  letter-spacing: 0px;
+  text-align: center;
+}
+
+body.pcat72-iframe .pcat72-cta-group {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (minmax(0, 1fr))[2];
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 19px;
+  margin-bottom: 33px;
+}
+
+body.pcat72-iframe .pcat72-cta {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 0;
+  font-family: Peugeot New !important;
+  font-weight: 700;
+  font-style: Bold;
+  font-size: 10px !important;
+  leading-trim: NONE;
+  line-height: 28px;
+  letter-spacing: 0%;
+  text-align: center;
+  text-transform: uppercase;
+  color: #000000;
+  text-decoration: none;
+  -webkit-transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+body.pcat72-iframe .pcat72-cta--outline {
+  border: 1px solid #000;
+  color: #000;
+  background: #fff;
+}
+
+body.pcat72-iframe .pcat72-cta--outline:hover,
+body.pcat72-iframe .pcat72-cta--outline:focus {
+  background: #0074e8;
+  border-color: #0074e8;
+  color: #fff;
+}
+
+body.pcat72-iframe .pcat72-cta--primary {
+  border: 1px solid #0074e8;
+  background: #0074e8;
+  color: #fff;
+}
+
+body.pcat72-iframe .pcat72-cta--primary:hover,
+body.pcat72-iframe .pcat72-cta--primary:focus {
+  background: black;
+  border-color: black;
+}
+
+body.pcat72-iframe .pcat72-terms {
+  position: relative;
+  padding: 0 28px 0 24px;
+}
+
+body.pcat72-iframe .pcat72-terms span {
+  background: transparent !important;
+  font-family: Peugeot New;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 11px;
+  leading-trim: NONE;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-transform: uppercase;
+  padding: 0;
+}
+
+body.pcat72-iframe .pcat72-terms__toggle {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #000;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-align: left;
+  border-bottom: 1px solid #d9d9d9;
+  padding-bottom: 5px;
+}
+
+body.pcat72-iframe .pcat72-terms__toggle:hover,
+body.pcat72-iframe .pcat72-terms__toggle:focus,
+body.pcat72-iframe .pcat72-terms__toggle:active {
+  background-color: transparent !important;
+}
+
+body.pcat72-iframe .pcat72-terms__icon {
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid #726f6f;
+  border-bottom: 2px solid #726f6f;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+  -webkit-transition: -webkit-transform 0.2s ease;
+  transition: -webkit-transform 0.2s ease;
+  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, -webkit-transform 0.2s ease;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  margin-top: -4px;
+}
+
+body.pcat72-iframe .pcat72-terms__toggle.is-open .pcat72-terms__icon {
+  -webkit-transform: rotate(-135deg);
+  -ms-transform: rotate(-135deg);
+  transform: rotate(-135deg);
+  margin-top: 4px;
+}
+
+body.pcat72-iframe .pcat72-terms__content {
+  margin-top: 14px;
+  color: #323334;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+body.pcat72-iframe .pcat72-terms__content p {
+  margin: 0 0 12px;
+}
+
+body.pcat72-iframe .pcat72-terms__content p:last-child {
+  margin-bottom: 0;
+  text-align: start;
+}
+
+body.pcat72-iframe .pcat72-terms.is-open .pcat72-terms__content {
+  position: absolute;
+  top: 100%;
+  left: -36px;
+  right: -32px;
+  z-index: 20;
+  margin-top: 0;
+  padding: 14px 32px 24px 36px;
+  background: #fff;
+  border-radius: 0 0 20px 20px;
+  -webkit-box-shadow: 0 12px 22px 0 rgba(0, 0, 0, 0.1490196078);
+  box-shadow: 0 12px 22px 0 rgba(0, 0, 0, 0.1490196078);
+}
+
+body.pcat72-iframe.pcat72-terms-expanded {
+  overflow: hidden;
+  background: transparent;
+}
+
+body.pcat72-iframe .estimate-form,
+body.pcat72-iframe .save-button {
+  display: none !important;
+}
+
+@media (max-width: 1180px) {
+  body.pcat72-iframe .calculator-slider-contain > span:nth-child(4) {
+    left: 95%;
+  }
+
+  body.pcat72-iframe .calculator-slider-contain > span:nth-child(2) {
+    left: 20px;
+  }
+}
+
+@media (max-width: 990px) {
+  body.pcat72-iframe .calculator-slider-contain > span:nth-child(4) {
+    left: 78%;
+  }
+
+  body.pcat72-iframe .calculator-slider-contain > span:nth-child(2) {
+    left: 24%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  body.pcat72-iframe .calculator {
+    padding: 37px 0;
+  }
+
+  body.pcat72-iframe .calculator .container {
+    padding: 0;
+    max-width: 100%;
+  }
+
+  body.pcat72-iframe .calculator-inner {
+    padding: 0 15px;
+  }
+
+  body.pcat72-iframe .calculator-inner > p {
+    margin-bottom: 14px;
+    padding: 0 10px;
+  }
+
+  body.pcat72-iframe h1 {
+    font-family: Peugeot New;
+    font-weight: 700;
+    font-style: Bold;
+    font-size: 18px !important;
+    leading-trim: NONE;
+    line-height: 130%;
+    letter-spacing: 0px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  body.pcat72-iframe .variant-dropdown {
+    padding: 0 8px;
+  }
+
+  body.pcat72-iframe #model-variant {
+    border-radius: 0px !important;
+    font-size: 15px !important;
+    height: 42px !important;
+    border: 1px solid #b1b1b1;
+    font-family: Peugeot New;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 13px;
+    leading-trim: NONE;
+    line-height: 28px;
+    letter-spacing: 0%;
+    color: #000000;
+    padding-left: 0;
+  }
+
+  body.pcat72-iframe .calculator-form {
+    padding: 13px 13px 35px 13px;
+    -webkit-box-shadow: 0px 0px 22px 0px rgba(0, 0, 0, 0.1490196078);
+    box-shadow: 0px 0px 22px 0px rgba(0, 0, 0, 0.1490196078);
+  }
+
+  body.pcat72-iframe .pcat72-field-label,
+  body.pcat72-iframe .interest-rate > p,
+  body.pcat72-iframe .cash-deposit > p {
+    font-size: 14px;
+  }
+
+  body.pcat72-iframe .pcat72-loan-term__btn {
+    font-size: 13px;
+    min-height: 34px;
+    padding: 6px;
+  }
+
+  body.pcat72-iframe .pcat72-repayment {
+    padding: 21px 0 12px 0;
+    margin: 15px 0 33px;
+  }
+
+  body.pcat72-iframe .pcat72-repayment > p {
+    font-size: 13px;
+  }
+
+  body.pcat72-iframe .pcat72-repayment > span {
+    font-size: 22px;
+  }
+
+  body.pcat72-iframe .pcat72-cta-group {
+    -ms-grid-columns: 1fr;
+    grid-template-columns: 1fr;
+  }
+
+  body.pcat72-iframe .pcat72-cta-group {
+    gap: 15px;
+  }
+
+  body.pcat72-iframe .pcat72-cta {
+    min-height: 42px;
+  }
+
+  body.pcat72-iframe .pcat72-terms__content {
+    margin-top: 26.28px;
+  }
+
+  body.pcat72-iframe .pcat72-terms.is-open .pcat72-terms__content {
+    left: -13px;
+    right: -13px;
+    margin-top: 0;
+    padding: 26.28px 13px 24px;
+  }
+
+  body.pcat72-iframe .pcat72-terms__content p {
+    font-family: Peugeot New;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 11px;
+    leading-trim: NONE;
+    line-height: 170%;
+    letter-spacing: 0%;
+  }
+
+  body.pcat72-iframe .calculator-slider-contain > span:nth-child(4) {
+    left: 92%;
+  }
+
+  body.pcat72-iframe .calculator-slider-contain > span:nth-child(2) {
+    left: 4%;
+  }
+
+  body.pcat72-iframe .calculator-inner .row {
+    margin-right: 0;
+  }
+}

@@ -1,0 +1,171 @@
+.pcat69-car-box {
+  -webkit-transition: all 0.25s ease;
+  transition: all 0.25s ease;
+  -webkit-box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.1019607843);
+  box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.1019607843);
+  border: 1px solid #e6e6e6;
+}
+
+.pcat69-car-box.pcat69-selected {
+  border: 2px solid #0069E5;
+}
+
+.pcat69-checkbox-wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 8px;
+  cursor: pointer;
+}
+
+.pcat69-checkbox[type=checkbox] {
+  pointer-events: none;
+  background-color: #0069E5;
+}
+
+.button_link.aem-GridColumn.aem-GridColumn--default--12 {
+  height: 10px;
+}
+
+.q-button.button.primary.q-mod.q-mod-button-link.stat-button-link.center.analytics {
+  visibility: hidden;
+  height: 1px;
+  margin: 0;
+  padding: 0;
+}
+
+.pcat69-checkbox-wrap {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  margin: 8px 0;
+}
+
+.pcat69-checkbox[type=checkbox] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.pcat69-checkbox-custom {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ccc;
+  border-radius: 3px;
+  background-color: #fff;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  -webkit-transition: background-color 0.15s ease, border-color 0.15s ease;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.pcat69-checkbox-custom .pcat69-checkmark {
+  opacity: 0;
+  -webkit-transition: opacity 0.15s ease;
+  transition: opacity 0.15s ease;
+}
+
+.pcat69-checkbox-label {
+  font-size: 14px;
+  color: #333;
+}
+
+.pcat69-checkbox:checked + .pcat69-checkbox-custom {
+  background-color: #0069e5;
+  border-color: #0069e5;
+}
+
+.pcat69-checkbox:checked + .pcat69-checkbox-custom .pcat69-checkmark {
+  opacity: 1;
+}
+
+.grid_builder_v2.grid_builder.aem-GridColumn.aem-GridColumn--default--12 > .q-grid-container.grid-bg-transparent.q-margin-large.grid-full-width > .row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 20px;
+}
+
+.q-title-container .q-title .q-label > div {
+  text-align: center;
+  font-weight: 400;
+  font-size: 16px;
+  color: #000000;
+}
+
+.q-multimedia-teaser.q-teaser-button .q-teaser-content-container {
+  padding: 0;
+}
+
+.q-multimedia-teaser.q-teaser-button.js-multimedia-teaser {
+  gap: 10px;
+}
+
+.ht-headline.flex-item {
+  text-align: center;
+  margin-top: 40px;
+}
+
+@media (max-width: 767px) {
+  /* make row a flex container */
+
+  .row {
+    display: -ms-grid !important;
+    display: grid !important;
+    -ms-grid-columns: (2fr)[2] !important;
+    grid-template-columns: repeat(2, 2fr) !important;
+  }
+
+  .row:before {
+    display: none !important;
+  }
+
+  .grid-bg-transparent {
+    margin: 0 !important;
+  }
+
+  .pcat69-flex-row {
+    display: -webkit-box !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+    margin-top: 40px;
+  }
+
+  /* each car = 50% width */
+
+  .row .small-12.medium-3.columns.pcat69-car-box {
+    width: 172px !important;
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 50%;
+    flex: 0 0 50%;
+    height: 184px;
+    margin: 0 auto;
+  }
+}

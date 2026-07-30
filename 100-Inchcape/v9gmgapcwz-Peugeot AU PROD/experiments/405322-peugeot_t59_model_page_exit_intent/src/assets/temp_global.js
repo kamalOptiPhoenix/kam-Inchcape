@@ -17,6 +17,24 @@ const globalGoals = {
 				});
 			},
 
+			processGoal: (goalId) => {
+				if (!goalId) {
+					return;
+				}
+
+				window.kameleoonQueue = window.kameleoonQueue || [];
+				window.kameleoonQueue.push([
+					'Kameleoon.API.Goals.processConversion',
+					goalId,
+				]);
+
+				console.log(
+					'%c*** Kameleoon goal queued ***',
+					'background: green; color: black;',
+					goalId
+				);
+			},
+
 			formSubmitHandler: () => {
 				// Prevent attaching the listener multiple times
 				if (window.__kameleoonGlobalSubmitHandlerAttached) {
@@ -51,7 +69,7 @@ const globalGoals = {
 
 								modules.tracking.push_API_only('make_an_enquiry_conversion');
 
-								Kameleoon.API.Goals.processConversion(
+								modules.tracking.processGoal(
 									globalGoals['KAM - Make an Enquiry Conversion']
 								);
 							} else if (wrapper.id === 'buildbuy_testdrive_enquiry') {
@@ -62,7 +80,7 @@ const globalGoals = {
 
 								modules.tracking.push_API_only('book_a_test_drive_conversion');
 
-								Kameleoon.API.Goals.processConversion(
+								modules.tracking.processGoal(
 									globalGoals['KAM - Book a Test Drive Conversion']
 								);
 							}
@@ -92,7 +110,7 @@ const globalGoals = {
 							);
 
 							modules.tracking.push_API_only('enquire_now_conversion_global');
-							Kameleoon.API.Goals.processConversion(
+							modules.tracking.processGoal(
 								globalGoals['Enquire now conversion global']
 							);
 						}
@@ -119,7 +137,7 @@ const globalGoals = {
 						);
 
 						modules.tracking.push_API_only('enquire_now_conversion_global');
-						Kameleoon.API.Goals.processConversion(
+						modules.tracking.processGoal(
 							globalGoals['Enquire now conversion global']
 						);
 					}

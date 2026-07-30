@@ -89,34 +89,7 @@ const globalGoals = {
 				});
 			},
 
-			enquiryFormHandler: () => {
-				if (window.__kameleoonGlobalEnquiryHandlerAttached) {
-					return;
-				}
-
-				window.__kameleoonGlobalEnquiryHandlerAttached = true;
-
-				document.addEventListener('click', (e) => {
-					if (!e.target.closest('form#general_enquiry_form input[type="submit"]')) {
-						return;
-					}
-
-					Kameleoon.API.Core.runWhenConditionTrue(
-						() => document.querySelector('div.success') !== null,
-						() => {
-							console.log(
-								'%c*** enquire_now_conversion_global goal triggered ***',
-								'background: yellow; color: black;'
-							);
-
-							modules.tracking.push_API_only('enquire_now_conversion_global');
-							modules.tracking.processGoal(
-								globalGoals['Enquire now conversion global']
-							);
-						}
-					);
-				});
-			},
+			
 
 			enquiryIframeHandler: () => {
 				if (window.__kameleoonGlobalEnquiryIframeHandlerAttached) {
@@ -170,14 +143,7 @@ const globalGoals = {
 		}
 	);
 
-	Kameleoon.API.Core.runWhenConditionTrue(
-		() => modules.targeting.bodyReady(),
-		() => {
-			console.log('*** Global Enquiry Tracking ***');
-
-			modules.tracking.enquiryFormHandler();
-		}
-	);
+	
 
 	Kameleoon.API.Core.runWhenConditionTrue(
 		() =>

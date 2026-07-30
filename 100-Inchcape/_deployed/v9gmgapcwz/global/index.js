@@ -1,0 +1,106 @@
+"use strict";
+
+(function () {
+  /**
+   * Site-level script (optional). Runs when included in Kameleoon site configuration.
+   * Site: v9gmgapcwz — Peugeot AU PROD
+   */
+  console.log('*** Global Code  2:50 ***');
+  const globalGoals = {
+    'KAM - Make an Enquiry Conversion': 420578,
+    'KAM - Book a Test Drive Conversion': 420579,
+    'Enquire now conversion global': 424164
+  };
+  (function globalTrackingAndTargeting() {
+    const modules = {
+      tracking: {
+        push_API_only: eventName => {
+          window.optimizely = window.optimizely || [];
+          window.optimizely.push({
+            type: 'event',
+            eventName
+          });
+        },
+        processGoal: goalId => {
+          if (!goalId) {
+            return;
+          }
+          window.kameleoonQueue = window.kameleoonQueue || [];
+          window.kameleoonQueue.push(['Kameleoon.API.Goals.processConversion', goalId]);
+          console.log('%c*** Kameleoon goal queued ***', 'background: green; color: black;', goalId);
+        },
+        formSubmitHandler: () => {
+          if (window.__kameleoonGlobalSubmitHandlerAttached) {
+            return;
+          }
+          window.__kameleoonGlobalSubmitHandlerAttached = true;
+          document.addEventListener('submit', e => {
+            const form = e.target;
+            if (!form.matches('form#buildbuy_testdrive_enquiry_form, form#buildbuy_email_dealer_form')) {
+              return;
+            }
+            console.log('*** Form Submitted ***');
+            const wrapper = form.parentElement;
+            Kameleoon.API.Core.runWhenConditionTrue(() => !!wrapper?.querySelector('.buildFormSuccessWrapper'), () => {
+              if (wrapper.id === 'buildbuy_email_dealer') {
+                console.log('%c*** make_an_enquiry_conversion goal triggered ***', 'background: yellow; color: black;');
+                modules.tracking.push_API_only('make_an_enquiry_conversion');
+                modules.tracking.processGoal(globalGoals['KAM - Make an Enquiry Conversion']);
+              } else if (wrapper.id === 'buildbuy_testdrive_enquiry') {
+                console.log('%c*** book_a_test_drive_conversion goal triggered ***', 'background: yellow; color: black;');
+                modules.tracking.push_API_only('book_a_test_drive_conversion');
+                modules.tracking.processGoal(globalGoals['KAM - Book a Test Drive Conversion']);
+              }
+            });
+          });
+        },
+        enquiryIframeHandler: () => {
+          if (window.__kameleoonGlobalEnquiryIframeHandlerAttached) {
+            return;
+          }
+          window.__kameleoonGlobalEnquiryIframeHandlerAttached = true;
+          const iframeOrigin = 'https://peugeotforms.inchcape.com.au';
+          let enquirySuccessHandled = false;
+          Kameleoon.API.Utils.addEventListener(window, 'message', event => {
+            if (event.origin !== iframeOrigin) {
+              return;
+            }
+            if (event.data === 'childReady' && event.source) {
+              event.source.postMessage('parentReady', iframeOrigin);
+              return;
+            }
+            const messageData = event.data;
+            if (!messageData || typeof messageData !== 'object' || messageData.formsLeadID === 'PCAT64') {
+              return;
+            }
+            if (messageData.mainStepName !== 'confirmation' && !JSON.stringify(messageData).includes('"mainStepName":"confirmation"')) {
+              return;
+            }
+            if (enquirySuccessHandled) {
+              return;
+            }
+            enquirySuccessHandled = true;
+            console.log('%c*** enquire_now_conversion_global goal triggered ***', 'background: yellow; color: black;');
+            modules.tracking.push_API_only('enquire_now_conversion_global');
+            modules.tracking.processGoal(globalGoals['Enquire now conversion global']);
+          });
+        }
+      },
+      targeting: {
+        pages: {
+          configuratorSummary: () => window.location.pathname.includes('/build-and-buy/build/summary/'),
+          enquiry: () => window.location.pathname.includes('/tools/enquiry.html')
+        },
+        bodyReady: () => document.body !== null
+      }
+    };
+    Kameleoon.API.Core.runWhenConditionTrue(() => modules.targeting.pages.configuratorSummary() && modules.targeting.bodyReady(), () => {
+      console.log('*** Global Tracking and Targeting [ configuratorSummary page ] ***');
+      modules.tracking.formSubmitHandler();
+    });
+    Kameleoon.API.Core.runWhenConditionTrue(() => modules.targeting.pages.enquiry() && modules.targeting.bodyReady(), () => {
+      console.log('*** Global Enquiry Tracking [ enquiry page ] ***');
+      modules.tracking.enquiryIframeHandler();
+    });
+  })();
+})();

@@ -1,0 +1,33 @@
+// Default state: Hide AU_IO_802 and show AU_IO_213 for all other color swatches
+body.SUBMY26 {
+  div[data-test="container:section:subaru_interior"]
+  > div.SPC_WIDGET-MuiCollapse-root
+  div[data-test="options:container"]
+  > div[data-test="option:AU_IO_802"] {
+    display: none !important;
+  }
+
+  div[data-test="container:section:subaru_interior"]
+  > div.SPC_WIDGET-MuiCollapse-root
+  div[data-test="options:container"]
+  > div[data-test="option:AU_IO_213"] {
+    display: block !important;
+  }
+}
+
+// Show AU_IO_802 and hide AU_IO_213 when color picker C2 or W5 is active
+body.SUBMY26.SUBMY26-show-802 {
+  div[data-test="container:section:subaru_interior"]
+  > div.SPC_WIDGET-MuiCollapse-root
+  div[data-test="options:container"]
+  > div[data-test="option:AU_IO_802"] {
+    display: block !important;
+  }
+
+  // div[data-test="container:section:subaru_interior"]
+  // > div.SPC_WIDGET-MuiCollapse-root
+  // div[data-test="options:container"]
+  // > div[data-test="option:AU_IO_213"] {
+  //   display: none !important;
+  // }
+}

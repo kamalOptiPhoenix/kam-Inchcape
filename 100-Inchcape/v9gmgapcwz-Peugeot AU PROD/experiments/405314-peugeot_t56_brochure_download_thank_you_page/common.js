@@ -13,30 +13,18 @@ function kamT56HandleFormMessage(event) {
         return;
     }
 
-    console.log('T56: postMessage received from iframe: Local', event.data);
-
     if (event.data && event.data.type === 'FORM_SUBMITTING') {
         const email = event.data.email || '';
-        const model = event.data.model || '';
-
-        console.log('T56: Form submitting. Email:', email, 'Model:', model);
 
         if (email && kamT56IsValidEmail(email)) {
-            console.log('T56: Valid email. Firing event...');
             kamT56ProcessGoal('brochure_contact_details_t56');
-        } else {
-            console.log('T56: Invalid email, event not fired. Email value:', email);
         }
     }
 
     if (event.data && event.data.type === 'FORM_SUBMIT_SUCCESS') {
         const email = event.data.email || '';
-        const model = event.data.model || '';
-
-        console.log('T56: Form submit success. Email:', email, 'Model:', model);
 
         if (email && kamT56IsValidEmail(email)) {
-            console.log('T56: Valid email on success. Firing confirmation event...');
             kamT56ProcessGoal('brochure_download_success_t56');
         }
     }

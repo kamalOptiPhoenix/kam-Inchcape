@@ -83,6 +83,14 @@
         fakeClickCTA();
       });
     });
+    const grids = document.querySelectorAll('.aem-Grid > .grid_builder_v2');
+    grids.forEach((grid, index) => {
+      if (index === grids.length - 1) return;
+      const gridRow = grid.querySelector('.row');
+      if (gridRow && !gridRow.querySelector('.pcat69-car-box')) {
+        grid.style.display = 'none';
+      }
+    });
     const cars = document.querySelectorAll('.q-grid-container.grid-bg-transparent.q-margin-large.grid-full-width:last-child .row .small-12.medium-3.columns.pcat69-car-box:last-child');
     const lastCar = cars[cars.length - 1];
     if (lastCar) {

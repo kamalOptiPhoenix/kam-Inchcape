@@ -15,7 +15,7 @@ function kamT56HtmlAdd(modelName) {
                     </p>
                     <iframe
                         id="t56FormIframe"
-                        src="https://peugeotforms.inchcape.com.au/webforms/download_brochure/?pcat56=true"
+                        src="https://peugeotforms.inchcape.com.au/webforms/download_brochure/?pcat56kam=true"
                         title="Download brochure form"
                         class="t56IframeForm"
                     ></iframe>

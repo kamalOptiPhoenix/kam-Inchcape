@@ -28,13 +28,11 @@ export default function kamT56NewV3FetchRequest(email, addDataWithCookie, dataLa
                 })
                     .then((res) => {
                         if ((res.status === 524 || res.status === 503) && count > 0) {
-                            console.log(`Retrying fetch due to status code ${res.status}...`);
                             return fetchData(count - 1);
                         }
                         return res.json();
                     })
                     .then((data) => {
-                        console.log('**** t56 Email Request Sent Successfully ****');
                         const TrackingCode = data.TrackingCode;
                         const id = TrackingCode.split('"formsLeadID": "')[1].split('"')[0];
                         sessionStorage.setItem('t56EmailCollected', email);
@@ -45,11 +43,10 @@ export default function kamT56NewV3FetchRequest(email, addDataWithCookie, dataLa
                     });
             })
             .catch((error) => {
-                console.error('Error:', error);
                 if (count > 0) {
-                    console.log('Retrying fetch...');
                     return fetchData(count - 1);
                 }
+                return error;
             });
     };
 

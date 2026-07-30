@@ -31,10 +31,8 @@ import { goals } from './goals.js';
     function trackMetric() {
         jQuery('#main .q-modal-content .aem-Grid a[data-gtm-event-category="d1-content::Content"]').click(() => {
             if (jQuery('.pcat56').length === 0) {
-                console.log('**** t56 Brochure Downloads Control ****');
                 processGoal('Brochure_Downloads');
             } else if (checkCookieDuration('t56EmailCollected')) {
-                console.log('**** t56 Brochure Downloads V1 ****');
                 processGoal('Brochure_Downloads');
             }
         });
@@ -47,9 +45,6 @@ import { goals } from './goals.js';
 
     Kameleoon.API.Core.runWhenConditionTrue(
         () => typeof window.jQuery === 'function',
-        () => {
-            console.log('**** t56 Global Script ****');
-            trackMetric();
-        },
+        trackMetric,
     );
 }());

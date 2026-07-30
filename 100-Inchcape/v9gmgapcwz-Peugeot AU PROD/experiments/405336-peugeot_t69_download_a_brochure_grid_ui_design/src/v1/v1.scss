@@ -141,8 +141,40 @@
     .row .small-12.medium-3.columns.pcat69-car-box {
         width: 172px !important;
         flex: 0 0 50%;
-        height: 184px;
+        height: 130px;
         margin: 0 auto;
+        padding: 0px;
+    }
+    .grid_builder_v2.grid_builder.aem-GridColumn.aem-GridColumn--default--12>.q-grid-container.grid-bg-transparent.q-margin-large.grid-full-width>.row {
+        display: flex;
+        gap: 10px;
+    }
+    .main-section .aem-Grid{
+        margin-right: 0px;
+        margin-left: 0px;
+    }
+    .pcat69-checkbox-wrap{
+        margin: 0;
+        margin-top: 7px;
+
     }
 
+    .q-title-container .q-title .q-label>div {
+        font-weight: 400;
+    font-style: Regular;
+    font-size: 12px;
+    leading-trim: NONE;
+    line-height: 100%;
+    letter-spacing: 0px;
+    text-align: center;
+    text-transform: uppercase;
+    }
+
+    .pcat69-checkbox-custom{
+        width: 14px;
+        height: 14px;
+    }
+    .q-multimedia-teaser.q-teaser-button.js-multimedia-teaser{
+        gap: 0px;
+        }
 }

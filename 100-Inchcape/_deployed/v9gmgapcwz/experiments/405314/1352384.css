@@ -1,0 +1,401 @@
+#t56FormIframe {
+  width: 100%;
+  border: none !important;
+}
+
+.pcat56 .t56ModalOverlay {
+  background: rgba(0, 0, 0, 0.5490196078);
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  opacity: 0;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  -webkit-transition-delay: 1s;
+  transition-delay: 1s;
+}
+
+.pcat56.t56ModalShow .t56ModalOverlay {
+  z-index: 20000201;
+  opacity: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.pcat56 .t24ModalOverlay {
+  opacity: 0;
+  z-index: -1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.pcat56.t24notAllowed.t24ModalShow .t24ModalOverlay {
+  display: none;
+}
+
+.pcat56.t24ModalShow.t24Allowed .t24ModalOverlay {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.pcat56.t24ModalContainer {
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  -webkit-transform: translate(-50%, -50%) !important;
+  -ms-transform: translate(-50%, -50%) !important;
+  transform: translate(-50%, -50%) !important;
+}
+
+.pcat56 .t56Link2 {
+  color: rgb(0, 0, 0);
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  font-size: 10px;
+  text-decoration: none;
+  font-weight: bold;
+  text-align: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0 auto;
+  width: 287px;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border: 2px solid rgb(0, 0, 0);
+}
+
+.hidden {
+  display: none;
+}
+
+.pcat56.t56ModalShow {
+  height: 100vh;
+  overflow: hidden;
+}
+
+.pcat56 .t56ModalContainer {
+  background: white;
+  z-index: 20000201;
+  -webkit-transition-delay: 0.3s;
+  transition-delay: 0.3s;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  -webkit-box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.4);
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.4);
+  border-radius: 4px;
+  width: 600px;
+  height: 700px;
+  padding: 0;
+  display: block;
+  -webkit-transform: scale(0);
+  -ms-transform: scale(0);
+  transform: scale(0);
+}
+
+.pcat56.t56ModalShow .t56ModalContainer {
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+}
+
+.pcat56 .t56CloseButton {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  font-size: 27px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  line-height: normal;
+  cursor: pointer;
+  color: #000;
+  height: 20px;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  font-weight: 500;
+}
+
+.pcat56 .t56ModalHeading {
+  font-size: 25px;
+  font-weight: 700;
+  margin: 40px 16px 16px;
+  line-height: 28px;
+  letter-spacing: 0em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.pcat56 .t56ModalContent {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0em;
+  text-align: center;
+  max-width: 550px;
+  color: #000;
+  margin: 22px auto 19px;
+}
+
+.pcat56 .t56EmailInputWrapper {
+  max-width: 476px;
+  margin: 0 auto;
+}
+
+.pcat56 .t56EmailInput {
+  background: white;
+  border: 1px solid #bdbdbd;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0em;
+  text-align: left;
+  margin: 0;
+}
+
+.pcat56 .t56CheckboxWrapper {
+  max-width: 476px;
+  margin: 24px auto 28px;
+}
+
+.pcat56 .t56CheckboxWrapper > div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.pcat56 .t56CheckboxWrapper label {
+  margin: 0 0 0 14px;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0em;
+  text-align: center;
+}
+
+.pcat56 .t56CheckboxWrapper label a {
+  text-decoration: none;
+  color: #0069e5;
+}
+
+.pcat56 .t56CheckboxInput {
+  width: 18px;
+  display: inline-block;
+  height: 18px;
+  border: 1px solid #979797;
+  border-radius: 4px;
+  position: relative;
+}
+
+.pcat56 .t56CheckboxInput.t56Active {
+  background: #0069e5;
+}
+
+.pcat56 .t56CheckboxInput.t56Active:after {
+  content: "";
+  background-image: url("//cdn.optimizely.com/img/16830821962/1d3657a201624e43b9f8f61b6aa18ca6.png");
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: block;
+  background-position: center;
+  -webkit-filter: invert(1);
+  filter: invert(1);
+}
+
+.pcat56 .t56SubmitButton {
+  background: #0069e5;
+  color: white;
+  text-decoration: none;
+  margin: auto;
+  margin-bottom: 30px;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 28px;
+  letter-spacing: 0em;
+  width: 156px;
+  text-align: center;
+  padding: 7px 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.pcat56 .t56errorShow .errorText {
+  display: inline;
+}
+
+.pcat56 .errorText {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #ff0000;
+  display: none;
+}
+
+.pcat56 .t56FinalDownloadBtn,
+.pcat56 .t56ConfigureBtn {
+  background-color: #0071eb;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  font-size: 10px;
+  text-decoration: none;
+  font-weight: bold;
+  text-align: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0 auto;
+  width: 287px;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.pcat56 .t56ConfigureBtn {
+  background: transparent;
+  color: black;
+  border: 2px solid black;
+  font-size: 10px;
+  text-decoration: none;
+}
+
+.pcat56 .t56BottomLinks a {
+  margin-right: 20px;
+  text-decoration: underline;
+  color: #0071eb;
+  margin: 24px auto;
+  text-align: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.pcat56 .t56BottomLinks {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  margin: 0 auto;
+  gap: 24px;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.pcat56 img.t56ModalImage.t56Step1Image {
+  width: 100%;
+  height: 335px;
+}
+
+.pcat56 .t56ModalImage.t56Step2Image {
+  width: 100%;
+  height: 335px;
+}
+
+@media (max-width: 768px) {
+  .pcat56 .t56ModalContainer {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    height: auto;
+  }
+
+  .pcat56 #podium-bubble {
+    z-index: 0 !important;
+  }
+
+  .pcat56 .t56ModalHeading {
+    max-width: 340px;
+    margin: auto;
+    font-size: 20px;
+    margin-top: 30px;
+  }
+
+  .pcat56 .t56ModalContent {
+    font-size: 14px;
+    max-width: 337px;
+  }
+
+  .pcat56 .t56CheckboxWrapper,
+  .pcat56 .t56EmailInputWrapper,
+  .pcat56 .t56SubmitButton {
+    width: 288px;
+    max-width: 288px;
+  }
+
+  .pcat56 .t56CheckboxWrapper > div {
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: start;
+  }
+
+  .pcat56 .t56CheckboxWrapper label {
+    font-size: 9px;
+    margin: 0 0 0 10px;
+  }
+
+  .pcat56 .t56CheckboxInput {
+    width: 12px;
+    height: 12px;
+  }
+
+  .pcat56 .t56CheckboxInput.t56Active:after {
+    background-size: 10px;
+  }
+
+  .pcat56 .t56CheckboxWrapper {
+    margin: 17px auto 27px;
+  }
+
+  .pcat56 .t56EmailInputWrapper.t56errorShow {
+    margin-bottom: -10px;
+  }
+}

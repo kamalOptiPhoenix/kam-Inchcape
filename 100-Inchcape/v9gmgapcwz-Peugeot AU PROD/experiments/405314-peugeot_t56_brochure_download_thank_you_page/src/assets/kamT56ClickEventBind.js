@@ -2,8 +2,6 @@
 import kamT56CloseModalClickEvent from './kamT56CloseModalClickEvent.js';
 import kamT56GetImageUrl from './kamT56GetImageUrl.js';
 import kamT56HtmlAdd from './kamT56HtmlAdd.js';
-import kamT56ProcessGoal from './kamT56ProcessGoal.js';
-
 const ModelCodes = {
     '308 HATCH': '308 Hatch',
     '308 WAGON': '308 Wagon',
@@ -67,7 +65,7 @@ function updateExistingModal(modelInfo) {
             step1.appendChild(iframe);
         }
 
-        iframe.src = 'https://peugeotforms.inchcape.com.au/webforms/download_brochure/?pcat56=true';
+        iframe.src = 'https://peugeotforms.inchcape.com.au/webforms/download_brochure/?pcat56kam=true';
 
         const email = localStorage.getItem('userEmail')
             || sessionStorage.getItem('t56EmailCollected')
@@ -97,9 +95,8 @@ function preloadIframe() {
     const preloadFrame = document.createElement('iframe');
     preloadFrame.id = 't56PreloadIframe';
     preloadFrame.style.display = 'none';
-    preloadFrame.src = 'https://peugeotforms.inchcape.com.au/webforms/download_brochure/?pcat56=true';
+    preloadFrame.src = 'https://peugeotforms.inchcape.com.au/webforms/download_brochure/?pcat56kam=true';
     document.body.appendChild(preloadFrame);
-    console.log('[PCAT56] Iframe preloaded for faster modal opening');
 }
 
 function kamT56HandleIframeMessage(event) {
@@ -149,15 +146,11 @@ function kamT56HandleIframeMessage(event) {
 
         if (step1) {
             step1.style.display = 'none';
-        } else {
-            console.error('[PCAT56 parent] ❌ t56Step1 NOT FOUND');
         }
 
         if (step2) {
             step2.removeAttribute('style');
             step2.style.cssText = 'display: block !important;';
-        } else {
-            console.error('[PCAT56 parent] ❌ t56Step2 NOT FOUND');
         }
 
         const overlay = document.querySelector('.t56ModalOverlay');
@@ -178,14 +171,6 @@ function kamT56HandleIframeMessage(event) {
         sessionStorage.setItem('t56EmailCollected', email);
 
         return;
-    }
-
-    if (event.data && event.data.type === 'FORM_SUBMIT_SUCCESS' && event.data.experiment === 'pcat56') {
-        try {
-            kamT56ProcessGoal('brochure_contact_details_t56');
-        } catch (e) {
-            console.error('[PCAT56 parent] Error triggering analytics:', e);
-        }
     }
 }
 
@@ -261,10 +246,6 @@ function kamT56BindDocumentClicks() {
             event.target.classList.toggle('t56Active');
             const wrapper = document.querySelector('.t56CheckboxWrapper');
             if (wrapper) wrapper.classList.remove('t56errorShow');
-        }
-
-        if (event.target.classList.contains('t56SubmitButton')) {
-            console.warn('[PCAT56] Old inline form submit detected - this should not be used with iframe implementation');
         }
 
         if (event.target.classList.contains('t56ConfigureBtn')) {

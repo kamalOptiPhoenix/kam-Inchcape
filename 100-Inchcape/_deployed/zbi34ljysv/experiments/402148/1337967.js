@@ -41,41 +41,44 @@
 
   /* eslint-disable no-unused-vars */
 
-  // Function to identify the model from .boxHome .title
-  function getModelName() {
-    const titleElement = document.querySelector('.hero__wrapper .model__title');
-    if (!titleElement) {
+  const MODEL_NAMES = ['CROSSTREK', 'FORESTER', 'IMPREZA', 'OUTBACK', 'WRX', 'BRZ'];
+  function matchModelName(text) {
+    const upper = text.trim().toUpperCase();
+    return MODEL_NAMES.find(model => upper.includes(model)) || null;
+  }
+  function getModelNameFromUrl() {
+    const match = window.location.pathname.match(/\/showroom\/([^/]+)/i);
+    if (!match) {
       return null;
     }
-    const titleText = titleElement.textContent.trim().toUpperCase();
-    if (titleText.includes('OUTBACK')) {
-      return 'OUTBACK';
-    }
-    if (titleText.includes('CROSSTREK')) {
-      return 'CROSSTREK';
-    }
-    if (titleText.includes('FORESTER')) {
-      return 'FORESTER';
-    }
-    if (titleText.includes('IMPREZA')) {
-      return 'IMPREZA';
-    }
-    if (titleText.includes('WRX')) {
-      return 'WRX';
-    }
-    if (titleText.includes('BRZ')) {
-      return 'BRZ';
+    return matchModelName(match[1].replace(/-/g, ' '));
+  }
+  function getModelNameFromPage() {
+    const selectors = ['.hero__wrapper .model__title', 'h1', 'h2'];
+    for (let i = 0; i < selectors.length; i += 1) {
+      const element = document.querySelector(selectors[i]);
+      if (!element) {
+        continue;
+      }
+      const model = matchModelName(element.textContent);
+      if (model) {
+        return model;
+      }
     }
     return null;
   }
+  function getModelName() {
+    return getModelNameFromPage() || getModelNameFromUrl();
+  }
   function kamSubnzT5ShowSlider() {
-    if (sessionStorage.getItem('t3ModalShown') === null) {
+    if (sessionStorage.getItem('t5ModalShown') === null) {
       const buildIcon = '//cdn.optimizely.com/img/15841360337/a6d5f8954fbc42d9b94709482b5639e3.svg';
       const testIcon = '//cdn.optimizely.com/img/15841360337/de946c42babb4dac863742ad1d68581c.svg';
       const brochureIcon = '//cdn.optimizely.com/img/15841360337/982d3b5ed0a4473fa90176fe6391749d.svg';
-
-      // Identify the model from .boxHome .title
       const modelName = getModelName();
+      if (!modelName) {
+        return;
+      }
 
       // Model mapping for FOTT4 models (OUTBACK and CROSSTREK)
       const modelMapping = {

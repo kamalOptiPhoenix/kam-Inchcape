@@ -180,7 +180,8 @@
     }
   }
   const goals = {
-    'enquire now embedded form conversions T64': 424414
+    'enquire now embedded form conversions T64': 424414,
+    'Enquire now conversion global': 424164
   };
   const kamT64Config = {
     goalIds: goals
@@ -250,9 +251,10 @@
         setTimeout(() => sendUrlToIframe(), 100);
         return;
       }
-      if (JSON.stringify(messageData).includes('"mainStepName":"confirmation"')) {
+      if (messageData && messageData.mainStepName === 'confirmation' && messageData.formsLeadID === 'PCAT64') {
         console.log('*** form submitted PCAT64 goal fired ***');
         kamT64ProcessGoal('enquire now embedded form conversions T64');
+        kamT64ProcessGoal('Enquire now conversion global');
       }
       if (!cachedIframe) {
         cachedIframe = document.querySelector('iframe.T64Iframe');

@@ -81,9 +81,14 @@ export default function kamT64InitParent() {
             return;
         }
 
-        if (JSON.stringify(messageData).includes('"mainStepName":"confirmation"')) {
+        if (
+            messageData
+            && messageData.mainStepName === 'confirmation'
+            && messageData.formsLeadID === 'PCAT64'
+        ) {
             console.log('*** form submitted PCAT64 goal fired ***');
             kamT64ProcessGoal('enquire now embedded form conversions T64');
+            kamT64ProcessGoal('Enquire now conversion global');
         }
 
         if (!cachedIframe) {

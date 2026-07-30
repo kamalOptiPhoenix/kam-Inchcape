@@ -1436,6 +1436,8 @@
   /* eslint-disable no-console */
 
   (function kamPcat64Iframe() {
+    const PARENT_ORIGIN = 'https://www.peugeot.com.au';
+    let successHandled = false;
     console.log('***** iframe: script loaded and executing');
     initModelSelectionFromParent();
     console.log('***** iframe: message listener initialized');
@@ -1443,17 +1445,46 @@
       if (window.parent && window.parent !== window) {
         window.parent.postMessage({
           type: 'PCAT64_IFRAME_READY'
-        }, 'https://www.peugeot.com.au');
+        }, PARENT_ORIGIN);
         console.log('***** iframe: sent ready signal to parent');
       }
     } catch (e) {
       console.log('***** iframe: could not send ready signal', e);
     }
-    function checkSuccessMessage() {
+    function notifyParentOfSuccess() {
+      if (successHandled) {
+        return;
+      }
+      const successDiv = document.querySelector('.success');
+      if (!successDiv) {
+        return;
+      }
+      successHandled = true;
+      try {
+        if (window.parent && window.parent !== window) {
+          window.parent.postMessage({
+            event: 'updatevirtualpath',
+            formsLeadType: 'cold lead',
+            formsName: 'make an enquiry',
+            formsLeadID: 'PCAT64',
+            mainStepIndicator: '1',
+            mainStepName: 'confirmation'
+          }, PARENT_ORIGIN);
+          console.log('***** iframe: sent form success signal to parent');
+        }
+      } catch (e) {
+        console.log('***** iframe: could not send success signal to parent', e);
+      }
+    }
+    function handleFormSuccess() {
+      notifyParentOfSuccess();
       const successDiv = document.querySelector('.success');
       if (successDiv && !successDiv.classList.contains('t64-success-modified')) {
         modifySuccessMessage();
       }
+    }
+    function checkSuccessMessage() {
+      handleFormSuccess();
     }
     function kamT64HandleFormReady() {
       console.log('*** pcat64-iframe ***');
@@ -1463,7 +1494,7 @@
     }
     function kamT64HandleSuccessReady() {
       console.log('*** pcat64-iframe success ***');
-      modifySuccessMessage();
+      handleFormSuccess();
     }
     if (window.__kam405331Initialized) {
       return;

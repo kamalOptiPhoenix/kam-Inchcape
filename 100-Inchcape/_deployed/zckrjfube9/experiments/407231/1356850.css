@@ -1,0 +1,11 @@
+body.SUBMY26 div[data-test="container:section:subaru_interior"] > div.SPC_WIDGET-MuiCollapse-root div[data-test="options:container"] > div[data-test="option:AU_IO_802"] {
+  display: none !important;
+}
+
+body.SUBMY26 div[data-test="container:section:subaru_interior"] > div.SPC_WIDGET-MuiCollapse-root div[data-test="options:container"] > div[data-test="option:AU_IO_213"] {
+  display: block !important;
+}
+
+body.SUBMY26.SUBMY26-show-802 div[data-test="container:section:subaru_interior"] > div.SPC_WIDGET-MuiCollapse-root div[data-test="options:container"] > div[data-test="option:AU_IO_802"] {
+  display: block !important;
+}

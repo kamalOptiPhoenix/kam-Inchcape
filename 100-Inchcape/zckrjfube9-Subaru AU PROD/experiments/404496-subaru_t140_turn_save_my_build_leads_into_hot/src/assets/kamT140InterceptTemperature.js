@@ -2,6 +2,47 @@
 
 const TARGET_ENDPOINT = 'sendEmailWithNames';
 const TEMPERATURE_VALUE = 'HOT';
+const PAYLOAD_LOG_KEY = 'kamT140HotLeadPayloadLogs';
+const PAYLOAD_LOG_LIMIT = 20;
+const PAYLOAD_LOG_WINDOW_KEY = '__kamT140HotLeadPayloadLogs';
+
+function kamT140StoreHotLeadPayload(parsed) {
+    const logEntry = {
+        timestamp: new Date().toISOString(),
+        toEmail: parsed.toEmail || '',
+        firstName: parsed.firstName || '',
+        lastName: parsed.lastName || '',
+        modelName: parsed.modelName || '',
+        variantName: parsed.variantName || '',
+        configUrl: parsed.configUrl || '',
+        postCode: parsed.postCode || parsed.postcode || '',
+        temperature: parsed.temperature || '',
+        payload: parsed,
+    };
+
+    let logs = [];
+
+    try {
+        logs = JSON.parse(sessionStorage.getItem(PAYLOAD_LOG_KEY) || '[]');
+    } catch (error) {
+        logs = [];
+    }
+
+    logs.push(logEntry);
+
+    if (logs.length > PAYLOAD_LOG_LIMIT) {
+        logs = logs.slice(logs.length - PAYLOAD_LOG_LIMIT);
+    }
+
+    sessionStorage.setItem(PAYLOAD_LOG_KEY, JSON.stringify(logs));
+    window[PAYLOAD_LOG_WINDOW_KEY] = logs;
+
+    console.log(
+        '%c *** T140 HOT lead payload ***',
+        'color:#fff;background:#c00;font-weight:bold',
+        logEntry
+    );
+}
 
 function getUrlString(input) {
     if (typeof input === 'string') {
@@ -32,7 +73,7 @@ function injectTemperature(body) {
         }
 
         parsed.temperature = TEMPERATURE_VALUE;
-        console.log('%c *** T140 temperature injected (HOT) ***', 'color:red;background:white');
+        kamT140StoreHotLeadPayload(parsed);
 
         return JSON.stringify(parsed);
     } catch (error) {

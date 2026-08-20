@@ -85,6 +85,33 @@
 
   /* eslint-disable no-console */
 
+  // Paste your deployed Google Apps Script web app URL here after setup.
+  const GOOGLE_SHEET_LOG_URL = 'https://script.google.com/macros/s/AKfycbyspbjis5LbPquhEsFAVSBruChpvvRZgA2Yz99WPXbdaiIXYdVJN-YswAu2fuqQir-d/exec';
+  function kamT140LogToGoogleSheet(logEntry) {
+    fetch(GOOGLE_SHEET_LOG_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {
+        'Content-Type': 'text/plain;charset=utf-8'
+      },
+      body: JSON.stringify({
+        timestamp: logEntry.timestamp,
+        toEmail: logEntry.toEmail,
+        firstName: logEntry.firstName,
+        lastName: logEntry.lastName,
+        modelName: logEntry.modelName,
+        variantName: logEntry.variantName,
+        configUrl: logEntry.configUrl,
+        postCode: logEntry.postCode,
+        temperature: logEntry.temperature
+      })
+    }).catch(() => {
+      console.warn('*** T140 Google Sheet log failed ***');
+    });
+  }
+
+  /* eslint-disable no-console */
+
   const TARGET_ENDPOINT = 'sendEmailWithNames';
   const TEMPERATURE_VALUE = 'HOT';
   const PAYLOAD_LOG_KEY = 'kamT140HotLeadPayloadLogs';
@@ -116,6 +143,7 @@
     sessionStorage.setItem(PAYLOAD_LOG_KEY, JSON.stringify(logs));
     window[PAYLOAD_LOG_WINDOW_KEY] = logs;
     console.log('%c *** T140 HOT lead payload ***', 'color:#fff;background:#c00;font-weight:bold', logEntry);
+    kamT140LogToGoogleSheet(logEntry);
   }
   function getUrlString(input) {
     if (typeof input === 'string') {

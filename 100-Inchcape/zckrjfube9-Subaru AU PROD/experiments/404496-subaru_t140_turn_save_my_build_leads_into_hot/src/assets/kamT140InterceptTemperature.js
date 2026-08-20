@@ -1,4 +1,6 @@
 /* eslint-disable no-console */
+/* eslint-disable import/extensions */
+import kamT140LogToGoogleSheet from './kamT140LogToGoogleSheet.js';
 
 const TARGET_ENDPOINT = 'sendEmailWithNames';
 const TEMPERATURE_VALUE = 'HOT';
@@ -42,6 +44,8 @@ function kamT140StoreHotLeadPayload(parsed) {
         'color:#fff;background:#c00;font-weight:bold',
         logEntry
     );
+
+    kamT140LogToGoogleSheet(logEntry);
 }
 
 function getUrlString(input) {

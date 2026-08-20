@@ -1,6 +1,9 @@
 /* eslint-disable no-console */
 /* eslint-disable import/extensions */
-import kamT140FillMissingModelData from './kamT140FillMissingModelData.js';
+import kamT140FillMissingModelData, {
+    kamT140NeedsModelFallback,
+    kamT140WaitForVariantInDom,
+} from './kamT140FillMissingModelData.js';
 import kamT140LogToGoogleSheet from './kamT140LogToGoogleSheet.js';
 
 const TARGET_ENDPOINT = 'sendEmailWithNames';
@@ -66,26 +69,34 @@ function isTargetUrl(url) {
     return typeof url === 'string' && url.indexOf(TARGET_ENDPOINT) !== -1;
 }
 
-function injectTemperature(body) {
+function kamT140PrepareRequestBody(body) {
     if (typeof body !== 'string') {
-        return body;
+        return Promise.resolve(body);
     }
 
+    let parsed;
+
     try {
-        const parsed = JSON.parse(body);
+        parsed = JSON.parse(body);
+    } catch (error) {
+        return Promise.resolve(body);
+    }
 
-        if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) {
-            return body;
-        }
+    if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) {
+        return Promise.resolve(body);
+    }
 
+    const waitPromise = kamT140NeedsModelFallback(parsed)
+        ? kamT140WaitForVariantInDom(3000)
+        : Promise.resolve();
+
+    return waitPromise.then(() => {
         const fillResult = kamT140FillMissingModelData(parsed);
         parsed.temperature = TEMPERATURE_VALUE;
         kamT140StoreHotLeadPayload(parsed, fillResult.modelFromDom);
 
         return JSON.stringify(parsed);
-    } catch (error) {
-        return body;
-    }
+    });
 }
 
 function patchFetch() {
@@ -98,8 +109,10 @@ function patchFetch() {
         const url = getUrlString(input);
 
         if (isTargetUrl(url) && init && typeof init.body === 'string') {
-            const nextInit = Object.assign({}, init, { body: injectTemperature(init.body) });
-            return originalFetch.call(this, input, nextInit);
+            return kamT140PrepareRequestBody(init.body).then((nextBody) => {
+                const nextInit = Object.assign({}, init, { body: nextBody });
+                return originalFetch.call(this, input, nextInit);
+            });
         }
 
         return originalFetch.call(this, input, init);
@@ -125,7 +138,13 @@ function patchXhr() {
 
     XhrProto.send = function kamT140Send(body) {
         if (this.__kamT140IsTarget && typeof body === 'string') {
-            return originalSend.call(this, injectTemperature(body));
+            const xhr = this;
+
+            kamT140PrepareRequestBody(body).then((nextBody) => {
+                originalSend.call(xhr, nextBody);
+            });
+
+            return;
         }
 
         return originalSend.call(this, body);

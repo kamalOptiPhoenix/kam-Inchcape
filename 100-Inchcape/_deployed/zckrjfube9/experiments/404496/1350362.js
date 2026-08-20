@@ -85,7 +85,8 @@
 
   /* eslint-disable no-console */
 
-  const kamT140VariantSelectors = ['div[data-test="specPack:list"] div[data-selected="true"] h6[data-test="title:model"]', '#customise_summary h6[data-test="title:model"]', '#customise_summary [data-test="title:model"]'];
+  const kamT140VariantWaitSelector = '#customise_summary [data-test="title:variantName"]';
+  const kamT140VariantSelectors = [kamT140VariantWaitSelector, '[data-test="trim_level_name:trim"] [data-test="title:variantName"]', 'div[data-test="specPack:list"] div[data-selected="true"] h6[data-test="title:model"]', '#customise_summary h6[data-test="title:model"]', '#customise_summary [data-test="title:model"]'];
   const kamT140ModelCodeMap = {
     aufor: 'Forester',
     auimp: 'Impreza',
@@ -146,6 +147,50 @@
       modelName,
       variantName
     };
+  }
+  function kamT140NeedsModelFallback(parsed) {
+    if (!parsed || typeof parsed !== 'object') {
+      return false;
+    }
+    return !kamT140HasModelValue(parsed.modelName) || !kamT140HasModelValue(parsed.variantName);
+  }
+  function kamT140WaitForVariantInDom(timeoutMs = 3000) {
+    const existing = document.querySelector(kamT140VariantWaitSelector);
+    if (existing && kamT140NormalizeModelText(existing.textContent)) {
+      return Promise.resolve();
+    }
+    return new Promise(resolve => {
+      let settled = false;
+      function finish() {
+        if (settled) {
+          return;
+        }
+        settled = true;
+        resolve();
+      }
+      let pollId = null;
+      const timeoutId = window.setTimeout(() => {
+        if (pollId) {
+          window.clearInterval(pollId);
+        }
+        finish();
+      }, timeoutMs);
+      if (typeof Kameleoon !== 'undefined' && Kameleoon.API && Kameleoon.API.Core && typeof Kameleoon.API.Core.runWhenElementPresent === 'function') {
+        Kameleoon.API.Core.runWhenElementPresent(kamT140VariantWaitSelector, () => {
+          window.clearTimeout(timeoutId);
+          finish();
+        });
+        return;
+      }
+      pollId = window.setInterval(() => {
+        const element = document.querySelector(kamT140VariantWaitSelector);
+        if (element && kamT140NormalizeModelText(element.textContent)) {
+          window.clearInterval(pollId);
+          window.clearTimeout(timeoutId);
+          finish();
+        }
+      }, 100);
+    });
   }
   function kamT140FillMissingModelData(parsed) {
     const result = {
@@ -270,22 +315,26 @@
   function isTargetUrl(url) {
     return typeof url === 'string' && url.indexOf(TARGET_ENDPOINT) !== -1;
   }
-  function injectTemperature(body) {
+  function kamT140PrepareRequestBody(body) {
     if (typeof body !== 'string') {
-      return body;
+      return Promise.resolve(body);
     }
+    let parsed;
     try {
-      const parsed = JSON.parse(body);
-      if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) {
-        return body;
-      }
+      parsed = JSON.parse(body);
+    } catch (error) {
+      return Promise.resolve(body);
+    }
+    if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) {
+      return Promise.resolve(body);
+    }
+    const waitPromise = kamT140NeedsModelFallback(parsed) ? kamT140WaitForVariantInDom(3000) : Promise.resolve();
+    return waitPromise.then(() => {
       const fillResult = kamT140FillMissingModelData(parsed);
       parsed.temperature = TEMPERATURE_VALUE;
       kamT140StoreHotLeadPayload(parsed, fillResult.modelFromDom);
       return JSON.stringify(parsed);
-    } catch (error) {
-      return body;
-    }
+    });
   }
   function patchFetch() {
     const originalFetch = window.fetch;
@@ -295,11 +344,13 @@
     const patchedFetch = function kamT140Fetch(input, init) {
       const url = getUrlString(input);
       if (isTargetUrl(url) && init && typeof init.body === 'string') {
-        const nextInit = {
-          ...init,
-          body: injectTemperature(init.body)
-        };
-        return originalFetch.call(this, input, nextInit);
+        return kamT140PrepareRequestBody(init.body).then(nextBody => {
+          const nextInit = {
+            ...init,
+            body: nextBody
+          };
+          return originalFetch.call(this, input, nextInit);
+        });
       }
       return originalFetch.call(this, input, init);
     };
@@ -319,7 +370,11 @@
     };
     XhrProto.send = function kamT140Send(body) {
       if (this.__kamT140IsTarget && typeof body === 'string') {
-        return originalSend.call(this, injectTemperature(body));
+        const xhr = this;
+        kamT140PrepareRequestBody(body).then(nextBody => {
+          originalSend.call(xhr, nextBody);
+        });
+        return;
       }
       return originalSend.call(this, body);
     };

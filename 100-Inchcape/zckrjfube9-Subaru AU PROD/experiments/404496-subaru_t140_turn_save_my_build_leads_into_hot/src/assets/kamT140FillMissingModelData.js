@@ -1,6 +1,10 @@
 /* eslint-disable no-console */
 
+const kamT140VariantWaitSelector = '#customise_summary [data-test="title:variantName"]';
+
 const kamT140VariantSelectors = [
+    kamT140VariantWaitSelector,
+    '[data-test="trim_level_name:trim"] [data-test="title:variantName"]',
     'div[data-test="specPack:list"] div[data-selected="true"] h6[data-test="title:model"]',
     '#customise_summary h6[data-test="title:model"]',
     '#customise_summary [data-test="title:model"]',
@@ -88,6 +92,67 @@ function kamT140GetDomModelData() {
         modelName,
         variantName,
     };
+}
+
+export function kamT140NeedsModelFallback(parsed) {
+    if (!parsed || typeof parsed !== 'object') {
+        return false;
+    }
+
+    return !kamT140HasModelValue(parsed.modelName) || !kamT140HasModelValue(parsed.variantName);
+}
+
+export function kamT140WaitForVariantInDom(timeoutMs = 3000) {
+    const existing = document.querySelector(kamT140VariantWaitSelector);
+
+    if (existing && kamT140NormalizeModelText(existing.textContent)) {
+        return Promise.resolve();
+    }
+
+    return new Promise((resolve) => {
+        let settled = false;
+
+        function finish() {
+            if (settled) {
+                return;
+            }
+
+            settled = true;
+            resolve();
+        }
+
+        let pollId = null;
+        const timeoutId = window.setTimeout(() => {
+            if (pollId) {
+                window.clearInterval(pollId);
+            }
+
+            finish();
+        }, timeoutMs);
+
+        if (
+            typeof Kameleoon !== 'undefined'
+            && Kameleoon.API
+            && Kameleoon.API.Core
+            && typeof Kameleoon.API.Core.runWhenElementPresent === 'function'
+        ) {
+            Kameleoon.API.Core.runWhenElementPresent(kamT140VariantWaitSelector, () => {
+                window.clearTimeout(timeoutId);
+                finish();
+            });
+            return;
+        }
+
+        pollId = window.setInterval(() => {
+            const element = document.querySelector(kamT140VariantWaitSelector);
+
+            if (element && kamT140NormalizeModelText(element.textContent)) {
+                window.clearInterval(pollId);
+                window.clearTimeout(timeoutId);
+                finish();
+            }
+        }, 100);
+    });
 }
 
 export default function kamT140FillMissingModelData(parsed) {

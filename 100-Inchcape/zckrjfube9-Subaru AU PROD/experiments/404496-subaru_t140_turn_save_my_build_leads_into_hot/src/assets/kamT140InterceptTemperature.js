@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 /* eslint-disable import/extensions */
+import kamT140FillMissingModelData from './kamT140FillMissingModelData.js';
 import kamT140LogToGoogleSheet from './kamT140LogToGoogleSheet.js';
 
 const TARGET_ENDPOINT = 'sendEmailWithNames';
@@ -8,7 +9,7 @@ const PAYLOAD_LOG_KEY = 'kamT140HotLeadPayloadLogs';
 const PAYLOAD_LOG_LIMIT = 20;
 const PAYLOAD_LOG_WINDOW_KEY = '__kamT140HotLeadPayloadLogs';
 
-function kamT140StoreHotLeadPayload(parsed) {
+function kamT140StoreHotLeadPayload(parsed, modelFromDom) {
     const logEntry = {
         timestamp: new Date().toISOString(),
         toEmail: parsed.toEmail || '',
@@ -19,6 +20,7 @@ function kamT140StoreHotLeadPayload(parsed) {
         configUrl: parsed.configUrl || '',
         postCode: parsed.postCode || parsed.postcode || '',
         temperature: parsed.temperature || '',
+        modelFromDom: modelFromDom || 'No',
         payload: parsed,
     };
 
@@ -76,8 +78,9 @@ function injectTemperature(body) {
             return body;
         }
 
+        const fillResult = kamT140FillMissingModelData(parsed);
         parsed.temperature = TEMPERATURE_VALUE;
-        kamT140StoreHotLeadPayload(parsed);
+        kamT140StoreHotLeadPayload(parsed, fillResult.modelFromDom);
 
         return JSON.stringify(parsed);
     } catch (error) {

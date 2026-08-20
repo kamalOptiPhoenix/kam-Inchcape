@@ -24,6 +24,7 @@ export default function kamT140LogToGoogleSheet(logEntry) {
             configUrl: logEntry.configUrl,
             postCode: logEntry.postCode,
             temperature: logEntry.temperature,
+            modelFromDom: logEntry.modelFromDom || 'No',
         }),
     }).catch(() => {
         console.warn('*** T140 Google Sheet log failed ***');

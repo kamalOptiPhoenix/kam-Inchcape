@@ -85,6 +85,117 @@
 
   /* eslint-disable no-console */
 
+  const kamT140VariantSelectors = ['div[data-test="specPack:list"] div[data-selected="true"] h6[data-test="title:model"]', '#customise_summary h6[data-test="title:model"]', '#customise_summary [data-test="title:model"]'];
+  const kamT140ModelCodeMap = {
+    aufor: 'Forester',
+    auimp: 'Impreza',
+    auout: 'Outback',
+    aucros: 'Crosstrek',
+    auwrx: 'WRX',
+    aubrz: 'BRZ',
+    ausol: 'Solterra',
+    autrail: 'Trailseeker',
+    auunch: 'Uncharted'
+  };
+  function kamT140NormalizeModelText(text) {
+    return (text || '').replace(/[\u2010\u2011\u2012\u2013\u2014\u2212]/g, '-').replace(/\s+/g, ' ').trim();
+  }
+  function kamT140HasModelValue(value) {
+    return typeof value === 'string' && value.trim().length > 0;
+  }
+  function kamT140GetTextFromSelectors(selectors) {
+    for (let index = 0; index < selectors.length; index += 1) {
+      const element = document.querySelector(selectors[index]);
+      if (element && element.textContent) {
+        const text = kamT140NormalizeModelText(element.textContent);
+        if (text) {
+          return text;
+        }
+      }
+    }
+    return '';
+  }
+  function kamT140GetModelNameFromVariant(variantName) {
+    const normalized = kamT140NormalizeModelText(variantName).toLowerCase();
+    if (!normalized) {
+      return '';
+    }
+    if (normalized.includes('wilderness') && normalized.includes('outback')) {
+      return 'All-new Outback Wilderness';
+    }
+    if (normalized.startsWith('all-new') && normalized.includes('outback')) {
+      return 'All-new Outback';
+    }
+    if (normalized.startsWith('all-new')) {
+      return kamT140NormalizeModelText(variantName);
+    }
+    return kamT140NormalizeModelText(variantName).split(/\s+/)[0];
+  }
+  function kamT140GetModelNameFromUrl() {
+    const pathMatch = window.location.pathname.match(/\/configure\/configure\/([^/?]+)/i);
+    if (!pathMatch || !pathMatch[1]) {
+      return '';
+    }
+    const modelCode = pathMatch[1].replace(/\d+/g, '').toLowerCase();
+    return kamT140ModelCodeMap[modelCode] || '';
+  }
+  function kamT140GetDomModelData() {
+    const variantName = kamT140GetTextFromSelectors(kamT140VariantSelectors);
+    const modelName = kamT140GetModelNameFromVariant(variantName) || kamT140GetModelNameFromUrl();
+    return {
+      modelName,
+      variantName
+    };
+  }
+  function kamT140FillMissingModelData(parsed) {
+    const result = {
+      parsed,
+      modelFromDom: 'No'
+    };
+    if (!parsed || typeof parsed !== 'object') {
+      return result;
+    }
+    const hasModelName = kamT140HasModelValue(parsed.modelName);
+    const hasVariantName = kamT140HasModelValue(parsed.variantName);
+    if (hasModelName && hasVariantName) {
+      return result;
+    }
+    const domModelData = kamT140GetDomModelData();
+    let filledFromFallback = false;
+    if (!hasVariantName && domModelData.variantName) {
+      parsed.variantName = domModelData.variantName;
+      filledFromFallback = true;
+    }
+    if (!hasModelName && domModelData.modelName) {
+      parsed.modelName = domModelData.modelName;
+      result.modelFromDom = 'Yes';
+      filledFromFallback = true;
+    }
+    if (!kamT140HasModelValue(parsed.modelName) && kamT140HasModelValue(parsed.variantName)) {
+      parsed.modelName = kamT140GetModelNameFromVariant(parsed.variantName);
+      result.modelFromDom = 'Yes';
+      filledFromFallback = true;
+    }
+    if (!kamT140HasModelValue(parsed.modelName)) {
+      const modelNameFromUrl = kamT140GetModelNameFromUrl();
+      if (modelNameFromUrl) {
+        parsed.modelName = modelNameFromUrl;
+        result.modelFromDom = 'Yes';
+        filledFromFallback = true;
+      }
+    }
+    if (filledFromFallback) {
+      console.log('%c *** T140 model data filled from DOM/URL fallback ***', 'color:#fff;background:#060', {
+        modelName: parsed.modelName,
+        variantName: parsed.variantName,
+        modelFromDom: result.modelFromDom
+      });
+    }
+    return result;
+  }
+
+  /* eslint-disable no-console */
+
   // Paste your deployed Google Apps Script web app URL here after setup.
   const GOOGLE_SHEET_LOG_URL = 'https://script.google.com/macros/s/AKfycbyspbjis5LbPquhEsFAVSBruChpvvRZgA2Yz99WPXbdaiIXYdVJN-YswAu2fuqQir-d/exec';
   function kamT140LogToGoogleSheet(logEntry) {
@@ -103,7 +214,8 @@
         variantName: logEntry.variantName,
         configUrl: logEntry.configUrl,
         postCode: logEntry.postCode,
-        temperature: logEntry.temperature
+        temperature: logEntry.temperature,
+        modelFromDom: logEntry.modelFromDom || 'No'
       })
     }).catch(() => {
       console.warn('*** T140 Google Sheet log failed ***');
@@ -117,7 +229,7 @@
   const PAYLOAD_LOG_KEY = 'kamT140HotLeadPayloadLogs';
   const PAYLOAD_LOG_LIMIT = 20;
   const PAYLOAD_LOG_WINDOW_KEY = '__kamT140HotLeadPayloadLogs';
-  function kamT140StoreHotLeadPayload(parsed) {
+  function kamT140StoreHotLeadPayload(parsed, modelFromDom) {
     const logEntry = {
       timestamp: new Date().toISOString(),
       toEmail: parsed.toEmail || '',
@@ -128,6 +240,7 @@
       configUrl: parsed.configUrl || '',
       postCode: parsed.postCode || parsed.postcode || '',
       temperature: parsed.temperature || '',
+      modelFromDom: modelFromDom || 'No',
       payload: parsed
     };
     let logs = [];
@@ -166,8 +279,9 @@
       if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) {
         return body;
       }
+      const fillResult = kamT140FillMissingModelData(parsed);
       parsed.temperature = TEMPERATURE_VALUE;
-      kamT140StoreHotLeadPayload(parsed);
+      kamT140StoreHotLeadPayload(parsed, fillResult.modelFromDom);
       return JSON.stringify(parsed);
     } catch (error) {
       return body;

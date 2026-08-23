@@ -22,6 +22,8 @@ const kamT140ModelCodeMap = {
     auunch: 'Uncharted',
 };
 
+const kamT140AllNewOutbackCode = 'auout2026';
+
 function kamT140NormalizeModelText(text) {
     return (text || '')
         .replace(/[\u2010\u2011\u2012\u2013\u2014\u2212]/g, '-')
@@ -49,6 +51,16 @@ function kamT140GetTextFromSelectors(selectors) {
     return '';
 }
 
+function kamT140GetConfigureModelCode() {
+    const pathMatch = window.location.pathname.match(/\/configure\/configure\/([^/?]+)/i);
+
+    if (!pathMatch || !pathMatch[1]) {
+        return '';
+    }
+
+    return pathMatch[1].toLowerCase();
+}
+
 function kamT140GetModelNameFromVariant(variantName) {
     const normalized = kamT140NormalizeModelText(variantName).toLowerCase();
 
@@ -56,37 +68,56 @@ function kamT140GetModelNameFromVariant(variantName) {
         return '';
     }
 
-    if (normalized.includes('wilderness') && normalized.includes('outback')) {
-        return 'All-new Outback Wilderness';
-    }
-
-    if (normalized.startsWith('all-new') && normalized.includes('outback')) {
+    // All-new Outback line (AUOUT2026): AWD / Premium / Touring / Wilderness / Wilderness Apex
+    if (normalized.includes('outback')
+        && (normalized.includes('wilderness') || normalized.startsWith('all-new'))) {
         return 'All-new Outback';
     }
 
+    // Runout Outback line (AUOUT): Outback AWD, Sport, Touring, XT, Onyx
+    if (normalized.includes('outback')) {
+        return 'Outback';
+    }
+
+    // "All-new Forester AWD Hybrid" -> "Forester" (match native short modelName)
     if (normalized.startsWith('all-new')) {
-        return kamT140NormalizeModelText(variantName);
+        const parts = kamT140NormalizeModelText(variantName).split(/\s+/);
+
+        return parts[1] || '';
     }
 
     return kamT140NormalizeModelText(variantName).split(/\s+/)[0];
 }
 
 function kamT140GetModelNameFromUrl() {
-    const pathMatch = window.location.pathname.match(/\/configure\/configure\/([^/?]+)/i);
+    const modelCode = kamT140GetConfigureModelCode();
 
     if (!pathMatch || !pathMatch[1]) {
         return '';
     }
 
-    const modelCode = pathMatch[1].replace(/\d+/g, '').toLowerCase();
+    // AUOUT2026 = All-new Outback (all trims including Wilderness)
+    if (modelCode.indexOf(kamT140AllNewOutbackCode) === 0) {
+        return 'All-new Outback';
+    }
 
-    return kamT140ModelCodeMap[modelCode] || '';
+    const mappedCode = modelCode.replace(/\d+/g, '');
+
+    return kamT140ModelCodeMap[mappedCode] || '';
 }
 
 function kamT140GetDomModelData() {
     const variantName = kamT140GetTextFromSelectors(kamT140VariantSelectors);
-    const modelName = kamT140GetModelNameFromVariant(variantName)
-        || kamT140GetModelNameFromUrl();
+    const modelNameFromVariant = kamT140GetModelNameFromVariant(variantName);
+    const modelNameFromUrl = kamT140GetModelNameFromUrl();
+
+    // Prefer URL for Outback family so AUOUT2026 trims are not mislabeled as runout
+    // when Summary text is "Outback AWD Touring" without the "All-new" prefix.
+    let modelName = modelNameFromVariant || modelNameFromUrl;
+
+    if (modelNameFromUrl === 'All-new Outback' || modelNameFromUrl === 'Outback') {
+        modelName = modelNameFromUrl;
+    }
 
     return {
         modelName,

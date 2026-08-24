@@ -86,7 +86,11 @@
   /* eslint-disable no-console */
 
   const kamT140VariantWaitSelector = '#customise_summary [data-test="title:variantName"]';
-  const kamT140VariantSelectors = [kamT140VariantWaitSelector, '[data-test="trim_level_name:trim"] [data-test="title:variantName"]', 'div[data-test="specPack:list"] div[data-selected="true"] h6[data-test="title:model"]', '#customise_summary h6[data-test="title:model"]', '#customise_summary [data-test="title:model"]'];
+  const kamT140SelectedSpecPackSelector = 'div[data-test="specPack:list"] div[data-selected="true"] h6[data-test="title:model"]';
+
+  // Prefer selected spec-pack title first — Summary title:variantName can concatenate
+  // feature labels (e.g. "Uncharted AWD Panoramic Glass Roof/Premium Paint").
+  const kamT140VariantSelectors = [kamT140SelectedSpecPackSelector, '[data-test="trim_level_name:trim"] > [data-test="title:variantName"]', kamT140VariantWaitSelector, '#customise_summary h6[data-test="title:model"]', '#customise_summary [data-test="title:model"]'];
   const kamT140ModelCodeMap = {
     aufor: 'Forester',
     auimp: 'Impreza',
@@ -96,23 +100,40 @@
     aubrz: 'BRZ',
     ausol: 'Solterra',
     autrail: 'Trailseeker',
-    auunch: 'Uncharted'
+    auunc: 'Uncharted'
   };
   const kamT140AllNewOutbackCode = 'auout2026';
+
+  // Known bad DOM / payload variant labels -> Salesforce catalog names
+  const kamT140VariantNameReplacements = {
+    'Uncharted AWD Panoramic Glass Roof/Premium Paint': 'Uncharted AWD with Panoramic Glass Roof'
+  };
   function kamT140NormalizeModelText(text) {
     return (text || '').replace(/[\u2010\u2011\u2012\u2013\u2014\u2212]/g, '-').replace(/\s+/g, ' ').trim();
   }
   function kamT140HasModelValue(value) {
     return typeof value === 'string' && value.trim().length > 0;
   }
+  function kamT140CleanVariantName(text) {
+    const cleaned = kamT140NormalizeModelText(text);
+    if (!cleaned) {
+      return '';
+    }
+    if (kamT140VariantNameReplacements[cleaned]) {
+      return kamT140VariantNameReplacements[cleaned];
+    }
+    return cleaned;
+  }
   function kamT140GetTextFromSelectors(selectors) {
     for (let index = 0; index < selectors.length; index += 1) {
       const element = document.querySelector(selectors[index]);
-      if (element && element.textContent) {
-        const text = kamT140NormalizeModelText(element.textContent);
-        if (text) {
-          return text;
-        }
+      if (!element) {
+        continue;
+      }
+      const rawText = element.innerText || element.textContent || '';
+      const text = kamT140CleanVariantName(rawText);
+      if (text) {
+        return text;
       }
     }
     return '';
@@ -228,13 +249,29 @@
     if (!parsed || typeof parsed !== 'object') {
       return result;
     }
+    let filledFromFallback = false;
     const hasModelName = kamT140HasModelValue(parsed.modelName);
-    const hasVariantName = kamT140HasModelValue(parsed.variantName);
+    let hasVariantName = kamT140HasModelValue(parsed.variantName);
+
+    // Hardcoded catalog fixes (e.g. Uncharted panoramic + premium paint label)
+    if (hasVariantName) {
+      const cleanedVariantName = kamT140CleanVariantName(parsed.variantName);
+      if (cleanedVariantName && cleanedVariantName !== kamT140NormalizeModelText(parsed.variantName)) {
+        parsed.variantName = cleanedVariantName;
+        filledFromFallback = true;
+        hasVariantName = kamT140HasModelValue(parsed.variantName);
+      }
+    }
     if (hasModelName && hasVariantName) {
+      if (filledFromFallback) {
+        console.log('%c *** T140 variantName cleaned ***', 'color:#fff;background:#060', {
+          modelName: parsed.modelName,
+          variantName: parsed.variantName
+        });
+      }
       return result;
     }
     const domModelData = kamT140GetDomModelData();
-    let filledFromFallback = false;
     if (!hasVariantName && domModelData.variantName) {
       parsed.variantName = domModelData.variantName;
       filledFromFallback = true;

@@ -115,10 +115,15 @@
     return typeof value === 'string' && value.trim().length > 0;
   }
   function kamT140CleanVariantName(text) {
-    const cleaned = kamT140NormalizeModelText(text);
+    let cleaned = kamT140NormalizeModelText(text);
     if (!cleaned) {
       return '';
     }
+
+    // Native payloads / Salesforce catalog never put "All-new" in variantName.
+    // modelName holds "All-new Outback"; variant is e.g. "Outback AWD".
+    // DOM sometimes shows "All-new Outback AWD" — strip the prefix.
+    cleaned = cleaned.replace(/^all-new\s+/i, '');
     if (kamT140VariantNameReplacements[cleaned]) {
       return kamT140VariantNameReplacements[cleaned];
     }

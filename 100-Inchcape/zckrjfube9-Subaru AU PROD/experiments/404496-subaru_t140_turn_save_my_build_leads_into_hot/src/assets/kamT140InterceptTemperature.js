@@ -90,13 +90,12 @@ function kamT140PrepareRequestBody(body) {
         ? kamT140WaitForVariantInDom(3000)
         : Promise.resolve();
 
-    return waitPromise.then(() => {
-        const fillResult = kamT140FillMissingModelData(parsed);
+    return waitPromise.then(() => kamT140FillMissingModelData(parsed).then((fillResult) => {
         parsed.temperature = TEMPERATURE_VALUE;
         kamT140StoreHotLeadPayload(parsed, fillResult.modelFromDom);
 
         return JSON.stringify(parsed);
-    });
+    }));
 }
 
 function patchFetch() {

@@ -13,19 +13,26 @@ const kamT140VariantSelectors = [
     '#customise_summary [data-test="title:model"]',
 ];
 
+// Live model codes from /configure/configure/ URLs (lookup key = code with digits removed)
+// AUIMP2026, AUCT2026, AUFOR26, AUOUT, AUOUT2026, AUBRZ2026, AUWRX2026, AUSOL, AUTS2026, AUUNC2026
 const kamT140ModelCodeMap = {
-    aufor: 'Forester',
     auimp: 'Impreza',
+    auct: 'Crosstrek',
+    aufor: 'Forester',
     auout: 'Outback',
-    aucros: 'Crosstrek',
-    auwrx: 'WRX',
     aubrz: 'BRZ',
+    auwrx: 'WRX',
     ausol: 'Solterra',
-    autrail: 'Trailseeker',
+    auts: 'Trailseeker',
     auunc: 'Uncharted',
+    // legacy aliases
+    aucros: 'Crosstrek',
+    autrail: 'Trailseeker',
 };
 
 const kamT140AllNewOutbackCode = 'auout2026';
+const kamT140ConfigurePathPattern = /\/configure\/configure\/([^/?&#"'\\]+)/i;
+const kamT140TinyUrlResolveTimeoutMs = 3000;
 
 // Known bad DOM / payload variant labels -> Salesforce catalog names
 const kamT140VariantNameReplacements = {
@@ -82,6 +89,104 @@ function kamT140GetTextFromSelectors(selectors) {
     return '';
 }
 
+function kamT140GetModelCodeFromUrlString(urlString) {
+    if (!urlString) {
+        return '';
+    }
+
+    const match = String(urlString).match(kamT140ConfigurePathPattern);
+
+    if (!match || !match[1]) {
+        return '';
+    }
+
+    return match[1].toLowerCase();
+}
+
+function kamT140GetModelCodeFromHtml(html) {
+    if (!html) {
+        return '';
+    }
+
+    const match = String(html).match(kamT140ConfigurePathPattern);
+
+    if (!match || !match[1]) {
+        return '';
+    }
+
+    return match[1].toLowerCase();
+}
+
+function kamT140IsTinyUrl(configUrl) {
+    return typeof configUrl === 'string' && /tinyurl\.com/i.test(configUrl);
+}
+
+function kamT140GetModelNameFromModelCode(modelCode) {
+    if (!modelCode) {
+        return '';
+    }
+
+    const normalized = modelCode.toLowerCase();
+
+    // AUOUT2026 = All-new Outback (all trims including Wilderness)
+    if (normalized.indexOf(kamT140AllNewOutbackCode) === 0) {
+        return 'All-new Outback';
+    }
+
+    const mappedCode = normalized.replace(/\d+/g, '');
+
+    return kamT140ModelCodeMap[mappedCode] || '';
+}
+
+function kamT140ResolveModelNameFromTinyUrl(configUrl) {
+    if (!kamT140IsTinyUrl(configUrl)) {
+        return Promise.resolve('');
+    }
+
+    let timeoutId = null;
+    let controller = null;
+
+    if (typeof AbortController !== 'undefined') {
+        controller = new AbortController();
+        timeoutId = window.setTimeout(() => {
+            controller.abort();
+        }, kamT140TinyUrlResolveTimeoutMs);
+    }
+
+    return fetch(configUrl, {
+        method: 'GET',
+        redirect: 'follow',
+        signal: controller ? controller.signal : undefined,
+    })
+        .then((response) => {
+            let modelCode = kamT140GetModelCodeFromUrlString(response.url);
+
+            if (modelCode) {
+                return kamT140GetModelNameFromModelCode(modelCode);
+            }
+
+            return response.text().then((html) => (
+                kamT140GetModelNameFromModelCode(kamT140GetModelCodeFromHtml(html))
+            ));
+        })
+        .catch((error) => {
+            console.log(
+                '%c *** T140 tinyurl model resolve failed ***',
+                'color:#fff;background:#900',
+                { configUrl, error }
+            );
+
+            return '';
+        })
+        .then((modelName) => {
+            if (timeoutId) {
+                window.clearTimeout(timeoutId);
+            }
+
+            return modelName;
+        });
+}
+
 function kamT140GetConfigureModelCode() {
     const pathMatch = window.location.pathname.match(/\/configure\/configure\/([^/?]+)/i);
 
@@ -123,18 +228,7 @@ function kamT140GetModelNameFromVariant(variantName) {
 function kamT140GetModelNameFromUrl() {
     const modelCode = kamT140GetConfigureModelCode();
 
-    if (!modelCode) {
-        return '';
-    }
-
-    // AUOUT2026 = All-new Outback (all trims including Wilderness)
-    if (modelCode.indexOf(kamT140AllNewOutbackCode) === 0) {
-        return 'All-new Outback';
-    }
-
-    const mappedCode = modelCode.replace(/\d+/g, '');
-
-    return kamT140ModelCodeMap[mappedCode] || '';
+    return kamT140GetModelNameFromModelCode(modelCode);
 }
 
 function kamT140GetDomModelData() {
@@ -224,7 +318,7 @@ export default function kamT140FillMissingModelData(parsed) {
     };
 
     if (!parsed || typeof parsed !== 'object') {
-        return result;
+        return Promise.resolve(result);
     }
 
     let filledFromFallback = false;
@@ -254,7 +348,7 @@ export default function kamT140FillMissingModelData(parsed) {
             );
         }
 
-        return result;
+        return Promise.resolve(result);
     }
 
     const domModelData = kamT140GetDomModelData();
@@ -286,17 +380,38 @@ export default function kamT140FillMissingModelData(parsed) {
         }
     }
 
-    if (filledFromFallback) {
-        console.log(
-            '%c *** T140 model data filled from DOM/URL fallback ***',
-            'color:#fff;background:#060',
-            {
-                modelName: parsed.modelName,
-                variantName: parsed.variantName,
-                modelFromDom: result.modelFromDom,
-            }
-        );
-    }
+    const tinyUrlPromise = !kamT140HasModelValue(parsed.modelName) && kamT140IsTinyUrl(parsed.configUrl)
+        ? kamT140ResolveModelNameFromTinyUrl(parsed.configUrl)
+        : Promise.resolve('');
 
-    return result;
+    return tinyUrlPromise.then((modelNameFromTinyUrl) => {
+        if (!kamT140HasModelValue(parsed.modelName) && modelNameFromTinyUrl) {
+            parsed.modelName = modelNameFromTinyUrl;
+            result.modelFromDom = 'Yes';
+            filledFromFallback = true;
+
+            console.log(
+                '%c *** T140 modelName filled from tinyurl ***',
+                'color:#fff;background:#060',
+                {
+                    configUrl: parsed.configUrl,
+                    modelName: parsed.modelName,
+                }
+            );
+        }
+
+        if (filledFromFallback) {
+            console.log(
+                '%c *** T140 model data filled from DOM/URL fallback ***',
+                'color:#fff;background:#060',
+                {
+                    modelName: parsed.modelName,
+                    variantName: parsed.variantName,
+                    modelFromDom: result.modelFromDom,
+                }
+            );
+        }
+
+        return result;
+    });
 }

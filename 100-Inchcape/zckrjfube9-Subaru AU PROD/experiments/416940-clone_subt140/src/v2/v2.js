@@ -1,18 +1,16 @@
 /* eslint-disable no-console */
 /* eslint-disable import/extensions */
-import kamT140AddPreferredPhone from '../assets/kamT140AddPreferredPhone.js';
 import kamT140InitLeadsCaptured from '../assets/kamT140InitLeadsCaptured.js';
 import kamT140InterceptTemperature from '../assets/kamT140InterceptTemperature.js';
 
-(function kamT140SubaruV1() {
+(function kamT140SubaruV2() {
     function init() {
-        if (document.body.classList.contains('subt140')) {
+        if (document.body.classList.contains('subt140v2')) {
             return;
         }
 
-        console.log('%c *** Subaru T140 V1 - Turn Save my Build Leads into HOT', 'color:red;background:white');
-        document.body.classList.add('subt140');
-        kamT140AddPreferredPhone();
+        console.log('%c *** Subaru T140 V2 - Turn Save my Build Leads into HOT', 'color:red;background:white');
+        document.body.classList.add('subt140v2');
         kamT140InterceptTemperature();
         kamT140InitLeadsCaptured();
     }

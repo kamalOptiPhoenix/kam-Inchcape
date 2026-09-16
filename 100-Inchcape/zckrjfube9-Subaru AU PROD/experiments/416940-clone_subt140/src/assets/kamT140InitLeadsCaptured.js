@@ -1,7 +1,13 @@
 /* eslint-disable no-console */
 
 const EMAIL_KEY = 'kamT140EmailCollected';
+const NATIVE_EMAIL_KEY = 'T37EmailCollected';
 const FIRED_KEY = 'kamT140DigitalDataFired';
+
+function kamT140GetCollectedEmail() {
+    const email = sessionStorage.getItem(EMAIL_KEY) || sessionStorage.getItem(NATIVE_EMAIL_KEY);
+    return email ? email.trim() : '';
+}
 
 function hashEmailSha256(email) {
     const normalized = email.trim().toLowerCase();
@@ -50,7 +56,7 @@ function tryFireDigitalData() {
         return;
     }
 
-    const email = sessionStorage.getItem(EMAIL_KEY);
+    const email = kamT140GetCollectedEmail();
     if (!email || !isSummaryInViewport()) {
         return;
     }
@@ -75,7 +81,9 @@ function storeEmailFromLeadModal() {
         return;
     }
 
-    sessionStorage.setItem(EMAIL_KEY, emailInput.value.trim());
+    const email = emailInput.value.trim();
+    sessionStorage.setItem(EMAIL_KEY, email);
+    sessionStorage.setItem(NATIVE_EMAIL_KEY, email);
     console.log('%c *** T140 email stored ***', 'color:red;background:white');
     tryFireDigitalData();
 }

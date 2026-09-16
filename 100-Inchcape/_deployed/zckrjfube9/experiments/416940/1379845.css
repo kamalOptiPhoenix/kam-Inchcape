@@ -1,0 +1,187 @@
+div.SPC_WIDGET-MuiDialog-root[data-test="modal:leadCapture"] h6 span[data-translationkey=trans__configurator__dealer_selection_modal__personal_details_description] {
+  font-size: 0;
+  line-height: 1.5;
+}
+
+div.SPC_WIDGET-MuiDialog-root[data-test="modal:leadCapture"] h6 span[data-translationkey=trans__configurator__dealer_selection_modal__personal_details_description]::after {
+  content: "Please enter your first name and email address so we can send you your configuration. One of our dealership sales consultants may also reach out if you have any questions or would like personalised assistance.";
+  display: block;
+  color: #222;
+  font-size: 18px;
+  text-align: center;
+  font-weight: 400;
+}
+
+body.kamT140V3_popupOpen {
+  overflow: hidden;
+}
+
+.kamT140V3_overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 2147483000;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding: 24px 16px;
+  background: rgba(0, 0, 0, 0.45);
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.kamT140V3_overlay.kamT140V3_overlay--active {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.kamT140V3_modal {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  background: #fff;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+  padding: 40px 32px 32px;
+  text-align: center;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.kamT140V3_close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  background: transparent;
+  color: #111;
+  cursor: pointer;
+  padding: 0;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.kamT140V3_heading,
+.kamT140V3_thankYou {
+  margin: 0 0 12px;
+  color: #1637A0;
+  font-size: 28px;
+  line-height: 1.25;
+  font-weight: 700;
+}
+
+.kamT140V3_subcopy,
+.kamT140V3_sentCopy,
+.kamT140V3_followUp {
+  margin: 0 auto;
+  max-width: 420px;
+  color: #222;
+  font-size: 16px;
+  line-height: 1.45;
+  font-weight: 400;
+}
+
+.kamT140V3_imageWrap {
+  margin: 28px auto 24px;
+  max-width: 420px;
+}
+
+.kamT140V3_carImage {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 220px;
+  -o-object-fit: contain;
+  object-fit: contain;
+}
+
+.kamT140V3_actions {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  gap: 12px;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+.kamT140V3_actions--single {
+  margin-top: 20px;
+}
+
+.kamT140V3_shareBtn,
+.kamT140V3_keepBtn,
+.kamT140V3_backBtn {
+  min-width: 160px;
+  height: 44px;
+  padding: 0 24px;
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.kamT140V3_shareBtn,
+.kamT140V3_backBtn {
+  border: 1px solid #1637A0;
+  background: #1637A0;
+  color: #fff;
+}
+
+.kamT140V3_keepBtn {
+  border: 1px solid #1637A0;
+  background: #fff;
+  color: #1637A0;
+}
+
+.kamT140V3_confirmView .kamT140V3_sentCopy {
+  margin-bottom: 0;
+}
+
+.kamT140V3_confirmView .kamT140V3_followUp {
+  margin-top: 8px;
+}
+
+.kamT140V3_backBtn {
+  min-width: 200px;
+}
+
+@media (max-width: 600px) {
+  .kamT140V3_modal {
+    padding: 36px 20px 24px;
+  }
+
+  .kamT140V3_heading,
+  .kamT140V3_thankYou {
+    font-size: 24px;
+  }
+
+  .kamT140V3_shareBtn,
+  .kamT140V3_keepBtn {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .kamT140V3_backBtn {
+    width: 100%;
+  }
+}

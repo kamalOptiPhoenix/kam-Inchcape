@@ -5,6 +5,7 @@ const LEAD_MODAL_SELECTOR = '[data-test="modal:leadCapture"]';
 const EMAIL_INPUT_SELECTOR = `${LEAD_MODAL_SELECTOR} input[data-test="input:email"]`;
 const NEXT_BUTTON_SELECTOR = '[data-test="button:personalDetails:next"]';
 const ERROR_MESSAGE = 'Please enter a valid phone number';
+const MIN_DIGITS = 10;
 const MAX_DIGITS = 10;
 const WATCH_INTERVAL_MS = 300;
 
@@ -18,6 +19,7 @@ const PHONE_FIELD_HTML = `
       type="tel"
       inputmode="numeric"
       autocomplete="tel"
+      minlength="${MIN_DIGITS}"
       maxlength="${MAX_DIGITS}"
       data-test="input:preferredPhone"
       class="SPC_WIDGET-MuiInputBase-input SPC_WIDGET-MuiInput-input"
@@ -34,7 +36,7 @@ function kamT140NormalizePhone(value) {
 
 function kamT140IsPhoneValid(value) {
     const digits = kamT140NormalizePhone(value);
-    return digits.length > 0 && digits.length <= MAX_DIGITS && /^\d+$/.test(digits);
+    return digits.length >= MIN_DIGITS && digits.length <= MAX_DIGITS && /^\d+$/.test(digits);
 }
 
 function kamT140StorePreferredPhone(value) {

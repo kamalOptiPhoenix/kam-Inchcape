@@ -11,7 +11,7 @@
 }
 
 .deet6 .deet6-butter-bar {
-  font-family: Gotham;
+  font-family: "Gotham Medium", sans-serif;
   position: fixed;
   top: var(--butter-bar-top, 0);
   left: 0;
@@ -100,7 +100,7 @@
     justify-content: center;
     text-align: center;
     color: #29323c;
-    font-family: Gotham;
+    font-family: "Gotham Medium", sans-serif;
     font-weight: 350;
     font-style: Medium;
     font-size: 12px;
@@ -169,7 +169,7 @@
     justify-content: center;
     text-align: center;
     color: #29323c;
-    font-family: Gotham;
+    font-family: "Gotham Medium", sans-serif;
     font-weight: 350;
     font-size: 10px;
     line-height: 12px;
@@ -211,7 +211,7 @@
     justify-content: center;
     text-align: center;
     color: #29323c;
-    font-family: Gotham;
+    font-family: "Gotham Medium", sans-serif;
     font-weight: 350;
     font-style: Medium;
     font-size: 12px;
@@ -283,7 +283,7 @@
     justify-content: center;
     text-align: center;
     color: #29323c;
-    font-family: Gotham;
+    font-family: "Gotham Medium", sans-serif;
     font-weight: 350;
     font-size: 10px;
     line-height: 12px;
@@ -324,7 +324,7 @@
     justify-content: center;
     text-align: center;
     color: #29323c;
-    font-family: Gotham;
+    font-family: "Gotham Medium", sans-serif;
     font-weight: 350;
     font-size: 12px;
     line-height: 16px;

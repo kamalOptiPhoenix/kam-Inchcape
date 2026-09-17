@@ -14,6 +14,8 @@ div.SPC_WIDGET-MuiDialog-root[data-test="modal:leadCapture"] h6 span[data-transl
 
 .kamT140PreferredPhone {
   margin: 0 0 24px;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
 }
 
 .kamT140PreferredPhone .SPC_WIDGET-MuiInput-underline.Mui-error::after {

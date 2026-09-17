@@ -42,14 +42,14 @@ function kamT140IsPhoneValid(value) {
 function kamT140StorePreferredPhone(value) {
     const digits = kamT140NormalizePhone(value);
     if (!digits) {
-        sessionStorage.removeItem(PHONE_STORAGE_KEY);
+        localStorage.removeItem(PHONE_STORAGE_KEY);
         return;
     }
-    sessionStorage.setItem(PHONE_STORAGE_KEY, digits);
+    localStorage.setItem(PHONE_STORAGE_KEY, digits);
 }
 
 export function kamT140GetPreferredPhone() {
-    return sessionStorage.getItem(PHONE_STORAGE_KEY) || '';
+    return localStorage.getItem(PHONE_STORAGE_KEY) || '';
 }
 
 function kamT140SetPhoneError(fieldRoot, input, hasError) {

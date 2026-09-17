@@ -407,7 +407,7 @@
 
   const PHONE_STORAGE_KEY = 'kamT140PreferredPhone';
   function kamT140GetPreferredPhone() {
-    return sessionStorage.getItem(PHONE_STORAGE_KEY) || '';
+    return localStorage.getItem(PHONE_STORAGE_KEY) || '';
   }
 
   /* eslint-disable no-console */

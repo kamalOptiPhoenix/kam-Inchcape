@@ -87,6 +87,72 @@ const domInjector = (() => {
 
     return { inject };
 })();
+
+/**
+ * Resilient inject for late/Slow-4G sections only (does NOT change section2/section4/headline).
+ * Waits for target, dedupes by uniqueId, re-injects if React wipes the node.
+ */
+const lateInject = ({
+    waitSelector,
+    parentSelector,
+    targetSelector,
+    targetClosestSelector,
+    html,
+    position = 'beforeend',
+    uniqueId,
+    onInsert
+}) => {
+    const LOG = '[subt136][lateInject]';
+    let observed = false;
+
+    const getTarget = () => {
+        let target = document.querySelector(targetSelector || waitSelector);
+        if (target && targetClosestSelector) {
+            target = target.closest(targetClosestSelector);
+        }
+        return target;
+    };
+
+    const insert = () => {
+        if (uniqueId && document.querySelector(uniqueId)) return false;
+        const target = getTarget();
+        if (!target) return false;
+        target.insertAdjacentHTML(position, html);
+        console.log(LOG, 'injected', uniqueId);
+        if (typeof onInsert === 'function') onInsert();
+        return true;
+    };
+
+    const bindObserver = () => {
+        if (observed) return;
+        const parent = document.querySelector(parentSelector);
+        if (!parent) return;
+        observed = true;
+        let timeout;
+        const observer = new MutationObserver(() => {
+            Kameleoon.API.Utils.clearTimeout(timeout);
+            timeout = Kameleoon.API.Utils.setTimeout(() => {
+                if (uniqueId && !document.querySelector(uniqueId)) {
+                    console.log(LOG, 're-inject after wipe', uniqueId);
+                    insert();
+                }
+            }, 200);
+        });
+        observer.observe(parent, { childList: true, subtree: true });
+    };
+
+    const run = () => {
+        insert();
+        bindObserver();
+    };
+
+    run();
+    Kameleoon.API.Core.runWhenElementPresent(waitSelector, run);
+    if (parentSelector && parentSelector !== waitSelector) {
+        Kameleoon.API.Core.runWhenElementPresent(parentSelector, run);
+    }
+};
+
 const config = {
     HTMLs: {
         section2: `
@@ -780,108 +846,101 @@ Driver Monitoring System<span class="subt136-footnote">*<span class="subt136-too
 
 
     },
+    _moveBlocksScheduled: false,
+
+    /** Retry moves when late nodes appear (Slow 4G). Does not change section2/4 inject. */
+    scheduleMoveReactBlocks() {
+        config.moveReactBlocks();
+        if (config._moveBlocksScheduled) return;
+        config._moveBlocksScheduled = true;
+
+        [
+            '.NFhp0A6EUn',
+            '[data-subt136-section4]',
+            '[data-subt136-section-new-headline]',
+            '.XdXNCvU5i3',
+            '#cid-62675',
+            '#cid-62676'
+        ].forEach((selector) => {
+            Kameleoon.API.Core.runWhenElementPresent(selector, () => {
+                config.moveReactBlocks();
+            });
+        });
+
+        [600, 1500, 3000].forEach((ms) => {
+            Kameleoon.API.Utils.setTimeout(() => {
+                config.moveReactBlocks();
+            }, ms);
+        });
+    },
+
     moveReactBlocks: () => {
-        // moving review section above model compare section
+        // No early-return: on Slow 4G some nodes arrive late; each move runs independently.
 
-        const reviewSection = document.querySelector('.NFhp0A6EUn');
-        const modelCompareSection = document.querySelector('.customContentPage .Q7fRqbxtJd');
-
-        if (!reviewSection || !modelCompareSection) return;
-
-        const reviewSectionReact = reviewSection.closest('div[id^="react_"]');
-        const modelCompareSectionReact = modelCompareSection.closest('div[id^="react_"]');
-
-        if (!reviewSectionReact || !modelCompareSectionReact) return;
-
-        if (reviewSectionReact.previousSibling !== modelCompareSectionReact) {
-            modelCompareSectionReact.parentNode.insertBefore(reviewSectionReact, modelCompareSectionReact);
-            // // console.log('✅ Moved');
-        }
-
-        // move technology and interior sections
-
-
-        // const headings = document.querySelectorAll('.FxFnug863P .anVEuPfQf3 h2');
-
-        const techReact = document.querySelector('#cid-62675') ? document.querySelector('#cid-62675').closest('div[id^="react_"]') : null;
-        const interiorReact = document.querySelector('#cid-62676') ? document.querySelector('#cid-62676').closest('div[id^="react_"]') : null;
-
-
-        if (!modelCompareSection) return;
-
-        const modelCompareReact = modelCompareSection.closest('div[id^="react_"]');
-        if (!modelCompareReact) return;
-
-        // ✅ Move Technology AFTER model compare
-        if (techReact && modelCompareReact.nextSibling !== techReact) {
-            modelCompareReact.parentNode.insertBefore(
-                techReact,
-                modelCompareReact.nextSibling
-            );
-            // console.log('✅ Technology moved after model compare');
-        }
-
-        // Inject custom tech block: domInjector expects STRING selectors, not Elements (Element → "[object HTMLDivElement]" error).
-        if (techReact) {
-            domInjector.inject({
-                parentSelector: `#${techReact.id}`,
-                targetRelativeSelector: '.tqQQ5puA4B.qn23cDY3tW',
-                html: config.HTMLs.techContent,
-                position: 'afterend',
-                uniqueId: '[data-subt136-tech-content]',
-                uniqueScope: 'document'
-            });
-        }
-
-
-        // ✅ Move Interior AFTER Technology (optional - adjust if needed)
-        if (interiorReact && techReact && techReact.nextSibling !== interiorReact) {
-            techReact.parentNode.insertBefore(
-                interiorReact,
-                techReact.nextSibling
-            );
-            // console.log('✅ Interior moved after Technology');
-        }
-
-        // Inject custom interior block (same pattern as tech)
-        if (interiorReact && interiorReact.id) {
-            domInjector.inject({
-                parentSelector: `#${interiorReact.id}`,
-                targetRelativeSelector: '.tqQQ5puA4B.qn23cDY3tW',
-                html: config.HTMLs.interiorContent,
-                position: 'afterend',
-                uniqueId: '[data-subt136-interior-content]',
-                uniqueScope: 'document'
-            });
-        }
-
-
-        // move navigation after newheadline
-
+        // 1) Nav after Discover headline
         const navigation = document.querySelector('.XdXNCvU5i3');
         const newHeadline = document.querySelector('.subt136-new-headline');
-        if (navigation && newHeadline) {
+        if (navigation && newHeadline && newHeadline.parentNode) {
             newHeadline.parentNode.insertBefore(navigation, newHeadline.nextSibling);
         }
 
-        // move Design section after capable section
+        // 2) Technology + Interior under Discover headline block (after Vo8hB react host)
+        const techReact = document.querySelector('#cid-62675')
+            ? document.querySelector('#cid-62675').closest('div[id^="react_"]')
+            : null;
+        const interiorReact = document.querySelector('#cid-62676')
+            ? document.querySelector('#cid-62676').closest('div[id^="react_"]')
+            : null;
+        const headlineHost = (document.querySelector('.Vo8hB_ClC_')
+            && document.querySelector('.Vo8hB_ClC_').closest('div[id^="react_"]'))
+            || (newHeadline && newHeadline.closest('div[id^="react_"]'))
+            || null;
 
+        if (techReact && headlineHost && headlineHost.parentNode
+            && headlineHost !== techReact
+            && headlineHost.nextSibling !== techReact) {
+            headlineHost.parentNode.insertBefore(techReact, headlineHost.nextSibling);
+            console.log('[subt136] moved Technology under headline');
+        }
+
+        if (interiorReact && techReact && techReact.parentNode
+            && techReact.nextSibling !== interiorReact) {
+            techReact.parentNode.insertBefore(interiorReact, techReact.nextSibling);
+            console.log('[subt136] moved Interior after Technology');
+        } else if (interiorReact && headlineHost && headlineHost.parentNode && !techReact
+            && headlineHost.nextSibling !== interiorReact) {
+            headlineHost.parentNode.insertBefore(interiorReact, headlineHost.nextSibling);
+        }
+
+        // 3) Reviews under Ownership (section4)
+        const reviewSection = document.querySelector('.NFhp0A6EUn');
+        const ownership = document.querySelector('[data-subt136-section4]');
+        if (reviewSection && ownership) {
+            const reviewSectionReact = reviewSection.closest('div[id^="react_"]');
+            if (reviewSectionReact && ownership.parentNode
+                && ownership.nextSibling !== reviewSectionReact) {
+                ownership.parentNode.insertBefore(reviewSectionReact, ownership.nextSibling);
+                console.log('[subt136] moved Reviews under Ownership');
+            }
+        }
+
+        // 4) Design after Capable
         const designSectionEl = document.querySelector('#cid-62673');
         const capableSectionEl = document.querySelector('#cid-62674');
         const designSection = designSectionEl ? designSectionEl.closest('div[id^="react_"]') : null;
         const capableSection = capableSectionEl ? capableSectionEl.closest('div[id^="react_"]') : null;
-        if (designSection && capableSection) {
+        if (designSection && capableSection && capableSection.parentNode) {
             capableSection.parentNode.insertBefore(designSection, capableSection.nextSibling);
         }
 
-
-        // move towing section before accessories section
-
+        // 5) Towing before Accessories
         const towingSectionEl = document.querySelector('#cid-62712');
         const accessoriesSectionEl = document.querySelector('#cid-62547');
         const towingSection = towingSectionEl ? towingSectionEl.closest('div[id^="react_"]') : null;
-        const accessoriesSection = accessoriesSectionEl ? accessoriesSectionEl.closest('div[id^="react_"]') : null;
-        if (towingSection && accessoriesSection) {
+        const accessoriesSection = accessoriesSectionEl
+            ? accessoriesSectionEl.closest('div[id^="react_"]')
+            : null;
+        if (towingSection && accessoriesSection && accessoriesSection.parentNode) {
             accessoriesSection.parentNode.insertBefore(towingSection, accessoriesSection);
         }
     },
@@ -1091,7 +1150,7 @@ Driver Monitoring System<span class="subt136-footnote">*<span class="subt136-too
             uniqueScope: 'document'
         });
 
-        config.moveReactBlocks();
+        config.scheduleMoveReactBlocks();
         config.reorderFeatureNav();
         Kameleoon.API.Utils.setTimeout(() => {
             config.reorderFeatureNav();
@@ -1100,92 +1159,140 @@ Driver Monitoring System<span class="subt136-footnote">*<span class="subt136-too
             config.reorderFeatureNav();
         }, 1200);
 
-        // performance content change
-        // insert performance content afterbegin of #cid-62678 .tqQQ5puA4B.JDuvqrq_5y
-        const performanceTarget = document.querySelector('#cid-62678 .tqQQ5puA4B');
-        if (performanceTarget) {
-            performanceTarget.insertAdjacentHTML('afterbegin', config.HTMLs.performanceContent);
-            // console.log('✅ Performance content injected');
-        }
+        // Tech / Interior copy — lateInject (blank when CSS hides original and inject is skipped)
+        lateInject({
+            waitSelector: '#cid-62675 .tqQQ5puA4B.qn23cDY3tW',
+            parentSelector: '#cid-62675',
+            targetSelector: '#cid-62675 .tqQQ5puA4B.qn23cDY3tW',
+            html: config.HTMLs.techContent,
+            position: 'afterend',
+            uniqueId: '[data-subt136-tech-content]'
+        });
 
-        // capable content change
-        const capableTarget = document.querySelector('#cid-62674 .tqQQ5puA4B');
-        if (capableTarget) {
-            capableTarget.insertAdjacentHTML('afterbegin', config.HTMLs.capableContent);
-            // console.log('✅ Capable content injected');
-        }
+        lateInject({
+            waitSelector: '#cid-62676 .tqQQ5puA4B.qn23cDY3tW',
+            parentSelector: '#cid-62676',
+            targetSelector: '#cid-62676 .tqQQ5puA4B.qn23cDY3tW',
+            html: config.HTMLs.interiorContent,
+            position: 'afterend',
+            uniqueId: '[data-subt136-interior-content]'
+        });
+
+        // --- Late sections only (were one-shot / wiped on Slow 4G). section2/4/headline untouched. ---
+
+        lateInject({
+            waitSelector: '#cid-62678 .tqQQ5puA4B',
+            parentSelector: '#cid-62678',
+            targetSelector: '#cid-62678 .tqQQ5puA4B',
+            html: config.HTMLs.performanceContent,
+            position: 'afterbegin',
+            uniqueId: '[data-subt136-performance-content]'
+        });
+
+        lateInject({
+            waitSelector: '#cid-62674 .tqQQ5puA4B',
+            parentSelector: '#cid-62674',
+            targetSelector: '#cid-62674 .tqQQ5puA4B',
+            html: config.HTMLs.capableContent,
+            position: 'afterbegin',
+            uniqueId: '[data-subt136-capable-content]'
+        });
         config.observeCapableSectionImage();
 
-        // design content change
-        const designTarget = document.querySelector('#cid-62673 .tqQQ5puA4B');
-        if (designTarget) {
-            designTarget.insertAdjacentHTML('afterbegin', config.HTMLs.designContent);
-            // console.log('✅ Design content injected');
-        }
+        lateInject({
+            waitSelector: '#cid-62673 .tqQQ5puA4B',
+            parentSelector: '#cid-62673',
+            targetSelector: '#cid-62673 .tqQQ5puA4B',
+            html: config.HTMLs.designContent,
+            position: 'afterbegin',
+            uniqueId: '[data-subt136-design-content]'
+        });
 
-        // safety content change
-        const safetyTarget = document.querySelector('#cid-62707 .bdoBCtd4bD');
-        if (safetyTarget) {
-            safetyTarget.insertAdjacentHTML('afterbegin', config.HTMLs.safetyContent);
-            // console.log('✅ Safety content injected');
-        }
+        lateInject({
+            waitSelector: '#cid-62707 .bdoBCtd4bD',
+            parentSelector: '#cid-62707',
+            targetSelector: '#cid-62707 .bdoBCtd4bD',
+            html: config.HTMLs.safetyContent,
+            position: 'afterbegin',
+            uniqueId: '[data-subt136-safety-content]'
+        });
 
-        // youtube content change
-        const youtubeTarget = document.querySelector('#cid-62701 .UmdTQMBfGY p');
-        if (youtubeTarget) {
-            youtubeTarget.insertAdjacentHTML('afterend', config.HTMLs.youtubeContent);
-            // console.log('✅ Youtube content injected');
-        }
+        lateInject({
+            waitSelector: '#cid-62701 .UmdTQMBfGY p',
+            parentSelector: '#cid-62701',
+            targetSelector: '#cid-62701 .UmdTQMBfGY p',
+            html: config.HTMLs.youtubeContent,
+            position: 'afterend',
+            uniqueId: '[data-subt136-youtube-content]'
+        });
 
-        // vision assist content change
-        const visionAssistTarget = document.querySelector('#cid-62671 .tqQQ5puA4B');
-        if (visionAssistTarget) {
-            visionAssistTarget.insertAdjacentHTML('beforeend', config.HTMLs.visionAssistContent);
-            // console.log('✅ Vision Assist content injected');
-        }
+        lateInject({
+            waitSelector: '#cid-62671 .tqQQ5puA4B',
+            parentSelector: '#cid-62671',
+            targetSelector: '#cid-62671 .tqQQ5puA4B',
+            html: config.HTMLs.visionAssistContent,
+            position: 'beforeend',
+            uniqueId: '[data-subt136-vision-assist-content]'
+        });
 
-        // DMS content change
-        const DMSTarget = document.querySelector('#cid-62694 .tqQQ5puA4B');
-        if (DMSTarget) {
-            DMSTarget.insertAdjacentHTML('beforeend', config.HTMLs.DMSContent);
-            // console.log('✅ DMS content injected');
-        }
+        lateInject({
+            waitSelector: '#cid-62694 .tqQQ5puA4B',
+            parentSelector: '#cid-62694',
+            targetSelector: '#cid-62694 .tqQQ5puA4B',
+            html: config.HTMLs.DMSContent,
+            position: 'beforeend',
+            uniqueId: '[data-subt136-dms-content]'
+        });
 
-        // SGP content change
-        const SGPTarget = document.querySelector('#cid-62700 .tqQQ5puA4B');
-        if (SGPTarget) {
-            SGPTarget.insertAdjacentHTML('afterbegin', config.HTMLs.SGPContent);
-            // console.log('✅ SGP content injected');
-        }
+        lateInject({
+            waitSelector: '#cid-62700 .tqQQ5puA4B',
+            parentSelector: '#cid-62700',
+            targetSelector: '#cid-62700 .tqQQ5puA4B',
+            html: config.HTMLs.SGPContent,
+            position: 'afterbegin',
+            uniqueId: '[data-subt136-sgp-content]'
+        });
         config.observeSgpSectionImage();
 
-        // Boxer content change
-        const boxerSectionEl = document.querySelector('#cid-62700');
-        const BoxerTarget = boxerSectionEl ? boxerSectionEl.closest('div[id^="react_"]') : null;
-        if (BoxerTarget) {
-            BoxerTarget.insertAdjacentHTML('afterend', config.HTMLs.boxerContent);
-            // console.log('✅ Boxer content injected');
-        }
+        lateInject({
+            waitSelector: '#cid-62700',
+            parentSelector: '.customContentPage',
+            targetSelector: '#cid-62700',
+            targetClosestSelector: 'div[id^="react_"]',
+            html: config.HTMLs.boxerContent,
+            position: 'afterend',
+            uniqueId: '[data-subt136-boxer-content]'
+        });
 
-        const familyTarget = document.querySelector('.subt136-tech-section[data-subt136-boxer-content]');
-        if (familyTarget) {
-            familyTarget.insertAdjacentHTML('afterend', config.HTMLs.familyContent);
-            // console.log('✅ Family content injected');
-        }
+        lateInject({
+            waitSelector: '[data-subt136-boxer-content]',
+            parentSelector: '.customContentPage',
+            targetSelector: '[data-subt136-boxer-content]',
+            html: config.HTMLs.familyContent,
+            position: 'afterend',
+            uniqueId: '[data-subt136-family-content]'
+        });
 
-        // towing content change
-        const towingTarget = document.querySelector('#cid-62712 .bdoBCtd4bD');
-        if (towingTarget) {
-            towingTarget.insertAdjacentHTML('afterend', config.HTMLs.towingContent);
-            // console.log('✅ Towing content injected');
-        }
-        // insert tabs content afterend of .Vo8hB_ClC_ .RfaLGDNWSW
-        const tabsTarget = document.querySelector('.Vo8hB_ClC_ .RfaLGDNWSW');
-        if (tabsTarget) {
-            tabsTarget.insertAdjacentHTML('afterend', config.HTMLs.tabsContent);
-            // console.log('✅ Tabs content injected');
-        }
+        lateInject({
+            waitSelector: '#cid-62712 .bdoBCtd4bD',
+            parentSelector: '#cid-62712',
+            targetSelector: '#cid-62712 .bdoBCtd4bD',
+            html: config.HTMLs.towingContent,
+            position: 'afterend',
+            uniqueId: '[data-subt136-towing-content]'
+        });
 
+        lateInject({
+            waitSelector: '.Vo8hB_ClC_ .RfaLGDNWSW',
+            parentSelector: '.Vo8hB_ClC_',
+            targetSelector: '.Vo8hB_ClC_ .RfaLGDNWSW',
+            html: config.HTMLs.tabsContent,
+            position: 'afterend',
+            uniqueId: '[data-subt136-tabs]',
+            onInsert: () => {
+                config.tabsFunctionality();
+            }
+        });
 
         config.tabsFunctionality();
         config.initTooltipEdgeAdjust();

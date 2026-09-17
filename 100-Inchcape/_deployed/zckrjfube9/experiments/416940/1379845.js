@@ -65,6 +65,11 @@
     const email = emailInput.value.trim();
     sessionStorage.setItem(EMAIL_KEY, email);
     sessionStorage.setItem(NATIVE_EMAIL_KEY, email);
+    try {
+      localStorage.setItem('kamT140V3EmailCollected', email);
+    } catch (error) {
+      // localStorage may be unavailable
+    }
     console.log('%c *** T140 email stored ***', 'color:red;background:white');
     tryFireDigitalData();
   }
@@ -669,12 +674,63 @@
   const PAYLOAD_LOG_WINDOW_KEY = '__kamT140HotLeadPayloadLogs';
   const PENDING_KEY = '__kamT140V3PendingRequest';
   const SUBMITTED_KEY = 'kamT140V3LeadSubmitted';
+  const SUBMITTED_AT_KEY = 'kamT140V3LeadSubmittedAt';
   const PENDING_BODY_KEY = 'kamT140V3PendingBody';
   const PENDING_URL_KEY = 'kamT140V3SendEmailUrl';
+  const EMAIL_LOCAL_KEY = 'kamT140V3EmailCollected';
   const SUMMARY_SELECTOR = '#customise_summary';
-  const SUMMARY_VIEWPORT_DELAY_MS = 3000;
+  // Keep a short settle so summary content can paint; 3s felt too slow for the popup.
+  const SUMMARY_VIEWPORT_DELAY_MS = 400;
+  const SUBMIT_RETRY_GUARD_MS = 8000;
   const CHECKOUT_BUTTON_SELECTOR = 'button[data-test="customise:summary:continuetocheckoutv4"]';
-  const EMAIL_KEYS = ['kamT140EmailCollected', 'T37EmailCollected'];
+  const EMAIL_KEYS = ['kamT140EmailCollected', 'T37EmailCollected', EMAIL_LOCAL_KEY];
+  function kamT140V3StorageGet(key) {
+    try {
+      return sessionStorage.getItem(key) || localStorage.getItem(key) || '';
+    } catch (error) {
+      return '';
+    }
+  }
+  function kamT140V3StorageSet(key, value) {
+    try {
+      sessionStorage.setItem(key, value);
+    } catch (error) {
+      // sessionStorage may be unavailable
+    }
+    try {
+      localStorage.setItem(key, value);
+    } catch (error) {
+      // localStorage may be unavailable
+    }
+  }
+  function kamT140V3StorageRemove(key) {
+    try {
+      sessionStorage.removeItem(key);
+    } catch (error) {
+      // ignore
+    }
+    try {
+      localStorage.removeItem(key);
+    } catch (error) {
+      // ignore
+    }
+  }
+  function kamT140V3WasRecentlySubmitted() {
+    const submittedAt = Number(kamT140V3StorageGet(SUBMITTED_AT_KEY) || 0);
+    if (!submittedAt) {
+      // Legacy SUBMITTED flag without timestamp — do not block new sessions forever.
+      return false;
+    }
+    return Date.now() - submittedAt < SUBMIT_RETRY_GUARD_MS;
+  }
+  function kamT140V3MarkSubmitted() {
+    kamT140V3StorageSet(SUBMITTED_KEY, 'true');
+    kamT140V3StorageSet(SUBMITTED_AT_KEY, String(Date.now()));
+  }
+  function kamT140V3ClearSubmitted() {
+    kamT140V3StorageRemove(SUBMITTED_KEY);
+    kamT140V3StorageRemove(SUBMITTED_AT_KEY);
+  }
   function kamT140V3StoreLeadPayload(parsed, modelFromDom) {
     const logEntry = {
       timestamp: new Date().toISOString(),
@@ -757,7 +813,7 @@
     if (!pending || typeof pending.body !== 'string') {
       return Promise.resolve();
     }
-    if (sessionStorage.getItem(SUBMITTED_KEY) === 'true') {
+    if (kamT140V3WasRecentlySubmitted()) {
       return Promise.resolve();
     }
     return kamT140V3PrepareRequestBody(pending.body, temperature).then(prepared => {
@@ -765,7 +821,7 @@
       const headers = pending.headers || {
         'Content-Type': 'application/json'
       };
-      sessionStorage.setItem(SUBMITTED_KEY, 'true');
+      kamT140V3MarkSubmitted();
       window.__kamT140V3BypassIntercept = true;
       return window.fetch(pending.url, {
         method: pending.method || 'POST',
@@ -775,34 +831,57 @@
       }).finally(() => {
         window.__kamT140V3BypassIntercept = false;
         window[PENDING_KEY] = null;
-        sessionStorage.removeItem(PENDING_BODY_KEY);
+        kamT140V3StorageRemove(PENDING_BODY_KEY);
+        kamT140V3StorageRemove(PENDING_URL_KEY);
       });
     });
   }
+  function kamT140V3EmailFromPendingBody(body) {
+    if (typeof body !== 'string') {
+      return '';
+    }
+    try {
+      const parsed = JSON.parse(body);
+      return parsed && parsed.toEmail ? String(parsed.toEmail).trim() : '';
+    } catch (error) {
+      return '';
+    }
+  }
   function kamT140V3GetCollectedEmail() {
     for (let index = 0; index < EMAIL_KEYS.length; index += 1) {
-      const email = sessionStorage.getItem(EMAIL_KEYS[index]);
+      const email = kamT140V3StorageGet(EMAIL_KEYS[index]);
       if (email && email.trim()) {
         return email.trim();
       }
     }
-    return '';
+    const pending = window[PENDING_KEY] || null;
+    const fromPending = kamT140V3EmailFromPendingBody(pending && pending.body);
+    if (fromPending) {
+      return fromPending;
+    }
+    return kamT140V3EmailFromPendingBody(kamT140V3StorageGet(PENDING_BODY_KEY));
   }
   function kamT140V3PersistPending(pending) {
     window[PENDING_KEY] = pending;
-    try {
-      sessionStorage.setItem(PENDING_BODY_KEY, pending.body);
-      sessionStorage.setItem(PENDING_URL_KEY, pending.url);
-    } catch (error) {
-      // sessionStorage may be unavailable
+    kamT140V3StorageSet(PENDING_BODY_KEY, pending.body);
+    kamT140V3StorageSet(PENDING_URL_KEY, pending.url);
+    const emailFromBody = kamT140V3EmailFromPendingBody(pending.body);
+    if (emailFromBody) {
+      kamT140V3StorageSet(EMAIL_LOCAL_KEY, emailFromBody);
+      try {
+        sessionStorage.setItem('kamT140EmailCollected', emailFromBody);
+        sessionStorage.setItem('T37EmailCollected', emailFromBody);
+      } catch (error) {
+        // ignore
+      }
     }
   }
   function kamT140V3RestorePendingFromSession() {
     if (window[PENDING_KEY]) {
       return window[PENDING_KEY];
     }
-    const body = sessionStorage.getItem(PENDING_BODY_KEY);
-    const url = sessionStorage.getItem(PENDING_URL_KEY);
+    const body = kamT140V3StorageGet(PENDING_BODY_KEY);
+    const url = kamT140V3StorageGet(PENDING_URL_KEY);
     if (body && url) {
       window[PENDING_KEY] = {
         url,
@@ -816,8 +895,8 @@
     const postCode = new URLSearchParams(window.location.search).get('postcode') || '';
     return {
       toEmail: kamT140V3GetCollectedEmail(),
-      firstName: sessionStorage.getItem('T38FNameCollected') || '',
-      lastName: sessionStorage.getItem('T38LNameCollected') || '',
+      firstName: kamT140V3StorageGet('T38FNameCollected') || '',
+      lastName: kamT140V3StorageGet('T38LNameCollected') || '',
       configUrl: window.location.href,
       postCode,
       postcode: postCode,
@@ -830,11 +909,14 @@
     if (window[PENDING_KEY]) {
       return Promise.resolve(true);
     }
-    const url = sessionStorage.getItem(PENDING_URL_KEY);
+    const url = kamT140V3StorageGet(PENDING_URL_KEY);
     if (!url) {
       return Promise.resolve(false);
     }
     const payload = kamT140V3BuildFallbackPayload();
+    if (!payload.toEmail) {
+      return Promise.resolve(false);
+    }
     return kamT140FillMissingModelData(payload).then(() => {
       kamT140V3PersistPending({
         url,
@@ -876,7 +958,7 @@
     if (!pending || typeof pending.body !== 'string') {
       return;
     }
-    if (sessionStorage.getItem(SUBMITTED_KEY) === 'true' || window.__kamT140V3PopupOpen) {
+    if (kamT140V3WasRecentlySubmitted() || window.__kamT140V3PopupOpen) {
       return;
     }
     kamT140V3ShowShareBuildPopup({
@@ -893,7 +975,7 @@
     });
   }
   function kamT140V3TryShowPopup() {
-    if (sessionStorage.getItem(SUBMITTED_KEY) === 'true' || window.__kamT140V3PopupOpen) {
+    if (kamT140V3WasRecentlySubmitted() || window.__kamT140V3PopupOpen) {
       return;
     }
     if (!kamT140V3GetCollectedEmail()) {
@@ -907,7 +989,7 @@
         console.log('%c *** T140 V3 summary ready — waiting for sendEmail payload ***', 'color:#fff;background:#1637A0');
         return;
       }
-      if (sessionStorage.getItem(SUBMITTED_KEY) === 'true' || window.__kamT140V3PopupOpen) {
+      if (kamT140V3WasRecentlySubmitted() || window.__kamT140V3PopupOpen) {
         return;
       }
       console.log('%c *** T140 V3 summary in viewport — showing popup ***', 'color:#fff;background:#1637A0');
@@ -915,9 +997,12 @@
     });
   }
   function kamT140V3ScheduleSummaryCheck() {
-    window.setTimeout(kamT140V3TryShowPopup, SUMMARY_VIEWPORT_DELAY_MS);
+    window.clearTimeout(window.__kamT140V3SummaryCheckTimer);
+    window.__kamT140V3SummaryCheckTimer = window.setTimeout(kamT140V3TryShowPopup, SUMMARY_VIEWPORT_DELAY_MS);
   }
   function kamT140V3StorePendingRequest(url, init, body) {
+    // Native sendEmail again = new session opportunity (control also fires again).
+    kamT140V3ClearSubmitted();
     kamT140V3PersistPending({
       url,
       body,
@@ -932,19 +1017,58 @@
       return;
     }
     window.__kamT140V3SummaryWatchBound = true;
-    window.addEventListener('scroll', () => {
-      if (sessionStorage.getItem(SUBMITTED_KEY) === 'true' || window.__kamT140V3PopupOpen) {
+    const maybeSchedule = () => {
+      if (kamT140V3WasRecentlySubmitted() || window.__kamT140V3PopupOpen) {
         return;
       }
       if (!document.querySelector(SUMMARY_SELECTOR) || !kamT140V3GetCollectedEmail()) {
         return;
       }
       kamT140V3ScheduleSummaryCheck();
-    }, {
+    };
+    window.addEventListener('scroll', maybeSchedule, {
       passive: true
     });
+
+    // Another tab may hold sendEmail first (fake 200). Restore shared pending here.
+    window.addEventListener('storage', event => {
+      if (event.key !== PENDING_BODY_KEY && event.key !== PENDING_URL_KEY) {
+        return;
+      }
+      if (!event.newValue) {
+        return;
+      }
+      window[PENDING_KEY] = null;
+      kamT140V3RestorePendingFromSession();
+      maybeSchedule();
+    });
+    if (typeof IntersectionObserver === 'function') {
+      const observeSummary = summarySection => {
+        if (!summarySection || summarySection.__kamT140V3Observed) {
+          return;
+        }
+        summarySection.__kamT140V3Observed = true;
+        const observer = new IntersectionObserver(entries => {
+          const visible = entries.some(entry => entry.isIntersecting);
+          if (visible) {
+            maybeSchedule();
+          }
+        }, {
+          threshold: 0.15
+        });
+        observer.observe(summarySection);
+      };
+      if (typeof Kameleoon !== 'undefined' && Kameleoon.API && Kameleoon.API.Core && typeof Kameleoon.API.Core.runWhenElementPresent === 'function') {
+        Kameleoon.API.Core.runWhenElementPresent(SUMMARY_SELECTOR, elements => {
+          const summarySection = Array.isArray(elements) ? elements[0] : elements;
+          observeSummary(summarySection);
+        });
+      } else {
+        observeSummary(document.querySelector(SUMMARY_SELECTOR));
+      }
+    }
     document.addEventListener('click', event => {
-      if (sessionStorage.getItem(SUBMITTED_KEY) === 'true' || window.__kamT140V3PopupOpen) {
+      if (kamT140V3WasRecentlySubmitted() || window.__kamT140V3PopupOpen) {
         return;
       }
       if (!kamT140V3GetCollectedEmail()) {
@@ -964,6 +1088,11 @@
       kamT140V3ScheduleSummaryCheck();
     }, true);
   }
+  function kamT140V3ShouldSwallowSendEmail() {
+    // Only block while the popup is open. A fresh native sendEmail means a new
+    // session (same as control) and must be held again — even in another tab.
+    return Boolean(window.__kamT140V3PopupOpen);
+  }
   function patchFetch() {
     const originalFetch = window.fetch;
     if (typeof originalFetch !== 'function' || originalFetch.__kamT140V3Patched) {
@@ -977,14 +1106,7 @@
       if (!isTargetUrl(url) || !init || typeof init.body !== 'string') {
         return originalFetch.call(this, input, init);
       }
-
-      // Already submitted via popup — swallow duplicate site retries.
-      if (sessionStorage.getItem(SUBMITTED_KEY) === 'true') {
-        return Promise.resolve(kamT140V3FakeSuccessResponse());
-      }
-
-      // Popup already open — ignore duplicate calls.
-      if (window.__kamT140V3PopupOpen) {
+      if (kamT140V3ShouldSwallowSendEmail()) {
         return Promise.resolve(kamT140V3FakeSuccessResponse());
       }
 
@@ -1042,7 +1164,7 @@
       if (window.__kamT140V3BypassIntercept || !this.__kamT140V3IsTarget || typeof body !== 'string') {
         return originalSend.call(this, body);
       }
-      if (sessionStorage.getItem(SUBMITTED_KEY) === 'true' || window.__kamT140V3PopupOpen) {
+      if (kamT140V3ShouldSwallowSendEmail()) {
         kamT140V3FakeXhrSuccess(this);
         return undefined;
       }

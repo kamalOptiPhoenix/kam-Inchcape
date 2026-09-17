@@ -65,6 +65,11 @@
     const email = emailInput.value.trim();
     sessionStorage.setItem(EMAIL_KEY, email);
     sessionStorage.setItem(NATIVE_EMAIL_KEY, email);
+    try {
+      localStorage.setItem('kamT140V3EmailCollected', email);
+    } catch (error) {
+      // localStorage may be unavailable
+    }
     console.log('%c *** T140 email stored ***', 'color:red;background:white');
     tryFireDigitalData();
   }

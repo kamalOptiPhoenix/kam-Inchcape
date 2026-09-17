@@ -95,6 +95,10 @@ body.kamT140V3_popupOpen {
   font-weight: 400;
 }
 
+.kamT140V3_sentCopy {
+  font-weight: 600;
+}
+
 .kamT140V3_imageWrap {
   margin: 28px auto 24px;
   max-width: 420px;

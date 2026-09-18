@@ -679,8 +679,8 @@
   const PENDING_URL_KEY = 'kamT140V3SendEmailUrl';
   const EMAIL_LOCAL_KEY = 'kamT140V3EmailCollected';
   const SUMMARY_SELECTOR = '#customise_summary';
-  // Keep a short settle so summary content can paint; 3s felt too slow for the popup.
-  const SUMMARY_VIEWPORT_DELAY_MS = 400;
+  // Only used when summary is visible but content has not painted yet.
+  const SUMMARY_SETTLE_RETRY_MS = 100;
   const SUBMIT_RETRY_GUARD_MS = 8000;
   const CHECKOUT_BUTTON_SELECTOR = 'button[data-test="customise:summary:continuetocheckoutv4"]';
   const EMAIL_KEYS = ['kamT140EmailCollected', 'T37EmailCollected', EMAIL_LOCAL_KEY];
@@ -998,7 +998,11 @@
   }
   function kamT140V3ScheduleSummaryCheck() {
     window.clearTimeout(window.__kamT140V3SummaryCheckTimer);
-    window.__kamT140V3SummaryCheckTimer = window.setTimeout(kamT140V3TryShowPopup, SUMMARY_VIEWPORT_DELAY_MS);
+
+    // Settled → show on next tick (coalesces scroll spam, no perceptible delay).
+    // Not settled → brief retry while summary content paints.
+    const delayMs = kamT140V3IsSummarySettled() ? 0 : SUMMARY_SETTLE_RETRY_MS;
+    window.__kamT140V3SummaryCheckTimer = window.setTimeout(kamT140V3TryShowPopup, delayMs);
   }
   function kamT140V3StorePendingRequest(url, init, body) {
     // Native sendEmail again = new session opportunity (control also fires again).

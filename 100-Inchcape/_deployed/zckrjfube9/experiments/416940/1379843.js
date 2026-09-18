@@ -630,7 +630,7 @@
       variantName: parsed.variantName || '',
       configUrl: parsed.configUrl || '',
       postCode: parsed.postCode || parsed.postcode || '',
-      mobile: parsed.mobile || '',
+      mobile: parsed.PersonMobilePhone || '',
       temperature: parsed.temperature || '',
       modelFromDom: modelFromDom || 'No',
       payload: parsed
@@ -678,11 +678,13 @@
     const waitPromise = kamT140NeedsModelFallback(parsed) ? kamT140WaitForVariantInDom(3000) : Promise.resolve();
     return waitPromise.then(() => kamT140FillMissingModelData(parsed).then(fillResult => {
       parsed.temperature = TEMPERATURE_VALUE;
-      const preferredPhone = kamT140GetPreferredPhone();
+      const preferredPhone = kamT140GetPreferredPhone() || parsed.mobile || '';
       if (preferredPhone) {
-        // Maps to Salesforce Account/Lead "Mobile"
-        parsed.mobile = preferredPhone;
+        // Salesforce Account/Lead Mobile field API name
+        parsed.PersonMobilePhone = preferredPhone;
       }
+      // Native payload still sends `mobile` — remove so only PersonMobilePhone is sent
+      delete parsed.mobile;
       kamT140StoreHotLeadPayload(parsed, fillResult.modelFromDom);
       return JSON.stringify(parsed);
     }));

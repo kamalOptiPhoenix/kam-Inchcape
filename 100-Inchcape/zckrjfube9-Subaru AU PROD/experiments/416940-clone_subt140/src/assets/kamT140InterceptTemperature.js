@@ -23,7 +23,7 @@ function kamT140StoreHotLeadPayload(parsed, modelFromDom) {
         variantName: parsed.variantName || '',
         configUrl: parsed.configUrl || '',
         postCode: parsed.postCode || parsed.postcode || '',
-        mobile: parsed.MobilePhone || '',
+        mobile: parsed.phone || '',
         temperature: parsed.temperature || '',
         modelFromDom: modelFromDom || 'No',
         payload: parsed,
@@ -98,9 +98,9 @@ function kamT140PrepareRequestBody(body) {
         const preferredPhone = kamT140GetPreferredPhone() || parsed.mobile || '';
         if (preferredPhone) {
             // Salesforce Account/Lead Mobile field API name
-            parsed.MobilePhone = preferredPhone;
+            parsed.phone = preferredPhone;
         }
-        // Native payload still sends `mobile` — remove so only MobilePhone is sent
+        // Native payload still sends `mobile` — remove so only phone is sent
         delete parsed.mobile;
 
         kamT140StoreHotLeadPayload(parsed, fillResult.modelFromDom);

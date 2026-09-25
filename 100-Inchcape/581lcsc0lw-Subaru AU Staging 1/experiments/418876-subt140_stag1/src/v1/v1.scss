@@ -1,0 +1,42 @@
+div.SPC_WIDGET-MuiDialog-root[data-test="modal:leadCapture"]
+h6
+span[data-translationkey="trans__configurator__dealer_selection_modal__personal_details_description"] {
+    font-size: 0;
+    line-height: 1.5;
+}
+
+div.SPC_WIDGET-MuiDialog-root[data-test="modal:leadCapture"]
+h6
+span[data-translationkey="trans__configurator__dealer_selection_modal__personal_details_description"]::after {
+    content: "Please enter your details so we can send you your configuration. One of our dealership sales consultants may also reach out if you have any questions or would like personalised assistance.";
+    display: block;
+    color: #222;
+    font-size: 18px;
+    text-align: center;
+    font-weight: 400;
+}
+
+.kamT140PreferredPhone {
+    margin: 0 0 24px;
+    box-shadow: none !important;
+}
+
+.kamT140PreferredPhone .SPC_WIDGET-MuiInput-underline.Mui-error::after {
+    transform: scaleX(1);
+    border-bottom-color: rgb(245, 34, 45);
+}
+
+.kamT140PreferredPhone__error {
+    color: rgb(245, 34, 45);
+    font-size: 14px;
+    margin-top: 4px;
+    text-align: left;
+}
+
+.kamT140PreferredPhone__error[hidden] {
+    display: none !important;
+}
+:not(#\20).SPC_WIDGET-MuiFormControl-fullWidth.kamT140PreferredPhone{
+    width: 80%;
+    margin-bottom: 24px;
+} 

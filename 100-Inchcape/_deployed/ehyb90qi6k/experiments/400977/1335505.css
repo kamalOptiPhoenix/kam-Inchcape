@@ -111,6 +111,14 @@
 }
 
 @media (max-width: 768px) {
+  .fott2 main {
+    margin-top: 98px;
+  }
+
+  .fott2.fott2-aumark-s main {
+    margin-top: 72px;
+  }
+
   .fott2 .fott2-butter-bar {
     height: auto;
     -webkit-box-orient: vertical;

@@ -92,6 +92,15 @@
 
   // Mobile styles
   @media (max-width: 768px) {
+    // Reserve space so fixed butter bar does not cover hero/banner
+    main {
+      margin-top: 98px;
+    }
+
+    &.fott2-aumark-s main {
+      margin-top: 72px;
+    }
+
     .fott2-butter-bar {
       height: auto;
       flex-direction: column;

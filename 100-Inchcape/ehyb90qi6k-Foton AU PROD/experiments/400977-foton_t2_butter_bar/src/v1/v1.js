@@ -57,6 +57,10 @@ import kamT2FotonConfig from '../assets/config.js';
         console.log('*** Foton T2 - Butter Bar ***');
         document.body.classList.add('fott2');
 
+        if (window.location.pathname === '/trucks/series/aumark-s/') {
+            document.body.classList.add('fott2-aumark-s');
+        }
+
         insertButterBar();
     }
 
